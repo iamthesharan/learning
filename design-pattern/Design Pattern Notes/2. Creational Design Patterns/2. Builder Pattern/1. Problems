@@ -1,0 +1,40 @@
+What Problem Builder Design Pattern Solves?
+
+    Let Say We have a Class and Object of this Class should be immutable.
+    Immutable objects are the objects whose state and property cannot be changed once the object is Created.
+    Example : String Class -> Once you create String Object you cannot change its value.
+
+
+    When you are Writing Immutable Classes you will often end up with Constructors having multiple parameters.
+    because you have to provide all the State of the object in the Constructor itself.
+    
+    class Product{
+        public Product(int weight, double price, int shipVolume, int shipCode){
+            //initialize
+        }
+    }
+
+    //Other Code.
+
+
+    Now Having a Constructor with lots of Arguments is considered to be a bad Practice, Because Anyone who is using that code has to pass know what those parameters means and has to pass the value in correct sequence.
+
+
+    Also Whenever you need Some other parts/objects that you need to build some object, you can make the use of builder design pattern.
+
+    class Address{
+        public Address(String houseNumber, String street){
+            //initialize
+        }
+    } 
+
+    class User{
+        public User(Address address, LocateDate birthDate, List<Role> roles){
+            //initialize
+            // This Constructor requires other object to create User class object.
+        }
+        //Other Code
+    }
+
+
+

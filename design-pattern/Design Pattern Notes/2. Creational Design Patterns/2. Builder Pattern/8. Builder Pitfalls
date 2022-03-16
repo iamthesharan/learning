@@ -1,0 +1,3 @@
+1. if the user hasn't provided some values to make the product class and simply calls build method, 
+then then there is a chance the build method will give the partially build object.
+and this needs to be taken care in builder pattern.

@@ -1,0 +1,15 @@
+Clients Shouldn't have to depend on interfaces that they don't use.
+
+Interface pollution: We should not make our interface bigger with methods which are unreated to the Iterface.
+
+
+When Do we have Violations of this Priniple:
+1. Classes Have Empty method Implementation
+2. Method Implementation thows UnsupportedOperationException (or Similar)
+3. Method Implementation return null or Default/dummy Values.
+
+
+Suppose an interface has methods which are not applicable for the particular class. There there are 3 Options left for the client:
+1. Implement that methods with Some Dummy Value
+2. Implement the method by returning null
+3. Implement the method by throw new UnsupportedOperationException("");

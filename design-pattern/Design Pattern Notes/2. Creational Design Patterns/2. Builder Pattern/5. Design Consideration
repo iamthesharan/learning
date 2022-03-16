@@ -1,0 +1,6 @@
+Design Consideration:
+Director role is rarely implemented as a separated class.
+
+Abstract Builder is also not requried if product itself is not a part of any inheritance hierarchy. You can directly create a concrete builder.
+
+If you're running into a "too many constructor Arguments" problem, then it's a good indication that builder pattern may help.

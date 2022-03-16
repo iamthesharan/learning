@@ -1,0 +1,13 @@
+Prototype pattern uses Clone methods in order to create objects of class.
+
+User of the Builder pattern has to call the Constructor of the Product Class (inside build method) to create the object
+In Prototype Design pattern whoever is going use the design pattern has to call the clone method which will create the object.
+So the user of prototype design pattern doesn't work with the constructor of the product class.
+ 
+
+
+ We will Create builder as a Separate Class. This makes our Builder Design pattern easy to work with legacy code.
+ You can still use Builder pattern with the classes of the legacy Code which used to Create an object and your builder is also a separate class so it will not let your code to break.
+
+ In Prototype we need to modify the existing code as we need to override the clone method.
+ So using prototype is a bad idea for legacy code where the changes will need high cost.
