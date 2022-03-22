@@ -1,0 +1,100 @@
+Protected Members:
+
+	if a member declared as protected, then we can access that member anywhere within the current 
+	package but only in child classes of outside package
+	
+	protected=    <default> + Kids
+	
+	
+	/*
+		package pack1;
+		public class A{
+			protected void m1(){
+				System.out.println("The Most misunderstood modifier");
+			}
+		}
+		class B extends A{
+			public static void main(String ...args){
+				A a=new A();
+				a.m1(); -----> possible
+				B b=new B();
+				b.m1()  -----> Possible
+				A a=new b();
+				a.m1();------> Possible
+			}
+		}
+		
+		
+		
+		package pack2;
+		import pack1;
+		class C extends A{
+			public static void main(String ..args){
+				A a=new A();
+				a.m1(); ---------------------> Invalid
+				C c=new C();
+				c.m1();-----------------------> Valid
+				A a1=new C();
+				a1.m1();---------------------->Invalid
+			}
+		}
+		
+		because protected members of parent class inside the same package
+		can be accessed in parent class by Parent class Object as well as child
+		class Object as well as their references.
+		
+		But in outside the package, the protected method of the parent class can only be 
+		accessed by child class object and child class reference.
+	*/
+	
+	
+	/*
+		package pack1;
+		public class A{
+			protected void m1(){
+				System.out.println("The Most misunderstood modifier");
+			}
+		}
+		class B extends A{
+			public static void main(String ...args){
+				A a=new A();
+				a.m1(); -----> possible
+				B b=new B();
+				b.m1()  -----> Possible
+				A a=new b();
+				a.m1();------> Possible
+			}
+		}
+		
+		
+		
+		package pack2;
+		import pack1;
+		class C extends A{
+
+		}
+		class D extend C{
+			public static void main(String ...args){
+							
+				A a=new A();
+				a.m1(); ---------------------> Invalid
+				C c=new C();
+				c.m1();----------------------->Invalid
+				D d=new D();
+				d.m1();----------------------> Valid
+				A a1=new C();
+				a1.m1();---------------------->Invalid
+				A a2=new D();
+				a2.m1();---------------------->Invalid
+				C c1=new D();
+				c.m1();------------------------>Invalid
+			}
+		}
+		Note* --- > Protected members can be called only through child class references
+					
+	*/
+	
+	
+	
+	
+	

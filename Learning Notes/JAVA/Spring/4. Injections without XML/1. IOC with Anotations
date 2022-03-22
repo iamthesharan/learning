@@ -1,0 +1,150 @@
+JAVA Anotations: are the Special labels or markers added to the java Class
+                 Provide metadata about the class
+                 Processed at Compiled time or runtime for Special Processing
+                 
+                 
+Boot
+Color: Silver
+Style: Jewel
+Size : US 8
+
+Above is the metadata of boot
+
+
+So in case of @Override, Compiler will autocheck you've already overrided the method or not.
+
+
+Why SpringConfiguration with anotaions?
+
+XML Configuration can be verbose
+Configure Your Spring Beans with Annotations
+Anotaions minimizes the XML Configuration
+
+
+Scanning the Component Class:
+When you provide the annotation over the class, Spring will Scan your java class for Special Anotations
+Automatically registers a bean in the Spring Container
+
+
+Development Process:
+
+Step 1: Enables Component Scanning in a Spring Config File
+Step 2: Add the @Component Annotation to our Java Class
+Step 3: Retrieve the Bean from the Spring Container
+
+
+
+1. Enable Component Scanning in Spring Config File:
+
+    <bean>
+        <context:component-scan base-package="com.spring.ioc">
+    </bean>
+    
+    in base package, you need to provide the  package name of the Beans. Spring is gonna Scan all packages.
+
+2. Add @Component Annotation to your java Class
+    @Components --> This wll tell spring that the Class is a special Spring Bean
+    @Component("thatSillyCoach")  --> inside it that's a bean Id
+
+3. Retrive the Spring From Spring Conatiner.
+    Same As Done before
+    
+    
+    
+========================================================================================================================================
+
+ AnotationDemoApp.java
+ 
+    package com.spring.anotations;
+
+    import org.springframework.context.support.ClassPathXmlApplicationContext;
+
+    public class AnotationDemoApp {
+        public static void main(String ...args) {
+            ClassPathXmlApplicationContext context =new ClassPathXmlApplicationContext("applicationContext.xml");
+            Coach theCoach=context.getBean("theCoach",Coach.class);
+            System.out.println(theCoach.getDailyWorkout());
+            context.close();
+        }
+    }
+
+
+
+TennisCoach.java
+
+    package com.spring.anotations;
+    import org.springframework.stereotype.Component;
+
+    @Component("theCoach")
+    public class TennisCoach implements Coach {
+
+        @Override
+        public String getDailyWorkout() {
+            return "Tennis Coach Class getDailyWorkout() method";
+        }
+    }
+
+
+Coach.java
+
+    package com.spring.anotations;
+
+    public interface Coach {
+        public String getDailyWorkout();
+    }
+    
+
+
+applicationContext.xml
+
+
+    <?xml version="1.0" encoding="UTF-8"?>
+    <beans xmlns="http://www.springframework.org/schema/beans"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xmlns:context="http://www.springframework.org/schema/context"
+           xsi:schemaLocation="http://www.springframework.org/schema/beans
+                http://www.springframework.org/schema/beans/spring-beans.xsd
+                http://www.springframework.org/schema/context
+                http://www.springframework.org/schema/context/spring-context-3.0.xsd">
+
+        <context:component-scan base-package="com.spring.anotations"></context:component-scan>
+    </beans>
+
+======================================================================================================================================
+
+Default Bean Id:
+
+class name: TennisCoach
+default beanId= tennisCoach
+
+TennisCoach.java
+
+    package com.spring.anotations;
+
+    import org.springframework.stereotype.Component;
+
+    @Component
+    public class TennisCoach implements Coach {
+
+        @Override
+        public String getDailyWorkout() {
+            return "Tennis Coach Class getDailyWorkout() method";
+        }
+    }
+
+
+
+AnotationDemoApp.java
+
+    package com.spring.anotations;
+
+    import org.springframework.context.support.ClassPathXmlApplicationContext;
+
+    public class AnotationDemoApp {
+        public static void main(String ...args) {
+            ClassPathXmlApplicationContext context =new ClassPathXmlApplicationContext("applicationContext.xml");
+            Coach theCoach=context.getBean("tennisCoach",Coach.class);
+            System.out.println(theCoach.getDailyWorkout());
+            context.close();
+        }
+    }

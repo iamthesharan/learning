@@ -1,0 +1,18 @@
+Java String concat ------------------------->
+
+The java string concat() method combines specified string at the end of this string. It returns combined string. It is like appending another string.
+
+Method:
+public String concat(String anotherString)  
+
+
+class Car{
+	public static void main(String ...args) {
+		String s1="Shashank ";
+		String s2="Sharan ";
+		String s3="Prasad";
+		s1=s1.concat(s2);
+		s2=s1.concat(s3);
+		System.out.println(s2); //Output: Shashank Sharan Prasad
+	}
+}

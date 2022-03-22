@@ -1,0 +1,50 @@
+================================================================================================================
+
+Initial Capacity Of ArrayList: none.
+Initial Capacity Of Vector : 10--> We can check this by Capacity Method
+
+Vector v=new Vector();
+System.out.println(v.capacity());-->10
+
+=============================
+Vector Capacity:
+
+import java.util.Vector;
+
+class Car{
+	public static void main(String ...args) {
+		Vector v=new Vector(24);
+		System.out.println(v.capacity());
+		for(int i=0;i<10;i++)
+			v.addElement(i);
+		v.addElement("A");
+		System.out.println("After Adding 11 element. capacity= "+v.capacity());
+	}
+}
+
+
+===============================================================================================================
+
+If the element exceeds the initial Capacity, the Capcacity gets Doubled
+
+import java.util.Vector;
+
+class Car{
+	public static void main(String ...args) {
+		Vector v=new Vector(10);
+		System.out.println(v.capacity());
+		for(int i=0;i<10;i++)			
+			v.addElement(i);
+		System.out.println("Before Adding 11 element. capacity= "+v.capacity());
+		v.addElement("A");
+		System.out.println("After Adding 11 element. capacity= "+v.capacity());
+	}
+}
+
+
+OUTPUT:
+
+10
+Before Adding 11 element. capacity= 10
+After Adding 11 element. capacity= 20
+

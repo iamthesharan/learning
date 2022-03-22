@@ -1,0 +1,30 @@
+Collections Class defines Several Utility Methods for Collection Objects like sorting, searching, reversing etc.
+
+since array list don't have SortedList Conecept. So here Colllections class provide sort method.
+
+Methods:
+
+public static void sort(List l);
+    --> for default sorting order, object should be homogeneous and comparable otherwise will get classCached Exception.
+    --> if the list contains null, then we will get null pointer Exception. Hence null objects not allowed.
+public static void sort(List l, Comparator C);
+    
+    	ArrayList<String> l=new ArrayList<String>();
+		l.add("Shashank");
+		l.add("Sharan");
+		l.add("Khushboo");
+		l.add("Shivhare");
+		l.add("Kiran");
+		l.add("Shelar");
+		System.out.println("BeforeSorting: "+l);
+		Collections.sort(l, new Comparator() {
+			public int compare(Object O1, Object O2) {
+				String S1=O1.toString();
+				String S2=O2.toString();
+				return S2.compareTo(S1);
+			}
+		});
+		System.out.println("AfterSorting: "+ l);
+        
+        
+        

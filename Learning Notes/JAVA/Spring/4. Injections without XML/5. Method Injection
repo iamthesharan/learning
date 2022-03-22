@@ -1,0 +1,21 @@
+	
+	@Autowired
+	public void doSomeCrazyStuff(FortuneService fortuneService) {
+		this.fortuneService=fortuneService;
+	}
+    
+    
+    and Run the Program
+    
+    
+    ====================================================================================================================
+    
+    
+    Field Injection. 
+    
+    Place @Autowired Directly on the Field
+    
+    @Autowired
+    private FortuneService fortuneService;
+    
+    Spring will Automatically Scan and inject the Dependencies with the help of reflection

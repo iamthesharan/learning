@@ -1,0 +1,22 @@
+So to add the Logout Support, We Need to Configure our SecurityCongif File.
+
+In the Configure (HttpSecurity) method add the Below lines.
+
+    .and().logout.premitAll();
+
+
+We are going to Send the data to the Default logout URL.
+By default must use POST Method. GET method is disabled by Default
+Logout URL will be handled by Spring Security Filters
+
+
+Logout Process:
+By Default Spring will Invalidated the users's HTTP Session and Remove Session Cookies etc.
+and Send User back to your login page
+And will append a ?logout parameter which we can use to show the logout message
+
+You need to Create a Logout form also which will contain the Logout button:
+
+	<form:form action="${pageContext.request.contextPath}/logout" method="POST">
+		<input type="submit" value="Logout"/>
+	</form:form>

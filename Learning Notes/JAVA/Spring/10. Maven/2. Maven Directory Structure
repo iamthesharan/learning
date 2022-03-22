@@ -1,0 +1,42 @@
+MyApp
+  |--- pom.xml
+  |--- ./src
+  |       |--- ./main
+  |       |       |--- ./java           --> Here Your Source JAVA code will reside
+  |       |       |--- ./resources      --> Here you will keep you properties file as well as config files of your app
+  |       |       |--- ./webapp         --> JSP files, web Config files and web assets (images, css, js).
+  |       |
+  |       |
+  |       |--- ./test
+  |               | --- ./java          --> Unit Testing code and properties
+  |               | --- ./resources     
+  |         
+  |--- ./target                         --> Destination Directory for Compiled Code. Automatically Created by Maven.
+
+
+  POM file:
+
+  POM Stands for Project Object Model.
+  Pom.xml file Structure.
+
+        Project Metadata  --> Project Name, version etc, output file type like Jar, war
+
+        Dependencies
+
+        Plugins
+
+
+Project Co-ordinates:
+
+It is similar to the GPS Co-ordinates of the house. Just like GPS provides the precise location of you house, Project Co-odrinates provide the precise location of your project.
+
+<groupId>com.springdemo</groupId>           --> name of the company, group or organization
+<artifactId>spring-crm-rest</artifactId>    --> name of the project.
+<version>1.0.0</version>                    --> a specific Release version like 1.0, 1.6, 2.0. If the project is under development, it has SNAPSHOT associated with it.
+
+
+<groupId>com.hibernate</groupId>
+<artifactId>hibernate-core</artifactId>
+<version>5.2.11.Final</version>
+
+You can say its a GAV

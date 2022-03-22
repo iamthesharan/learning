@@ -1,0 +1,68 @@
+Configuring the Container with the JAVA Code.
+
+
+
+With XML:
+
+
+<context:component-sacn base-package="com.spring.io">
+
+
+Without XML:
+
+
+Step 1: Create JAVA Class and anotate as @Configuration
+Step 2: Add Component Scanning Support.
+Step 3: Read Spring JAVA Configuration Class
+Step 4: Retrive bean from Spring Container
+
+
+
+SportsConfig.java
+
+Step 1:
+
+@Configuration
+public class SprotConfig{
+    // Currently this is an Empty Config. There is not Anything there. We need to add some beans to this configuration.
+}
+
+
+We can manually Add beans but here we will use easier approach by the use of @ComponentScan
+
+Step 2:
+
+@Configuration
+@ComponentScan("com.spring.ioc")
+public class SportConfig{
+ 
+}
+
+
+Step 3:
+
+Read Spring Java Configuration class
+
+AnnotationConfigApplicationContext context =new AnnotationConfigApplicationContext(SportConfig.class); // mentioning the Configuration class
+
+
+
+Step 4:
+
+Coach theCoach =context.getBean("tennisCoach", Coach.class);
+
+
+
+package com.spring.anotations;
+
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
+
+public class AnotationDemoApp {
+	public static void main(String ...args) {
+		AnnotationConfigApplicationContext context=new AnnotationConfigApplicationContext(SportConfig.class);
+		Coach theCoach=context.getBean("tennisCoach", Coach.class);
+		System.out.println(theCoach.getDailyFortune());
+		context.close();
+	}
+}

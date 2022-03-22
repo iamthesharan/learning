@@ -1,0 +1,15 @@
+Directives are instructions in the DOM.
+Example Component are directives but directives with the template.
+We can make our own directives
+
+<p appTurnGreen >Hi There</p>
+
+appTurnGreen is a directive here
+We can use directives with Attribute Selector.
+
+@Directive({
+    selector:'[appTurnGreen]'
+})
+export class TurnGreenDirective{
+    
+}

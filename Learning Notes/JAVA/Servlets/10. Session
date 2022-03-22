@@ -1,0 +1,21 @@
+HttpSession
+
+Http protocol is a stateless so we need to maintain state using session tracking techniques. Each time user requests to the server, server treats the request as the new request. So we need to maintain the state of an user to recognize to particular user.
+
+
+adding the Value to the session Object
+
+First we need to create a Session on our First Servlet and set the attribute to the session:
+
+		HttpSession session=request.getSession();
+		session.setAttribute("k", (i+j));
+
+Then to use this session variables we need to create a session object in the redirected Servlet and then call getAttribute method
+
+		HttpSession session=request.getSession();
+		int k=(int)session.getAttribute("k");
+        
+Removing the session Attribute:
+
+		HttpSession session=request.getSession();
+		session.removeAttribute("k");

@@ -1,0 +1,18 @@
+There is a Hardware and to communicate with hardware we require a special Software called OS.
+
+These Operating System Contains 2 Components:
+1. Shell  --> User can only communicate with Shell. It is the outer layer of OS.
+2. Kernel --> 
+
+                |                |               |
+    ------->    |   SHELL        |   KERNEL      | <-----    HARDWARE
+                |                |               |
+                |                |               |
+
+Whenever you enter a command in terminal, Shell is going to read that command, check wether it's valid or not
+and then convert it into kernel understandable and hand it over to the kernel.
+
+Shell acts as interface between User and Kernel.
+
+Kernel is the Core component of Unix OS.
+

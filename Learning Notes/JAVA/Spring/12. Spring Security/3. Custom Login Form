@@ -1,0 +1,76 @@
+So Here We will design our own Login Form.
+
+Development Process:
+1. Modify Spring Security Configuration to reference to login Form
+2. Develop a Controller To Show the Login Form
+3. Create Custom Login Form with HTML and CSS and Spring Form Tags
+
+
+1. Modify Spring Security Configuration to reference to login Form
+
+    We need to override the class configure(HttpSecurity) in Security Config Class
+    This will allow to configure the Security for we paths in application, logging, logout etc.
+
+
+    http.authorizeRequests()   -> This will restrict acess based on the Servlet Request
+    http.authorizeRequests().anyRequest() --> Restrict Access for Any Http Servlet Request Comming in
+    http.authorizeRequests().anyRequest().authenticated() --> Any Request Comming to the App Must Be Authenticated
+    http.authorizeRequests().anyRequest().authenticated().and().formLogin() --> and for our Form Login we will customize the Login form
+
+    http.authorizeRequests().anyRequest().authenticated().and().formLogin().loginPage("login").loginProcessingUrl("/authenticateUser").premitAll();
+
+    premitAll  -> Anyone should See the login page
+
+    Also there is no Controller Request Mapping Required for /authenticateUser processing URL. we get this for Free with Spring Security 
+
+
+    Spring Security provides the Default Names for Login Form Fields.
+
+    Username Field: username
+    Password Field: password
+
+
+2. Develop a Controller To Show the Login Form
+
+        @Controller
+        public class LoginController {
+            @GetMapping("/login")
+            public String showMyLoginPage() {
+                return "login";
+            }
+        }
+
+3. Create Custom Login Form with HTML and CSS and Spring Form Tags
+
+		<form:form action="${pageContext.request.contextPath}/authenticateUser" method="POST">
+			<p>
+				Username: <input type="text" name="username"/>
+			</p>
+			<br>
+			<p>
+				Password: <input type="password" name="password"/>
+			</p>
+			<input type="submit" value="Login"/>
+		</form:form>
+
+
+===========================================================================================================
+
+
+Now We have to add the Login Failure message
+
+Spring will send the User back to the Login form and will append the parameter error in the URL
+So we can check in the URL Parameter and write the Code Accordingly
+This Error Parameter is passed by spring Security Automatically in case of login Failure
+
+Development Process:
+
+1. We are going to Modify Our Custom Login Form
+    a. Check for error Parameter
+    b. If Error Parameter Exist, then Show the Error Message
+
+        JSTL Tag:
+
+    		<c:if test="${param.error != null }">
+				<i style="color:red;">Sorry You've Entered Invalid Credentials.</i>
+			</c:if>

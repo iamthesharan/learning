@@ -1,0 +1,29 @@
+GenricServlet is an Abastract Class.
+
+    4 mehtods of Servlet Interface is implemented by  this class
+    only service() method is not implemented
+    
+    
+    
+=================================================================
+
+
+
+package com.servlets;
+
+import java.io.IOException;
+import java.io.PrintWriter;
+
+import javax.servlet.GenericServlet;
+import javax.servlet.ServletRequest;
+import javax.servlet.ServletResponse;
+
+public class MyServlet extends GenericServlet{
+	public void service(ServletRequest req, ServletResponse resp) throws IOException {
+		System.out.println("Servicing......");
+		//Set content type of the response
+		resp.setContentType("text/html");
+		PrintWriter out=resp.getWriter();
+		out.println("<h1>This is the response from Servlet</h1>");
+	}
+}

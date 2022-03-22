@@ -1,0 +1,53 @@
+AOP Solution:
+
+Apply the Proxy Design Pattern
+
+                                        Logging, Security
+    Main App  <------  AOP Proxy <--------------------------------------------> Target Object
+targetObjcct.doSomeStuff()                                                      doSomeStuff()
+
+
+    So here we have main app on the left and Target Object in the right.
+
+    So here Main app has no idea about the Proxy or any aspects. It just know about the method calls.
+    This is similar to Phone Calls. Phone Calls are monitored by Service Provider. SO here the Service Providers acts as a proxy. And this happens all behind the scenes.
+
+
+    Benefits of AOP:
+        Code for the Aspect is defined in a Single Class
+    
+            1. Much better than being Scattered everywhere.
+            2. Promotes Code re-use and easier to change
+
+        Bussiness Code in your application is Cleaner.
+
+            1. Only applies to Bussiness Functionality: addAccount
+            2. Reduces Code Complexity
+
+        Configurable:
+
+            1. Based on the Configuration, apply Aspects selectively to different parts of the Application
+            2. No need to make changes to your main application Codes.
+
+
+    Other AOP Usecases:
+    Most Common:
+    1. Logging, Security and Transaction
+    2. Audit Logging: Who, what, when and where
+    3. Exception Handling: Log Exception and notify DevOps team via SMS/Email
+    4. API Management: How many times has method been called by the user.
+    5. Analytics: What are peak times? what is average load? Who is top user.
+
+
+
+    Advantages of AOP
+    1. Re-usable Modules
+    2. Resolves Code Tangling
+    3. Resolves Code Scatter
+    4. Applied Selectively based on Configuration
+
+    Disadvantages of AOP:
+    1. Too many Aspects and app flow is hard to follow
+    2. Minor performance cost for aspect Execution (runtime Weaving)
+
+

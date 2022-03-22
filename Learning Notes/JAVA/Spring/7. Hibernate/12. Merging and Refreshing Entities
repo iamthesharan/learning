@@ -1,0 +1,24 @@
+Refreshing Hibernate Entities Using refresh() Method
+Sometimes we face situation where we application database is modified with some external application/agent and thus corresponding hibernate entity in your application actually becomes out of sync with it’s database representation i.e. having old data. In this case, you can use session.refresh() method to re-populate the entity with latest data available in database.
+
+You can use one of the refresh() methods on the Session interface to refresh an instance of a persistent object, as follows:
+
+public void refresh(Object object) throws HibernateException
+public void refresh(Object object, LockMode lockMode) throws HibernateException
+
+			Student student=(Student)session.get(Student.class, 23);
+			System.out.println(student.getFirstName()); // Shashank
+			student.setFirstName("Khushboo");           // Persistance Object First Name Changed to Khushboo
+			session.refresh(student);                   // Here we have refreshed the Persistance Object so the Object Changed its state to original State
+			System.out.println(student.getFirstName()); // Shashank
+
+
+
+EmployeeEntity mergedEmpEntity = session.merge(empEntity);
+
+        1.  ’empEntity’ is detached entity when it is passed to merge() method.
+        2.  merge() method will search for an already loaded EmployeeEntity instance with identifier information taken from empEntity. If such persistent entity is found then it will be used for updates. Other wise a new EmployeeEntity is loaded into session using same identifier information as present in ’empEntity’.
+        3.  Data is copied from ’empEntity’ to new found/loaded entity.
+        4.  Because new/found entity is persistent, all data copied to it from ’empEntity’ is automatically saved into database.
+        5.  Reference of that new entity is returned from merge() method and is assigned to ‘mergedEmpEntity’ variable.
+        6.  ’empEntity’ is still detached entity.

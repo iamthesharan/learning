@@ -1,0 +1,61 @@
+Concept of commiting.
+
+Whenever I made changes in the code, I create a checkpoing and also add some info snapshots along with that checkpoint. Each Checkpoint is caled a commit.
+
+do some stuff  ---> commit
+
+There is a difference between Commit and Save.
+    So Commit is done over save. First we make the changes and save the file, and then we commit.
+    Suupose we made changes in 2 or 3 files and save those files. Now we group these files and perform commit.
+
+Commit is a multi step process. We simply cannot call commit like this instead there is an intermidiate step where we actually call out the particular changes that we've made and that we want to include in a commit.
+
+Lets assume we made changes in 3 files:
+1. index.html -> modified
+2. style.css  -> deleted
+3. app.js     -> created
+
+So I will not just commit. Instead I will call out some of these and group together. and then perform commit.
+So here we are selecting certain changes and making commit on those group of changes
+
+=================================================================================================================================
+Command:
+
+    git add -> we use the git add command to stage changes to be commited. Its the way of telling git to please include this change in our next commit.
+
+    Working Directory   --> The place where we are working on the project.
+        |
+        |   git add
+        |
+    staging Area        --> When You use git add and create a group it goes to the Staging area.
+        |
+        |   git commit
+        |
+    repository          --> This is .git Folder. This is updated after commit
+
+
+
+Now create a file outline .txt in a project. and execute the command git status. You will get the error Untracked files
+Untracked files:
+  (use "git add <file>..." to include in what will be committed)
+        outline.txt
+
+Command:
+
+    git add file1 file2
+    git add . --> will stage all files and folder in the directory as well as subdirectory
+
+
+Command:
+    git commit: We use git commit command to actually Commit changes from staging area. when making a commit we need to provide the commit message that summarize the changes and work snapshotted in the commit
+
+    git commit -m "my message"
+
+
+======================================================================================================
+
+If you modify the commited file, and enter command git status, it will show that the file is modified as the git keeps track of the file.
+
+Command :
+
+git log  --> This will basically prints the logs of the commit files

@@ -1,0 +1,7 @@
+Constructors:
+
+
+HashMap M=new HashMap();
+HashMap M=new HashMap(int initialCapacity);
+HashMap M=new HashMap(int initialCapacity, float fillRatio);
+HashMap M=new HashMap(Map M);

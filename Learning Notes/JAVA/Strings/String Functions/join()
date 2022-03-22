@@ -1,0 +1,38 @@
+Java String join() ------------>
+
+The java string join() method returns a string joined with given delimiter. In string join method, delimiter is copied for each elements.
+In case of null element, "null" is added. The join() method is included in java string since JDK 1.8.
+There are two types of join() methods in java string.
+
+Signature
+The signature or syntax of string join method is given below:
+
+public static String join(CharSequence delimiter, CharSequence... elements)  
+public static String join(CharSequence delimiter, Iterable<? extends CharSequence> elements)  
+
+
+
+Parameters
+delimiter : char value to be added with each element
+elements : char value to be attached with delimiter
+
+
+Returns
+joined string with delimiter
+
+
+Throws
+NullPointerException if element or delimiter is null.
+
+
+Program:
+
+class Car{
+	public static void main(String ...args) {
+		System.out.println(String.join("/","27","10","2020"));
+	}
+}
+
+Output:
+
+27/10/2020

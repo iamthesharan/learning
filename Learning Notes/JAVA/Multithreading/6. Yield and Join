@@ -1,0 +1,183 @@
+We can prevent a thread execution by using the following methods.
+
+    1. yield()
+    2. join()
+    3. sleep()
+
+1. yield()
+
+    Yield Method causes to pass current executing thread to give the chance for waiting threads of same priority.
+    If there is no waiting thread or all waiting threads have low priority, then Same thread can continue its execution.
+
+    Q.) If multiple threads are waiting with the same priority then which waiting thread will get the chance?
+
+    Ans ->  We can't expect, it depends on thread scheduler.
+
+            Suppose we have a thread tx with priority 7 and is currently in running state and t1,t2,t3 threads are of same priority 7.
+            and now tx is yielded (left the process), then any of the thread from t1,t2,t3 will get the chance (depends on thread scheduler) 
+            and tx will go in wating state.
+
+    
+
+    Also note if t1,t2,t3 are of low priority, and then tx is yielded, then tx will continue to execute
+             
+
+Prototype of yield method:
+
+    public static native void yield();
+
+    Yield method just push the state of the current running thread of the same priority to Ready/Runnable.
+
+
+
+Example:
+
+class MyThread extends Thread{
+	public void run() {
+		for(int i=0;i<10;i++) {
+			System.out.println("Child Thread");
+			Thread.yield();
+		}
+	}
+}
+
+public class test{
+	public static void main(String ...args) {
+		MyThread t=new MyThread();
+		t.start();
+		for(int i=0;i<10;i++) {
+			System.out.println("Main Thread");
+		}
+	}
+} 
+
+Here main thread will complete first because child thread is always calling yield method.
+
+Yield is used if the thread takes a lot of time in order to give the priority to other threads
+
+Some platforms won't provide proper support for Yield Methods
+
+===============================================================================================================
+
+2. Join:
+
+    If a  thread wants to wait until completing some other thread then we will use join method
+
+        Lets suppose we have 2 threads T1 and T2.
+        T1 wants to wait until completing T2 as the return value from T2 will be used by T1
+        Since T1 has to wait until completing T2 hence we should call in T1, t2.join()
+
+
+
+        T1      T2
+        |       |
+     t2.join()
+
+     Now when t1 calls t2.join, t1 gets in a waiting state.
+
+     If a thread wants to wait until completeing some other thread, then we should go for join method
+     If a thread t1 wants to wait until completing t2, then T1 has to call, t2.join
+     If T1 executes t2.join, then immediately t1 will be entered into waiting state until t2 completes.
+     Once T2 completes, then T1 can continue its execution
+
+
+     Venue Fixing   Wedding Card printing   Wedding Card distribution
+        t1                  t2                      t3
+        |                   |                       |
+        |                   |                       |
+    
+
+    t2 is dependedent on t1, so t2 should call t1.join()
+    Similarly with t3, its dependent on t2 so t3 should call t2.join()
+
+
+Prototype:
+
+    public final void join(); throws InteruppetedExceptions --> we cannot override.
+    public final void join(long ms); throws IE--> If the dependent thread won't complete in ms millisecond, then the current thread will continue.
+    public final void join(long ms, int ns) throw IE
+
+    Every join method throws InteruppetedExceptions which is checked Exception hence compulsory we should handle this exception either by using 
+    try catch or by using throws keyword otherwise we will get compile time error.
+
+
+
+    Your friend         You Waiting for Friend   <------- Another friend intruppeted for tea
+                            join() will get intruppted Exception
+
+
+
+                t.start()                   If thread Scheduler allocates processor              If run() Completes
+    New/Born -------------> Ready/Runnable ------------------------------------------> Running ----------------------> Dead  
+                                                                                          |
+                                                                                          | t2.join()
+                                                                                          |
+                                                                                    waiting State(Blocked for Joinning)
+
+
+        Now suddenly the Running thread called Join method, then the Thread will enter into waiting state.
+        When a Thread comes out of the Waiting State, it againg goes to the Ready State.
+
+        when join is used with, T2 will always goes to Ready State if the below condition is there:
+
+        1. If t2 Completes or 
+        2. If Time Expires
+        3. or if waiting thread got intruppeted
+
+
+Example 1:
+
+class MyThread extends Thread{
+	public void run() {
+		for(int i=0;i<10;i++) {
+			System.out.println("Child Thread");
+			try {
+				Thread.sleep(2000); // 2 Sec so 10x2=20sec
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
+		}
+	}
+}
+
+public class test{
+	public static void main(String ...args) throws InterruptedException {
+		MyThread t=new MyThread();
+		t.start();
+		t.join();// Here Joinning the t thread. So first main thread will start and wait until t completes.
+		for(int i=0;i<10;i++) {
+			System.out.println("Main Thread");
+		}
+	}
+}
+
+So here first Child thread will start and main thread will wait until child thread completes.
+
+
+Example 2: 
+
+class MyThread extends Thread{
+	public void run() {
+		for(int i=0;i<10;i++) {
+			System.out.println("Child Thread");
+			try {
+				Thread.sleep(2000); // 2 Sec so 10x2=20sec
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
+		}
+	}
+}
+
+public class test{
+	public static void main(String ...args) throws InterruptedException {
+		MyThread t=new MyThread();
+		t.start();
+		t.join(10000); // Here Joinning the t thread. So first main thread will start and wait until t completes in 10 Sec. 
+		for(int i=0;i<10;i++) {
+			System.out.println("Main Thread");
+		}
+	}
+}
+
+

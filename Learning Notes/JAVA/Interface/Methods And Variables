@@ -1,0 +1,102 @@
+
+/*
+	interface Readable{
+		void m1(){
+			## This Method is always Public to make this method available to every implementation class. 	
+			
+			## This method is always abstract. Because Implementation class is responsible to provide
+				implementation
+		}
+	}
+	
+	Hence inside Interface, the following method declarations are Equal.
+	1) void m1();
+	2) public void m1();
+	3) abstract void m1();
+	4) public abstract void m1();
+*/
+
+/*
+	As Every interface method is always public and abstract, we can't declare interface method
+	with the following Modifiers:
+	
+		#already Declared Public
+		Private
+		Protected
+		
+		#Declared with abstract by Default
+		Static
+		Final
+		Synchronized
+		Strictfp
+		Native
+*/
+
+/*
+	An interface can contain variable. The main Purpose variable is to Define Requirement level 
+	Constants for the Specification. 
+	
+	Every Interface Variable is always public static and Final.
+	Public - To make this variable visible to every Implementation Classes.
+	Static - Without Existing Object, Implementation Class Can Access This Variable.
+	Final  - To Avoid any Changes By the Vendors.
+*/
+/*
+	interface Readable{
+		int x=10;
+		## Interface variables are static and final so it can be declared either at the 
+		time of Declaration or in the static block. But static block concept is not there in Interface.
+	}
+*/
+
+
+
+/*
+	interface Left{
+		public void m1();	
+	}
+	interface Right{
+		public void m1();	
+	}
+	class test implements Left, Right{
+		public void m1(){
+		
+		}
+	}
+	
+	## If Both the Iterface methods has same Method Signature and Return type, Then 
+		Only One method implementation is needed in the Implemented Class.
+*/
+
+
+/*
+	If two interfaces contains a method with same signature but different return types,
+	then it is impossible to implement both the interfaces simultaneously(If Return types are not 
+	covariant).
+	
+	interface Left{
+		public void m1();
+	}
+	interface Right{
+		public int m1();
+	}
+	class test implements Left, Right{
+		## Cant be Implemented.
+	}
+*/
+
+/*
+	interface Left{
+		int x=10;
+	}
+	interface Right{
+		int x=20;
+	}
+	class test implements Left, Right{
+		public static void main(String ...args){
+			//SOP(super(x));  ## invalid because of naming Conflicts.
+			SOP(Left.x);
+			SOP(Right.x);
+		}
+	}
+*/

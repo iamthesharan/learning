@@ -1,0 +1,4 @@
+First index.html file loads
+Then main.ts file loads which inturn bootstrap the AppModule
+    - platformBrowserDynamic().bootstrapModule(AppModule)
+In the AppModule there is a bootstrap Array in the @NgModule Decorator, where we bootstrap AppComponent

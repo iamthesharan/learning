@@ -1,0 +1,37 @@
+If we want to represent a group of objects as a key Value Pair. Then we go for MAP
+
+    Keys    | Values
+__________________________
+    101     |   Shashank
+    102     |   Sharan
+    103     |   Kiran
+    
+Duplicate Keys are not allowed, but Duplicate Values are allowed
+
+Each Key Value pair is Called Entry.
+
+
+Methods:
+
+1. Object put(Object Key, Object Value)
+    
+    m.put(101,"Shashank");
+    m.put(102,"Sharan");
+    m.put(101,"Kiran");// Shashank will be replace by kiran and the return type of this method will be old Object.
+    ie System.out.println(m.put(101,"Kiran"));  --O/P Shashank
+    
+    If there is no replacement or overwrite of the Value for a key. the method will return null Object.
+    
+2. void putAll(Map M);  -- put all the key values present in M to the calling Map
+3. Object get(key);  -- for retriveing the value of a key
+4. Object remove(key); --> remove the key and hence value will also be removed. returns the removed key Value
+5. boolean containesKey(key); -- tells whether key values is present or not.
+6. boolean containsValue(value); -- tells whether value is present or not.
+7. boolean isEmpty(); -- tells whether map is empty or not.
+8. int size(); --> gives the size of the map
+9. void clear(); clear the Map.
+
+The Below three methods are called Collection Views of MAP
+10. Set keySet(); -- returns only the keys
+11. Collection values();  --returns only the values.
+12. Set entrySet(); --> returns the entry Set i.e. key with values.

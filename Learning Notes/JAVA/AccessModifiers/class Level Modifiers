@@ -1,0 +1,91 @@
+Class Level Modifiers:
+
+	The only applicable modifiers for top level classes are:
+		1) public
+		2) Default
+		3) final
+		4) abstract
+		5) strictfp
+		
+	But for Inner classes:
+		1) public
+		2) Default
+		3) final
+		4) abstract
+		5) strictfp
+		6) Private
+		7) Protected
+		8) Static
+		
+/*
+	private class test{
+		public static void main(String ...args){
+			// Invalid Code
+			// Class Can't be Private
+		}
+	}
+*/
+
+
+/*
+	Access Specifiers vs Access Modifiers
+	 IN C++
+	1) Public, Private, Protected, Default  -> Access Specifiers
+	2) final, Abstract, static --->Access Modifiers
+	
+	But This is rule is not in JAVA 
+	
+	In Java All are considered as Access Modifiers. There is no word like specifiers
+	
+*/
+
+
+
+/*
+	private class test{
+		
+	}
+	
+	## Compile time Error - Modifer Not allowed.
+	
+*/
+
+/*
+	If a class Declared as public then we can access that class from anywhere.
+	
+	
+	
+	package pack1;
+	class A{
+		public void m1(){
+			System.out.println("Hello");
+		}
+	}
+	
+	For Compiling A----> javac -d . A.java
+	
+	
+	package pack2;
+	class B{
+		public static void main(String ...args){
+			A a=new A();
+			a.m1();
+		}
+	}
+	For Compiling A----> javac -d . B.java
+	
+	CE -- > Class A not found.	
+*/
+
+
+/*
+	final class A{
+		void m1(){}
+		void m2(){}
+		
+		##Every Method present Inside Final Class is by Default Final. So we Cannot Override. 
+		##We Cannot extends A that's why we cannot Override its method;
+		
+		##Every Variable Present in final Class is not Final. So we can Change it.
+	}
+*/

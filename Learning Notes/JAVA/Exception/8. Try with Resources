@@ -1,0 +1,71 @@
+IllegalArgumentException: Child Class of RE
+
+If we set the priority of thread other than 1 to 10, then we will get IllegalArgumentException.
+t.setPriority(15);// IllegalArgumentException
+
+
+
+V1.6:
+
+Whatever resources we have opened at try block, Compulsory we must close it in the finally block
+
+
+V1.7:
+In 1.7v, whatever resources we've opened will be automatically close. This can be achieved by try with resources
+
+    try(R){
+
+    }
+    catch(Exception e){
+
+    }
+
+
+    try(BufferReader br=new BufferReader("input.txt")){
+        use br based on requirement.
+    } // Once control reaches the end of try block, the resource will automatically gets closed.
+    catch(IOException e){
+
+    }
+
+
+        try(
+            // Note here all the Resources must be autoclosable. hence we must implements java.lang.autoclosable
+            BufferReader br=new BufferReader("input.txt");
+            FileReader fr=new FileReader("input.txt")
+            
+            ){
+        use br based on requirement.
+    } // Once control reaches the end of try block, the resource will automatically gets closed.
+    catch(IOException e){
+
+    }
+
+
+    All Resources should be autoclosable resources. A resource is said to be autoclosable if and only if the corresponding class implements,
+    autoclosable interface. All IO related resources, DB Related resources or network Related Resources or already implemented autoclosable interface.
+    Being a programmer we are not required to do anything. just we should aware the point.
+
+    autoclosable interface came in 1.7v and contains only 1 method close()
+
+
+    public void close();
+
+
+    All Resources which are part of try with resource block is implicitly Final.
+    that means:
+
+    try(BufferReader br=new BufferReader("input.txt")){
+        br=new BufferReader("output.txt); // Invalid. We cannot perform re-assignment for final Variable.
+    } 
+    catch(IOException e){
+
+    }
+
+    ------------------------------------------------------------------------------------------------------------
+
+    Now 1.7v the below is perfectly valid
+
+    try(R){
+
+    }

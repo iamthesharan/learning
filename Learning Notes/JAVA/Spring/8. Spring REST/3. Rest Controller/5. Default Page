@@ -1,0 +1,8 @@
+You can use Default Page while Starting the Server.
+
+For this we will Create a new File index.jsp in src/main/webapp
+inside index.jsp, you can put anchor tag and give the URL.
+
+		<a href="${pageContext.request.contextPath}/test/hello">Hello World</a>
+
+

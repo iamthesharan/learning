@@ -1,0 +1,72 @@
+The Underlined Data Structure is Balanced tree
+Dulplicate Objects are not allowed
+insertion order are not preserved
+hetrogenous objects are not allowed otherwise it will throw class Cast Exception
+null insertion is possible only once.
+tree Set implements Serialiazable and Clonable but not RandomAccess
+All objects will be inserted based on some Sorting order. 
+It may be Default Sorting order or Customized Sorting Order.
+
+
+Constructor:
+
+TreeSet t=new TreeSet();              --> Ment for Default Sorting order
+TreeSet t=new TreeSet(Compartor  C);   --> ment for Customized Sorting Order
+TreeSet t=new TreeSet(Collection C);
+TreeSet t=new TreeSet(SortedSet  S);
+---
+
+
+For Non Empty treeset if we are trying to insert null, then we will get NullPointerException
+initial t has some elements.
+t.add(null); -->NPE
+
+For Empty Treeset as a first Element null is allowed. but after null insertion if we are trying to insert any other element the we will get NullPointerException
+initial: no element in t
+t.add(null);
+t.add("A"); --->NPE
+
+But From 1.7v null is not allowed even as 1st Element.
+
+
+
+TreeSet t=new TreeSet();
+t.add(new StringBuffer("A"));
+t.add(new StringBuffer("Z"));
+t.add(new StringBuffer("X"));
+t.add(new StringBuffer("C"));
+t.add(new StringBuffer("G"));
+Since here we are depending on Default Nautural Sorting Order.
+So here the added object must be Homogenous and implements Comparable Interface.
+
+So in this Case we Get ClassCastException. since String implements Comparable Interface but Not StringBuffer.
+
+To Check the Profile of StringBuffer--> javap java.lang.StringBffer
+
+
+
+===========================================================================
+
+When Inserting the object in treeset, depending on Default Natural Sorting Order, JVM will Call CompareTo Method.
+
+Note: 
+Obj1.compareTo(Obj2);
+
+Obj1=Object that is to be inserted.
+Obj2=Object with which inserting object needs to be Compared.
+
+Ex:
+
+TreeSet t=new TreeSet();// Default Natural Sorting Order.
+t.add("k"); // no need to compare. 
+t.add("z"); // "z".compareTo("k"); -- +ve hence it is put in right side of k
+t.add("a"); // "a".compareto("k"); -- -ve hence it it put in left side of a
+t.add("a"); // "a".compareTo("k"); -ve -> now here left element is there. so again "a".compareTo("a")--> 0 --> ie duplicate. hence no insertion.
+
+Hence the order is [a, k, z]
+
+
+            k
+           / \
+          /   \
+         a     z

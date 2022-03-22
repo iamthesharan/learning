@@ -1,0 +1,74 @@
+In order to prevent writing the Html in Servlets class in out.println() method,
+JSP was introduced.
+
+JSP --> JAVA Server Pages. The lifecycle is reverse.
+
+Note, Tomcat container only provides request Response object to JSP
+
+
+
+hello.html
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+</head>
+<body>
+	<form action="add.jsp" method="get">
+		<input name="num1" type="text"/>
+		<input name="num2" type="text"/>
+		<input name="add" type="submit" value="submit"/>
+	</form>
+</body>
+</html>
+
+add.jsp
+
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+</head>
+<body>
+	<%
+		int i=Integer.parseInt(request.getParameter("num1"));
+		int j=Integer.parseInt(request.getParameter("num2"));
+		out.println(i+j);
+	%>
+</body>
+</html>
+
+==========================================================================================================
+
+
+Note Tomcat can only run Servlets and not JSP. So when you write a JSP Code, that JSP code is converted into Servlets
+
+When you create a JSP wile with Demo.jsp, then after convertion into java file with class name Demo_Jsp
+
+So Whatever you will write in Scriptlet portion in JSP, it will goes to service method in servlet
+
+And TOMCAT Container will give the request object , response object , session object to JSP. And these objects are called as Implicit Object in JSP
+
+
+===========================================================================================================
+
+
+Suppose if we want to declare a varaible outside the service method in servlet, then putting it into Scriptlet will not work. Instead we need to put it in declaration.
+
+<%!
+    int val=1;
+%>
+
+===========================================================================================================
+For importing the package, we use directive ie @
+<%@ page import="java.util.date"
+%>
+
+===========================================================================================================
+Expression:
+<%= k %>

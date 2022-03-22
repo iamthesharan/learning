@@ -1,0 +1,71 @@
+Beans:
+
+Container Started -----> Beans Instantiated-----> Dependencies Injected
+                                
+                                ---->Internal Spring Processing -----> Your Custom init method
+                                                                                    |
+                                                                                    |
+                                                                                    
+                                                                            Beans are ready to use.
+                                                                                    |
+                                                                                    |
+                                Your Custom destroy method<-------------- Container is shutdown after the applications ends
+                                
+                                
+                                
+                                
+You can add customer Codes during Bean Initilization:
+*Calling Customer bussiness Logic methods
+*Setting up handles to resource(db, sockets, file etc)
+
+
+
+You can add customer Code during bean Distruction:
+*Calling Custom business logic methods
+*Clean up handles to resource(db, sockets, file etc)
+
+
+
+So during bean initialization and distruction you can add codes and this is called Hooks
+
+
+Init method configuration:
+
+	<bean id="myCoach" class="com.spring.ioc.CricketCoach" init-method="doMyStartupStuff">
+	</bean>                                                                    |
+                                                                                   |    
+                                                                        Method to be defined in bean
+                                                                        
+                                                                        
+Destroy method Configuration:
+
+
+<bean id="myCoach" class="com.spring.ioc.CricketCoach" destroy-method="doMyClenupStuff">
+
+
+
+
+
+Development process:
+
+1. define a method for int and destroy
+2. Configure a method in Spring Config file
+
+
+
+Special Note: Defining init and destroy methods - Method Signatures
+Special Note about init and destroy Method Signatures
+
+When using XML configuration, I want to provide additional details regarding the method signatures of the init-method  and destroy-method .
+
+Access modifier
+The method can have any access modifier (public, protected, private)
+
+Return type
+The method can have any return type. However, "void' is most commonly used. If you give a return type just note that you will not be able to capture the return value. As a result, "void" is commonly used.
+
+Method name
+The method can have any method name.
+
+Arguments
+The method can not accept any arguments. The method should be no-arg.

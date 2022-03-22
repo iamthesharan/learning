@@ -1,0 +1,35 @@
+Final: Its a modifier applicable for Classes, Methods and Variable.
+
+    If a Class Declared as Final, then that class Can't be extended
+    If a Method Declared as Final, Then we can't override that child class.
+    If a Variable declared as Final Then, we can't perform re-assignment for that variable.
+
+Finally:
+
+Finally is a block always associated with try catch to maintain cleanup code.
+try{
+    Risky Code
+}
+catch(Exception e){
+
+}
+finally{
+    Cleanup Code
+}
+
+The Speciality of finally Block is It will be executed always irrespective of whether exception is rised or not rised 
+and whether handled or not handled.
+
+Finally Block is responsible to perform clenup activities related to try block. Will be closed inside finally Block.
+
+Finalize:
+
+    Finalize is a method always invoked by garbage Collector just before destroying an object to perform Cleanup activities.
+    Once Finalize methods completes, immediately Garbage collector Destroys the Object
+
+    Finalize method is responsible to perform cleannup activities related to object. 
+    i.e Whatever resources associated to object will be de-allocated before destroying an object by using finalize method.
+
+
+
+

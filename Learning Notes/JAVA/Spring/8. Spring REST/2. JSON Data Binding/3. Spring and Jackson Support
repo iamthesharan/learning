@@ -1,0 +1,6 @@
+Spring and Jackson Support
+
+    Whenever we are building the Spring REST application, Spring will automatically Support Jackson Integration.
+    So any JSON data which is getting passed to the rest Controller, it will automatically Converted to the POJO.
+    Also, Any JAVA object which is being passed from the Rest Controller, it is converted to JSON.
+    

@@ -1,0 +1,30 @@
+For Every Thread JVM is going to creating 1 runtime Stack
+class test{
+    public static void main(String ...args){
+        doStuff();
+    }
+    public static void doStuff(){
+        doMoreStuff();
+    }
+    public static void doMoreStuff(){
+        SOP("Hello");
+    }
+}
+
+
+|               |
+|               |
+|               |
+|  doMoreStuff  |
+|_______________|
+|               |
+|    doStuff    |
+|_______________|
+|               |
+|  Main Thread  |
+|_______________|
+
+    Runtime Stack
+
+Each Entry in the Runtime Stack is called Activation Record or Stack Frame. After Successful Completion of all the methods, Each methods from the tops gets destroyed 1 by 1,
+and at last runtime Stack will be Destroyed by JVM

@@ -1,0 +1,10 @@
+Web Services are Client Server applications that communicate over the network through HTTP Protocol and Exchange messages with SOAP, XML, JSON etc.
+Two Types of Services:
+1. SOAP --> XML on HTTP POST
+2. REST --> Multiple Data Formats(JSON, text etc) on All HTTP Methods
+
+
+JAVA Web Service Standards:
+1. JAX-WS - JAVA API for XML based Services. These are the standards for implementing SOAP Based Web Services.
+2. JAX-RS - JAVA API for Restful Web Serivces.
+

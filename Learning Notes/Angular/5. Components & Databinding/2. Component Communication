@@ -1,0 +1,32 @@
+Now Want if we want to send the data from the down component to up component. We can do this by custom Event Binding
+    
+    We need to first create an Event Emmiter Object in the down component so that we can send the data to the Up Component.
+    This event Emmiter Object will have the generic type which is rerquired in the Up component.
+    Once event Emitter Object is Created , we need to put @Output() decorator to expose the variable.
+
+        @Output() serverCreated=new EventEmitter<{serverName:string, serverContent:string}>();
+        @Output()  blueprintCreated=new EventEmitter<{serverName:string, serverContent:string}>();
+    
+    Now to emit the data from the Down Component,we will use the Emit Method:
+
+    onAddServer(){
+        this.serverCreated.emit({serverName:this.newServerName, serverContent:this.newServerContent});
+    }
+    
+    Now We have emiited the variable serverCreated.
+    To catch the emmited object in Up Component,
+        (serverCreated)="addServer($event)"
+    the emmited object received will be Attached to the $event variable and will be passed to the .ts component file of Up Component.
+
+            addServer(serverData:{serverName:string, serverContent:string}){
+                this.serverElements.push({
+                type: 'server',
+                name: serverData.serverName,
+                content: serverData.serverContent
+                });
+            }
+
+
+==================================================================================
+
+    Just like input we can also give the alias to the Output.

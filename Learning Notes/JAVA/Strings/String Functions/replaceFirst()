@@ -1,0 +1,14 @@
+replaceFirst() ----------------->
+
+
+class Car{
+	public static void main(String ...args) {
+		String s="Shahank Sharan Sharan";
+		System.out.println(s.replaceFirst("Sharan","Sheeran"));
+	}
+}   
+
+
+
+Output:
+Shahank Sheeran Sharan

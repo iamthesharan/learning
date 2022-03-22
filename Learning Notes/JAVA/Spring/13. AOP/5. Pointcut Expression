@@ -1,0 +1,60 @@
+@Before("execution(public void addAccount())")
+The content inside the @Before annotation is the Pointcut Expression
+
+AOP Terminology:
+Pointcut: A Predicate Expression where the advice should be applied
+
+Here we will first discuss about execution Pointcut
+
+Matching on method name: Means Execute the Cross Cutting Concern on mathing with the method name inside the Expression.
+
+    execution(modifiers-pattern? return-type-pattern declaring-type-pattern? declaring-type-pattern?
+        method-name-pattern(param-pattern) throws-pattern?)
+
+
+    Here ? indicates that the Pattern is optional.
+    Pattern can also use wildcards with *
+
+
+    Examples:
+    1. Match on method name: Match only addAccount() method in AccountDAO Class
+
+        @Before("execution(public void com.spring.aop.dao.AccountDAO.addAccount())")
+        // Get the Qualified name of the Class by right clicking on the DAO Class
+
+    2. Match on method name: Match only addAccount() method in any Class
+
+         @Before("execution(public void addAccount())")
+    
+    3. Match on method names (using wildcards)
+        Match methods starting with add in anyClass
+
+        @Before("execution(public void add*())")
+        @Before("execution(public VerificationResult processCreditCard*())")
+
+    4. Match on method name with any modifier and any return type of processCreditCard()
+
+        @Before("execution(* * processCreditCard*())")
+        @Before("execution(* processCreditCard*())")   --> modifier is optional
+
+
+Parameter Pattern Wildcards:
+
+1. matches a method with no arguments:
+    () 
+
+    We have seen this above. 
+
+2. (*) Matches the method with one argument of any type
+
+3. (..) Matches 0 to more arguments of any type
+
+
+4. Match addAccount method that have account object as parameter
+
+    @Before("execution(* addAccount(com.spring.aop.Account))") //Note the parameter must match the fully qualified name
+    @Before("execution(* addAccount(com.spring.aop.Account, ..))") // .. specifies any no of argument
+    @Before("execution(* addAccount(com.spring.aop.Account, boolean))")
+5. Match any method on our DAO Package com.spring.aop.dao with any no of param
+
+    @Before("execution(* com.spring.aop.dao.*.*(..)))")

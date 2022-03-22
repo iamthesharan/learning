@@ -1,0 +1,123 @@
+We will have Rest Client and a RestService.
+
+So we will make a request for /test/hello 
+and the Rest Service will Respond with Hello World.
+
+
+@RestController   // This adds the Rest Support
+@RequestMapping("/test")
+public class DemoRestController{
+
+    @GetMapping("/hello")           // Rest Endpoint /test/hello which we will access from the POSTMAN for getting the Response.
+    public String sayHello(){
+        return "Hello World";       // Return to the Client Hello World
+    }
+}
+
+Note** while you put the Rest Endpoint on browser instead of Postman, you will get the Same Result.
+So it doen't mean the browser is same as postman. 
+
+Browser=Postman --> only for GET Request.
+
+For Advance REST testing like PUT, DELETE, POST. postman has better support.
+
+
+======================================================================================================================================================
+
+Development Process:
+
+    1. Add Maven Dependency for Spring MVC and Jackson Project
+    2. Add code for all Java Config: @Configuration
+    3. Add code for all JAVA Config: Servlet Initilizer
+    4. Create a Spring Rest service using @RestController
+
+
+    1. Adding the Maven Dependency:
+
+        <!-- https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-databind -->
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-databind</artifactId>
+            <version>2.12.1</version>
+        </dependency>
+
+        <!-- https://mvnrepository.com/artifact/org.springframework/spring-webmvc -->
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-webmvc</artifactId>
+            <version>5.3.3</version>
+        </dependency>
+
+        <!-- https://mvnrepository.com/artifact/javax.servlet/javax.servlet-api -->
+        <dependency>
+            <groupId>javax.servlet</groupId>
+            <artifactId>javax.servlet-api</artifactId>
+            <version>4.0.1</version>
+            <scope>provided</scope>
+        </dependency>
+
+
+    2. Add Code for all Java Config: Creating a Config class.
+
+
+            @Configuration  --> Specifies its the Configuration Class
+            @EnableWebMvc
+            @ComponentScan(basePackages="com.spring.mvc")  --> Scan the Controllers and any other Spring Component and register it into the Spring Container
+            public class DemoAppConfig{
+
+            }
+
+
+    3. Web App Initilizer:
+
+        Spring MVC provdides support for web app initialization
+        make sure your code is automatically detected.
+        your code is used to initialize the servlet Container.
+
+        So we make use of this class:
+
+        AbstractAnnotaionConfigDispatcherServletInitilizer
+
+        So for initializing the Servlet Container, we do the following things.
+        1. Extends AbstractAnnotaionConfigDispatcherServletInitilizer  which is abstract class
+        2. Override Required Methods
+        3. Specify Servlet Mapping and Location of your appConfig
+
+
+        1. Extends AbstractAnnotaionConfigDispatcherServletInitilizer  which is abstract class
+
+            public class MySpringDispatcherServletInitilizer extends AbstractAnnotaionConfigDispatcherServletInitilizer{
+                @Override
+                protected Class<?>[] getRootConfigClasses(){
+                    return null;
+                }
+
+                @Override
+                protected Class<?>[] getServletConfigClasses(){
+                    return new Class[]{DemoAppConfig.class}; // here we give the Spring MVC app config Class name
+                }
+
+                @Override
+                protected String[] getServletMapping(){
+                    return new String[]{"/"};           // maps everthing to this root location.
+                }
+            }
+
+
+    4. Creating a REST Controller
+
+        For Creating a Rest Controller we will use the Annotation @RestController. The Class which uses @RestController will be Automatically 
+        Get Scanned by the Component Scan 
+
+
+            @RestController
+            @RequestMapping("/test")
+            public class DemoRestController {
+
+                @GetMapping("/hello")       //This will handle only GET Request
+                public String sayHello() {
+                    return "Hello World";
+                }
+            }
+
+    5. Run the program on Server and hit the URL: Porject Address/test/hello

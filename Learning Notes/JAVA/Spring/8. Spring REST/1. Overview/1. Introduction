@@ -1,0 +1,39 @@
+So here we will build a client application that provides the whether report for the city.
+For the whether report data, we are going to get from the external Service.
+
+
+Below is the application Structure:
+
+My Whether app --> Client Side App.                                                     ==========
+                                                                                                 |   
+Whether Service --> External Third party Service that will act as a backend Server         <======
+
+
+
+How we connect to the Extenal Service?
+
+    We can make Rest API class over HTTP'
+    REST: Representational State Transfer.
+    Its a Light Weight Approach for Communicating between the application
+
+
+What Programming Languge do we use?
+Any Programming Language --> REST is language Independent
+No matter whatever language the Client Side application and the Server Side application is Written
+
+
+What is the DataFormat?
+REST application can use any Data Format
+Mostly it use -->    XML and JSON.
+
+
+Here we Will use Open Whether Map and Fetch the data from there
+In the API Doc you will get the information how to request for the data from the URL
+
+
+You can also find the various REST API on this website www.programmableweb.com and use it on your project
+
+What do we call it?
+
+
+REST API, REST Web Services, REST Services, Restful Web Services. They All mean the Same.

@@ -1,0 +1,83 @@
+Spring Boot Dev Tools:
+
+1. Automatically Restarts our application when the code is updated.
+2. We need to Simply add the below dependencies in maven pom file
+
+    	<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-devtools</artifactId>
+		</dependency>
+
+
+=====================================================================================================
+
+
+Spring Boot Actuator:
+
+Problems:
+
+1. How Can I monitor and manage the application?
+2. How can I check the application health?
+3. How Can I access Application Metrics?
+
+
+Spring Boot Actuator helps in this case.
+Springboot Actuator exposes end points to monitor and manage your application
+You can easily get the Dev Ops functionality out of the box.
+Simply add the dependency to your POM file
+
+
+Once you add the endpoints for metrics out of the box, Endpoints are prefixed with : /actuator
+
+/health --> health information about your project
+/info   --> Info about your project
+
+
+localhost:8081/actuator/health  ---> this Rest end point will tell if the application status is up or not in JSON format
+localhost:8081/actuator/info    ---> By default its empty but you can customize it in application.properties
+
+    info.app.name=Matenick
+    info.app.description=Record Label Application
+    info.app.version=1.0.0
+
+
+By Default only health and info endpoints are exposed
+TO Expose all actuator end points over HTTP add the below lines in application.properties
+
+management.endpoints.web.exposure.include=*
+
+Other End Points"
+
+localhost:8081/actuator/mapping 
+localhost:8081/actuator/threaddump
+localhost:8081/actuator/beans
+
+
+===================================================================================================================================
+Spring Security:
+
+
+You dont want to expose all these information.
+Add Spring Security to the projects and endpoints are secured
+
+So here you need to add the Spring Starter Security dependency.
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-security</artifactId>
+		</dependency>
+
+So After adding the Dependency, If you access the Endpoints, Spring boot application will prompt you for the username and password:
+
+By Default 
+username: user
+password: wiil be printed in console.
+
+
+You can also customize your username and password in application.properties file
+
+spring.security.user.name=scott
+spring.security.user.password=tiger
+
+For Excluding the End Points, use the below in application.properties.
+management.endpoints.web.exposure.exclude=health,info
+

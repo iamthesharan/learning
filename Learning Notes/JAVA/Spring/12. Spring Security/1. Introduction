@@ -1,0 +1,86 @@
+Spring Security Defines the Framework for Security
+Implemented using Servlet Filtters in the Background
+
+There are two methods for Securing a Web App: declarative and programmatic.
+
+
+Spring Security with Servlet Filters
+
+    1. Servlet Filters are used to Pre-process/ post process web requests
+    2. Servlet Filters can route web requrest based on Security Logic
+    3. Spring Provides a bulk of Security functionality with Servlets Filters
+
+
+Aplication Architecture:
+                                                                                        5
+         1                                 2                                      /myTopSecretStuff
+    Web Browsers <------------> Spring Security Filters <-------------------> Protected Web Resource
+                                        |
+                                        |<============================> My App Security Conf <===========> User Password Roles
+                                                                                3                                   4
+
+
+
+
+    https://www.udemy.com/course/spring-hibernate-tutorial/learn/lecture/8352928#overview  --> 3:02
+
+
+
+    Security Concept:
+    1. Authentication:
+
+        Check userid and password with Credentials stored in app/db
+
+    2. Authorization:
+
+        Check to see if user has an authorized role
+
+
+    Declarative Security:
+
+    Define applications Security constraint in Configuration
+        1. All JAVA Config(@Configuration, no XML)
+        2. or Spring XML Config
+
+
+    Programatic Security
+
+    Spring API provides an API for customer Application Coding
+    Provides greater Customization for Specific app Requirements.
+
+    Spring Security Gives me the Basics, however at my company, we have addition bussiness Security rules.
+    So here we can plugin our own custom Specific code for Security
+
+
+
+    Different Login Methods:
+
+    1. HTTP Basic Authentication
+    2. Default Login Form  --> Provided by Spring
+    3. Custom Login Form
+
+
+
+    Authentication and Authorization:
+
+    1. In Memory
+    2. JDBC
+    3. LDAP
+    4. Custom / Pluggable
+    5. others..
+
+
+    Example:
+                                                                                /leaders
+                                                  /--------------------->   Leader Retreat Page
+                                                 /                            Role: MANAGER
+                                                /
+        Login Form:-------------> Home Page    
+                                role: Employee  \
+                                                 \                              /system
+                                                  \---------------------->  Admin Holiday Cruise
+                                                                                Role : ADMIN
+
+
+    So here we will have a Login Form which when Authenticated will route to the Home Page.
+    Later on we have pages that will be Role Specific as Mentioned in the above Daigram

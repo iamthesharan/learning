@@ -1,0 +1,18 @@
+Cross Component Communication is possible through Services.
+
+
+export class AccountService{
+    statusUpdate=new EventEmmiter<string>();
+}
+
+
+Now we can emit this statusUpdated from the Diffrent Component where this service is injected.
+
+    this.accountService.statusUpdate.emit("Server Status Updated");
+
+Now if you can subscribe the events in other component.
+So in different component I want to listen to it
+
+this.accountService.statusUpdated.subscribe((status:string)=>{
+    alert(status);
+});

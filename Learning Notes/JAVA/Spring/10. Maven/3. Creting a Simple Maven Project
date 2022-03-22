@@ -1,0 +1,27 @@
+In Eclipse IDE we have by default Maven plugin Installed.
+You Mainly need the below:
+1. m2e --> maven Integration for Eclipse
+2. m2e-wtp --> maven web tool project
+
+
+Steps:
+1. Create a new Maven project
+2. Select the Arifact for the quickstart
+3. click Finish
+
+By default it will show J2SE 1.5. We need to tell maven Compiler to use maven 1.8
+
+Add the below lines in properties tag.
+
+<maven.compiler.target>1.8<maven.compiler.target>
+<maven.compiler.source>1.8<maven.compiler.source>
+
+
+=================================================================================================================
+
+Creating a Web App using Maven
+
+Steps:
+1. Select the Artifact as webapp
+2. Fill the GAV
+3. Finish

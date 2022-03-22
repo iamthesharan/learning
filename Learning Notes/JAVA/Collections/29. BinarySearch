@@ -1,0 +1,21 @@
+public static int binarySearch(List l, Object key);  // Successful Search returns index,
+//Unsuccessful Search returns insertion point with negetive sign . i.e where you can put this element.
+
+
+Before calling BinarySearch methods, the list must be sorted. otherwise the method will give unpredicatable results
+
+
+public static int binarySearch(List l, Object key); // if the list is sorted by default sorting order.
+public static int binarySearch(List l, Object key, Compartor C); // if the list is Sorted according to default natural Sorting Order
+
+
+If the list is sorted with Some Compartor Object then at the time of Search operation, we have to pass same compartor object. otherwise we will get unpredictable results.
+
+https://youtu.be/bQkR6N8OUks?list=PLd3UqWTnYXOmx_J1774ukG_rvrpyWczm0&t=1982
+
+
+================================================
+
+public static void reverse(List l);
+
+Collections.reverse(l);

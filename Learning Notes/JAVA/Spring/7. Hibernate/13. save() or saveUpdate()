@@ -1,0 +1,20 @@
+public Serializable save(Object object) throws HibernateException
+
+when you call the Save method on the persistance entity in same session, and any changes made to that entity in the same session. It will overwrite that entity.
+when you call the Save method on the persistance entity in diffrent session session, and any changes made to that entity in diffrent Session will create a new entry.
+
+
+
+public Serializable saveOrUpdate(Object object)  throws HibernateException:
+
+Even if the changes are made to the persistant entity in different session, it will overwrite that entity
+
+			Student student=new Student("Khushboo","Shivhare","khushbos@amdocs.com");
+			session.save(student);
+			session.getTransaction().commit();
+			session=factory.getCurrentSession();
+			session.beginTransaction();
+			student.setFirstName("Motu");
+			session.saveOrUpdate(student);
+
+It will update the same entity student

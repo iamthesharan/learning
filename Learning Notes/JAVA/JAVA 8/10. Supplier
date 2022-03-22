@@ -1,0 +1,265 @@
+More About Consumers:
+
+    Consumer<Movie> c1=m->System.out.println(m.name+"Ready to release");
+    Consumer<Movie> c2=m->System.out.println(m.name+"release but biggest Flop");
+    Consumer<Movie> c3=m->System.out.println(m.name+"Biggest hit");
+
+    Movie m=new Movie("Spriderman");
+    c1.accept(m);
+
+    Consumer <Movie> cc=c1.andThen(c2).andThen(c3); // here all the three consumers by default will be executed.
+    cc.accept(m);
+
+    Note**: compose method is not there for consumers FI
+
+=============================================================================================================================
+
+Supplier:
+
+Just Supply My Required Object and it won't take any input --> Supplier
+
+interface Supplier<R>{
+    public R get();
+}
+
+class test{
+    public static void main(String ...args){
+        // To supply System date
+        Supplier<Date> s=()->new Date();
+        System.out.println(s.get());
+    }
+}
+
+
+Example:
+Supply Random OTP:
+
+Supplier<String>s=()->{
+    String otp="";
+    for(int i=0;i<6;i++){
+        otp+=(int)(Math.random()*10);
+    }
+    return otp;
+}
+
+System.out.println(s.get());
+
+==========================================================================================================================
+
+Now For 2 input arguments:
+
+Normal Predicate will take only 1 argument
+BiPredicate can take 2 agrguments. Sometime our programming requirement is 2 arguments
+
+BiPredicate is exactly same as predicate, except it take 2 arguments
+ interface BiPredicate<T1, T2>{
+     public boolean test(T1 t1, T2 t2);
+     // Remaining Default methods: .and, .or ,  .negate
+ }
+
+BiPredicate<Integer, Integer> p=(a,b)-> (a+b)%2==0;
+System.out.println(p.test(10,20));// true
+
+========================================================================================================================
+
+Similar with BiFunction:
+
+BiFunction<Integer, String, Employee> f=(eno,name)-> new Employee(eno, name);
+Employee e1=f.apply(100,"Sharan");
+
+
+ArrayList<Employee> l=new ArrayList<Employee>();
+l.add(f.apply(100, "Sharan"));
+l.add(f.apply(200, "Shashank"));
+
+
+interface BiFunction<T,U,R>{
+    public R apply(T t, U u);
+    // default method andThen() 
+}
+========================================================================================================================
+
+BiConsumer:
+
+If I want to increase the salary of the Employee.
+
+ArrayList<Employee> l=new ArrayList<Employee>();
+l.add(new Employee("Sharan",100));
+l.add(new Employee("Shashank",200));
+BiConsumer<Employee,Double> c=(e,b)->e.salary=e.salary+b;
+
+for(Employee e:l){
+    c.accept(e,1000);
+}
+
+for(Employee e:l){
+    System.out.println(e.salary);
+}
+
+======================================================================================================================
+
+
+Performance Issue:
+
+Since when you use Function interface like Predicate, Function, Consumer, Supplier, there is a need of Autoboxing and AutoUnboxing.
+Integer will be converted to int and int will be converted to Integer.
+These process takes time in ns but if there is a huge data, then it will impact the performance.
+Hence these FI are good for Object Datatype but not for Primitive data type.
+
+In order to go for Primitive Datatype we must go for Primitive version of these FI
+=======================================================================================================================
+
+FI with Primitive Data Type: Primitive Predicate types
+
+If we want to use the predicate with int data type, then don't go for normal Predicate, instead go for IntPredicate FI
+
+IntPredicate p=i->i%2==0 // Perdicate checks whether the value is even or not.
+
+in this example 0 times Autoboxing and AutoUnboxing is happening
+
+
+interface IntPredicate{
+    public boolean test(int i);
+}
+
+Similarly DoublePredicate , LongPredicate
+
+================================================================================================================
+
+Primitive Function Types:
+
+format: inputTypeFunction
+
+DoubleFunction: can take input as double, return type can be any type
+IntFunction:    can take input as int, return type can be any type
+LongFunction:   can take input as long, return type can be any type
+
+DoubleToIntFunction(): input type: double, Return Type: Int, method: int applyAsInt(double value);
+DoubleToLongFunction(): input type: double, Return type: long, method: Long applyAsLong(double value);
+
+IntToDoubleFunction(): input type: int, Return type: double, method: double applyAsDouble(int value);
+IntToLongFunction():  input type: int, Return type: long, method: long applyAsLong(int value);
+
+LongToIntFunction(): input type: long, Return type: int, method: int applyAsInt(long value);
+LongToDoubleFunction():  input type: long, Return type: double, method: double applyAsDouble(long value);
+
+ToDoubleFunction(): Return Type is double but input can be anything
+ToIntFunction(): Return Type is int but input can be anything
+ToLongFunction():Return Type is long but input can be anything
+
+
+ToDoubleBiFunction():You can take 2 input arguments of any Type but return type must be double Type
+ToIntBiFunction():You can take 2 input arguments of any Type but return type must be int Type
+ToLongBiFunction(): You can take 2 input arguments of any Type but return type must be long Type
+
+=====================================================================================================
+
+Suppose we have FI as :
+
+Function<Integer, Integer> f=i->i*i;
+IntFunction<Integer>f=i->i*i;  // this will take int as input but the return value will be converted into Wrapper class and hence Integer is there in type of IntFunction
+
+Function<String, Integer> f=s->s.length(); // O/P will be 5
+toIntFunction<String>f=s->s.length();
+SOP(f.applyAsInt()); // Note here we have to write applyAsInt()
+
+
+Function<Integer, Double> f=i->Math.sqrt(i);
+
+IntToDoubleFunction f=i->Math.sqrt(i);
+SOP(f.applyAsDouble());
+
+
+=====================================================================================================
+
+
+Note Counsumer will only take input.
+
+Consumer always have accept method.
+IntConsumer --> void accept(int value);
+LongConsumer
+DoubleConsumer
+
+
+-------------------------------------------------------------------------
+Its like Primitive BiConsumer
+ObjDoubleConsumer<T> --> One Argument is T type and 2nd Argument is double type
+    void accept(T t, Double d);
+
+ObjIntConsumer<T>
+     void accept(T t, int i);
+
+ObjLongConsumer<T>
+    void accept(T t, Long l);
+
+=====================================================================================================
+
+
+Supplier: Supplier is always gonna take Return Type.
+
+    BooleanSupplier
+        boolean getAsBoolean();
+    
+    IntSupplier
+        int getAsInt();
+
+    LongSupplier
+        long getAsLong();
+
+    DoubleSupplier
+        double getAsDouble();
+
+
+============================================================================================================
+
+UnaryOperator: It is the Child of Function.
+We will use Unary Operator only if input and output values are same.
+
+
+Function<Integer, Integer> f=i->i*i;
+UnaryOperator<Integer> f=i->i*i;
+
+
+Primitive Versions of UnaryOperator.
+    IntUnaryOperator --> if input and output are int
+        - int applyAsInt();
+
+    DoubleUnaryOperator -->  if input and output are double
+        - double applyAsDouble();
+
+    LongUnaryOperator  --> if input and output are long
+        - long applyAsLong();
+
+============================================================================================================
+
+BinaryOperator: It is the Child of BiFunction
+If the Both input are of T type, then the return value will be of T type
+
+BinaryOperator<T,T,T>
+    It is the Child of BiFunction<T,T,T>
+
+You need to provide only 1 type Parameter.
+
+
+    BiFunction<String, String, String> f=(s1,s2)->s1+s2;
+    SOP(f.apply("Shashank"," Sharan"));
+
+
+    BinaryOperator<String> f=(s1,s2)->s1+s1;
+    SOP(f.apply("Shashank"," Sharan"));
+
+
+--------------------------------------------------------------------------------------------------------------
+
+Primitive Types of BinaryOperator
+
+    IntBinaryOperator
+        - int applyAsInt(int value1, int value2);
+
+    DoubleBinaryOperator
+        - double applyAsDouble(double value1, double value2);
+
+    LongBinaryOperator
+        - long applyAsLong(long value1, long value2);
+
+     

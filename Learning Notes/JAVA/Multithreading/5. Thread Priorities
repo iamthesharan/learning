@@ -1,0 +1,42 @@
+Every Thread in JAVA has some Priorities:
+It may be Default priority provided by JVM or customized priority provided by the programmer.
+
+    Valid range of Thread priorities: 1-10
+
+    1  --> Lowest priority
+    10 --> Maximum priority
+
+
+Thread class has some constants:
+
+1. Thread.MIN_PRIORITY   -> 1
+2. Thread.NORM_PRIORITY  -> 5
+3. Thread.MAX_PRIORITY   -> 10
+
+
+Thread Scheduler will use Priorities while allocating processor. The Thread which is having highest priority will get the chance first.
+If thread is having same priority, then it depends on Thread Scheduler to execute which thread based on LIFO/FIFO/Round Robin Method
+
+Getting the priority the Thread?
+
+    Thread class containt 2 priority methods:
+        1. public final int getPriority();
+        2. public final void setPriority(int p);// if we put the value>10 and value<1, then we will get IllegalArgumentException.
+
+    Note*** The default priority of only main thread is 5.
+    But for all remaining thread, Default priority will be inherited from parent to child. ie what ever priority parent thread has, the same priority will be there for child thread.
+
+    class MyThread extends Thread{}
+    class test{
+        public static void main(String ...args){
+            Thread.currentThread().setPriority(7);
+            MyThread t=new MyThread();
+            System.out.println(t.getPriority());
+
+        }
+    }
+
+    Now The main Thread always create the child Thread.
+    Here for child thread, main thread is the parent thread
+
+      System.out.println(t.getPriority()); // So here in this case child thread priority will be 7 because it inherits from main Thread.

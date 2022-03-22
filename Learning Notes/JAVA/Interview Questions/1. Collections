@@ -1,0 +1,88 @@
+Q1. What are the Difference betwween the Collection and Arrays?
+->  Collection is an interface which can be used to represent a group of individual Objects as a single entity.
+    Arrays are the collection of same type of data having fixed Size.
+
+
+Q2. Is there any Concrete class which implements Collection interface Directly?
+->  No
+
+Q3. What are the major interfaces of Collection Frameworks.
+->  List, Set, SortedSet, NavigableSet, Queue, Map, SortedMap, NavigableMap.
+
+
+
+
+Q4. What is the Diffrence between the Collections and Collection?
+->  Collections is a utility class that provide readymade methods support for the Collection Objects.
+
+Q5. What are the Features of the ArrayList?
+->  1. ArrayLists are not Sorted.
+    2. Datastructure used -> Resizable Array
+    3. Heterogeneous Objects are allowed.
+    4. Null Insertion is possible.
+    5. Duplicates are allowed and Insertion order is Preserved.
+
+
+Q6. What are Queue?
+->  Before Processing or before offering a Service, If we want to represent a group of individual objects as a single entity.
+    Those are called queues.
+
+Q7. What are maps?
+-> If you want to represent a group of individual Objects as a key value Pair, the we can go for Map.
+
+Q8. What are cursors?
+->  Cursors are something which is used to traverse over the lists. Example: Iterator, ListIterator.
+
+Q9. In whole Collection, what are the classes which don't accept Heteogeneous objects?
+->  TreeSet, TreeMap. Because here the comparisons are done. If there are Heteogeneous Objects then we will get ClassCastException.
+
+Q10.    What are the interface that Every Collection Class should implement?
+->      Serializable(For Transfering over the network) and Clonable (For Cloning the object).
+
+Q11.    What are the classes which implements RandomAccess interface?
+->      Arraylist and Vectors are only classes that implements RandomAccess Interface. Every Element is accessed with the same speed.
+        
+        System.out.println(l instanceof RandomAccess);  //true
+		System.out.println(l1 instanceof RandomAccess); //true
+
+Q12.    What is the best usecase of ArrayList?
+-->     Frequent Retrival and Update.
+
+Q13.    What is the best usecase of LinkedList?
+-->     Frequent insertion or deletion.
+
+
+Q14.    What are the Difference between ArrayList and Vector?
+-->     Most methods in ArrayList are non-synchronized whereas Most Methods in Vectors are Synchronized.
+        At a time Multiple thread can access ArrayList but At a time only Single thread can access Vectors.
+
+Q15.    What are the features of LinkedList?
+-->     Underlined Datastructure is Doubled LinkedList.
+        Insertion Order is Preserved
+        Duplicates are allowed.
+        Null Insertion is possible.
+        LinkedList Implements Serilizable and Clonable interface but not Random Access.
+        There is no capacity for Linked List as the Objects are not Stored in Consecutive memory Location.
+
+Q16.    What are the Operations, iterator Can perform?
+-->     Read and Remove and it is a forward Directon Cursor.
+
+Q17.    What are the Operations ListIterator can perform?
+-->     It is a child interface of iterator which can perform add and Replace operation as well
+
+Q18.    What is the Default intital Capactiy of hashSet?
+-->     16 with a defualt fill ratio of 75%. ie. once the 75% of hashSet is full, its size increases.
+
+Q19.    How is LinkedHashSet different from HashSet?
+-->     Undelined Datastructure with LinkedHashSet is LinkedList + HashTable
+        Insertion Order is Preserved but Duplicate are not allowed.
+
+Q20.    What are the Features of TreeSet?
+-->     1.  Underlined DataStructures is Balanced Tree.
+        2.  Duplicate Objects are not allowed.
+        3.  Insertion Orders are based on some sorting order.
+        4.  Null Insertion is possible only once till 1.6 version, but after 1.7 version null insertion is not possible.
+
+Q21.    Difference between HashMap and LinkedHashmap.
+-->     1. Hashmap- Insertion orders are presered based on some hashcode of keys
+        2. LinkedHashMap-> Insertion orders are preserved.

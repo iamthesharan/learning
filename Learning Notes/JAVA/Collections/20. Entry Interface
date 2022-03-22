@@ -1,0 +1,24 @@
+Each key value pair is called entry.
+
+Since entry is always part of MAP hence Entry interface is a child interface of map and is defined inside the Map Interface (inner Interface)
+
+
+Mehods in Entry Interface. it is used of each entry only and not for whole Map.
+these are entry Specific methods and can be applied on entry object.
+
+interface Map{
+    interface Entry{
+        Object getKey();
+        Object getValue();
+        Obejct setValue(Object newValue);  // returns old Value
+    }
+}
+
+
+Undelying data Structure for HashMap is HashTable.
+insertion order is not preserved and is based on Hashcode of keys.
+key can be null but only once
+values can be null any number of time
+Heterogeneous keys are allowed for both key and value
+implements Serializable, Clonable, but not RandomAccess.
+best used for searching

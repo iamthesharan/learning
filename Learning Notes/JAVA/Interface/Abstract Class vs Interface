@@ -1,0 +1,8 @@
+When We should go for Interface and Abstract Class and Concrete Class
+
+	Interfaces: If We don't know anything about Implementation, just we have requirement
+				Specification.
+	
+	Abstract Class: If we know about Partial Implementation
+	Concrete Class: If we know Completely about Implementation
+	

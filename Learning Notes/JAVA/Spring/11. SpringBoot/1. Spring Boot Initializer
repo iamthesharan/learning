@@ -1,0 +1,17 @@
+1. Configure our project on  the Spring Initializer Website
+2. Download the Zip Files
+3. Unzip the Files
+4. Import Maven project into our IDE
+
+1. Configure our project on  the Spring Initializer Website
+
+    visit the https://start.spring.io/
+
+
+
+Below Dependency is for Hibernate:
+
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-data-jpa</artifactId>
+		</dependency>

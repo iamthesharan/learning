@@ -1,0 +1,36 @@
+Form Validation:
+
+    For Validation, we can make the use of Java's Standard Bean Validation API.
+    It defines the Metadata model and API for Entity Validation
+    So this Bean Validation API is available for Server Side Applications as well as Client Side Application such as JAVAFx/ Swing Apps
+
+
+    Spring Version 4 and Higher supports Bean Validation API (JSR-303)
+
+        Validation Features Supported by Bean Validation API are:
+
+            1. required
+            2. Validate Length
+            3. Validate Numbers
+            4. Validate with Regular Expressions
+            5. Custom Validation
+
+
+        JAVA Spring Validation API is just a Specification but we still need an implementation. We needs something that Implements the Specification.
+        SO here Comes the Hibernate.
+
+        So Hibernate will Provide the JSR -303 Validation
+
+=================================================================================================================================
+
+Validation Annotations:
+
+    1. @NotNull
+    2. @Min
+    3. @Max
+    4. @Size
+    5. @Pattern --> Match the Regular Expression
+    6. @Future/@Past --> Date must be future or Past of given date
+
+=================================================================================================================================
+

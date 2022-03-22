@@ -1,0 +1,43 @@
+home.jsp:
+
+<%
+    int k=9/0;
+%>
+--> Output: page receives Exception
+------------------------------------------
+here handling the exception
+<%
+    try{
+        int k=9/0
+    }
+    catch(Exception e){
+        out.println("Error by zero");
+    }
+
+%>
+
+output --> page will show "Error by zero"
+
+------------------------------------------
+
+Now this is not a good practice. we must always have a separate error page.
+
+So here we will create a separate page error.jsp
+
+home.jsp
+<%@ page language="java" errorPage="error.jsp" %> // need to provide the taglib and in error page we need to put                                                        isErrorPAge value to true
+<!DOCTYPE html>
+<head></head>
+<body>
+<%
+    int k-9/0;
+%>
+</body
+
+
+error.jsp
+
+<%@ page language="java" isErrorPage="true" %>
+<body>
+    Error // want to print error
+</body>

@@ -1,0 +1,80 @@
+When we throw an excption using throw keyword, we are explicitly handing over the excption to JVM and after that JVM will do its process.-> 
+handing over to defualt excption handler
+
+Best use of throw keyword is for user defined exceptions and customized exceptions
+
+class test{
+    static AE e=new AE();
+    public static void main(String ...args){
+        throw e;
+    }
+}
+
+RE: AE
+
+
+class test{
+    static AE e;
+    public static void main(String args[]){
+        throw e;
+    }
+}
+
+Now Here also we will get Runtime Exception as compiler will only check syntax.
+So here we will get RE but Nullpointer Exception.
+
+as Static variable defualt value is null
+
+=============================================================================================================
+
+class test{
+    static AE e=new AE();
+    public static void main(String ...args){
+        throw e;
+        SOP("Hello"); //This line will throw an error because the method will handover the exception in the abouve line.
+    }
+}
+
+CE: unreachable Statement
+
+
+Note** If there is a chance of rising checked exception, Compulsory We must handle that excption
+
+public static void main(String ...args){
+    throw new Exception();
+}
+
+CE: UnreportedException java.lang.exception must be caught or declared to be thrown.
+
+
+public static void main(String ...args){
+    throw new Error(); // 
+}
+
+In case of unchecked Exception, the code will successfully compile 
+RE:We are throwing that's why we will get runtime exception.
+
+
+
+
+Inside try Block if there is no chance of rising an Exception then we can't write try catch block for that exception. This rule is only valid for Fully Checked Exception
+
+
+try{
+    SOP("");
+}
+catch(IOException e){
+
+}
+
+The code will not compile.
+
+--------------------------------------------
+try{
+    SOP("");
+}
+catch(ArithmeticException e){
+
+}
+
+The code will compile successfully

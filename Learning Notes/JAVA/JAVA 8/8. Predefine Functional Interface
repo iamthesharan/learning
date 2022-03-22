@@ -1,0 +1,83 @@
+In Java 8, to make lambda Expression as common coding activity , Predefine functional Interface  is there:
+
+    1. Predicate
+    2. Function
+    3. Consumer
+    4. Supplier
+
+Two Argument predefine Functional Interfaces:
+    1. BiPredicate
+    2. BiFunction
+    3. BiConsumer
+
+Primitive Functional Interface
+
+    1. IntPredicate
+    2. IntFunction
+    3. IntConsumer
+
+
+All these functional interfaces are defined in java.util.function package
+
+
+1. Predicate
+
+    For Conditional Check we used if and else.
+    From now onwords, you can use lamda Expression along with this Predicate Functional Interface.
+
+    Predicate Functional Interface Contains only 1 abstract method.
+
+    public abstract boolean test(T t);
+
+
+    interface Predicate<T>{
+        public boolean test(T t);
+    }
+
+    class test{
+        public static void main(String ...args){
+           // Predicate<Integer> p=(Integer I)-> I%2==0
+           Predicate<Integer> p=I-> I%2==0;
+           System.out.println(p.test(10));
+           System.out.println(p.test(11));
+        }
+    }
+
+    You can also use with Employee Object:
+
+
+        Predicate<Employee> canUpdateTicket=e->e.role.equals("Software Developer") && e.access==true;// canUpdateTicket  is the refernce to the predicate interface
+        System.out.println(canUpdateTicket.test(new Employee("Software Developer",true)));// true
+
+Check whether String length is 5 or not?
+
+    Predicate <String> isLengthGreaterThan5=s->s.length()>5;
+    System.out.println(isLengthGreaterThan5.test("Shashank Sharan"));
+
+    String s[]={"Shashank","Sharan","Kiran","Shelar"}
+    for(String s1:s){
+        if(isLengthGreaterThan5.test(s1)){ // This is easier suppose if 10 conditions more added for string s1 with If statement then you need to create if block for each if you don't use predicate FI
+            System.out.println(s1);
+        }
+    }
+
+
+
+Predicate Joining:
+
+p1 --> to check whether the number is ever or not
+p2 --> to check whethre the number is >10  or not
+
+p1.and(p2).test(34);
+p1.or(p2).test(34);
+p1.negeate().test(34); // Which are not satisfying the p1 condition
+
+int x[]={0,5,10,15,25,30,35}
+Predicate <Integer> p1=i->i%2==0;
+Predicate <Integer> p2=i-> i>10;
+System.out.println("The numbers which are not even : ");
+for(int x1:x){
+    if(p1.negeate().test(x1)){
+        System.out.println(x1);
+    }
+}

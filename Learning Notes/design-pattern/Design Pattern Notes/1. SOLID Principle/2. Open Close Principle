@@ -1,0 +1,3 @@
+Software Entities(Classes, Modules, Methods) should be open for Extension but closed for Modification.
+Open for Extension - This means we should be able to Extend existing Behaviour.
+Closed For Modification - Not Chaning the Existing Code.

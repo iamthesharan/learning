@@ -1,0 +1,16 @@
+endsWith() --------------->
+
+The java string endsWith() method checks if this string ends with given suffix. It returns true if this string ends with given suffix else returns false.
+
+Method:
+public boolean endsWith(String suffix)  
+
+
+public class EndsWithExample{  
+public static void main(String args[]){  
+String s1="java by javatpoint";  
+System.out.println(s1.endsWith("t"));       //true
+System.out.println(s1.endsWith("point"));   // true
+System.out.println(s1.endsWith("java"));    //false
+
+}}  

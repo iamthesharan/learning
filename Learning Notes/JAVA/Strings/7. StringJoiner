@@ -1,0 +1,16 @@
+import java.util.StringJoiner;
+
+class Car{
+	public static void main(String ...args) {
+		StringJoiner join=new StringJoiner("and ","",";");
+		String main_query="SELECT * FROM TBAP_ITEM WHERE ";
+		join.add(main_query);
+		join.add("CUSTOMER_ID='21345697' ");
+		join.add("Service_id='123456789'");
+		System.out.println(join);
+	}
+}
+
+
+Output:
+SELECT * FROM TBAP_ITEM WHERE AND CUSTOMER_ID='21345697' AND Service_id='123456789';

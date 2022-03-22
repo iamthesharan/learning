@@ -1,0 +1,26 @@
+There are two types of links:
+
+    1. Hard Links:
+    2. Symbolic Links
+
+1. Hard Links:
+
+    A hard link is basically a file and it points to a spot on hard drive.
+
+    Example file1 points to 1000 address (inode) in harddrive.
+    If you create a hardlink file for file1 with name as file2, it will point to the exact same inode in harddrive.
+
+    If you delete file1, then file2 will be there and is perfectly valid.
+
+
+    ln SourceFile Hardlink
+
+2. Symbolic Links:
+
+    Symbolic Links points to the name of the file or descriptor instead of pointing to the spot on the harddrive.
+    Suppose you have file1 and you created Symbolic link for file1 named as file2.
+    Then file2 will point to the name of the file1.
+
+    So If you delete file1, file2 will be completely useless because it refrences to the descriptor or name of the file1.
+
+    ln -s SourceFile Softlink

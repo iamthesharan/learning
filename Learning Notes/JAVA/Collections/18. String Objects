@@ -1,0 +1,125 @@
+Q)Write a program to insert String Objects in treeset where all elements should be inserted according to reverse of alphabeticle order. 
+
+
+    TreeSet t=new TreeSet(new MyComparator());
+    t.add("Roja");
+    t.add("ShobhaRani");
+    t.add("RajaKumari");
+    t.add("GangaBhavani");
+    t.add("Ramulamma");
+    System.out.println(t);  
+    
+class MyComparator implements Comparator{
+    public int compare(Object obj1, Object obj2){
+        String S1=(String) obj1;
+        String S2=obj2.toString(); // If internal Object is StringBuffer or StringBuilder
+        return -S1.compareTo(S2);
+                or
+        return S2.compareTo(S1);
+    }
+}
+
+Now in case of StringBuffer.
+If we Use Default Sorting order/ce for StringBuffer Default Natural Sorting is not there.
+Hence we must provide the MyComparator object as an Argument of TreeSet.
+also we need to Convert StringBuffer Object to String with toString Function.  
+
+ TreeSet t=new TreeSet(new MyComparator());
+    t.add(new StringBuffer("A"));
+    t.add(new StringBuffer("Z"));
+    t.add(new StringBuffer("K"));
+    t.add(new StringBuffer("L"));
+    System.out.println(t);  
+    
+In Customized Sorting the objects need not be Comparable and it can be hetroeneous.
+
+If We Are depending on Default Natural Sorting Order Cumpulsory Object Should be homogeneous and Comparable otherwise we will get runtime exception saying Class Cached Exception.
+
+
+Sorting Based On Length and Hetrogeneous Objects.
+
+TreeSet t=new TreeSet(new MyComparator());
+t.add("A");
+t.add(new StringBuffer("ABC"));
+t.add(new StringBuffer("AA"));
+t.add("XX");
+t.add("ABCD");
+t.add("ABCD");
+t.add("A");
+System.out.println(t); 
+
+
+
+class MyComparator implements Comparator{
+    public int compare(Object o1, Object o2){
+        String S1=o1.toString();
+        String S2=o2.toString();
+        int l1=S1.length();
+        int l2=S2.length();
+        if(l1<l2)
+            return -1;
+        else if(l1>l2)
+            return 1;
+        else
+            return S1.compareTo(S2);
+    }
+}
+
+
+
+
+==============================================
+
+
+Comparable is a pre-defined Concept . Example: Predefined Class like String User Comparable interface. If we want Customied Sorting, We Can use Comparator Interface.
+
+Non-Comparable Predefined Classes: StringBuffer --> Comparator Interface.
+
+For Ower Own Classes like Employees:
+
+Someone write methods and and that method is read through api.
+For Example Someone has written String Class mehtods but we are using it.
+
+Similarly Someone who writes our Own class method implements Comparable while other who wants to read with customized sorting can implements Comparator.
+
+
+
+=============================================================================
+
+
+
+class Employee implements Comparable{
+    String Name;
+    int eid;
+    public int compareTo(Object o1){
+        
+    }
+} 
+
+Employee e1=new Employee("Nag",100);    
+Employee e2=new Employee("Kailash",200); //obj1.compareTo(obj2);    
+Employee e3=new Employee("Chiru",50);
+Employee e4=new Employee("Venki",150);
+Employee e5=new Employee("Nag",100);
+
+
+ public int compareTo(Object o1){
+        int eid1=this.eid;
+        Employee e=(Employee) o1; // Typecasting Required
+        int eid2=e.eid;
+        if(eid1<eid2)
+            return -1;
+        else if(eid1>eid2)
+            return 1;
+        else
+            return 0;
+    }
+    
+    
+TreeSet t=new TreeSet();
+t.add(e1);
+t.add(e2);
+t.add(e3);
+t.add(e4);
+t.add(e5);
+SOP(t);// NOw here the TwoString Method will be Called. [chiru--50, Nag--100, Venky--150]

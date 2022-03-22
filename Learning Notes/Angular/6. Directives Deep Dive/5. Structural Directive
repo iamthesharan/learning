@@ -1,0 +1,56 @@
+to indicate angular that something is structural Directive we use * in front
+
+So If you write:
+
+<p *ngIf="condition">
+  Our heroes are true!
+</p>
+
+Angular will convert it to  :
+
+<ng-template [ngIf]="condition"> // this is property Binding
+  <p>
+    Our heroes are true!
+  </p>
+</ng-template>
+
+=============================================================================================================
+
+writing our own Structural Directive
+
+@Directive({
+  selector: '[appUnless]'
+})
+export class UnlessDirective {
+  @Input() set unless(condition:boolean){
+    // This now turns this into a method but technically this is just a property which is a setter of the property
+    // which is a method which executed whenever the property Changes
+    // So it unless property will be changed whenever it changes outside out the Directive
+    // So when any condition we pass changes or some paramter
+
+    if(condition){
+      this.vcRef.createEmbeddedView(this.templateRef);
+    }
+    else{
+      this.vcRef.clear(); // if Condtion is false, then clear everything.   
+    }
+
+  }
+  constructor(private templateRef:TemplateRef<any>, private vcRef:ViewContainerRef) {
+    // And we also need to get the place where we want to render the directive
+    // First argument is what we want to render
+    // 2nd Argument is where we want to render
+   }
+}
+
+
+<div *appUnless="condition">
+    <p>Hi There</p>
+</div>
+
+or
+<ng-template [appUnless]="condition">
+    <div >
+        <p>Hi There</p>
+    </div>
+</ng-template>

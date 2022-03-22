@@ -1,0 +1,65 @@
+                                        Logging, Security
+    Main App  <------  AOP Proxy <--------------------------------------------> Target Object
+targetObjcct.doSomeStuff()                                                      doSomeStuff()
+
+
+So Here the Plan is to Run the Custom code before calling the Target Object method
+
+
+So over the Target Object Method we will use @Before Annotation
+
+Example @Transaction --> Spring uses AOP behind the Scene to Start the Transaction and Commit the Transaction
+
+Usecases of @BeforeAdvice:
+
+1. logging, Security, transaction
+2. Audit Logging : who, what, when, and where
+3. API Management:
+    How many time the method is been called?
+    analytics: what are the peak time? what is the average load? who is the top user?
+
+
+Spring AOP uses Some of the AspectJ annotations and some of the AspectJ Classes
+
+
+Development Process:
+1. Create target Object: AccountDAO
+
+        @Component
+        public class AccountDAO {
+            public void addAccount() {
+                System.out.println("Doing my DAO Work!!");
+            }
+        }
+
+2. Create Spring JAVA Config Class
+
+        @Configuration
+        @EnableAspectJAutoProxy
+        @ComponentScan("com.spring.aop")
+        public class DemoConfig {
+
+        }
+
+3. Create an aspect with @BeforeAdvice
+
+    @Aspect
+    @Component
+    public class MyDemoLoggingAspect {
+        
+        @Before("execution(public void addAccount())")
+        void beforeAddAccount() {
+            System.out.println("Executing before adding Account");
+        }
+    }
+
+4. Call the Target object function throught MyApp:
+
+    public class MyApp {
+        public static void main(String ...args) {
+            AnnotationConfigApplicationContext context=new AnnotationConfigApplicationContext(DemoConfig.class);
+            AccountDAO theAccountDAO=context.getBean("accountDAO",AccountDAO.class);
+            theAccountDAO.addAccount();
+            context.close();
+        }
+    }

@@ -1,0 +1,103 @@
+Whenever we want to perform some bussiness operation, like performing Square, or performing cubes, where we require some in value or object value, 
+then we should go For Function FI
+
+
+interface Function<T,R>{
+    public R apply(T t);
+}
+
+class test{
+    public static void main(String ...args){
+        Function<Integer, Integer> performSquare=i->i*i;
+        System.out.println(performSquare.apply(4));//16
+        System.out.println(performSquare.apply(5));//25
+    }
+}
+
+
+Let us say we have a function which returns the length of this string.
+
+Function<String, Integer> calculateString=s->s.length();
+System.out.println(calculateString.apply("Shashank Sharan"));
+
+Converting the String to upper Case:
+
+Function<String, String> convertToUpperCase=s->s.toUpperCase();
+System.out.println(convertToUpperCase.apply("shashank sharan"));
+
+
+Another example:
+We will provide here the Student object and Accordingly find the grades with marks
+
+import java.util.function.Function;
+
+class Student{
+    String name;
+    int marks;
+    Student(String name, int marks){
+        this.name=name;
+        this.marks=marks;
+    }
+}
+public class test{
+    public static void main(String ...args){
+        Function<Student, String> calculateGrade=s->{
+            int marks=s.marks;
+            String grade="";
+            if(marks>=80) grade="A";
+            else if(marks>=60 && marks<80) grade="B";
+            else grade="F";
+            return grade;
+        };
+        System.out.println(calculateGrade.apply(new Student("Shashank Sharan",60)));
+    }
+}
+
+=============================================================================================================================
+
+Function Chaining:
+F1 and then F2
+
+
+In the below Case first f1 followed by f2
+f1.andThen(f2).apply(i);// Two functions can be combine to perform more complex function
+
+In the below Case first f2 and then f1
+f1.compose(f2).apply(i);
+
+
+Function <Integer, Integer> f1=i->2*i;
+Function <Integer, Integer> f2=i->i*i*i;
+System.out.println(f1.andThe(f2).apply(2));//64
+System.out.println(f1.compose(f2).apply(2));//16
+
+f1.andThen(f2).andThen(f3).apply(2); // We can also use chaining like this
+
+
+=============================================================================================================================
+Consumer:
+Consumer<T> // Consumer never gonna return any value. It will only take the value and Perform bussiness logic.
+
+
+Interface Consumer<T>{
+    public void accept(T t);
+}
+class test{
+    public static void main(String ...args){
+        Consumer<String> c=s->System.out.println(s);
+
+        c.accept("Sharan");// it will only print Sharan
+        c.accept("Shashank");
+
+    }
+}
+
+
+now we want to write Consumer for student which will print student object
+
+
+Consumer<Student> printStudentConsumer=s->{
+    System.out.println(s.name);
+    System.out.println(s.age);
+};
+printStudentConsumer.accept(new Student("Shashank",20));// we can also use Predicate to print the Specific Student

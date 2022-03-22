@@ -1,0 +1,35 @@
+ResultSet is the CursorSet
+
+by default Result Set is pointing towards BFR.
+BFR: Before First Record.
+AFR: After Last Record
+
+
+ResultSet interface contain various Methods:
+rs.getInt();
+rs.getDouble();
+rs.getString();
+
+rs.getXxx(String Column);
+rs.getXxx(int Column);
+
+In JDBC index always starts with 1.
+
+
+For Huge amount of rows use Column Index --> Since comparison of name will decrease performance
+For less Amount of rows use Column name.
+
+rs.findColumn(String columnName);
+
+ResultSet follows Iterator Design Pattern
+
+
+
+
+--------------------------------------------------
+
+Statement st=con.createStatement();
+ResultSet rs1=st.executeQuery("SELECT * FROM EMP");
+ResultSet rs2=st.executeQuery("SELECT * FROM STUDENTS"); --> HERE THE rs1 will get closed after this statement
+
+When we try to open new Result Set with the same statement object, previous resultSet will get Closed.

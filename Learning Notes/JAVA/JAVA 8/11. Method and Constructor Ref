@@ -1,0 +1,163 @@
+For Some Lambda Expressions we have some special Syntax
+
+Method Reference:
+
+Suppose we have one Lambda Expression which has a logic of child Thread.
+
+
+class Test{
+    public static void main(String ...args){
+        Runnable r=()->{
+            for(int i=0;i<10;i++){
+                System.out.println("Child Thread");
+            }
+        }
+        Thread t=new Thread(r);
+        t.start();
+        for(int i=0;i<10;i++){
+            System.out.println("Main Thread");
+        }
+    }
+}
+
+But suppose How Can we reuse the code of the run method.
+Simply with the help of method Refrence.
+We will create a Static Method which will have the same Bussiness Logic as present inside run Method.
+
+
+class Test{
+
+    public static void m1(){
+        for(int i=0;i<10;i++){
+            System.out.println("Child Thread");
+        }        
+    }
+    public static void main(String ...args){
+        Runnable r=Test::m1; // This is how the method is Referenced
+        Thread t=new Thread(r);
+        t.start();
+        for(int i=0;i<10;i++){
+            System.out.println("Main Thread");
+        }
+    }
+}
+
+hence FI method can be mapped to our specify method by using ::(Double Colon)
+Now We can take Static methods as well as Instance Method.
+
+If the method is Static then Syntax will be:
+classname :: method name
+
+
+
+If the Method is non static , then the Syntax will be:
+object reference::method name
+
+
+
+class Test{
+
+    public void m1(){
+        for(int i=0;i<10;i++){
+            System.out.println("Child Thread");
+        }        
+    }
+    public static void main(String ...args){
+        Test t=new Test();
+        Runnable r=t::m1; // This is how the method is Referenced in case of non static method
+
+        Thread t=new Thread(r);
+        t.start();
+        for(int i=0;i<10;i++){
+            System.out.println("Main Thread");
+        }
+    }
+}
+
+Now in case of Method Referenced, The Argument type must match with the Abstarct method of the FI.
+
+For public void run();
+
+public void m1(); //Valid
+public int m1();// Valid, as return type can be different.
+public void m1(int x, int y); // invalid
+
+
+===============================================================================================================================
+
+Another Example:
+
+interface Interf{
+    public void add(int i, int j);
+}
+class Test{
+    public static void sum(int i, int j){
+        System.out.println("Sum is "+ (i+j));
+    }
+    public static void main(String ...args){
+        Interf i=Test::sum;
+        i.sum(10,20);
+    }
+}
+
+Now If the implementation is already Available, Better to go for Method Reference.
+If the Implementation is not Available, better to go for Lambda Expression.
+
+===============================================================================================================================
+
+Constructor Reference:
+
+Test::new;  ==> Constructor Reference.
+
+When we should go for Construnctor Reference?
+
+If the FI method , returns an object, then we should go for Constructor Reference
+
+Example:
+
+    class Sample{
+        Sample(){
+            System.out.println("Sample Class Constructor Executed");
+        }
+    }
+
+    interface Interf{
+        public Sample get(); // Return type is Sample because Sample type object will be returned
+    }
+
+    class Test{
+        public static void main(String ...args){
+            Interf i=Sample::new; // Here Interf get method refrers Sample Class Constructor
+            Sample s1=i.get(); // If you want sample Object. and here the Constructor is going to execute
+        }
+    }
+
+
+--------------------------------------------------------------------------------------------------------------------
+
+If there are arguments:
+    class Sample{
+        Sample(String s){
+            System.out.println("Sample Class Constructor Executed " + s);
+        }
+    }
+
+    interface Interf{
+        public Sample get(String s); // Return type is Sample because Sample type object will be returned
+    }
+
+    class Test{
+        public static void main(String ...args){
+            Interf i=Sample::new; // Here Interf get method refrers Sample Class Constructor
+            Sample s1=i.get("Shashank"); // If you want sample Object. and here the Constructor is going to execute
+        }
+    }
+
+
+Suppose We have Parameterize constructor:
+
+    We can also write
+    Interf i=(s)->new Sample("Sharan");
+    // Instead of doint this, we just write
+
+    Interf i=Sample::new;

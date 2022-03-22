@@ -1,0 +1,61 @@
+Let us Suppose we Want to transfer a collection from one network to another. Then cumpulsory this collection class  must implements Serializable
+
+Now Suppose Collection Object A sent through Network and on the network side this Object is B.
+
+Client                      Network
+  A-------------------------->B
+  
+  Now if we perform any operation on Object B and Some mistakes happen, Then again we need to request Client to send the Object.
+  In order to prevent that, Object B should be Clonable. So to Provide support for this type of requirement. Every Collection Class must Implement Clonable and Serializable interface.
+
+
+
+  ArrayList and Vectoer Classes implements RandomAccess interface. That means any Arraylist object can be accessed with same speed.
+  
+  1st Emement ---> 1sec
+  1000th Element ---> 1sec
+  
+  RandomAccess interface. present in java.util package. It doesn't have any methods. It is a marker interface. Where Required Ability will be provided automatically by the JVM.
+  
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.RandomAccess;
+
+class Car{
+	public static void main(String ...args) {
+		ArrayList l=new ArrayList();
+		LinkedList l1=new LinkedList();
+		System.out.println(l instanceof Serializable);
+		System.out.println(l1 instanceof Serializable);
+		System.out.println(l instanceof Cloneable);
+		System.out.println(l1 instanceof Cloneable);
+		System.out.println(l instanceof RandomAccess);
+		System.out.println(l1 instanceof RandomAccess);
+	}
+}
+
+
+OUTPUT:
+
+true
+true
+true
+true
+true
+false
+
+
+ArrayList Best Case:
+Whenever Frequent retrival is necessary, ArrayList is needed there.
+
+ArrayList Worst Case: 
+Whenever Frequent inserstion or deletion is required.
+
+ex: Let's Assume ArrayList   1 2 3 4 5 6 ..... 1000000000
+    l.add(2,'X');
+    here number of shifting of elements will be huge amount of times
+
+Same in Case of l.remove(2);
+
+

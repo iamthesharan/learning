@@ -1,0 +1,132 @@
+Methods: 
+In JAVA 1.7:
+    Every Methods Present inside an interface is always public and Abstract
+
+In JAVA 1.8 :
+    In the interface default methods and Static methods are also allowed.
+
+IN Java 1.9 :
+
+    In the interface private methods are also allowed
+
+Variables:
+
+    Every variables Present in the interface is by default public static and final.
+
+
+Default Method | Virtual Extension Method | Defender Method:
+____________________________________________________________
+
+Without affecting the implementation classes, if we want to add new methods to the interface, then we use Default Methods
+
+Suppose we have multiple Classes which implements I interface. Hence these classes needs to implement all the methods in I.
+
+Interface I{
+    public void m1();
+    public void m2();
+}
+class Test1 implements I{
+    public void m1(){}
+    public void m2(){}
+}
+
+class Test2 implements I{
+    public void m1(){}
+    public void m2(){}
+}
+class Test3 implements I{
+    public void m1(){}
+    public void m2(){}
+}
+class Test4 implements I{
+    public void m1(){}
+    public void m2(){}
+}
+
+
+So in future if Interface I adds any abstract method then all the implementaion classes will throw an error. In order to avoid that Interface I will use Default methods.
+Default methods no need to be overriden by the implementaion class. If the Implementation class object calls the default methods without overriding, then it will execute the defualt method in Interface I.
+
+But Implementation class can also override Default Method.
+
+
+Interface I{
+
+    default void m3(){
+        System.out.println("Hello World");
+    }
+}
+
+class test implements I{
+    public static void main(String args){
+        test t=new test();
+        t.m3(); // This will prints Hello world.
+    }
+}
+
+Now what if you override m1 method?
+
+    class test implements I{
+        public void m3(){
+            System.out.println("Overriding");
+        }
+        public static void main(String args){
+            test t=new test(); 
+            t.m3(); // This will prints Overriding.
+        }
+    }
+
+
+note defualt method has different meaning inside the class. hence you should take default methods in interface only.
+
+Note** Object class methods we can't implement as default method.
+Interface I{
+
+default int hashCode(){
+    return 10;
+}
+}
+
+class test implements I{
+    public static void main(String args){
+        test t=new test();
+        t.hashCode();// Compile time error, Object class methods we can't implement as default method.
+    }
+}
+
+
+==================================================================================
+
+Now note***:
+Multiple inheritance is not there in hava because of diamond Problem.
+Hence with default methods also there is a loophole.
+
+Interface Left{
+    default void m1(){
+        System.out.println("Left Interface");
+    }
+}
+Interface Right{
+    default void m1(){
+        System.out.println("Right Interface");
+    }
+}
+
+class test implements Left, Right{
+    public static void main(String ...args){
+        test t=new test();
+        t.m1(); // Compiler error, which m1 mehtod to be called.
+    }
+}
+
+To overvcome this problem override the defualt mehtod:
+
+class test implements Left, Right{
+    public void m1(){
+        Left.super.m1();
+    }
+    public static void main(String ...args){
+        test t=new test();
+        t.m1(); // Left Interface
+    }
+}

@@ -1,0 +1,33 @@
+Now once we save the object, we are gonna retrive the data
+
+Step 1: Here we will create a new STUDENT
+
+Student student1=new Student("Shashank","Sharan","shashank.sharan01@gmail.com")
+
+Step 2: Begin Transaction
+
+    session.beginTransaction();
+
+Step 3: Save Student object
+
+    session.save(student1);
+
+Step 4: Commit Transaction
+
+    session.getTransaction().commit();
+
+Step 5: Create a new Session
+    session=factory.getCurrentSession();
+
+Step 6: now we will Strat the Transaction
+
+    session.beginTransaction();
+
+Step 7: Retrive the data from the DB
+
+    Student student=session.get(Student.class, student1.getId)
+
+
+Step 8: Commit The Transaction  
+
+        session.getTransaction().commit();

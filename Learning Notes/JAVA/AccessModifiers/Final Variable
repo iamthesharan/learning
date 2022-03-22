@@ -1,0 +1,73 @@
+Final Variable
+
+/*
+	class test{
+		final int x;
+		// Here By Default Compiler will Not provide initial value as in case
+		of instance variable.
+	}
+*/
+/*
+	Final Variable must be initialized before Constructor Completion.
+	
+	
+	So Possibilities:
+		1) At the Time Of Declaration
+			
+			class test{
+				final int x=10;
+			}
+			
+		2) Inside Instance block.
+			
+			class test{
+				final int x=10;
+				{
+					x=10;
+				}
+			}
+		3) Inside Constructor
+			
+			class test{
+				final int x;
+				test(){
+					x=10;
+				}
+			}
+*/
+
+
+/*
+	class test{
+		static int x=10;
+		public static void main(String ...args){
+			SOP(x);------------------>## Default value will be 0 assigned by the compiler.
+		}
+	}
+*/
+
+
+/*
+	For Final Variable Before Constructor Completion, The final variable must be Initialized
+	for Final static Variable, Before Class Loading Completion, the final variable must be initialized.
+	
+	Possibilities:
+		1) At the time of declaration
+		2) Inside Static block
+*/
+
+
+/*
+	class test{
+		public static void main(String ...args){
+			final int x;
+			sop("Hi");
+		}
+	}
+	
+	O/P Even Though Local Variable is final, Before using only we have to perform initialization.
+*/
+
+/*
+	For Local Variable Only Final Variable is applicable.
+*/

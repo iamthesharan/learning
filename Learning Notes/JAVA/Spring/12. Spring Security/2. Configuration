@@ -1,0 +1,204 @@
+Development Process:
+1. Add Maven dependencies for Spring MVC Web App
+2. Create Spring App Configuration (@Configuration)
+3. Create Spring Dispatcher Servlet Initializer
+4. Develop our Spring Controller
+
+
+1. Add Maven dependencies for Spring MVC Web App
+
+    Need to add <artifactId>maven-war-plugin</artifactId> plugin in the Build Section of the pom.xml file.
+    So here Basically We are customizing the Maven Build Process.
+
+
+    With this we don't need web.xml
+
+    Now here we will use JAVA Config for Configuration
+
+
+    1. @EnableWebMvc : 
+    
+        a. This annotation provides the Similar support to <mvc:annotation-driven/> in XML 
+        b. Add conversion, formatting and Validation Support
+        c. Helps in processing of @Controller and @RequestMapping etc ... methods
+
+    2. @Configuration:
+
+        @Configuration is meta-annotated with @Component, therefore @Configuration classes are candidates for component scanning (typically using Spring XML's <context:component-scan/> element) and therefore may also take advantage of @Autowired/@Inject like any regular @Component. In particular, if a single constructor is present autowiring semantics will be applied transparently for that constructor:
+
+        <mvc:annotation-driven/>
+
+        Spring MVC View Resolver.
+
+        @Bean
+        public ViewResolver viewResolver(){
+            InternalResourceViewResolver viewResolver=new InternalResourceViewResolver();
+            viewResolver.setPrefix("/WEB-INF/view/");
+            viewResolver.set Suffix(".jsp");
+            return viewResolver;
+        }
+
+    3. Create Spring Dispatcher Servlet Initializer
+
+        Spring MVC Provides Support for Web App Initialization
+        Makes Sure your code is automatically Detected
+        Your code will initialize the Servlet Container
+        This can be Achieve with the help of AbstractAnnotationConfigDispatcherServletInitializer
+
+        So here we have to Extend the abstract base class, Override required methods
+        Specify servlet mapping and location of your app Config
+
+        @Override
+        protected Class<?>[] getRootConfigClasses(){
+            return null;
+        }
+
+        @Override
+        protected Class<?>[] getServletConfigClasses(){
+            return new Class[] {DemoAppConfig.class}
+        }
+
+        @Override
+        protected String[] getServletMapping(){
+            return new String[]{"/"};
+        }
+
+
+=================================================================================================================================
+
+Development:
+
+
+1. Configuring Maven File:
+
+    a. Put the Below Lines in properties:
+
+        <maven.compiler.source>1.8</maven.compiler.source>
+        <maven.compiler.target>1.8</maven.compiler.target>
+
+    b. Create a build Section to add the Plugin for maven war project
+
+        <build>
+            <finalName>spring-security-demo</finalName>     --> This will be the actual name of the war file
+            <pluginManagement>
+              	<plugins>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-war-plugin</artifactId>
+                        <version>3.3.1</version>
+                    </plugin>
+                </plugins>
+            </pluginManagement>
+        </build>
+    
+
+2. Create Spring App Configuration (@Configuration)
+
+    @Configuration
+    @EnableWebMvc
+    @ComponentScan(basePackages="com.spring.security")
+    public class AppConfig {
+        
+        @Bean
+        public ViewResolver viewResolver() {
+            InternalResourceViewResolver viewResolver=new InternalResourceViewResolver();
+            viewResolver.setPrefix("/WEB-INF/view/");
+            viewResolver.setSuffix(".jsp");
+            return viewResolver;
+        }
+    }
+
+3. Create Spring Dispatcher Servlet Initializer
+
+    public class MySpringMvcDispatcherServletInitializer extends AbstractAnnotationConfigDispatcherServletInitializer {
+        @Override
+        protected Class<?>[] getRootConfigClasses() {
+            return null;
+        }
+        @Override
+        protected Class<?>[] getServletConfigClasses() {
+            return new Class[] {AppConfig.class};
+        }
+        @Override
+        protected String[] getServletMappings() {
+            return new String[] {"/"};
+        }
+    }
+
+4. Develop our Spring Controller
+
+    @Controller
+    public class AppController {
+
+        @GetMapping("/")
+        public String showHome() {
+            return "show-home";
+        }
+    }
+
+5. Add Maven Dependencies for Spring Security
+    a. spring-security-web
+    b. spring-security-config
+
+
+    Note** Spring Sercurity and Spring Framework are Different projects. They Are not of the Same version
+
+    Common Pitfall is using incompatible Projects.
+    Need to find the Compatible version
+
+
+
+
+Development Process:
+
+    1. Create Spring Security Initializer
+    2. Create Spring Security Configuration (@Configuration)
+    3. Add User Password roles
+
+
+    Spring provides the web-app initializer for initializing the security Framework.
+    Your Security Code is used to initialize the Servlet Container.
+    The Most Important thing it will do that it will actually register the Spring Security Filters and make them active
+
+    There is a Special Class to Register the Spring Security Filters: AbstractSecurityWebApplicationInitializer
+
+    1. Create Spring Security Initializer:
+
+        extend the Class AbstractSecurityWebApplicationInitializer
+
+
+        public class SecurityWebApplicationInitializer extends AbstractSecurityWebApplicationInitializer {
+
+        }
+
+    2. Create Spring Security Configuration (@Configuration):
+
+        extends the class WebSecurityConfigureAdapter and put the annotation @Configuration and @EnableWebSecurity
+
+
+        @Configuration
+        @EnableWebSecurity
+        public class MySecurityConfig extends WebSecurityConfigurerAdapter {            
+        }
+
+    3. Add User Password roles
+
+
+    
+            @Override
+            protected void configure(AuthenticationManagerBuilder auth) throws Exception {
+                UserBuilder users=User.withDefaultPasswordEncoder(); // This method is depreceated.
+                auth.inMemoryAuthentication().withUser(users.username("Shashank").password("Sshar012").roles("DEVELOPER"));
+                auth.inMemoryAuthentication().withUser(users.username("Khushboo").password("March2021").roles("DEVELOPER"));
+                auth.inMemoryAuthentication().withUser(users.username("Shashank").password("Sbolia").roles("LEAD"));
+            }
+
+
+Spring Security Will Automatically Provide the Login Form
+
+
+
+================================================================================================================================
+
+For Dev and Testing when you make the Changes to the code, you will see that when you re-visit the URL after making changes, it will automatically gets logged in if you've already logged in before
+

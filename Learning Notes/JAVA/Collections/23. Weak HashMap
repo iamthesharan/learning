@@ -1,0 +1,46 @@
+https://youtu.be/AVdD987trsc?list=PLd3UqWTnYXOmx_J1774ukG_rvrpyWczm0&t=2091
+
+GC will call Finalize method just before destroying the object in order to fullfill the object Last wish.
+GC calls finalize method to perform Clenup Activities.
+EX : DB connection Still Exists etc.
+
+Once Finalize method Completes, GC will Destroy the Object.
+
+
+Class Temp{
+    
+    // when we try to print the Object Internally toString() mehod will be called.
+    // We will try to overrider that method here in this class
+    
+    public String toString(){
+        return "Temp"    ;
+    }
+    public void finalize(){
+        System.out.println("Finalize method Call");
+    }
+}
+
+
+HashMap m=new HashMap();
+Temp k=new Temp();
+m.put(k,"durga");
+System.out.println(m); // [Temp=durga]
+
+            ___________________
+            |       |         |
+    k---->  |__K____|__Durga__|
+    
+    
+Now I will mark k=null; this means k has no reference.
+
+Now GC will come to destroy k but at this time JVM will not allow because even though k has no reference, it is associated with m. So here HashMap object will get high Priority.
+
+Hence K is not eligible for Garbage Collection in this case.
+
+t=null;
+System.gc(); // here no finalize methods will be called
+Thread.sleep(630);
+System.out.println(m);
+
+
+but If we Change HashMap to WeakHashMap then GC will surely gonna destroy the object k

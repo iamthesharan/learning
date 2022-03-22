@@ -1,0 +1,17 @@
+import java.util.Arrays;
+
+class Car{
+	String toString(String s) {
+		return s ;
+	}
+	public static void main(String ...args) {
+		System.out.println(new Car().toString());
+		//The Default toString() method for Class objects returns a String Consisting 
+		//of the name of the Class of which the objects is an instance and Hashcode.
+		System.out.println(new Car().toString("Shashank"));
+	}
+}
+
+Output:
+Car@4517d9a3
+Shashank

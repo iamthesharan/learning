@@ -1,0 +1,19 @@
+JAVA Application  ---> Type 3 Driver  --> MiddleWare Server  --------------->DB
+                                                (IDS Server
+                                                INternet Database 
+                                                Server)
+                                                
+This is why it is called Netowrk Protocol Driver, or MiddleWare Driver 
+
+
+INternally Type 3 driver take support of Middleware server to communicate with database.
+
+Advantages:
+
+Type 3 drivers are made in JAVA. Hence it is platform independent.
+Type 3 drivers doesnot directly interact with Database. Hence it is Database independent Driver
+
+
+Disadvantage:
+
+Performace is slow. Since JDBC call are converted to middleware calls. The Middleware calls are converted to DB calls 

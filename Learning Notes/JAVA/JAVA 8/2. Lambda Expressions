@@ -1,0 +1,187 @@
+Functional Interface
+
+Without curly Braces we can't use return keyword.
+Whitin Cury braces we must use return keyword.
+
+    n-> return n*n; ==> invalid
+    n->{return n*n;};==> Valid
+    n-> {return n*n};==> invalid
+    n->{n*n;};==> invalid
+    n->n*n; ==> Valid
+
+=============================================================================================
+
+Once We write Lambda Expression , To call that lamda Expression we must go for FI(contains single Abstract Method)
+
+Now can i take Default Methods and static methods inside FI?
+    Yes we can take any no of Default methods and Static methods. But FI should have exactly 1 abstract method.
+
+
+interface interf{
+    public void m1();
+    default void m3(){
+
+    }
+    public static void m3(){
+
+    }
+}
+
+To Specify Explicitly interf is a Functional Interface, we need to provide the Special Annotation, @FunctionalInterface
+so Above lines of code:
+@FunctionalInterface // No if we do any mistake by adding any other abstract method, then compiler will give left and right
+interface interf{
+    public void m1();
+    default void m3(){
+
+    }
+    public static void m3(){
+
+    }
+}
+@FunctionalInterface
+interface A{
+    public void m1();
+}
+
+@FunctionalInterface
+interface B extends A{
+    // This is perfectly valid. B interface will have m1() method. 
+    //So If an interface doesn't have any abstract method and it maked as FunctionalInterface and extends the FI with only 1 abstract method, then it is perfectly valid.
+}
+
+===================================================================================================================
+
+
+@FunctionalInterface
+interface A{
+    public void m1();
+}
+
+@FunctionalInterface
+interface B extends A{
+    public void m1();// This is valid as we are overriding m1() and not adding any other abstract method
+}
+
+===================================================================================================================
+@FunctionalInterface
+interface A{
+    public void m1();
+}
+
+@FunctionalInterface
+interface B extends A{
+    public void m2();// This is invalid.
+}
+
+===================================================================================================================
+@FunctionalInterface
+interface A{
+    public void m1();
+}
+
+interface B extends A{
+    public void m2();// This is perfectly valid as its not define as Functional Interface.
+}
+
+
+
+==============================================================================================================
+
+Lambda Expression with Functional Interfaces:
+
+    interface interf{
+        public void m1();
+    }
+    class Demo implements interf{
+        public void m1(){
+            System.out.println("Hi There");
+        }
+    }
+    class test{
+        public static vid main(String ...args){
+            Interf i=new Demo(); // parent reference can be used to hold child object
+            i.m1();
+        }
+    }
+
+
+    So now here we are not requried to write Separate Top Level Class:
+
+    class Demo implements interf{
+        public void m1(){
+            System.out.println("Hi There");
+        }
+    }
+
+    so method m1 can be written as
+        class Demo implements interf{
+            ()->System.out.println("Hi There");
+        }
+    
+
+    So now instead of  taking separate top level class we can provide like this:
+    class test{
+        public static vid main(String ...args){
+            Interf i=()->System.out.println("Hi By Lambda Expression"); // implemented by Lambda Expression and we can remove Demo class
+            i.m1();
+            i.m1();
+            i.m1(); // Now we can use like this and can shorten the code
+            i.m1();
+            i.m1();
+            i.m1();
+        }
+    }
+
+
+======================================================================================
+
+    Another Example:
+
+
+    interface Interf{
+        public void add(int a, int b);
+    }
+    class Demo implements Interf{
+        public void add(int a, int b){
+            System.out.println("The Sum: "+(a+b));
+        }
+    }
+    class Test{
+        public static void main(String ..args){
+            Interf i=new Demo();
+            i.add(10,20);
+        }
+    }
+
+
+    In order to conver it into lambda Expression, we can use this:
+
+
+    interface Interf{
+        public void add(int a, int b);
+    }
+    class Test{
+        public static void main(String ..args){
+            Interf i=(a,b)->System.out.println(a+b);// Now here compile can able to map the type of the argument with the interface
+            i.add(10,20);
+            i.add(10,30);
+            i.add(20,30);
+            i.add(30,20);
+            i.add(40,10);
+        }
+    }
+
+
+Now Suppose Our interface Interf has 2 methods with same arguments:
+
+
+    interface Interf{
+        public void add(int a, int b);
+        public void products(int a, int b);
+    }
+
+    So while calling 
+
+    Interf i=(a,b)->System.out.println(a*b);  // Compiler will be confused and thus our FI must contain only 1 absrtract method
+

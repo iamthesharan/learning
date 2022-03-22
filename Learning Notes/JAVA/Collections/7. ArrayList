@@ -1,0 +1,80 @@
+Datastructure used in ArrayList is: Resizable Array.
+In Array List, Hetrogeneous objects are allowed.
+In Whole Collection Concept, Hetrogeneous Objects are not allowed is TreeSet and TreeMap. since here comparison between the objects are required for Sorting.
+Null insertion is also possible in ArrayList
+
+
+ArrayList l=new ArrayList(); --> Creates Empty ArrayList with Default Initial Capacity =10.
+Once the ArrayList exceeds the Capacity of 10. another Arraylist object is Created with new capacity and elements are added to it and reference variable is refered to the new ArrayList Object.
+
+New Capacity= (current Capacity * 3/2) + 1 --> also there will be an intergral division. suppose 37.6 will become 37
+
+
+ArrayList l=new ArrayList(int initialCapacity); --> If there is a lot of element. This prevents the multiple increase in the capacity
+ArrayList l=new ArrayList(Collection C); --> Creates an equivalent Arraylist Object for the given Collection.   
+
+
+
+
+import java.util.ArrayList;
+import java.util.Arrays;
+
+class Car{
+	public static void main(String ...args) {
+		ArrayList l1=new ArrayList();
+		ArrayList l2=new ArrayList(100);
+		ArrayList l3=new ArrayList(l1);
+		l1.add('A');
+		System.out.println(l1);//  								[A]
+		l1.add(null);
+		System.out.println(l1);//  								[A, null]
+		l1.add(1,'B');
+		System.out.println(l1);//  								[A, B, null]
+		l2.add('Z');
+		System.out.println(l2);//  								[Z]
+		l2.addAll(l1);
+		System.out.println(l2);//  								[Z, A, B, null]
+		l2.add(4,l1);
+		System.out.println(l2);//  								[Z, A, B, null, [A, B, null]]
+		l2.remove(Character.valueOf('Z'));
+		System.out.println(l2);//  								[A, B, null, [A, B, null]]
+		l2.remove(1);
+		System.out.println(l2);//  								[A, null, [A, B, null]]
+		System.out.println(l2.containsAll(l1));//				false (B is Not there)
+		System.out.println(l2.contains(l1));//					true ([A, B, null] is there)
+		System.out.println(l2.get(2));// 						[A, B, null]
+		l2.set(1,'C');
+		System.out.println(l2);//								[A, C, [A, B, null]]
+		System.out.println(l2.indexOf('C'));//					1
+		System.out.println(l2.lastIndexOf('A'));//				0
+		l2.removeAll(l1);
+		System.out.println(l2);//								[C, [A, B, null]]
+		l2.remove(l1);
+		System.out.println(l2);//								[C]
+		System.out.println(Arrays.toString(l2.toArray()));//	[C]
+		l1.add('C');	
+		System.out.println(l1);//								[A, B, null, C]
+		l1.retainAll(l2);
+		System.out.println(l1);//								[C]
+		System.out.println(l1.size());//						1
+		l1.clear();
+		System.out.println(l1.isEmpty());//						true
+	}
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

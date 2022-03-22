@@ -1,0 +1,320 @@
+Suppose my gf said she will be sending a letter to me.
+I'm checking my mail box at every 1 hr but the letter didn't arrive. Then on the next day the letter arrive.
+
+So assume that I'm the system here and if i check every hour whether there is any update. This type of communication is not at all recommened.
+
+So how can we avoid this.
+
+So Soution is I'll Stick 1 sticker over there and write on it, if somebody gonna update, please let me know by calling.
+Now If I check the letterbox every hour, then system time we are going to waste.
+
+
+So Suppose here I am thread t1 and Postman is thread t2.
+Now If T1 is expecting some updation, then its not recommended to go and come every 1 hr.
+So here what will happen?
+
+    T1 has to call wait method on the letterbox object.
+    Once T1 called Wait method, then T1 goes in waiting state.
+    After T2 updates the letter box, t2 will call notify method to notify T1.
+
+    Two Threads can communicate each other with the help of three methods:
+        1. wait();
+        2. notify();
+        3. notifyAll();
+
+    Which Thread is required to call wait method?
+        1. A thread which is expecting some updation.
+
+    Which Thread is required to call notify method?
+        1. A Thread which is going to update.
+
+
+===================================================================================================
+
+wait() , notify() , notifyAll() present in object class but not in thread class.
+Why these methods present in object class but not thread class?
+These methods are applicable for multithreading only. If these methods are applicable for multithreading only then why these methods are not defined in Thread Class?
+
+    Suppose you call s.m1();
+    then s must be student or customer or String class object. and m1 methods must be there in these class if we are calling s.m1();
+
+    Similarly We have 2 threads t1 and t2.
+    and t1 calls wait method on letterbox object. so letter box must have wait().
+    Simlarly t1 can also call wait method in other objects so that object must have wait().
+    hence it is available in Object class and not in thread class
+
+
+=====================================================================================================
+
+To call wait meethod on any object, compulsory, the thread must be the owner of the object. You cannot call wait method on someone else postbox :-)
+When thread is the owner of he object? -> When The thread should have lock of the object.
+When thread should have lock on the object? --> When thread should be inside the synchronized area.
+
+Hence wait, notify and notify all we can call only in the synchronized area otherwise we will get IllegalMonitorStateException
+
+
+====================================================================================================
+
+If a Thread Call Wait method on any object, it immediately realeases the lock on that particular object only and entered into waiting state.
+Because the thread which need to update this object, the object must be available to it and should'nt be locked.
+
+Next when the thread which is going to update calls the notify method, then thread must be the owner of the object and then after locking, it may or may not immediately release the lock.
+Take an example of postman. Post man sometimes notify first and then give the letter.
+
+Now if the updating thread wont release the lock, then how the Wating thread can access the object for getting the update.
+Hence updating thread must release the lock
+
+If a thread calls notify method on any object, it release the lock of the object but may not immediately except wait, notify, notifyall where thread releases the lock.
+
+Except wait, notify, notifyall, thread won't release the lock
+
+
+Which of the following is valid?
+1. If a Thread calls wait method, immediately it will enter into waiting state, without releaseing any lock --> Invalid
+2. If a Thread calls wait method, it releases the lock of that object but may not immediately. -> invalid
+3. If a Thread calls wait method on any object, it releases all locks aquired by that thread and immediately entered into waiting state. -> Invalid
+4. If a thread calls wait methods on any object, it immediately releases the lock of that object and enter into waiting state. --> valid
+5. If a Thread calls notify method on any object, it immediately releases lock of that particular object. --> Invalid
+6. If a Thread calls notify method on any object, it  releases lock of that particular object but may not immedidately --> Valid
+
+
+=========================================================================================================
+Prototyes:
+
+public final void wait() throws InterruptedException. // when the thread is waiting, there is a chance of interruption by other thread. 
+public final native void wait(long ms) throws Interrupted Exception;
+public final void wait(long ms, int ns) throws Interrupted Exception;
+
+public final native void notify();
+public final native void notifyAll();
+
+Since notify and notifyAll doesn't goes to the waiting state.
+
+
+==========================================================================================================
+
+If the waiting thread get the notification, then it will immediately goes to another waiting state to set the lock on that object.
+It will not directly goes to ready state or runnable state.
+
+
+========================================================================================================
+
+
+Now asssume we have a ThreadB class
+class ThreadB extends Thread{
+    int total=0;
+    public void run(){
+        for(int i=0;i<100;i++){
+            total+=i;
+        }
+    }
+}
+
+class ThreadA {
+    public static void main(String ...args){
+        ThreadB Tb=new ThreadB();
+        tb.start();
+        System.out.println(tb.total); // Here the output can't be guaranteed, it can be 0 or it can be 5050 (Sum of first hundred natural numbers). or it can be any number in between the calculation.
+    }
+}
+
+
+Now if we call Sleep method:
+
+class ThreadA {
+    public static void main(String ...args) throws InterruptedException{
+        ThreadB Tb=new ThreadB();
+        tb.start();
+        Thread.sleep(100); // This will give the total sum result but what if the calculation Exceeds the 100 ms and the result is not correct. Decreases the System performace and is never recommended here.
+        System.out.println(tb.total);
+    }
+}
+
+
+What if we use join?
+
+
+class ThreadA {
+    public static void main(String ...args){
+        ThreadB Tb=new ThreadB();
+        tb.start();
+        tb.join();// Here if the calculation is complex, then the main thread will go in waiting stage for long time. Hence never recommended to use join here.
+        System.out.println(tb.total);
+    }
+}
+
+
+What if we use wait?
+
+
+class ThreadA {
+    public static void main(String ...args){
+        ThreadB Tb=new ThreadB();
+        tb.start();
+        tb.wait(); // But here we will get exception like IllegalMonitorStateException.
+        System.out.println(tb.total); 
+    }
+}
+
+class ThreadB extends Thread{
+    int total=0;
+    public void run(){
+        for(int i=0;i<100;i++){
+            total+=i;
+        }
+        this.notify();// here we will get exception like IllegalMonitorStateException.  
+    }
+}
+
+=========================================================================================================================
+Wait must be called inside the Synchroinized.
+
+class ThreadA {
+    public static void main(String ...args){
+        ThreadB Tb=new ThreadB();
+        tb.start();
+        synchronized(b){
+            System.out.println("Main thread trying to call wait method");
+            b.wait();
+            System.out.println("Main Thread got the notification")
+        }
+        System.out.println(tb.total); 
+    }
+}
+
+class ThreadB extends Thread{
+    int total=0;
+    public void run(){
+        synchronized(this){
+            System.out.println("Child Thread Start calculation");
+            for(int i=0;i<100;i++){
+                total+=i;
+            }
+            this.notify();// here we will get exception like IllegalMonitorStateException.
+            System.out.print("Child Thread Trying to give notification");  
+        }
+    }
+}
+
+======================================================================================================================
+What if main Thread Goes to sleep for few Seconds and Child thread completes and then main thread goes in waiting state?
+
+class ThreadA {
+    public static void main(String ...args){
+        ThreadB Tb=new ThreadB();
+        tb.start();
+        Thread.sleep(10000);
+        synchronized(b){
+            System.out.println("Main thread trying to call wait method");
+            b.wait();
+            System.out.println("Main Thread got the notification")
+        }
+        System.out.println(tb.total); 
+    }
+}
+
+class ThreadB extends Thread{
+    int total=0;
+    public void run(){
+        synchronized(this){
+            System.out.println("Child Thread Start calculation");
+            for(int i=0;i<100;i++){
+                total+=i;
+            }
+            this.notify();// here we will get exception like IllegalMonitorStateException.
+            System.out.print("Child Thread Trying to give notification");  
+        }
+    }
+}
+
+In this case Main thread will wait forever if Child Thread completes first and then main thread went into waiting State.
+Hence its always recommended to use timming inside the wait();
+===========================================================================================================================
+
+Producer Consumer Problem is the best example for Inter Thread Communication.
+
+Producer Thread is reponsible to Produce Items to the Queue.
+Consumer Thread is responsible to consume items from the queue.
+If Queue is empty, then consumer thread will called wait method and entered into waiting state.
+After producing items to the queue, producer thread is responsible to call notify method, then waiting consumer will get the notification and continue its execution with updated items.
+
+
+
+    Producer    --------------> queue -----------------> Consumer
+
+    class ProducerThread{
+        produce(){
+            synchronized(q){
+                // Produce items in queue
+                q.notify();
+            }
+        }
+    }
+
+    class ConsumerThread{
+        consume(){
+            synchronized(q){
+                if(q is empty){
+                    q.wait();
+                }
+                else{
+                    consumer items
+                }
+            }
+        }
+    }
+
+
+
+===================================================================================================================
+
+Difference Between notify and notifyAll();
+
+We can use notify method to give the notification for only 1 waiting thread. If multiple threads are waiting, then opnly 1 thread will be notified
+and the remaining threads have to wait for further notifications.
+Which thread will be notify we can't expect. it depends on JVM.
+
+
+                n waiting threads
+                        |
+                        |
+                        | obj.wait();
+                        |
+                    Running
+
+If we want to notify all the threads then we need to call notifyAll();
+
+
+No suppose we have 100 waiting threads:
+
+                    100 waiting threads
+                        |
+                        |
+                        | obj1.wait();  => 60 waiting 
+                        | obj2.wait();  => 40 waiting
+                        |
+                     Running
+
+    So when we call notifyAll(), then the waiting threads on that particular object will be notifed i.e either 60 or 40
+
+    If the people is waiting for magarpatta bus, and if magarpatta bus comes, then magarpatta people will be only notified.
+
+    We can use notifyAll  to give the notification for all waiting thread of a particular object. Even though multiple threads notify 
+    but execution will be performed 1 by 1 because threads are required lock and only 1 lock is available.
+
+
+============================================================================================================================
+On which object we are calling wait method, thread require the lock of that particular object.
+For Example : if we are calling wait method on S1 we have to get lock on s1 object but not s2 object.
+
+    Stack s1=new Stack();
+    Stack s2=new Stack();
+
+    Synchroinized(s1){
+        s2.wait(); // invalid--> IllegalMonitorStateException
+    }
+    
+    
+    Synchroinized(s1){
+        s1.wait(); // Perfectly Valid
+    }

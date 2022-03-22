@@ -1,0 +1,32 @@
+for redirection of output to file -> 
+
+    cat 1>output.txt
+
+    here 1 is the standart output terminal
+
+For redirection of error to the output file -->
+
+    here 2 is the error output
+
+    cat 2>output.txt
+
+
+For Reading input from file use:
+
+    cat 0<output.txt
+
+
+To do input, output and error redirection simulataneously
+
+    cat 0<input.txt 1>output.txt 2>>error.txt
+            OR
+
+    cat <input.txt >output.txt 2>>error.txt
+
+                OR
+    cat input.txt > output.txt 2>>error.txt
+                OR
+    cat input.txt &>>output.txt
+
+
+    & will send both error and output redirection together if the file is same

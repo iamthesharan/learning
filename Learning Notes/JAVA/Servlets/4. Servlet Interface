@@ -1,0 +1,117 @@
+How to create a servlets?
+
+Servlet interface is present in javax.servlet
+
+The javax.servlet package contains many interfaces and classes that are used by the servlet or web container. These are not specific to any protocol.
+
+The javax.servlet.http package contains interfaces and classes that are responsible for http requests only.
+
+
+Life Cycle method:
+
+    init(ServletConfig config);
+    service(ServletRequest, ServletResponse);
+    destroy();
+
+    whenever the Servlet object is created, the server will execute automatically the init method.
+
+Non Life Cycle Method:
+    String getServletInfo();
+    ServletConfig getServletConfig();
+    
+    
+import javax.servlet.Servlet;
+class MyServlet implements Servlet{
+    //Override methods 
+}
+
+
+Not to Execute MyServlet we need to do mapping in web.xml. This web.xml file is called Deployment Descriptor
+
+
+File Locations:
+
+HTML, CSS, JAVASCRIPT: WebContent
+web.xml : will be  present in WEB-INF
+Servlet java files: JAVA Resources --> src
+
+
+=================================================================================================
+
+MyServlet.java:
+
+
+package com.servlets;
+
+import java.io.IOException;
+import java.io.PrintWriter;
+
+import javax.servlet.Servlet;
+import javax.servlet.ServletConfig;
+import javax.servlet.ServletRequest;
+import javax.servlet.ServletResponse;
+
+public class MyServlet implements Servlet{
+	ServletConfig conf;
+	
+    
+    public void init(ServletConfig config) {    // initilizing the object
+        this.conf=config;
+		System.out.println("Initializing Object........");
+	
+    
+    }
+	public void service(ServletRequest req, ServletResponse resp) throws IOException,ServletException { 
+    // all the input request and output responses are implemented here
+    
+    
+		System.out.println("Servicing......");
+		//Set content type of the response
+		resp.setContentType("text/html");
+		PrintWriter out=resp.getWriter();
+		out.println("<h1>This is the response from Servlet</h1>");
+	
+    
+    
+    
+    }
+	public void destroy() {
+    //The web container calls the destroy method before removing the servlet instance from the service.
+		System.out.println("Detroying....");
+	}
+	
+	
+	// Non Life Cycle methods
+	
+	public ServletConfig getServletConfig() {
+		return this.conf;
+	}
+	
+    
+    
+    public String getServletInfo() {
+		return "This is servlet Info";
+	}
+	
+}
+
+
+========================================================================================
+web.xml
+
+
+
+<?xml version="1.0" encoding="UTF-8"?>
+
+<web-app>
+	<servlet>
+		<servlet-name>FirstServlet</servlet-name>
+		<servlet-class>com.servlets.MyServlet</servlet-class>
+	</servlet>
+	
+	<servlet-mapping>
+		<servlet-name>FirstServlet</servlet-name>   <!-- Defines Which Servlet CLass the URL is mapped -->
+		<url-pattern>/web</url-pattern> <!-- needs to provide the URL on which this servlet will execute  -->
+	</servlet-mapping>
+
+</web-app>

@@ -1,0 +1,5 @@
+1. StringBuilder Class as well as various buffer class in java.nio pacakge like ByteBuffer, CharBuffer are often given as example of builder pattern.
+
+Another Example is 
+
+Calender.Builder --> This is the inner Builder class in Calender Class.

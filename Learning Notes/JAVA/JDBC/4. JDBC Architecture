@@ -1,0 +1,35 @@
+                            JAVA Application
+                                    |
+                                JDBC API   (JDBC API provides Driver Manager to JAVA Application)
+                                    |
+                              Driver Manager
+                                    |
+        ____________________________|
+        |                           
+        |                           |
+Driver Software for Oracle    Driver for Mysql
+        |                           |
+        |                           |
+        |                           |
+Oracle Database                 My SQL Database
+
+
+
+For Multiple database, there will be multiple drivers and DriverManager will take care of the drivers.
+Ex Registring the driver, Unregister etc.
+
+Driver Manager is a class present inside java.sql package
+
+Methods
+
+DM.registerDriver(){}
+DM.unregisterDriver(){}
+DM.getConnection(){}
+
+
+Driver manager is internally connected to driver Software which acts as a translator.
+
+
+therefor connecting we we
+
+Connection con=DriverManager.getConnection();

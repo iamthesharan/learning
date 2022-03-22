@@ -1,0 +1,55 @@
+It's like Elastic Audio. Allows to apply time compression and Expansion on audio wave forms.
+For getting the Flex button on each track, you should click on the flex button in the function bar.
+and with division snap mode you can strech and compress.
+
+Polyponic mode -> Instruments play multiple notes at time like Guitar, Paino
+Monophonic -> Intruments that play one note at a time like bass
+
+
+In Inspector Section there is a check named the complex. 
+Make sure that is check when using with polyphonic mode because it will use more system resources to get the good quality sound.
+
+
+While Grouping the Drums, Make Sure that in Editing, Phase-locked Audio is checked.
+So while Editing it won't let other tracks to go out of phase.
+For Drums you Should Select Rhythmic pattern
+
+
+--------------
+
+Slicing Algorithm:
+
+Best use case is when you want some partaricular instrument sound from overall sound.
+Example when you need kick from drums.
+using Slicing Algorithm, You can right click on the Clip top and select slice at transient marker.
+
+---------------
+
+Speed and tempophone mode:
+allows speacial effect by channging the speed and tempo of the clip
+
+Speed will create a high pitch effect while compressing and low pitch effect while Expanding.
+Tempophone will add some digital additions onto the stretched part based on chopped Small Granuel samples instead of increase the speed as in case of Speed Mode.
+
+
+In File Editor, you can increase or decrease the transient Sensitivity by clicking on -/+
+
+
+
+----------------
+
+Flex Pitch-
+
+You can Scale it in Any Scale.
+Each Note has 6 dots.
+
+Lower Middle Dot -> vibrato
+Lower right Dot -> Formant Shift
+Lower Left Dot -> Gain
+Upper Left Dot --> Pitch Drift   --> Start of the note
+Upper middle Dot -> Fine Pitch
+Upper Right Dot -> Pitch Drift.  --> End of the note.
+
+
+Convert Audio to MIDI:
+You will get an option of "Create MIDI track from Flex Pitch Data" in Edit section in Track Editor.

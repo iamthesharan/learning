@@ -1,0 +1,22 @@
+Java String contains() ---------------------->
+
+The java string contains() method searches the sequence of characters in this string. It returns true if sequence of char values are found in this string otherwise returns false.
+
+Method:
+public boolean contains(CharSequence sequence)  
+
+Throws
+NullPointerException : if sequence is null.
+
+
+
+class Car{
+	public static void main(String ...args) {
+		String s1="Shashank Sharan Prasad";
+		String s2=null;
+		System.out.println(s1.contains("Sharan")); //true
+		System.out.println(s1.contains("Sha")); //true
+		System.out.println(s2.contains("Sharan")); //NullPointerException
+
+	}
+}

@@ -1,0 +1,67 @@
+Java String replaceAll() ------------------->
+
+The java string replaceAll() method returns a string replacing all the sequence of characters matching regex and replacement string.
+
+Signature
+public String replaceAll(String regex, String replacement)  
+
+Parameters
+regex : regular expression
+
+replacement : replacement sequence of characters
+
+
+Returns
+replaced string
+
+
+
+Java String replaceAll() example: replace character
+
+public class ReplaceAllExample1{  
+    public static void main(String args[]){  
+        String s1="javatpoint is a very good website";  
+        String replaceString=s1.replaceAll("a","e");//replaces all occurrences of "a" to "e"  
+        System.out.println(replaceString);  
+    }
+}  
+
+Output:
+
+jevetpoint is e very good website
+
+-------------
+
+Java String replaceAll() example: replace word
+
+
+public class ReplaceAllExample2{  
+    public static void main(String args[]){  
+        String s1="My name is Khan. My name is Bob. My name is Sonoo.";  
+        String replaceString=s1.replaceAll("is","was");//replaces all occurrences of "is" to "was"  
+        System.out.println(replaceString);  
+    }
+}  
+
+Output:
+
+My name was Khan. My name was Bob. My name was Sonoo.
+
+
+
+
+-----------------------------
+
+Java String replaceAll() example: remove white spaces
+
+public class ReplaceAllExample3{  
+    public static void main(String args[]){  
+        String s1="My name is Khan. My name is Bob. My name is Sonoo.";  
+        String replaceString=s1.replaceAll("\\s","");  
+        System.out.println(replaceString);  
+    }
+}  
+
+Output:
+
+MynameisKhan.MynameisBob.MynameisSonoo.

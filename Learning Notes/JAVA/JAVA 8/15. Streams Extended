@@ -1,0 +1,31 @@
+In collect
+
+
+
+Stream Pipeline:
+
+Source                  --> Source of data, it can be collection.
+Intermidiate Operations --> These are used to perform Bussiness Logic.
+Terminal Operations     --> These are used to collection the Final Result from Stream.
+
+
+List<Integer> l=Arrays.asList(1,2,3,4,5,6);
+
+Intermidiate Operation:
+
+1. Filter : Filter takes Predicated FI.
+
+    Stream<Integer> filteredStream=l.Stream().filter(ele->ele>3);
+
+2. Map: Map takes Function FI.
+
+    Stream<Integer> computedStream=l.stream().map(n->n*n);
+
+
+
+Terminal Operation:
+
+1. forEach: It takes consumer FI.
+
+    filteredStream.forEach(System.out::println);
+

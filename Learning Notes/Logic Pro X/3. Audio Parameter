@@ -1,0 +1,15 @@
+Sample rate - No of samples taken per second from analog to digital conversion process. 
+Sample Rate is directly Proportional to File Size.
+44.1Khz This means that 44100 samples of Sound are collected in 1 sec.
+
+As per Nyquist Theorm,-
+Your Sample Rate = 2 x (The highest Recording frequency you're recording). i.e 22.05KHz
+Now This doesn't mean that human can hear upto 22KHz so we don't need more that 44.1Khz.
+Sometimes Higher Sample rate has more good quality in mid frequencies which can't be capture in lower Sample rate.
+
+
+Bit Depth: 
+No Of bits(information) each Sample has.
+
+Audio Buffer:
+How the processor handle info.

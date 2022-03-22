@@ -1,0 +1,22 @@
+By using array reference if we perform any change, automatically, that change will be reflected to the list.
+
+By using list if we perform any Change, automatically, that change will be reflected in the array.
+
+
+1. 
+
+String[] S={"A","Z","B"};
+List l=new Arrays.asList(S);
+S[0]="k";
+sop(l); //["k","Z","B"];
+
+
+2. extending or redusing the size is not allowed by using array reference in list.
+
+    l.add("k");
+    l.remove("k");
+    
+    this will give RE: Unsupported Operation Exceptions.
+    
+    l.set(1,"k"); // valid
+    l.set(1,new Integer(10)); //RE: ArrayStoreException. By using list with array reference, we are not allowed to replace with heterogeneous objects

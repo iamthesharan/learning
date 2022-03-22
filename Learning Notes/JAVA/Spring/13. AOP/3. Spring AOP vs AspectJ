@@ -1,0 +1,61 @@
+AOP Terminology:
+Aspect: Module of code for Cross cutting Concern
+Advice: What action taken and when it should be applied
+Joint Point: when to apply code during program execution
+Pointcut: A Predicate expression for where the advice should be applied
+
+Advice Types:
+1. Before advice: run the code before the method
+2. After finally advice: run after the method(finally)
+3. After Returning Advice: run this piece of code after the method (successfull execution)
+4. After Throwing Advice: run after method (if Exception Thrown)
+5. Around Advice: run before and after method
+
+
+Weaving:
+
+    Connecting Aspects to target Object to create an advice object
+    There are different Types of Weaving:
+    1. Compile time Weaving, load time weaving or runtime weaving.
+
+
+    Regarding performace, runtime weaving is the slowest
+
+
+
+    AOP Frameworks:
+    1. Spring AOP:
+        Spring provides AOP Support
+        key Components of Spring
+        1. Security
+        2. transaction
+        3. caching etc.
+
+        Spring uses runtime-weaving of aspects.
+        So Spring uses proxy pattern to advice an object
+
+
+
+        Spring AOP Comparison:
+
+        Advantages:
+        1. Simpler to use than AspectJ
+        2. Use Proxy Pattern
+        3. Can migrate to AspectJ when using @Aspect annotation
+
+        Disadvantages:
+        1. Only Supports Method Level JointPoints
+        2. Can only apply aspects to beans created by Spring app context
+        3. Minor Performace cost for Aspect execution (run-time weaving)
+
+
+
+
+        AspectJ
+        1. Supports all JointPoints
+        2. Works with any POJO not just beans from appContext
+        3. Faster Performance compared to Spring AOP
+        4. Complete AOP Support
+
+        Disadvantages:
+        1. Compile time weaving requires extra compilation Step

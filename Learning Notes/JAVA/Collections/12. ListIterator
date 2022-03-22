@@ -1,0 +1,54 @@
+By Using ListIterator either to Forward Dir or Back Dir. and Hence it is Bi-Directional Cusrsor.
+We can perform replacement and iteration of new Objects in addition to read and remove operations.
+
+
+public ListIterator listIterator();
+
+ListIterator itr=l.listiterator(); --> l is any list object
+
+
+        Iterator(I)
+            |
+            |
+        ListIterator(I)
+        
+ListIterator is a child interface of Iterator and hence all methods present in Iterator is also there in ListIterator.
+
+ListIterator Methods:
+
+Forward :
+    public boolean hasNext();
+    public Object next();
+    public int nextIndex();
+    
+Backword:
+
+    public boolean hasPrevious();
+    public Object previous();
+    public int previousIndex();
+
+Extra Operations:
+
+    public void remove();
+    public void add(Object o);
+    public void set(Object o);
+
+=======================================
+
+
+import java.util.ArrayList;
+import java.util.Iterator;
+
+class Car{
+	public static void main(String ...args) {
+		ArrayList l=new ArrayList();
+		Iterator itr=l.iterator();
+		System.out.println(itr.getClass().getName());
+	}
+}
+
+
+OUTPUT:
+
+java.util.ArrayList$Itr:
+So Basically itr is referring to inner class Itr object.

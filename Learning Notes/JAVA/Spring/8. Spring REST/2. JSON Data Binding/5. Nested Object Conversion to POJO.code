@@ -1,0 +1,13 @@
+So here we will use the below JSON.
+{
+    "id":14,
+    "Name":"Shashank Sharan",
+    "Address":{
+        "City":"Pune",
+        "State":"Maharashtra"
+    }
+}
+
+We need to Create and Address Class first with getters and Setters for the Field City and State.
+after that we need to create a nested object address in side our POJO Class in our POJO Class with getters and Setters.
+Finally we call the Getters method of the nested class from Driver Class.

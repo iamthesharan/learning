@@ -1,0 +1,16 @@
+
+Java String lastIndexOf()-------------------------->
+
+The java string lastIndexOf() method returns last index of the given character value or substring. If it is not found, it returns -1. The index counter starts from zero.
+
+Signature
+There are 4 types of lastIndexOf method in java. The signature of lastIndexOf methods are given below:
+
+No.	Method	Description
+1	int lastIndexOf(int ch)	returns last index position for the given char value
+2	int lastIndexOf(int ch, int fromIndex)	returns last index position for the given char value and from index
+3	int lastIndexOf(String substring)	returns last index position for the given substring
+4	int lastIndexOf(String substring, int fromIndex)	returns last index position for the given substring and from index
+
+Returns
+last index of the string

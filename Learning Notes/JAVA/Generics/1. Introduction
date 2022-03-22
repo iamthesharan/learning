@@ -1,0 +1,101 @@
+Generics provide Type Safety and to resolve type casting problem.
+
+
+ArrayList l=new ArrayList();
+l.add("Shashank");
+l.add(new Integer(10));
+String S1=(String)l.get(0);
+String S2=(String)l.get(1); // RE: ClassCastException
+
+===============================================================
+
+
+ArrayList<String> l=new ArrayList<String>();
+l.add("Shashank");
+l.add("Sharan");
+l.add(new Integer(10));  CE: X
+
+
+String S1=l.get(0); // Here TypeCasting not required.
+
+
+Basetype Polymorphism is applicable:
+
+ArrayList<String> l =new ArrayList<String>(); // BaseType: ArrayList, Parameter Type: String
+List<String> l=new ArrayList<String>();
+Collection<String> l=new ArrayList<String>();
+
+Parameter type Polymorphism is not applicable
+
+ArrayList<Object> l =new ArrayList<String>(); CE
+
+
+Till JAVA 1.4
+
+There was no type Safety Concept in ArrayList
+
+class ArrayList{
+    add(Object o);  // Parameter type is object
+    Object get(int index); // return type is object 
+}
+
+In JAVA 1.5v when Generic Conecept was introduced,
+
+class ArrayList<T>{  // Here T is Type Safety
+    add(T k);  // add method can take only T type object
+    T get(int index); // get method can only return T type object
+}
+
+Based on our runtime requirement, Every T will be replaced by our own Type 
+
+ex ArrayList<String> l=new ArrayList<String>();
+here Every T will be replaced by String
+
+l.add("Sharan");// passed
+l.add(new Integer(10)); // CE: Cannot find Symbol.
+                        // Symobol:     method add(java.lang.Integer)
+                        //Loaction: class Al<String>
+                        
+                        
+                        
+                        
+Here these 5Parameterized class are called Generic classes
+
+
+
+
+
+
+======================================================================
+
+We can also Apply Genrics concept on Normal Classes
+class Account<T>{
+    
+}
+
+Account<Gold> a1=new Account<Gold>();
+Account<Platinum> a1=new Account<Platinum>();
+
+
+we can use this in aggeration
+=======================================
+
+class Gen<T>{
+    T obj;
+    Gen(T ob){
+        this.ob=ob;
+    }
+    public void Show(){
+        System.out.println(ob.getClass().getName());
+    }
+    public T get(){
+        return ob;
+    }
+}
+
+
+class Test{
+    Gen<Sting> g1=Gen<String>("Shashank");
+    g1.show();
+    sop(g1.get());
+}

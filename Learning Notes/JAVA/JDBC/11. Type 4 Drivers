@@ -1,0 +1,14 @@
+JAVA Application <-----> Type 4 drivers <--------> DB
+
+These Drivers can directly communicate with DB
+
+Advantage:
+* pure JAVA Driver hence platform independent
+* Native protocol drivers. beacuse it uses Database vendor provided libraries
+* Thin Driver --> doesnt need any component to communicate with DB 
+* Only 1 Conversion hence performace is so good
+
+
+limitations:
+
+It is the Database dependent Driver

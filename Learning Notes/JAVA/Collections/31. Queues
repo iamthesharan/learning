@@ -1,0 +1,65 @@
+Queue is Child Interface of Collection.
+
+If you want to represent a group of individual objects prior to processing, then we should go for queue.
+Ex: Before Sending SMS, All mail ids we have to store in some data structures with the same order in which we have added the email ids.
+
+When we should go for queue?
+1. Before Processing if you want to store a group of object, Then you can go for queue.
+    -- Example we want to send mail to 1lakh people. so we need to store these 1 lakh mail ids somewhere. so queue is best suitable for it.
+2. From 1.5v LinkedList implements Queue interface.
+
+Queue Follows FIFO order by default. But based on our requirement we can implement our own Priority Queue.
+LinkedList Based implementation of Queue always follows FIFO order.
+
+
+
+
+
+                    1.2v  Collection(I)1.2v
+                              |
+                              |
+                            Queue(I) 1.5v
+                              |
+    __________________________|___________________________________
+    |           |       |        |
+    |           |       |        |
+Priority    Blocking ---------------
+Queue       Queue
+                |
+                |---Priority Blocking Queue
+                |
+                |---Synced Blocking Queue
+                
+
+
+Queue Interface Specific Methods:
+
+1. offer(Object o) --> For Offer the service to the queue item.
+2. poll() -> To remove and return head element of the queue. If the queue is empty, we will get null if we call poll
+3. remove() --> To remove and return head element of the queue. If the queue is empty, we will get No Such element Exception if we call remove
+4. peek() --> This method returns the head element of the queue.
+
+
+====================================================================================================================================
+
+Priority Queue.:
+
+
+1. If you want to represent a group of individual objects prior to processing according to some priority.
+2. Priority can be : default natuaral Sorting order --> ex: According to alphabetical order of name
+                  Customized sorting order.
+
+3. Duplicates are not allowd
+4. Heterogeneous objects are not allowed because of Comparison. Only Homogeneous objects which implements Comparator or Comarable are allowed.
+5. Null insertion is not possible.
+
+
+Constructors:
+
+PriorityQueue q=new PriorityQueue(); --> Default Natural Sorting order.
+PriorityQueue q=new PriorityQueue(int initialCapacity);
+PriorityQueue q=new PriorityQueue(int initialCapacity, Comparator C);
+PriorityQueue q=new PriorityQueue(SortedSet s);
+PriorityQueue q=new PriorityQueue(Collection c);
+
+

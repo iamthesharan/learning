@@ -1,0 +1,74 @@
+What is Container?
+
+    Let us take an example of Servlet Container, i.e TomCat.
+    TomCat Creates a Servlet Objects which are required in order to run an Application
+    Similarly, Spring is a container of Beans. So any POJO that you Have Can be contained inside the Spring Container
+
+
+
+     __________________________________________
+    |                                          | 
+    |       Object-1                           | 
+    |                       Object-3           | 
+    |               Object-2                   |
+    |  Object-4                                |
+    |           Object-5              Object-6 |
+    |__________________________________________|
+                Spring Container
+
+    Inside the Spring Container Your Can as many Object as you want. And all these Objects are managed by the Spring Container.
+    Means --> it handles the Initialization of the Objects, Handles the Life Cycle Of the Objects, and Handles the Distruction of the Objects
+
+    You Can have the Objects ouside the Spring Container But, you cannot take adavantage of the Spring Container 
+
+
+    Spring Container Follows the Factory Pattern.
+
+    What is a Factory Pattern?
+
+        (Conf file)    Reads From Configuration <======> Object Factory  -----> Main Object
+
+        So Here the Object Factory will hand over the Objects to the Main Object
+        SO basically Object Factory Creates an Object Based on the Config file or blue print for all the Objects
+        So Object Factory will tell the Configuration that it needs, the object of particular type with the following Specification.
+
+
+
+    In Spring there is Bean Factory. This beanFactory will read the XML file which is a Conf file. This Conf File will have all the Object definition and Configuration.
+
+
+
+IOC Container: 
+    The IoC container is responsible to instantiate, configure and assemble the objects. 
+    The IoC container gets informations from the XML file and works accordingly. The main tasks performed by IoC container are
+
+
+       1.   to instantiate the application class
+       2.   to configure the object
+       2.   to assemble the dependencies between the objects
+
+       There are two types of IoC containers. They are:
+
+        1. BeanFactory
+        2. ApplicationContext
+
+
+    Difference between BeanFactory and the ApplicationContext:
+
+        The org.springframework.beans.factory.BeanFactory and the org.springframework.context.ApplicationContext interfaces acts as the IoC container. 
+        The ApplicationContext interface is built on top of the BeanFactory interface. It adds some extra functionality than BeanFactory such as simple 
+        integration with Spring's AOP, message resource handling (for I18N), event propagation, application layer specific context (e.g. WebApplicationContext)
+        for web application. So it is better to use ApplicationContext than BeanFactory.
+
+
+    Using ApplicationContext:
+
+        The ClassPathXmlApplicationContext class is the implementation class of ApplicationContext interface. We need to instantiate the 
+        ClassPathXmlApplicationContext class to use the ApplicationContext as given below:
+
+        ApplicationContext context =  new ClassPathXmlApplicationContext("applicationContext.xml");
+
+
+    
+
+    

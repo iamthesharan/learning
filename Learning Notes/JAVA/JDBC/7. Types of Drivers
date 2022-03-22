@@ -1,0 +1,7 @@
+Types of JDBC Drivers
+
+
+1. Type 1 Driver (JDBC ODBC Bridge Driver or Bridge Driver)
+2. Type 2 Driver (Native API Partly JAVA Driver or Native Driver)
+3. Type 3 Driver (All JAVA Net protocol Driver or Network Protocol Driver or Middle Ware Driver)
+4. Type 4 Driver (Pure JAVA Driver or Native protocol Driver or THIN Driver)

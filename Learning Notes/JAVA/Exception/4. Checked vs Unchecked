@@ -1,0 +1,30 @@
+Note Every Exceptions occurs at runtime.
+
+Checked Exception: The Exception which are checked by Compiler for Smooth Execution of the Program at runtime. These Exceptions are called Checked Exceptions.
+
+Example:
+
+
+class Test{
+    public static void main(String ...args){
+        PrintWriter pw=new PrintWriter("abc.txt");
+        pw.println("Hello");
+    }
+}
+
+So here Copiler will say that there may be a chance of FileNotFoundException. How you will handle and the Compile will throw Exception at runtime.
+Compulsory We must handle the Checked Exception either by try/Catch or Throws Keyword
+
+
+Unchecked Exception:
+There are Some Exception which are not checked By compiler whether the programmer has handled it or not. These types of Exceptions are called Unchecked Exceptions.
+
+Example: ArithmeticException
+
+
+Fully Checked vs Partially Checked
+
+A Checked Exceptions is Called Fully Checked if all its Child classes are checked Exception.
+Example IOException, InterruptedException
+
+A Checked Exceptions is called Partially Checked if some of its child classes are not checked Exception

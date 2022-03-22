@@ -1,0 +1,173 @@
+The Criteria API allows you to build up a criteria query object programmatically; 
+the org.hibernate.Criteria interface defines the available methods for one of these objects. 
+The Hibernate Session interface contains overloaded createCriteria() method.
+The object of Criteria can be obtained by calling the createCriteria() method of Session interface.
+
+For Retrival:
+
+    		Criteria crit=session.createCriteria(Reader.class);
+			List<Reader> readers=crit.list();
+
+Restrictions:
+
+
+	The Criteria API makes it easy to use restrictions in your queries to selectively retrieve objects; for instance, your application could retrieve only products with a price over $30. You may add these restrictions to a Criteria object with the add() method. The add() method takes an org.hibernate.criterion.Criterion object that represents an individual restriction. You can have more than one restriction for a criteria query.
+
+	a. Restrictions.eq() Example
+
+			Criteria crit=session.createCriteria(Book.class);
+			crit.add(Restrictions.eq("bookName","Harry Potter"));
+			List<Book> books=crit.list();
+
+	b. Restrictions.ne():
+		crit.add(Restrictions.ne("bookName","Harry Potter"));
+		
+		You cannot use the not-equal restriction to retrieve records with a NULL value in the database for that property (in SQL, and therefore in Hibernate, NULL represents the absence of data, and so cannot be compared with data). If you need to retrieve objects with NULL properties, you will have to use the isNull() restriction.
+
+	c. Restrictions.like() and Restrictions.ilike()
+
+		Instead of searching for exact matches, we can retrieve all objects that have a property matching part of a given pattern. To do this, we need to create an SQL LIKE clause, with either the like() or the ilike() method. The ilike() method is case-insensitive.
+
+		crit.add(Restrictions.like("bookName","Harry%",MatchMode.ANYWHERE));
+
+		Above example uses an org.hibernate.criterion.MatchMode object to specify how to match the specified value to the stored data. The MatchMode object (a type-safe enumeration) has four different matches:
+
+			ANYWHERE: Anyplace in the string
+			END: The end of the string
+			EXACT: An exact match
+			START: The beginning of the string
+
+	d. Restrictions.gt(), Restrictions.ge(), Restrictions.lt() and Restrictions.le()
+
+		Several of the restrictions are useful for doing math comparisons. The greater-than comparison is gt(), the greater-than-or-equal-to comparison is ge(), the less-than comparison is lt(), and the less-than-or-equal-to comparison is le(). We can do a quick retrieval of all products with prices over $25 like this, relying on Java’s type promotions to handle the conversion to Double:
+
+		crit.add(Restrictions.gt("price", 25.0));
+
+	e. Combining Two or More Criteria Examples
+
+		crit.add(Restrictions.lt("price",10.0));
+		crit.add(Restrictions.ilike("description","mouse", MatchMode.ANYWHERE));
+
+		If we want to have two restrictions that return objects that satisfy either or both of the restrictions, we need to use the or() method on the Restrictions class
+
+
+			Criteria crit=session.createCriteria(Reader.class);
+			Criterion nameLikeShelar=Restrictions.like("name", "Shelar", MatchMode.ANYWHERE);
+			Criterion nameLikeSharan=Restrictions.ilike("name", "%SHARAN%");
+			LogicalExpression orExp=Restrictions.or(nameLikeShelar, nameLikeSharan);
+			crit.add(orExp);
+			List<Reader> readers=crit.list();
+			for(Reader reader: readers) {
+				System.out.println(reader.getName());
+				System.out.println(reader.getBooks().size());
+			}
+
+			Match Modes:
+				
+				ANYWHERE: Anyplace in the string
+				END: The end of the string
+				EXACT: An exact match
+				START: The beginning of the string
+
+
+	f.  Hibernate criteria – paging through the result set
+
+		One common application pattern that criteria can address is pagination through the result set of a database query. There are two methods on the Criteria interface for paging, just as there are for Query: setFirstResult() and setMaxResults(). The setFirstResult() method takes an integer that represents the first row in your result set, starting with row 0. You can tell Hibernate to retrieve a fixed number of objects with the setMaxResults() method. Using both of these together, we can construct a paging component in our web or Swing application.
+
+		Criteria crit = session.createCriteria(Product.class);
+		crit.setFirstResult(1);
+		crit.setMaxResults(20);
+		List<Product> results = crit.list();
+
+
+	g.	Hibernate criteria – obtain unique result
+
+		Sometimes you know you are going to return only zero or one object from a given query. This could be because you are calculating an aggregate or because your restrictions naturally lead to a unique result. If you want obtain a single Object reference instead of a List, the uniqueResult() method on the Criteria object returns an object or null. If there is more than one result, the uniqueResult() method throws a HibernateException.
+
+		The following short example demonstrates having a result set that would have included more than one result, except that it was limited with the setMaxResults() method:
+
+		Criteria crit = session.createCriteria(Product.class);
+		Criterion price = Restrictions.gt("price",new Double(25.0));
+		crit.setMaxResults(1);
+		Product product = (Product) crit.uniqueResult();
+
+
+		Again, please note that you need to make sure that your query returns only one or zero results if you use the uniqueResult() method. Otherwise, Hibernate will throw a NonUniqueResultException exception.
+
+
+	h. . Hibernate criteria – sort query results
+
+		Sorting the query’s results works much the same way with criteria as it would with HQL or SQL. The Criteria API provides the org.hibernate.criterion.Order class to sort your result set in either ascending or descending order, according to one of your object’s properties.
+
+		This example demonstrates how you would use the Order class:
+
+		Criteria crit = session.createCriteria(Product.class);
+		crit.add(Restrictions.gt("price",10.0));
+		crit.addOrder(Order.desc("price"));
+		List<Product> results = crit.list();
+
+
+	g. Hibernate criteria – perform associations (joins)
+
+		The association works when going from either one-to-many or from many-to-one. First, we will demonstrate how to use one-to-many associations to obtain suppliers who sell products with a price over $25. Notice that we create a new Criteria object for the products property, add restrictions to the products’ criteria we just created, and then obtain the results from the supplier Criteria object:
+
+		Criteria crit = session.createCriteria(Supplier.class);
+		Criteria prdCrit = crit.createCriteria("products");
+		prdCrit.add(Restrictions.gt("price",25.0));
+		List results = crit.list();
+		Going the other way, we obtain all the products from the supplier MegaInc using many-to-one associations:
+
+		Criteria crit = session.createCriteria(Product.class);
+		Criteria suppCrit = crit.createCriteria("supplier");
+		suppCrit.add(Restrictions.eq("name","Hardware Are We"));
+		List results = crit.list();
+
+
+	h.  Using Disjunction Objects with Criteria
+
+		If we wanted to create an OR expression with more than two different criteria (for example, “price > 25.0 OR name like Mou% OR description not like blocks%”), we would use an org.hibernate.criterion.Disjunction object to represent a disjunction.
+
+		You can obtain this object from the disjunction() factory method on the Restrictions class. The disjunction is more convenient than building a tree of OR expressions in code. To represent an AND expression with more than two criteria, you can use the conjunction() method, although you can easily just add those to the Criteria object. The conjunction can be more convenient than building a tree of AND expressions in code. Here is an example that uses the disjunction:
+
+		Criteria crit = session.createCriteria(Product.class);
+		Criterion priceLessThan = Restrictions.lt("price", 10.0);
+		Criterion mouse = Restrictions.ilike("description", "mouse", MatchMode.ANYWHERE);
+		Criterion browser = Restrictions.ilike("description", "browser", MatchMode.ANYWHERE);
+		Disjunction disjunction = Restrictions.disjunction();
+		disjunction.add(priceLessThan);
+		disjunction.add(mouse);
+		disjunction.add(browser);
+		crit.add(disjunction);
+		List results = crit.list();
+
+	i.  Using Disjunction Objects with Criteria
+
+		If we wanted to create an OR expression with more than two different criteria (for example, “price > 25.0 OR name like Mou% OR description not like blocks%”), we would use an org.hibernate.criterion.Disjunction object to represent a disjunction.
+
+		You can obtain this object from the disjunction() factory method on the Restrictions class. The disjunction is more convenient than building a tree of OR expressions in code. To represent an AND expression with more than two criteria, you can use the conjunction() method, although you can easily just add those to the Criteria object. The conjunction can be more convenient than building a tree of AND expressions in code. Here is an example that uses the disjunction:
+
+		Criteria crit = session.createCriteria(Product.class);
+		Criterion priceLessThan = Restrictions.lt("price", 10.0);
+		Criterion mouse = Restrictions.ilike("description", "mouse", MatchMode.ANYWHERE);
+		Criterion browser = Restrictions.ilike("description", "browser", MatchMode.ANYWHERE);
+		Disjunction disjunction = Restrictions.disjunction();
+		disjunction.add(priceLessThan);
+		disjunction.add(mouse);
+		disjunction.add(browser);
+		crit.add(disjunction);
+		List results = crit.list();
+
+
+	j. Hibernate criteria – query by example (QBE)
+	
+		In QBE, instead of programmatically building a Criteria object with Criterion objects and logical expressions, you can partially populate an instance of the object. You use this instance as a template and have Hibernate build the criteria for you based upon its values. This keeps your code clean and makes your project easier to test.
+
+		For instance, if we have a user database, we can construct an instance of a user object, set the property values for type and creation date, and then use the Criteria API to run a QBE query. Hibernate will return a result set containing all user objects that match the property values that were set. Behind the scenes, Hibernate inspects the Example object and constructs an SQL fragment that corresponds to the properties on the Example object.
+
+		The following basic example searches for suppliers that match the name on the example Supplier object:
+
+		Criteria crit = session.createCriteria(Supplier.class);
+		Supplier supplier = new Supplier();
+		supplier.setName("MegaInc");
+		crit.add(Example.create(supplier));
+		List results = crit.list();

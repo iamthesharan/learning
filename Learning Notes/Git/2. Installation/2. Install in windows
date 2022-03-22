@@ -1,0 +1,4 @@
+The problem with windows machine is windows machine don't come up with linux based command Prompt.
+On Mac and linux, By defualt we have bash terminal. So on windows we need to install Git bash
+
+git --version   --> This command is gonna provide the version of the Git

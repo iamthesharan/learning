@@ -1,0 +1,36 @@
+1. Entity Lifecycle States
+    Given an instance of a class that is mapped to Hibernate, it can be in any one of four different persistence states (known as hibernate entity lifecyle states):
+
+    Transient
+    Persistent
+    Detached
+    Removed
+
+    1.1. Transient
+    
+        Transient entities exist in heap memory as normal Java objects. Hibernate does not manage transient entities or persist changes done on them.
+
+
+    1.2. Persistent
+        
+        Persistent entities exist in the database, and Hibernate manages the persistence for persistent objects.
+
+        Persistent objects are maintained by Hibernate. If fields or properties change on a persistent object, 
+        Hibernate will keep the database representation up to date when the application marks the changes as to be committed.
+
+
+1.3. Detached
+
+        Detached entities have a representation in the database, but changes to the entity will not be reflected in the database, and vice-versa. This temporary separation of the entity and the database is shown in the image below.
+
+        In order to persist changes made to a detached object, the application must re-attach it to a valid Hibernate session. A detached instance can be associated with a new Hibernate session when your application calls one of the load(), refresh(), merge(), update(), or save() methods on the new session with a reference to the detached object.
+
+        After the method call, the detached entity would be a persistent entity managed by the new Hibernate session.
+
+
+1.4. Removed
+        Removed entities are objects that are being managed by Hibernate (persistent entities, in other words) that have been passed to the session’s remove() method.
+
+        When the application marks the changes held in the session as to be committed, the entries in the database that correspond to removed entities are deleted.
+
+        Now let’s not note down the take-aways from this tutorial.

@@ -1,0 +1,52 @@
+Servlet is like a client Server Language and Servlet interacts with DB using JDBC
+and displays the Results using JSP
+
+
+
+Editions:
+1. Java STD edition (J2SE/JSE)   (core JAVA + JDBC)
+2. JAVA enterprise edition (J2EE/JEE) (Servlets and JSP)
+3. Java Micro Edition (J2ME/JME)
+
+
+                                                                        ____________
+                                                                       |            |
+            |--vehicle-----------------------------------------|       | Result Set |
+            |                                                  |       |____________|
+    JAVA Application  ---->  Translator -------Road-------->Storage
+    
+    
+    
+Translator: Driver
+Road: Connection --> Some pipeline required to send the request
+Storage: Database
+Vehicle: Statement Object to get the items from the storage.
+Result Set is the box which is sent via vehicle and contains Query Results
+
+
+
+
+Steps to implement JDBC Application.
+
+1. Load & Register Driver.
+2. Establish Connection b/w JAVA Application and Database
+3. create Statement Object
+4. sent and Execute query
+5. Process results from Result Set
+6. Close Connection
+
+
+import java.sql.*;
+class JDBC{
+    psvm(String ...args)throws Exception{
+        // Class.forName is used to load driver
+        Class.forName("oracle.jdbc.OracleDriver");
+        Connection con=DriverManager.getConnection(url,username, password);
+        Statement s=con.createStatement();
+        ResultSet rs=s.executeQuery("SELECT * FROM EMPLOYEES");
+        while(rs.hasNext()){
+            sysout(rs.getInt(1)+rs.getString());
+        }
+        con.close();
+    }
+}

@@ -1,0 +1,19 @@
+Q1. Difference Between Arrays and Collections:
+    a. Arrays are of Fixed Size. Once you define the Size of the Array, you can't extend the size of the original Array. But in case of Collections, Size is Dynamic.
+
+    b. Arrays can be Sometimes waste of memory as if you need small amount of data and You're defining the Size greater than that, then there is a waste of memory. In case of collections, the size is dynamic and dependents of type of the Collection Objects.
+
+    c. Arrays Holds Homogeneous data. Collections can store both Homogeneous and Hetrogeneous data.
+
+    d. Readymade method support is not abailable in arrays. For sorting, it's dependent on Programmers. In case of Collection Use treeset
+
+    e.
+
+        
+                                 Arrays                                 |               Collections
+                                                                        |
+        1. Performance wise Array is good.                              |    1. Performance wise Collection is Okay
+        2. Memory Wise array is bad.                                    |    2. Memory wise Collection is good.
+        3. Can hold Primitives and Objects                              |    3. Can only hold Objects.  
+
+

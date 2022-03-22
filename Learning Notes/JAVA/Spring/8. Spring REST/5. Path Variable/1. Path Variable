@@ -1,0 +1,32 @@
+Using a Path Variable we can get the specific data by making a request.
+Suppose we make a GET request for /api/students/{StudentId}  --> This will return that specific student with ID.
+
+So here StudentId is a path Variable
+
+
+===============================================================================================================================================
+
+
+Development Process:
+
+1. We will add the Request mapping to spring REST Service.
+
+        @GetMapping("/students/{studentId}")    
+
+
+2. After that we will bind the path Variable to the method parameter using @PathVariable
+
+        @GetMapping("/students/{studentId}")
+        public Student getStudent(@PathVariable int studentId){
+                // So @PathVariable is gonna Bind the studentId that's comming in from End Point and assign it to the parameter studentId
+
+                List<Student> theStudent=new ArrayList<Student>();
+
+                return theStudent.get(studentId);  // here we will get it via Hibernate.
+        }
+
+3. Now we out the URL :
+
+    /api/students/0
+    /api/students/1
+

@@ -1,0 +1,12 @@
+For directories:
+
+    suppose there are two directories dir1 and dir2.
+    if I write mv dir1 dir2:
+    then dir1 will be moved inside dir2.
+
+
+For files.
+    suppose there are two files file1 and file2.
+    if I write mv file1 file2:
+    then file2 will be replaced with file1
+

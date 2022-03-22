@@ -1,0 +1,149 @@
+Can the Same thing that we are applying on Spring DATA JPA, can be applied on creating REST API.
+This will Minimize our Code and will make it easier by not writing the same kind of rest end points for multiple Controllers.
+
+We can use Spring DATA Rest
+
+Spring DATA Rest will Expose the CRUD methods like GET, POST, PUT, DELETE, PATCH and provide all the Restpoints for Free like magic.
+
+
+Spring Data Rest -- > How Does it Works?
+
+Spring Data Rest will Scan your project for JPA Repository sub interfaces
+Exposes REST API for each entity type for your JPA Repository
+
+
+Rest Endpoints of Spring DATA Rest
+By Default Spring DATA rest will create end-points based on entity Type
+Simple Pluralized form
+    First Character of the Entity Type is lowercase
+    Then just add an "s" to the entity
+
+
+Development process:
+1. add the maven dependency for spring DATA Rest
+    spring-boot-starter-data-rest
+
+Application Architecture:
+
+    Spring Data Rest /employees <---------> Employee Repository(Spring DATA JPA) <-----------> DB
+
+    Delete the Service, Rest Controller and DAO . no need of those
+
+
+========================================================================================================
+
+Spring Data Rest EndPoints are HATEOAS compliant
+    HATEOAS Hypermedia as the Engine of Application State
+
+Hypermedia-driven site provide info to access REST Interface
+    Think of it as meta-data for REST Data.
+
+
+
+Spring DATA Rest Responses make use of HATEOAS
+For Example  --> REST Response from: GET /customers/3 will be JSON
+
+    {
+        "firstName":"Shashank",
+        "lastName":"Sharan",
+        "email": "shashank.sharan01@gmail.com",
+        "_links":{ /* this is method data*/
+            "self":{
+                "href":"http://localhost:8081/customers/3"
+            },
+            "employee":{
+                "href":"http://localhost:8081/customers/3"
+            }
+        }
+    }
+
+
+    For Collection: GET /customers/3
+
+    {
+        "_embedded":{
+            "employees":[  -- JSON Array of Employees
+                {
+                    "firstName":"Shashank",
+                    "lastName":"Sharan",
+                    "email":"shashank.sharan01@gmail.com"
+                }
+            ]
+        },
+        "page":{  --METADATA of the Page
+            "size":20
+            "totalElements":5,
+            "totalPages":1,
+            "number":0
+        }
+    }
+
+    HATEOAS uses Hypertext Application Language(HAL) data Format.
+    It is the Format on which the data is sent in Response
+
+
+    So now for Creating an app with Spring DATA Rest and Spring DATA JPA,
+    we Only need 2 items 
+    1. Entity POJO class
+    2. Interface Extending the JPA Repository
+
+
+To Change the Base Path:
+
+    spring.data.rest.base-path=/crm
+
+
+=====================================================================================================
+Spring Data Rest Doesnot handle complex Pluralzed form.
+In that Case you need to specify Plural Name
+
+What if we want to expose a different resouce name?
+Instead of /employees ... use /members
+
+
+=====================================================================================================
+
+
+Pagination:
+
+By Default Spring Data Rest will Return the First 20 Elements
+Page Size=20
+
+You can navigate to different pages of data using query param
+
+http://localhost:8080/employees?page=0
+http://localhost:8080/employees?page=1
+
+
+Following Properties are available:
+spring.data.rest.default-page-size=40
+spring.data.rest.max-page-size=20
+
+
+
+Sorting:
+You can sort by the Property name of your entity
+In Customer we have firstName, lastName and email
+we want to sort by lastName
+
+http:localhost:8082/customers?sort=lastName  --> By default its Ascending
+http:localhost:8082/customers?sort=lastName, desc
+http://localhost:8082/crm/customers?sort=lastName,firstName,desc
+
+
+===============================================================================================
+
+For Giveing the Custom Resource Path just add the below lines of code.
+
+@RepositoryRestResource(path="custs")
+public interface CustomerRepository extends JpaRepository<Customer , Integer>{
+
+}
+
+
+============================================================================================
+
+
+Using Page-size in Request:
+
+http://localhost:8080/crm/customers?page=1&size=3

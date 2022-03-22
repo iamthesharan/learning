@@ -1,0 +1,10 @@
+
+Below will be executed with executeUpdate() since it is non select query
+create table
+drop table  
+insert
+
+For inserting and updating you can use String.format
+
+String sqlQuery=String.format("insert into employess values(%d, '%s', %f,'%s')",var1,var2,var3,var4);
+st.executeUpdate(sqlQuery);

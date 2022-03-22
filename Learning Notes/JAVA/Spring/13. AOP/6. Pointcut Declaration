@@ -1,0 +1,92 @@
+How Can we re-use the Pointcut Decleration?
+
+	@Before("execution(* com.spring.aop.demo.Account.add*(..))")
+	void beforeAddAccount() {
+		System.out.println("Executing before adding Account");
+	}
+
+    @Before("execution(* com.spring.aop.demo.Account.add*(..))")
+	void performApiAnalytics() {
+		System.out.println("Performing API Analytics");
+	}
+
+    The above is the bad idea. We are using the same point cut declaration  @Before("execution(* com.spring.aop.demo.Account.add*(..))")
+    again and again.
+
+
+    The Solution is Create a pointcut declaration once and apply to multiple advices
+
+
+    1. Create a pointcut Decleration once
+
+        @Pointcut("execution(* com.spring.aop.dao.*.*(..))")
+        private void forDaoPackage(){
+
+        }
+
+    
+    
+    2. Applying to multiple advices
+
+        @Before("forDaoPackage")
+        public void beforeAccountAdvice(){
+            System.out.println("Execution before Account Advice");
+        }
+
+        @Before("forDaoPackage")           --> so here we are using the Pointcut Decleration
+        public void performAnalytics(){
+            System.out.println("Execution before Account Advice");
+        }
+
+    Benefits of pointcut Declerations
+
+    1. Easily Re-use pointcut expressions
+    2. Update pointcut in one location
+    3. Can also share and combine pointcut expression
+
+
+
+
+===========================================================================================================
+
+How to apply multiple pointcut expression to a Single advice?
+Execute an advice only if certain condtions are met.
+
+For example:
+
+    I want to apply the all methods in a package except getter and Setters
+
+So for this we can combine Pointcut expressions by using logical operators like && || and !
+
+@Before("expression1() && expression2()")
+@Before("expression1() || expression2()")
+@Before("expression1() && !expression2()")
+
+
+
+Development process:
+
+1. Create a  pointcut Decleration
+2. Combine the Pointcut Decleratiion
+3. Apply Pointcut decleration to advices
+
+
+    1. Create a pointcut Decleration
+
+        @Pointcut("execution(* com.spring.aop.dao.*.*(..))")
+	    public void forDaoPackage() {}
+
+        @Pointcut("execution(* com.spring.aop.dao.*.get*(..))")
+	    public void getter() {}
+
+        @Pointcut("execution(* com.spring.aop.dao.*.set*(..))")
+	    public void setter() {}
+
+        @Pointcut("forDaoPackage() && !(getter() || setter())")
+        public void forDaoPackageNoGetterSetter(){}
+
+
+        @Before("forDaoPackageNoGetterSetter()")
+        public void beforeAccountAdvice(){
+            
+        }

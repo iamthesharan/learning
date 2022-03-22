@@ -1,0 +1,45 @@
+This advice is called after the Method is completed. It acts as a finally. But note anyhow the Finnaly block will execute at last.
+
+Sequence Diagram:
+
+    After Advice will execute before After throwing Advice.
+
+    Main App            AOP Proxy               Account DAO             @AfterAdvice            @AfterThrowingAdvice
+        |                   |                        |                         |                           |                                    
+        | findAccounts()    |                        |                         |                           |                             
+        |------------------>|   findAccounts()       |                         |                           |                                                     
+        |                   |----------------------->|  success or Exception   |                           |                                                            
+        |                   |                        |------------------------>|                           |                                                
+        |                   |                        |            Exception    |                           |                   
+        |                   |                        |---------------------------------------------------->|                                                                        
+        |                   |                        |                         |                           |            
+        |                   |   return success data  |                         |                           |
+        |return success data|<-----------------------|                         |                           |
+        |<----------------- |                        |                         |                           |
+        |                   |                        |                         |                           |        
+
+
+
+Note ****** But in Recent Version of Spring After Advice is run after After throwing Advice
+Use case:
+1. Log the Exception/ or perform auditing
+2. Code to run regardless of the method Outcome (resouces Cleaning)
+3. Encapsulate this Functionality in AOP aspect for easy Re-use
+
+
+Syntax:
+
+    @After("execution(* com.spring.aop.dao.AccountDAO.findAccounts(..))")
+	public void afterThrowingFindAccountAdvice() {
+		System.out.println("Executing After Advice");
+    }
+
+
+    Note** After Advice doesnot have access to Exception. If you need Exception then use @AfterThrowingAdvice
+
+
+    Development Process:
+    1. Prep Work
+    2. Add the After advice
+    3. Test the Failure and Success
+    4. Test for Success Case

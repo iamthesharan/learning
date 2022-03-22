@@ -1,0 +1,45 @@
+Session Factory:    1. Reads The Hibernate Config File
+                    2. Creates Session Object
+                    3. Heavy Weight Object
+                    4. Only Create once in your app
+
+Once the Session Factory is created, It will Create Session
+
+Session:    1. Wraps a JDBC Connection
+            2. Main Object used to save and Retrive Objects
+            3. Short Lived Object
+            4. Retrived from Session Factory
+
+Step:1
+
+So first we need to get the reference to the Session Factory.
+
+// Creating a Session Factory Object
+SessionFactory factory=new Configuration().configure("hibernate.cfg.xml")
+                                            .addAnnotatedClass(Student.class).buildSessionFactory();
+
+
+// Creating a Session Object
+
+Session session=factory.getCurrentSession();
+try{
+   // Now use this session object to retrive the data. 
+}
+finally{
+    factory.close();
+}
+
+
+Step2: Here we will create a Simple JAVA POJO object that we want to Save it into the DB.
+
+Step 3: Now We will Start the Transaction with the Database with the help of Created Session Object.
+
+    session.beginTransaction();
+
+Step 4: Here we will Save POJO Object.
+
+    session.save(pojoObjectName);
+
+Step 5. In this last step we will commit the Transaction.
+
+    session.getTransaction().commit();

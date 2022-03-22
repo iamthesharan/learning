@@ -1,0 +1,44 @@
+Navigable Set is the Child interface of Sorted Set
+
+Methods Defined in SortedSet interface
+
+first();
+last();
+headSet(Object o);
+tailSet(Object o);
+subset(Object o1, Object o2);
+
+
+Navigation Set is used for Navigation
+
+https://youtu.be/Tk-vLd0zjN0?list=PLd3UqWTnYXOmx_J1774ukG_rvrpyWczm0&t=557
+
+
+What is the last flight before 10oclock
+
+lower(10:00)
+
+What is the last flight on or before 10:00 o clock
+floor(10:00)
+
+
+What is the first flight after 10oclock
+higher(10:00)
+
+
+What is the first  flight on or after 10:00 o clock
+ciel(10:00)
+
+
+Remove and Return first element
+
+t.pollFirst(e);
+
+
+Remove and Return last element
+
+t.pollLast(e)
+
+For displaying the set in reverse order
+
+t.descendingSet();

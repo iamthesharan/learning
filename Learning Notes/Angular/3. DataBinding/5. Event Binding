@@ -1,0 +1,54 @@
+Suppose you have a variable in you component:
+    serverCreationStatus="No Server was Created!!";
+
+Now we will create a binding method:
+
+    onAddServer(){
+        this.serverCreationStatus="Server was Created!!";
+    }
+
+Now we will bind this method in the template.
+Binding is done in () with event name related to that element inside it.
+
+<button (click)="onCreateServer()">Add Server</button>
+<p>{{serverCreationStatus}}</p> // This property will change once the above button is clicked.
+
+================================================================================================================
+
+Event Binding without using two way Data binding.
+The idea is when we input the Value in the Input field, it will get displayed in the document.
+
+Process:
+
+    1. Create an input element in the Template.
+        <input type="text">
+    
+    2. Create a variable in the Component named as serverName=""
+    
+    3. Add a method onUpdateServerName() :
+        onUpdateServerName(){
+            this.serverName=serverName;
+        }
+    
+    4. Now add the paragraph element in the temmplate with interpolation serverName
+        <p>{{serverName}}</p>
+    
+    5. On the input event add the method onUpdateServerName with argument $event.
+        $event is the special argument that gives the access to the event data
+
+        <input type="text" (input)="onUpdateServerName($event)">
+
+    6. Now Modify the Method onUpdateServerName with the Event object as an argument:
+        onUpdateServerName(event:Event){
+            console.log(event); // this will now log the input event when triggered in the field
+        }
+        The inputEvent Object will have target attribute which has a value.
+
+    7. So now we will modify the method by (event.target as HTMLInputElement).value
+
+        onUpdateServerName(event:Event){
+            this.serverName=(event.target as HTMLInputElement).value;
+        }
+
+        
+

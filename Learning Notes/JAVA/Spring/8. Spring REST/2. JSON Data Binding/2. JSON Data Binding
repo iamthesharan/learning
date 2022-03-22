@@ -1,0 +1,82 @@
+JSON Data Binding: Data Binding is the process of converting JSON data to JAVA POJO (Plain Old Java Object)
+
+
+        JSON  <========>  JAVA POJO
+
+    Data Binding is also known as Mapping, Serialization/Deserialization, Marshalling/Unmarshalling
+
+    1. For Data Binding Spring Uses JACKSON project Behind the Scene
+    2. JACKSON handles Databinding between JSON and JAVA POJO.
+    3. Jackson is basically a separate Project which handle data binding for XML, JSON
+
+    Maven Dependency for JACKSON:
+
+        <!-- https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-databind -->
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-databind</artifactId>
+            <version>2.12.1</version>
+        </dependency>
+
+    By Default JACKSON will call the appropriate default getter and Setter Methods of the POJO class when it handles the Conversion
+    JSON ---> POJO  : It will Call the given Setter Methods
+    POJO ---> JSON  : It will Call the given Getter Methods
+
+    Example:
+
+        JSON:
+
+        {
+            "id":14,
+            "Name":"Shashank Sharan"
+        }
+
+        For conversion of this JSON to POJO, Jackon will call setter methods, setId(int id) and setName(String Name).
+        It Doesnot call internal Private field.
+
+===========================================================================================================================================================
+
+Writing a Code.
+
+    1. So here we will use Driver Class which will Perform Conversion with the help Of JACKSON API
+
+        class Driver{
+
+        } 
+
+    2. Inside this Driver Class we will Create an object of ObjectMapper class provided by Jackson API.
+
+        so for that we need to import com.fasterxml.jackson.databind.ObjectMapper;
+
+        ObjectMapper mapper=new ObjectMapper();
+
+    3. After that we will Read JSON from File and Map that to JAVA POJO
+
+        For reading the data from the file, we will use the readValue() method provided inside the Object Mapper Class provided by Jackson.
+
+
+            readValue() --> This method takes two Parameter. 
+                            1. The JSON file Object
+                            2. POJO class on which the data is being mapped
+
+            so it looks like this:
+
+            mapper.readValue(new File("FilePath/data.json"),Student.class);
+
+
+            Also the readValue method will return the POJO Class Object
+
+    4. Now we will Write JSON to Output File. Which is Vice Versa.
+
+            here we will use enable(SerializationFeature f) method for enabling specified DeserializationConfig feature.
+            INDENT_OUTPUT will give nice pretty Prinnting
+
+            mapper.enable(SerializationFeature.INDENT_OUTPUT);
+
+            For writing into JSON file we will use writeValue() method:
+
+            writeValue method takes 2 parameter -> file object and POJO class 
+
+            mapper.writeValue(new File("data/data.json"), Student.class)
+
+

@@ -1,0 +1,92 @@
+Child Classes of Number
+    1. Byte
+    2. Short
+    3. Long
+    4. Float
+    5. Integer
+    6. Double
+    
+    
+If the Method is Applicable only for Numbers ex performing arithmetic operations then
+
+class test<T extends Number >{  // This is called bounded type // if only T then its called unbounded types
+    T a,b;
+    public void m1(){
+        sop(a+b);
+        sop(a*b);
+        sop(a/b);
+    }
+}
+
+test <Integer> t=new test<Integer>(); // Valid
+test <String> t=new test<String>(); // Type Parameter String is not in its bound
+
+
+Below is wrong: we cannot use implements and super
+
+class test <T implements Runnable>{
+    // object datatype that implements runnable
+}
+
+class test<T super String>{
+    // Datatype which is either String or its super Class
+}
+
+
+
+//We can define bound datatypes only with Extends keyword
+
+if we want to bound the genreic object with the class that implements runnable then:
+
+class test <T extends Runnable>{
+    
+}
+
+this means if the generic datatype object extends X, then we can pass either X type or the type which extends X
+
+
+
+==============================================
+
+class test <T extends Runnable>
+test<Runnable> t=new test<Runnable>(); // Valid
+test<Thread>t =new test<Thread>(); // Valid
+test<Integer> t=new test <Integer>(); // INValid
+
+
+========================================================
+
+
+How to implement the type that extends class and implements interface simultaneously
+
+class Test<T extends Number & Runnable>{
+    
+}
+
+
+
+===============================================================
+how to implement the type that extends both runnable and comparable interface.
+
+class Test<T extends Runnable & Comparable>{
+
+}
+
+class Test<T extends Number & Runnable & Comparable>{
+
+}
+
+====================================================
+
+class test<A,B,C>{
+
+}
+class HashMap<key,value>{
+
+}
+
+
+HashMap <Integer,String> m=new HashMap<Integer, String>();
+
+
+Based on requirements we can declare any number of type parameters and all these type parameters should be separated with ','

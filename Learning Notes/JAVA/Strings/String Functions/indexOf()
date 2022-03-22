@@ -1,0 +1,17 @@
+Java String indexOf() -------------------->
+
+The java string indexOf() method returns index of given character value or substring. If it is not found, it returns -1. The index counter starts from zero.
+
+
+Signature
+There are 4 types of indexOf method in java. The signature of indexOf methods are given below:
+
+No.	Method	Description
+1	int indexOf(int ch)	returns index position for the given char value
+2	int indexOf(int ch, int fromIndex)	returns index position for the given char value and from index
+3	int indexOf(String substring)	returns index position for the given substring
+4	int indexOf(String substring, int fromIndex)	returns index position for the given substring and from index
+
+
+Returns
+index of the string

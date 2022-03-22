@@ -1,0 +1,81 @@
+Step 1: Create Setter methods in your class for injections
+Step 2: Configure the dependency injection with @Autowired Annotation
+
+-----------------------------------------------------------------------------------------------------------------------
+
+
+package com.spring.anotations;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+
+@Component
+public class TennisCoach implements Coach {
+	private FortuneService fortuneService;
+	
+	@Autowired
+	public void setFortuneService(FortuneService fortuneService) {
+		this.fortuneService=fortuneService;
+	}
+	@Override
+	public String getDailyWorkout() {
+		return "Tennis Coach Class getDailyWorkout() method";
+	}
+
+	@Override
+	public String getDailyFortune() {
+		return this.fortuneService.getFortune();
+	}
+}
+
+
+-----------------------------------------------------------------------------------------------------------------------
+
+
+
+applicationContext.xml
+
+	<context:component-scan base-package="com.spring.anotations"></context:component-scan>
+
+
+-----------------------------------------------------------------------------------------------------------------------
+
+
+package com.spring.anotations;
+
+import org.springframework.context.support.ClassPathXmlApplicationContext;
+
+public class AnotationDemoApp {
+	public static void main(String ...args) {
+		ClassPathXmlApplicationContext context =new ClassPathXmlApplicationContext("applicationContext.xml");
+		Coach theCoach=context.getBean("tennisCoach",Coach.class);
+		System.out.println(theCoach.getDailyWorkout());
+		System.out.println(theCoach.getDailyFortune());
+		context.close();
+	}
+}
+
+-----------------------------------------------------------------------------------------------------------------------
+
+
+
+package com.spring.anotations;
+
+public interface FortuneService {
+	public String getFortune();
+}
+-----------------------------------------------------------------------------------------------------------------------
+
+
+package com.spring.anotations;
+
+import org.springframework.stereotype.Component;
+
+@Component
+public class HappyFortuneService implements FortuneService {
+
+	@Override
+	public String getFortune() {
+		return "This is Happy Fortune Service Method";
+	}
+}

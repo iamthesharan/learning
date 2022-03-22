@@ -1,0 +1,12 @@
+Java String replace()------------>
+
+The java string replace() method returns a string replacing all the old char or CharSequence to new char or CharSequence.
+
+Signature
+There are two type of replace methods in java string.
+
+public String replace(char oldChar, char newChar)  
+public String replace(CharSequence target, CharSequence replacement)  
+
+Returns
+replaced string

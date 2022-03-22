@@ -1,0 +1,15 @@
+Java String charAt() -------------------->
+
+The java string charAt() method returns a char value at the given index number.
+
+The index number starts from 0 and goes to n-1, where n is length of the string. It returns StringIndexOutOfBoundsException if given index number is greater than or equal to this string length or a negative number.
+
+Method: 
+public char charAt(int index)  
+
+class Car{
+	public static void main(String ...args) {
+		String s=new String("Sharan");
+		System.out.println(s.charAt(2));  //output : a
+	}
+}

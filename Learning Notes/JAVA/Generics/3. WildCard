@@ -1,0 +1,71 @@
+public static void m1(AL<String> l){
+
+}
+
+AL<String> L=new AL<String> ();
+
+now aftersometime my requirement is
+AL <Integer> I=new AL<Integer>();
+
+so we have to make new Method:
+
+public static void m1(AL<Integer> l){
+
+}
+
+
+To Solve this problem whci can take only one method for any type,
+
+public static void m1(AL<?> l){
+
+}
+
+we can also use with bounded types
+
+public static m1(AL<? extends X> l){
+
+}
+
+public static m1(AL<? super X> l){
+    WITH WILD CARD this is also possible in method level but at class level it is not possible with T
+}
+
+
+
+
+=============================================
+
+within a method we can't add any this except null in case of wildcard types
+
+m1(AL <?> l){
+    l.add(10.5);// wrong. we don't know the type of list
+    l.add("Shashank");// wrong. we don't know the type of list
+    l.add(null); valid
+    System.out.println(l); //Read valid
+}
+
+This Type of methods are best suitable for Read only Operations
+
+
+==================================================
+
+
+public static m1(AL<? super X> l){
+    // if X is an interface then we can call the objects of the class that implements X or super class of implementation
+    // class of X
+}
+
+
+================================================
+
+
+AL<String> l=new AL<String>(); Valid
+AL<?> l=new AL<String>();valid
+AL<?> l=new AL<Integer>();valid
+AL<? extends Number> l=new AL<Integer>(); Valid
+AL<? extends Number> l=new AL<String>(); invalid
+AL<? super String> l=new AL<Object>(); Valid
+
+We can only use ? in the declaration side and on right had side there should not be any boundries. 
+AL<?> l=new AL<?>(); Invalid
+AL<?> l=new AL<? extends Number>();invalid

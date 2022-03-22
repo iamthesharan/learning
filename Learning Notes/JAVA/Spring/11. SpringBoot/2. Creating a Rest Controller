@@ -1,0 +1,9 @@
+@RestController
+public class MyRestController {
+	
+	@GetMapping("/")
+	public String sayHello() {
+		return "Hello World! Time on the Server is "+LocalDateTime.now();
+	}
+}
+

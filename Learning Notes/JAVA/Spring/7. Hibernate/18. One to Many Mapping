@@ -1,0 +1,29 @@
+1.  When to use one to many mapping?
+    Use one to mapping to create 1..N relationship between entities or objects.
+
+    For example, we have to write two entities i.e. EmployeeEntity and AccountEntity such that multiple accounts can be associated with a single employee, but one single account can not be shared between two or more employees.
+
+
+
+
+
+2.  Hibernate one to many mapping solutions
+    This problem can be solved in two different ways.
+
+    One is to have a foreign key column in account table i.e. EMPLOYEE_ID. This column will refer to primary key of Employee table. This way no two accounts can be associated with multiple employees. Obviously, account number needs to be unique for enforcing this restriction.
+    
+    Second approach is to have a common join table lets say EMPLOYEE_ACCOUNT. This table will have two column i.e. EMP_ID which will be foreign key referring to primary key in EMPLOYEE table and similarly ACCOUNT_ID which will be foreign key referring to primary key of ACCOUNT table.
+
+
+
+    1. Hibernate one to many mapping with foreign key association
+        In this approach, both entity will be responsible for making the relationship and maintaining it. EmployeeEntity should declare that relationship is one to many, and AccountEntity should declare that relationship from its end is many to one.
+
+
+        @JoinColumn is used to specify a column for joining an entity association or element collection. This annotation indicates that the enclosing entity is the owner of the relationship and the corresponding table has a foreign key column which references to the table of the non-owning side.
+
+
+        **** In a bidirectional OneToMany/ManyToOne association, the Many side must be the owner side (and thus doesn't need a mappedBy attribute), and the One side must be the inverse side (and thus needs a mappedBy attribute). mappedBy is used for establishing the Bi-directional Relationship
+
+
+        when we use mapped by in ManyToOne, a new join table which stores the mapping is not created.

@@ -1,0 +1,43 @@
+executeQuery()-->
+
+    Used to execute SELECT query
+    
+executeUpdate() -->
+    Used for Non-Select Queries
+    
+    public int executeUpdate(String Query) throws SQLException
+    
+    int x=st.executeUpdate("UPDATE TBAP_ITEM SET STATUS='CE' WHERE AP_ID='20'");
+    
+execute()---->
+    Used for both SELECT and NON-SELECT operations.
+    it should only be used when we don't know the type of query in Runtime, the we must go for execute
+    return type : true --> for Select query
+                  false --> for non select query
+                  
+    public boolean execute(String query) throws SQLException
+    
+    
+
+
+Loopholes: Varies from driver to driver
+
+ResultSet rs=executeQuery("UPDATE TBAP_ITEM SET STATUS='CE' WHERE AP_ID='20'");
+
+For Type1 Driver: This will be SQL Exception
+For Tyoe4 driver: We will not get any Exception. It will return Empty resultSet, but if you access resultset we will get SQLException
+
+
+
+ResultSet rs=executeUpdate("SELECT * FROM EMP");
+
+For Type1 Driver: This will be SQL Exception
+For Tyoe4 driver: No of rows Selected
+
+
+
+Create table:
+int rowCount =st.executeUpdate("CREATE TABLE(EMP_ID VARCHAR(20))");
+
+For Type1 Driver: -1
+For Tyoe4 driver: 0

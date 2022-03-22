@@ -1,0 +1,12 @@
+ins sendRedirect process, if you use setAttribute(), then it will set the attribute wit the request 1 and not with request2.
+
+So in this case you need to pass the parameter to the redirected URL.
+
+Ex in servlet 1:
+    
+        response.sendRedirect("Square?k="+2); // url rewriting
+    
+    in servlet 2:
+    
+        int k=Integer.parseInt(request.getParameter("k"));
+		System.out.println(k*k);

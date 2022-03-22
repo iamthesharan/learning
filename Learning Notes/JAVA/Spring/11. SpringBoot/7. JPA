@@ -1,0 +1,151 @@
+springboot will Automatically Configure your datasource for you based on the Entries in POM File
+DB Connection info is present in application.properties
+
+
+In application.properties file, Provide the Below Info.:
+
+    spring.datasource.url=jdbc:oracle:thin:@localhost:1521:xe
+    spring.datasource.username=Sharan
+    spring.datasource.password=system
+
+
+Here no need to give the springboot driver classname explicitly. Springboot will automatically detect it based on URL.
+
+You can get the other properties over here.
+https://docs.spring.io/spring-boot/docs/current/reference/html/appendix-application-properties.html#common-application-properties-data
+
+
+Based on the Config, Spring boot will automatically create the beans:
+1. DataSource
+2. EntityManager
+
+You can then inject these into your app, for Example your DAO
+
+Entity Manager is from JAVA Persistence API(JPA)
+
+
+JPA: Standard API for Object Relational Mapping (ORM).
+It is just a specification that defines  a set of interface and Requires implementation.
+One of the implementation vendor of JPA is hibernate.
+
+
+In Springboot, Hibernate is the Default Implementation of JPA. Here EntityManager is Similar to Hibernate SessionFactory
+EntityManager can serve as a Wrapper for Hibernate Session Object.
+
+So We can Inject EntityManager into our DAO.
+
+
+=================================================================================================================================
+DAO Technique
+1. Hibernate API:
+    	Session currentSession=entityManager.unwrap(Session.class);
+        Query<Customer> theQuery=currentSession.createQuery("from Customer c", Customer.class);
+		List<Customer> theCustomers=theQuery.getResultList();
+
+2. Standard JPA API:
+
+    Benifits of JPA:
+        By having a standard API, You're not locked to vendor's Implementation
+        Maintain portable, Flexible Code
+        Can Theoretically switch Vendor Implementation:
+            If Vendor ABC stops supporting their product
+            switch to Vendor XYZ without Vendor Lock
+
+    JPA Supports  query Language JPQL
+
+
+    Action                                      Hibernate                               JPA method
+    Create/Save new Entity                    session.save()                            entityManager.persist()
+    Retrive Entity by ID                      session.get()/session.load()              entityManager.find()
+    Retrive list of entities                  session.createQuery()                     entityManager.createQuery()
+    Save or Update Entity                     session.saveOrUpdate()                    entityManager.merge()
+    Delete Entity                             session.delete()                          entityManager.remove()
+
+
+
+
+
+    private EntityManager entityManager;
+
+	@Autowired
+	public CustomerDAOHibernateImpl(EntityManager entityManager) {
+		this.entityManager=entityManager;
+	}
+	@Override
+	@Transactional
+	public List<Customer> findAll() {
+		TypedQuery<Customer> theQuery=entityManager.createQuery("from Customer c", Customer.class);
+		List<Customer> theCustomer=theQuery.getResultList();
+		return theCustomer;
+	}
+	@Override
+	@Transactional
+	public void setCustomer(Customer customer) {
+
+		entityManager.merge(new Customer(customer.getFirstName(), customer.getLastName(), customer.getEmail()));
+	}
+	@Override
+	@Transactional
+	public Customer findById(int id) {
+		Customer theCustomer=entityManager.find(Customer.class, id);
+		return theCustomer;
+	}
+
+
+3. Spring DATA JPA: 
+
+    Application Architecture:
+
+    Employee REST Controller <-------> Employee Service <---------> Spring DATA JPA DAO <---------> DB
+    
+    Its Easier to create Single DAO. But when it comes to Multiple DAO's Hibernate API and Standard JPA API requrires lots of code re-writing.
+    to Overcome this Problem Spring DATA is there.
+
+    We Will as Spring:
+    1. Create a DAO for me
+    2. Plugin my Entity Type and primary Key
+    3. Give me all the Basic Crud Features for Free.
+        CRUD method like : findAll, findById, save, deleteById ...
+        So we just need to plugin the Entity to the Spring DATA JPA
+
+    Spring DATA JPA Says:
+    Create a DAO and just Plug in your entity Type and Primary Key.
+    Spring DATA JPA provides the interface JPA Repository which exposes these CRUD methods.
+
+
+    Development Process:
+    1. Extend the JPA Repository Interface
+    2. Use the Repository in your application
+
+
+    Example:
+
+    public interface CustomerRepository extends JPARepository<Customer, Integer>{
+
+    }
+
+
+    @Service	
+    public class CustomerServiceImpl implements CustomerService{
+        
+        private CustomerRepository customerRepository;
+
+        @Autowired
+        public  CustomerServiceImpl(CustomerRepository customerRepository) {
+            this.customerRepository=customerRepository;
+        }
+        @Override
+        public List<Customer> findAll() {
+            return customerRepository.findAll();
+        }
+        @Override
+        public void setCustomer(Customer customer) {
+
+            customerRepository.save(new Customer(customer.getFirstName(), customer.getLastName(), customer.getEmail()));
+        }
+        @Override
+        public Customer findById(int id) {
+            return customerRepository.findById(id).get();
+        }
+
+    }

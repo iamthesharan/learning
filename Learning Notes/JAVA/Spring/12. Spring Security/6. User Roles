@@ -1,0 +1,26 @@
+Spring Security Provides JSP custom Tags for accessing userId and Roles.
+
+
+Development Process:
+1. Update POM file for Spring Security JSP Tag Library to JSP Page
+2. Add Spring Security JSP Tag library to JSP page
+3. Display User ID
+4. Display User Roles
+
+
+
+1. Update POM file for Spring Security JSP Tag Library to JSP Page
+
+    <dependency>
+    <groupId>org.springframework.security</groupId>
+    <artifactId>spring-security-taglibs</artifactId>
+    <version>5.3.9.RELEASE</version>
+    </dependency>
+
+
+2. Add Spring Security JSP Tag library to JSP page
+
+	<p>User: <security:authentication property="principal.username"/></p>
+	<p>Role: <security:authentication property="principal.authorities"/></p>
+
+3. Display User ID

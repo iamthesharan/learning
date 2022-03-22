@@ -1,0 +1,31 @@
+A High Level Modules Should Not Depend on Low Level Modules, Both Should Depened on abstraction.
+
+Abstraction Should not depend upon details. Details Should Depends upon Abstraction.
+
+
+Dependency:
+Dependency is something we need in order to provide the functionality that we are writing code for.
+
+
+High Level Module: the Module Which has Main Business Logic.
+Low Level Module: The module which has very samll functionality like writing to disk etc.
+So High Level Module Should not depend on low level module.
+
+
+Example:
+public void viewReport(){
+    Report report=new Report();
+    Formatter formatter=new Formatter();
+    String report=formatter.format(report);
+    FileWriter writer=new FileWriter("Report.txt");
+    writer.write("My Report");
+}
+
+
+Suppose  We want to write in HTML Format but the Above method is for writing in File.
+--->
+public void viewReport(Formatter formatter, Writer writer){
+    Report report=new Report();
+    String report=formatter.format(report);
+    writer.write("My Report");
+}

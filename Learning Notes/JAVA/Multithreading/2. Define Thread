@@ -1,0 +1,144 @@
+What is a thread?
+    A thread is a separtated flow of execution. For every thread, there is a separtate individual job is there.
+
+In how many ways we can define a Thread:
+
+    1. Extending a Thread Class
+    2. Implementing a runnable Interface.
+
+    class MyThread extends Thread{
+        public void run(){
+            for(int i=0;i<10;i++){
+                System.out.prinlnt("Child Thread");
+            }
+        }
+    }
+
+
+    This total process is called Defineing a thread and the code inside the run method is the job of the thread.
+
+
+    Now for starting the thread
+
+    // Every Java program is having a main thread
+    class test{
+        public static void main(String ...args) {
+            MyThread myThread=new MyThread();  // This is a thread instantiation
+            myThread.start(); // starting of the thread. This Start method is in Thread Class
+            for(int i=0;i<10;i++) {
+                // This is executed by main thread
+			    System.out.println("Main Thread");
+		    }
+        }
+    }
+
+===========================================================================================================
+
+    class MyThread extends Thread{
+        public void run(){
+            for(int i=0;i<10;i++){
+                System.out.prinlnt("Child Thread");
+            }
+        }
+    }
+
+    class test{
+        public static void main(String ...args) {
+            MyThread myThread=new MyThread();
+            myThread.start();  // If we call here myThread.run() instead of myThread.start() then what is the difference
+            for(int i=0;i<10;i++) {
+                System.out.println("Main Thread");
+            }
+        }
+    }
+
+
+    t.start vs t.run:
+
+    if we use t.start, a separtate new thread will be created to call the run method.
+    but if we use t.run, no new separtate thread will be created and the run method will be called just like a normal java method
+
+
+Start method:
+
+
+    So For our thread, whatever compulsory required activites are performed by the Start method.
+
+    start(){
+        1. Register this thread with Thread Scheduler
+        2. Perform all other mandatory activites.
+        3. Invoke run();
+    }
+
+
+Overloding of run method:
+
+    1. No argument run method:
+
+        public void run(){
+            System.out.println("No argument run");
+        }
+
+    2. Single Argument int  
+
+        public void run(int i){
+            System.out.println("int arg run")
+        }
+
+
+    Overloading of run method is possible. But when you call t.start(), the jvm will only call the no argumnet run mehtod.
+    run(int i) method will be called just like a normal java method
+
+
+Note*** If you don't override run method, then the parent Thread class run method will be executed.
+Note*** If we oveeride start method then our start method will be executed just like a normal method call and new thread wont be created.
+
+        So if our start method is not executed, then the Thread class start method will be executed and that start method will call the run method
+
+        class MyThread extends Thread{
+            public void start() {
+                super.start();
+                System.out.println("Start Method");
+            }
+            public void run() {
+                System.out.println("Child Thread");
+            }
+        }
+        class test{
+            public static void main(String ...args) {
+                MyThread myThread=new MyThread();
+                myThread.start();	
+                System.out.println("Main Thread");
+            }
+        }
+
+
+        Here output will be random
+
+
+============================================================================================================================
+
+    Thread Life Cycle:
+
+
+        MyThread t=new MyThread(); // This state is called New/Born state
+                |
+                |
+
+        t.start();                  // Ready state/Runnable State
+                |
+                |
+
+        If thread Scheduler allocates processor // Thread is in running state.
+
+                |
+                |
+        run() method completes      //Dead State
+
+
+    ============================================================================================================================
+
+    If we start a thread and again start the same thread. we will get the Runtime exception.
+    IllegalThreadStateException
+
+    According to the Thread Life Cycle, Thread can be brought to the Running State from Runnable State not from Dead State.

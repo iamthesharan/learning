@@ -1,0 +1,4 @@
+grep something * --> this searches on all files
+grep something */* --> This searches on all files in immidiate 1st sub level directories.
+grep something */*/* --> This searches on all files in 2nd sub level directories.
+

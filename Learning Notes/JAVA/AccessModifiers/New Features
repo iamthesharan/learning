@@ -1,0 +1,189 @@
+    1.5v New Features
+
+1.	For each
+2.	varargs
+3.	autoboxing and autounboxing
+4.	Genrics
+5.	Co-varient Return Types
+6.	Queue
+7.	Annotations
+8.	enum
+9.	static import
+
+
+/*
+	Static Import:
+		Introduced in 1.5v. According to Sun, Ussages of static import reduces length of the code
+		and improves readability but according to World wide Programming Experts(Like us) ussage
+		of static import creates confusion and reduces readability. Hence if there is no specific
+		requirements,then it's not recommended to use static import.
+		
+	Without Static Import:
+		class test{
+			public static void main(String ...args){
+				System.out.println(Math.sqrt(4));
+				System.out.println(Math.random());
+			}
+		}
+		//	Usually we can access static members by using class name but whenever we are writing static
+			import, we can access static members directly without class name
+		
+	With Static Import:
+		import static java.lang.Math.sqrt;
+		import static java.lang.Math.*;
+		class test{
+			public static void main(String ...args){
+				System.out.println(sqrt(4));
+				System.out.println(random());	 		
+			}
+		}
+*/
+
+/*
+	case :1
+	
+	class test{
+		static String s="JAVA";
+	}
+	
+	Now i have to find length of the String. length() method is present in String class.
+	but s is present in test class.
+	So to access s, we have to use "test.s"
+	therefore for length test.s.length();
+	
+	
+	So here test -----> class Name
+			s -------->	Static variable present in test class of the type java.lang.String
+			length() ---> Method present in String Class
+			
+			
+			
+	Case : 2
+	
+	
+	class System{
+		static PrintStream out;
+	}
+	
+	System.out.println();
+		|	|	|
+		|	|	|---------->	Method Present in PrintStream Class
+		|	|
+		|	|------->	static variable present in System Class of PrintStream Type
+		|
+		|-------->	class present in java.lang package
+		
+		
+		
+		// Here Case 1 is the replica of case 2
+		
+		
+		Now I don't want to use class Name----> So in this case i have do static import
+	
+		import static java.lang.System.out;
+	 	class test{
+	 		public static void main(String ...args){
+	 			out.println("Hello");
+	 			out.println("Hi");
+	 		}
+	 	}
+	 	
+	 	o/p
+	 	
+	 		Hello
+	 		Hi
+	 		
+	 		
+	 	
+	 	import static java.lang.Integer.*;
+	 	import static java.lang.Byte.*;
+	 	public class test{
+	 		public static void main(String ...args){
+	 			// Note* Every Number type wrapper class has one static variable
+	 			// i.e. MAX_VALUE
+	 			// For Byte Class -> 127  
+	 			//For Integer class -->326...
+	 			System.out.println(MAX_VALUE);
+	 		}
+	 	}
+	 	
+	 	o/p 
+	 		Compile Time Error: Reference to MAX_VALUE is ambiguous.
+	 		Both Integer and Byte Class have MAX_VALUE
+	 		
+		-------------------------------------------------------------- 		
+	 		
+	 		
+	 	import static java.lang.Integer.MAX_VALUE;
+	 	import static java.lang.Byte.*;
+	 	public class test{
+	 		static int MAX_VALUE=999;
+	 		public static void main(String ...args){
+	 			// Note* Every Number type wrapper class has one static variable
+	 			// i.e. MAX_VALUE
+	 			// For Byte Class -> 127
+	 			//For Integer class -->326...
+	 			System.out.println(MAX_VALUE);
+	 		}
+	 	}	
+	 	
+	 	o/p
+	 		999
+	 		
+	 	Normal Import Rule: 
+	 	
+	 		Highest Priority goes to Explicit Import > then Default Package > then Implicit Import
+	 		
+	 	Static Import Rule:
+			 		
+	 		Highest Priority will Goes to Current class static members
+	 		then Explicit Static import
+	 		then Implicit Static Import
+	 	
+	 	
+	 	
+	 	-----------------------------------------------------
+	 			
+*/
+
+
+
+/*
+	Q) Which of the following Statement is Valid?
+	
+		1) import java.lang.Math.*;						---> Invalid. .* must be after package in Normal Import
+		2) import static java.lang.Math.*;				---> Valid. 
+		3) import java.lang.Math.sqrt;					---> Invalid. Normal Import is till Class Level
+		4) import static java.lang.Math.sqrt();			---> Invalid. Brackets Not allowed with import
+		5) import java.lang.Math.sqrt.*;				---> Invalid. Normal Import is till Class Level
+		6) import static java.lang.Math.sqrt;			---> Valid. Only method Name but not brackets with static import
+		7) import java.lang;							---> Invalid	
+		8) import static java.lang;						---> Invalid. Static Import Always Talks about Particular class or Class Member 
+		9) import java.lang.*;							---> Valid. Uptil Package Level
+	   10) import static java.lang.*;					---> Invalid. .* must be after class Name in Static Import
+*/
+
+/*
+	Two Packages Contain a Class or interface with the same name is very rare and hence
+	ambiguity problem is also very rare in Normal Import.
+	
+	But, Two Classes or Interfaces contains a variable or method with a same name is very common and
+	hence ambiguity problem is also very common problem in static import.
+	
+	
+	-------------------------------------------------------------------------------------
+	
+	Ussage of Static Import reduces readablility and creates confusion and hence
+	if there is no specific requirements then it's not recommended to use static import.
+	
+	
+	Difference Between Normal Import and Static Import
+		1) We can Use Normal Import to import classes and Interfaces of a particular package
+		2) Whenever we are using Normal Import, it is not required to use fully qualified Name and
+		   we can use Short names Directly.
+			
+			
+		1) We can Use Static Import to import static members of a Particular class or interface
+		2) Whenever we are writing static import, it is not required to use class name to access static
+		   members and we can access Directly.
+*/

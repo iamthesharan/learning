@@ -1,0 +1,60 @@
+An object of ServletConfig is created by the web container for each servlet. This object can be used to get configuration information from web.xml file.
+
+If the configuration information is modified from the web.xml file, we don't need to change the servlet. So it is easier to manage the web application if any specific content is modified from time to time.
+
+Advantage of ServletConfig
+The core advantage of ServletConfig is that you don't need to edit the servlet file if information is modified from the web.xml file.
+
+
+Methods of ServletConfig interface
+    public String getInitParameter(String name):Returns the parameter value for the specified parameter name.
+    public Enumeration getInitParameterNames():Returns an enumeration of all the initialization parameter names.
+    public String getServletName():Returns the name of the servlet.
+    public ServletContext getServletContext():Returns an object of ServletContext.
+
+Using Servlet Config and Servlet Context, we Don't need to change the Configuration parameters in each Servlets everytime. 
+
+With The Help Of ServletContext, we can define the Parameters in web.xml and any number of Servlet class can use those parameters.
+
+Ex: web.xml
+
+    <context-param>
+		<param-name>name</param-name>
+		<param-value>Shashank</param-value>
+	</context-param>
+	<context-param>
+		<param-name>Phone</param-name>
+		<param-value>iPhone11</param-value>
+	</context-param>
+    
+    
+Servlets:
+
+
+    PrintWriter out=response.getWriter();
+    out.print("<body>Hello <br/></body>");
+    ServletContext ctx=getServletContext();
+    String str=ctx.getInitParameter("Phone");
+    out.println(str);
+
+With The Help Of ServletConfig, we can define the Parameters in web.xml for the particular servlet and that Servlet class can use those parameters.
+
+web.xml
+
+	<servlet>
+		<servlet-name>AddServlets</servlet-name>
+		<servlet-class>com.servlets.AddServlets</servlet-class>
+		<init-param>
+			<param-name>name</param-name>
+			<param-value>Sharan</param-value>
+		</init-param>
+	</servlet>
+    
+Servlet Class:
+
+		PrintWriter out=response.getWriter();
+		out.print("<body>Hello <br/></body>");
+		
+		ServletConfig ctx=getServletConfig();
+		String str=ctx.getInitParameter("name");
+		out.println(str);

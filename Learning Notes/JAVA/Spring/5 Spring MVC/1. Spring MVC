@@ -1,0 +1,579 @@
+Spring MVC is a Web Application Development Framework Based On MVC Guidlines.
+
+                                                Helper1
+    
+            Request
+Client ------------------>    Front Controller              Helper2
+
+
+                                    Helper3           Helper4
+
+
+In Spring MVC Framework you will Have Something which is Called Front Controller. The Client Request is first sent to the Front Controller.
+Front Controller is a Main Guy which Controls the Complete Application Flow.
+It Has Many Helpers Around it to get the Work Done. Each Helper is going to do a certain Specific Task and returns the Result Back to it.
+With The help of these Helpers, the Front Controller Job is to Prepare and Send the Response in the Form of HTML along with Data back to the Client
+
+
+                              Handler Mapping
+                                    |
+                                    |
+                              Front Controller     <---------------->  Data Generator Guy
+                                    |         \
+                                    |          \
+                             Final Response   View Resolver
+                                Builder
+
+
+As the Request Comes it Sends the request to one of the Helper Guy called Handler Mapping. This Handler Mapping Will Scan the URL and tells the Exact Address of the guy to the Front Controller who can generate data for this web Page Request.
+
+It Similar to Someone who is walking in the Road and ask you the Address and you tell him to Go there. So here that guy is the Front Controller
+and Handler Mapping is you yourself.
+
+After Getting The Information from the Hander Mapping, the Front Controller Sends the Request to Data Generator Guy.
+This guy  prepares the data , creates the JAVA Object to hold the Data. This data can be retirved from DB or It Can also take the Help of other Java Classes if required to do this job. Once this JAVA Object is Created, it Sends it Back to the Controller. 
+Along with Data it will also send the Name (view Name) of the Component which is going to retive data from this Java Object along with Mixing it with HTML to prepare the Actual Response.
+
+Now the Front Controller is haveing the JAVA Object which is to be consumed with some component whose name is available but not the Actual Address.
+So the Front Controller will Sends the name to the another helper guy called View Resolver which Further Send the Exact Address to the Front Controller
+
+
+The Front Controller will Send the JAVA object to the Final Response Builder Guy and This guy will build the ACtual HTML page and Hand it to the Front Controller. The Front Controller will Send the Response as an HTML page to the Client
+
+So Now:
+
+    The Final Builder Guy           --> Is View (JSP Page )
+    Data Generator Guy              --> Is a Controller
+    Front Controller                --> Is Called Dispatcher Servlet in Spring MVC Framework
+    The Java Object holding Data    --> Is Called the Model Object
+========================================================================================================================================
+
+
+
+MVC Framework Process Flow.
+
+
+
+____________
+|           |============================>> Front Controller
+|           |                                       |
+|           |                                       |  (Model)
+|           |                                       |
+|           |                                   Controller          
+|Web Browser|                                       |
+|           |                                       |  (Model)
+|           |                                       |
+|___________|=============================>>   View Template
+
+
+
+
+Front Controller-> It is also known as DispatcherServlet.
+
+It is part of the Spring Framework and is already developed bt Spring Dev Team. This is part of the Spring JAR file that you download.
+
+As a Developer, What we need to create is:
+
+    1. Model Object
+    2. View Templates
+    3. Controller Class
+    
+Controller -> has a code that we will actually Create. Contains Bussiness Logic.
+
+Example: Handles the request, Store/retrive data from DB.
+         Place data in model.
+        
+        So once the data is retireved from the backend system like DB or spring bean, You can place it in the model. So model is basically a suitcase.
+        
+
+
+
+Steps:
+
+1. Configure the Spring MVC Dispatcher Servlet in config file ie web.xml.
+
+    <web-app>
+        <servlet>
+            <servlet-name>dispatcher</servlet-name>
+            <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+            <init-param>
+                <param-name>contextConfgLocation</param-name>
+                <param-value>/WEB-INF/spring-mvc-demo-servlet.xml</param-value>   -----> this will thell where your applicationContext.xml file is kept.
+            </init-param>
+            <load-on-startup>1</load-on-startup>
+        </servlet>
+    </web-app>
+
+
+2. Set up a URL mapping for Spring MVC Dispatcher Servlet
+
+
+    	<servlet-mapping>
+			<servlet-name>Dispatcher</servlet-name>
+			<url-pattern>/</url-pattern>
+		</servlet-mapping>
+
+3. Add Support for Spring Scanning.
+
+        add <component-scan>
+        <context:component-scan base-package="com.spring.demo"></component-scan>
+
+4. add Support for conversion, formatiing and validation --> it is used for the conversion of form data, validation
+
+        <mvc:annotation-driven/>
+
+5. Define Spring MVC view Resolver. --> how do we display the resources
+
+    when your app provides a view name, Spring MVC will 
+        prepend the prefix
+        append the suffix
+
+    where spring look for file to actually render the view.
+
+    <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+        <property name="prefix" value="/WEB-INF/view/"></property>
+        <property name="suffix" value=".jsp"></property>
+    </bean>
+
+    Example:
+        view Name = show-student-list
+
+        /WEB-INF/view/show-student-list.jsp
+
+
+===============================================================================================================================
+
+
+Now in this example we will do a request mapping for a path / and the we have a home Controller that will handed over the request and will forward the view template
+which will call main-menu.jsp
+
+
+Steps:
+
+    1. Create the Controller Class.
+    2. Define the Controller Metod.
+    3. Add Request Mapping to the Controller method
+    4. return View Name
+    5. Develop View Page.
+
+
+1. Creating a controller class:
+
+    basically here you define a class and add controller annotation
+
+    @Controller
+    public class HomeController{
+
+    }
+
+    @Controller inherits from @Component
+
+    So when Spring Containers does Component Scanning, it also Scan @Controller class since it inherits from @Component
+
+2. Defining a Controller Method.
+
+        here my method name is String showMyPage()
+
+    So in spring if you define a controller method, You can pass any no of parameters like request Parameters, Session Objects or model Object
+
+3. Add Request Mapping.
+
+        So here we have to map some kind of web request to this controller method.
+        we do this with the help on @RequestMapping Annotation
+
+            @RequestMapping("/")
+
+            so when we go to "/" this page, it will show the output of the controller method on that page
+
+
+4. Return The View Name.
+
+    So in this case we will return the view.
+
+        view name: "main-menu"
+
+
+5. Now in this step the Spring container will add the suffix and prefix to the view name
+
+
+
+=============================================================================================================================
+
+
+Reading HTML Form Data and dislaying it on webpage:
+
+
+                request mapping
+    /show-form  ------------------> HelloWorldController ---> hello-world-form.jsp
+    so in browser when we go to the website /show-form, it will go to the controller and display the form
+
+                            /processForm(Request Mapping)
+    hello-world-form.jsp ------------------------------------------> HelloWorldController --->helloworld.jsp
+
+
+    So here we are using only one controller with two request mapping
+
+
+
+Model: A model is a container of your application data
+       In your controller you can put anything in the model.
+       string, object, info from db etc.
+
+       your viewpage can access data from model.
+
+Requirements:
+    We want to create a method that process form data.
+    Read the form data student's name
+    Convert the name to upper case
+    add the uppercase version to the model
+
+
+        Step 1: Passing model to your controller
+
+                When we make use of our spring controller, we can pass model to the controller and we can also read form data in our controller
+
+
+        so in order to get the request from the web page, we need to  pass the argument of HttpServletRequest and grab the attribute value.
+        now process the result and add the attribute value to the model with the help of 
+
+        model.addAttribute("message",name);
+
+        with return value
+
+===================================================================================================================================================
+
+
+Spring Data Bindding.
+
+    in Servlet we just use the HttpServletRequest object to get the object from the request.
+
+    request.getParameter("name");
+
+
+    but now Spring has a special Annotation.
+    @RequestParam("studentName") String studentName;
+
+    So what it does that the spring container will get the request parameter with name and bind it to this instance variable
+
+
+        @RequestMapping("/processed-form-Three")
+        public String processFormThree(
+                @RequestParam("name") String name, 
+                Model model) {
+            name=name.toUpperCase();
+            model.addAttribute("message",name);
+            return "processed-form";
+        }
+
+
+        For Children Routes, put @RequestMapping("/parent-path") above the class
+
+
+===================================================================================================================================================
+
+Spring MVC Form Tags.
+
+Web Page Structure:
+
+For JSP you need to put the @taglib decorator and provide the Spring URI
+
+
+In a Spring Controller, before you Show Form you must add model attribute.
+This is a bean that will hold form Data for the DataBinding.
+
+
+So while Showing the form we need to pass the model Attribute object in the model.
+theModel.addAttribute("attribute_name",new model_Attribute());
+
+on the input tag, we have the attribute path. So this actully binds this formfield to a property on a bean.
+
+for form field firstName, Spring MVC will call student.getFirstName().
+
+When the form is submitted, Spring will call the setter methods.
+
+    -------------------
+
+Reading the data in our Controller.
+
+We will have to pass the Special annotation @ModelAttribute("student") Student student as an argument to the mapping method
+
+
+    -------------------
+to Show in JSP Page, use sutdent.firstName i.e. ${model.modelAttribute}
+
+
+
+Note When We load the form, Spring MVC will call getter Methods but when we submit the form, Spring MVC will call the Setter Methods
+
+    Class: Student
+
+        package com.spring.demo;
+
+        public class Student {
+            // This is the Model Class
+            private String firstName;
+            private String lastName;
+            private int regNo;
+            private String courseName;
+            
+            
+            public Student() {}
+            public String getFirstName() {return firstName;}
+            public void setFirstName(String firstName) {this.firstName = firstName;}
+            public String getLastName() {return lastName;}
+            public void setLastName(String lastName) {this.lastName = lastName;}
+            public int getRegNo() {return regNo;}
+            public void setRegNo(int regNo) {this.regNo = regNo;}
+            public String getCourseName() {
+                return courseName;
+            }
+            public void setCourseName(String courseName) {
+                this.courseName = courseName;
+            }
+
+        }
+
+
+    Class: StudentController
+
+        package com.spring.demo;
+
+        import org.springframework.stereotype.Controller;
+        import org.springframework.ui.Model;
+        import org.springframework.web.bind.annotation.ModelAttribute;
+        import org.springframework.web.bind.annotation.RequestMapping;
+
+        @Controller
+        @RequestMapping("/students")
+        public class StudentController {
+            // This is Controller Class
+            @RequestMapping("/studentForm")
+            public String showForm(Model theModel) {
+                theModel.addAttribute("student", new Student());
+                return "student-form";
+            }
+            
+            @RequestMapping("/processForm")
+            public String processForm(@ModelAttribute("student") Student theStudent) {
+                return "process-form";
+            }
+        }
+
+===============================================================================================================================================
+
+FAQ: Use properties file to load country options
+
+1. Create a properties file to hold the countries. It will be a name value pair.  Country code is name. Country name is the value.
+
+    New text file:  WEB-INF/countries.properties
+
+    BR=Brazil 
+    FR=France 
+    CO=Colombia 
+    IN=India
+
+
+2. Update header section for Spring config file
+
+    We are going to use a new set of Spring tags for <util>. As a result, you need to update the header information in the Spring config file.
+
+    File: spring-mvc-dmo-servlet.xml
+
+    Remove the previous header and add this.
+
+    <?xml version="1.0" encoding="UTF-8"?>
+    <beans xmlns="http://www.springframework.org/schema/beans" 
+            xmlns:context="http://www.springframework.org/schema/context" 
+            xmlns:mvc="http://www.springframework.org/schema/mvc" 
+            xmlns:util="http://www.springframework.org/schema/util" 
+            xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+            xsi:schemaLocation="
+                http://www.springframework.org/schema/beans     
+                http://www.springframework.org/schema/beans/spring-beans.xsd     
+                http://www.springframework.org/schema/context     
+                http://www.springframework.org/schema/context/spring-context.xsd     
+                http://www.springframework.org/schema/mvc         
+                http://www.springframework.org/schema/mvc/spring-mvc.xsd 
+                http://www.springframework.org/schema/util     
+                http://www.springframework.org/schema/util/spring-util.xsd">
+
+3. Load the country options properties file in the Spring config file. Bean id: countryOptions
+
+        File: spring-mvc-dmo-servlet.xml
+
+        Add the following lines:
+
+        <util:properties  id="countryOptions" location="classpath:../countries.properties" />
+
+4.1 In StudentController.java, add the following import statement:
+
+    import java.util.Map;
+
+4.2 Inject the properties values into your Spring Controller: StudentController.java
+
+    @Value("#{countryOptions}") 
+    private Map<String, String> countryOptions;
+    5. Add the country options to the Spring MVC model. Attribute name: theCountryOptions
+
+    @RequestMapping("/showForm") 
+    public String showForm(Model theModel) { 
+    
+        // create a student object Student 
+        Student theStudent = new Student();
+    
+        // add student object to the model 
+        theModel.addAttribute("student", theStudent); 
+    
+        // add the country options to the model 
+        theModel.addAttribute("theCountryOptions", countryOptions); 
+    
+        return "student-form"; 
+    }
+
+6. Update the JSP page, student-form.jsp, to use the new model attribute for the drop-down list: theCountryOptions
+
+    <form:select path="country"> 
+    <form:options items="${theCountryOptions}" />
+    </form:select>
+
+
+
+=======================================================================================================================================================================
+---OLD----
+
+Form Validation:
+
+
+we will first input the value and validate it on controller Class if the validation fails, the request will go back to the form page. If gets success,
+the request will go to the display page.
+
+
+
+Steps 1: Add the validation rule to the model Class
+
+    @NotNull(message="is required")
+	@Size(min=1, message="is required")
+	private String firstName;
+
+
+Step 2: In form jsp page display the error message.
+        <form:input path="firstName">
+        <form:errors path: firstName cssClass=""error> --> cssClass is for CSS.
+
+Step 3: Perform Validation on Controller Class
+
+        put @Valid anotation for validation
+        and BindingResults object for containing validation results
+
+        NOTE****** the BindingResult parameter must appear immediately after the model attribute
+
+
+            @RequestMapping("/processForm")
+            public String processForm(@Valid @ModelAttribute("student") Student theStudent, BindingResult theBindingResult) {
+                // @Valid performs Validation rules on the model Object.
+                
+                
+                if(theBindingResult.hasErrors())
+                    return "student-form";
+                else
+                return "process-form";
+            }
+
+
+------------------------------------------------------------------------------------------
+
+    what if the user inputs white spaces and validation got success.
+    @InitBinder is used for that purpose.
+
+    in the controller Class put.
+
+    @InitBinder         // This will Pre-process all web request Comming into this Controller
+    public void initBinder(WebDataBinder dataBinder){
+        dataBinder.registerCustomEditor(String.class, new StringTrimmerEditor(true)); // StringTrimmerEditor purpose is to remove the white space
+        // Here we are registering the StringTrimmerEditor with Every String Class
+    } 
+
+==============================================================================================================================================
+
+Custom Validation:
+
+
+    With Custom Validation we can add our custom business rules.
+
+    So in our Example, the course code must start with LUV
+    Here spring will call our custom validation rule and it returns true or false based on the pass/fail result
+    
+
+    So here we will create our own custom JAVA anotaion for validation
+
+    @CourseCode --> this is a validation rule which is applied to a given Field.
+
+                    @CourseCode(value="LUV",message="must Start with LUV")
+                    private String CourseCode;
+
+    How to create a custom Anotation?
+
+
+        Step 1: Create @CourseCode annotation
+        Step 2: Create CourseCodeConstaintValidator.  --> here we put our own custom logic
+
+
+        Step 1:Create @CourseCode annotation 
+
+
+                So for creating a custom anotation we have a special Synatx: @interface
+            
+
+                // here we are defining special annotation which will define @CourseCode annotation
+                @Constraint(ValidatedBy=CourseCodeConstaintValidator.Class)   --> this is a class where we define the bussiness logic for this custom annotaion
+                @Target({
+                    // Target tells where can you apply this annotation
+                    ElementType.METHOD,
+                    ElementType.FIELD
+                })
+                @Retention(RententionPolicy.RUNTIME) //This will tell keep this annotaion in the compiled byte code so that we can use this during runtime
+                public @interface CourseCode{
+
+                    public String value() default "LUV"; // default value will be used if the user don't provide the value
+                    public String message() default "must start with LUV"
+
+                    // creating groups
+                    public Class<?>[] groups() default{};
+    
+                    //define default payloads
+                    public Class<? extends Payload>[] payload() default;
+
+                } 
+
+
+        Step 2: Create CourseCodeConstaintValidator.
+
+                    public class CourseCodeConstaintValidator implements ConstaintValidator<CourseCode, String>{
+
+                        private String coursePrefix;
+                        @Override
+                        public void initialize(CourseCode courseCode){
+                            this.coursePrefix=courseCode;
+                        }
+                        public boolean isValid(String theFormData , ConstaintValidatorContext constaintValidatorContext ){
+                            // Spring MVC will call this method
+                            // ConstaintValidatorContext--> helper class for additional Error Message to add later
+
+
+                            boolean result;
+                            if(theFormData!=null)
+                                result=theFormData.startsWith(coursePrefix);
+                            else    
+                                result=true;
+
+                            return result;
+                        }
+
+                    }
+
+
+
+            YOU CAN ALSO TAKE coursePrefix AS AN ARRAY FOR MULTIPLE VALIDATIONS.
+
+
+    

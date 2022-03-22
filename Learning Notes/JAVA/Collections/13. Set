@@ -1,0 +1,59 @@
+                Collection(I)
+                    |
+                    |
+                   Set(I)
+                    |
+            ________|_______
+            |               |
+            |               |
+        HashSet(C)      SortedSet(I)
+            |               |
+            |               |
+    Linked HashSet(C)  NavigableSet(I)
+                            |
+                            |
+                         TreeSet(C)
+
+SetInterface doesn't include any new Mehtods and We have to use only Collection Interface Methods.
+
+HashSet:
+1.  The Underlined datastructure in HashSet is HashTable
+2.  Duplicates are not Allowed.
+3.  Insertion order is not preserved
+4.  All Object are inserted based on hash code.
+5.  It can store null object
+6.  Heterogeneous Object are Allowed
+7.  Implements Serializable, Clonable but not RandomAccess Interface
+
+hashing related data Structures are best Suitable for Searching Operations.
+
+
+import java.util.HashSet;
+
+class Car{
+	public static void main(String ...args) {
+		HashSet s=new HashSet();
+		System.out.println(s.add('A'));
+		System.out.println(s.add('A'));
+		System.out.println(s);
+	}
+}
+
+OUTPUT:
+
+true
+false
+[A]
+
+
+Constructors:
+
+HashSet h=new HashSet(); -->Default Initial Capacity is 16, Default Fill Ratio aka Load factor is 0.75
+
+In case of ArrayList, the size of the ArrayList Extends after filling 100%
+In case of HashSet, The Size of the HashSet Extends after filling 75% by default.
+
+HashSet h=new HashSet(int initial Capacty);
+HashSet h=new HashSet(int initial Capacty, float fillRatio);
+HashSet h=new HashSet(Collections C);
+

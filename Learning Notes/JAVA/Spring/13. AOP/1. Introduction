@@ -1,0 +1,81 @@
+Suppose you've a method name addAccount in your DAO
+
+public void addAccount(Account theAccount, String userId){
+    Session currentSession=sessionFactory.getCurrentSession();
+    currentSession.save(theAccount);
+}
+
+Now We have the New Requirement from the Boss:
+1. Need to Add Logging to our DAO method addAccount before the Start of the Method.
+
+
+public void addAccount(Account theAccount, String userId){
+
+    // Adding Logging Code here will make the Requirement fullfill
+
+    Session currentSession=sessionFactory.getCurrentSession();
+    currentSession.save(theAccount);
+}
+
+2. Now the New Requirement comes in and now we need to add some security in our DAO method addAccount. Only Authorized user are allowed to access this method.
+
+    In that case we can modify our code and add the Security Code. in the method.
+
+    public void addAccount(Account theAccount, String userId){
+
+    // Adding Logging Code here will make the Requirement fullfill
+    // Some Security role check method will make the Requirement fullfill
+
+    Session currentSession=sessionFactory.getCurrentSession();
+    currentSession.save(theAccount);
+}
+
+3. Now the Boss says implement the Logging method and Security method in all the Layers ie. Controller, Service and DAO.
+
+    So now you copied paste the Same code for logging and Security in Controller and Service, whatever you've done in DAO method addAccount().
+
+4. Now the Boss ask to add the Logging and Security to the Whole System.
+
+
+
+So there are two Problems in this Scenario.
+
+1. Code Tangling:
+
+    For Given Method: addAccount(), the Code for logging and Security is present inside the business method. That is code tangling.
+
+2. Code Scattering:
+
+    Means your System has thousands of classes, then you need add the logging and security code in Every class method.
+
+This is not a good practice.
+
+
+
+Solution: 
+
+1. Not a Solution:
+
+    You can use Inheritance. You can take a class and add the Method for Logging and Security and then ever class should extend this class
+    
+    But Can all class extends from your base class? --> plus no multiple inheritance
+
+2. Real Soution: AOP
+
+    AOP is a programming Technique based on the Concept of Aspect. Aspect encapsulate cross cutting Concern/ Cross cutting Logic
+
+    Concern means Logic/ functionality
+
+
+    Cross Cutting Concern:
+
+    So in this we can take our logging code and Security Code and encapsulate that in a re-usable module or a re-usable class
+    and then we can have that code called whenever we make calls to Controller, Service or DAO at any levels
+
+
+    Aspects can be used at multiple Location
+    Same aspect/class applied based on Configuration
+
+
+    <---- logging  Security ---->Account Controller <---- Logging Security -----> Account Service <----Logging Security ----> Account DAO <----> DB
+

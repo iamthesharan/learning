@@ -1,0 +1,64 @@
+1. Hibernate load entity – session.load()
+
+    Hibernate’s Session interface provides several overloaded load() methods for loading entities from the database. Each load() method requires the object’s primary key as an identifier, and it is mandatory to provide it.
+
+    In addition to the ID, hibernate also needs to know which class or entity name to use to find the object with that ID. After the load() method returns, we need to cast the returned object to suitable type of class to further use it. 
+    
+    1.1. Session load() method
+
+        public Object load(Class theClass, Serializable id) throws HibernateException
+        public Object load(String entityName, Serializable id) throws HibernateException
+        public void load(Object object, Serializable id) throws HibernateException
+
+
+        a. First method need the class type which you would like to load along with unique ID.
+        b. Second method asks for entityName directly and unique ID. Both method return the populated entity object as return value which you will cast to desired type.
+        c. Third takes an object as an argument. The object should be of the same class as the object you would like loaded, and it should be empty. Hibernate will populate that   object with the object you requested.
+
+    The other load() methods available through hibernate session take a lock mode as an argument too. The lock mode specifies whether Hibernate should look into the cache for the object and which database lock level Hibernate should use for the row (or rows) of data that represent this object.
+
+
+
+
+
+
+        a. public Object load(Class theClass, Serializable id) throws HibernateException 
+
+   			Student student=(Student)session.load("com.hibernate.practice.Student", 23);
+			System.out.println(student.getFirstName());
+
+
+
+        b.  public Object load(String entityName, Serializable id) throws HibernateException
+
+            Student student=(Student)session.load(Student.class, 23);
+			System.out.println(student.getFirstName());
+
+
+
+        c. public void load(Object object, Serializable id) throws HibernateException
+			
+            Student student=new Student();
+			session.load(student, 23);
+			System.out.println(student.getFirstName());
+			System.out.println(student.getLastName());
+
+
+
+
+
+2. Hibernate get entity by id – session.get()
+
+    The get() method is very much similar to load() method. The get() methods take an identifier and either an entity name or a class. There are also two get() methods that take a lock mode as an argument
+
+    public Object get(Class clazz, Serializable id) throws HibernateException
+    public Object get(String entityName, Serializable id) throws HibernateException
+
+
+3. Difference between load() and get() methods
+
+    Why we have two method to do the same job. Actually this is frequently asked interview question as well.
+
+    The difference between get and load methods lies in return value when the identifier does not exist in database.
+
+    In case of get() method, we will get return value as NULL if identifier is absent. But in case of load() method, we will get a runtime exception.

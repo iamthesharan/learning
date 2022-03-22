@@ -1,0 +1,71 @@
+Option + Drag clip - Creates a Copy of WaveForm
+Normally Extending the clip by streching it from Down --> You will trim the Clip by this.
+Normally Extending the clip by streching it from Up --> You will Loop the Clip by this.
+
+Normally Extending the clip by streching it from Down and Pressing Option  --> Stretch the Clip (Time Compression Expansion (TCE)) Tool
+Note ** Use this tool properly as it may degrade the quality of the sound.
+
+
+
+Fade -- Shift + Control + Drag the pointer on the clip from where you want to fade.
+To Modify the Fade Graph, Press Shift + Control + Stretch the fade graph
+
+Seprating the Clip - Select the region from the Marquee Tool and click on the region.
+Scissor Tool --> When used Nomally by Clicking, it separates the tool.
+             --> When used with Option (+ command as usual)  --> Breaks the Clips into Equal Regions of first Separation.
+
+
+
+--------------
+
+Pencil Tool: If you Want to Create an Empty midi Clip by simply Clicking on the track.
+Select the track + A --> Switch On Automation.
+
+--------------
+
+Text Tool: Once you Split the Clip with Scissor tool, You Can rename those Clip.
+One Great Feature of Text Tool is to Select all the Clip and Rename First Clip as Clip 1, The Other Clip will be renamed as 
+Clip 1, Clip 2 .... Clip n
+
+--------------
+
+Split By Playhead - Playhead is a long Line going vertically On all tracks. So Split by Playhead will Spit the Trach on playhead.
+Split By Locators - Locators are the Yellow Bar at the top. Split by locator will Split the Clip based on Start and End Of the Locator.
+
+
+--------
+Glue Tool - Rejoins the Clip
+Solo Tool - Solo the selected track -- Short cut S
+Golbal Solo tool - Shortcut Control + S.
+
+------
+
+Fading all Tracks:
+select all tracks and control + shilf + drag the reagion. you can also use fade tool.
+
+
+-----------------------------------------------------------------------------------
+
+Snap Mode: 
+Smart, bar, beat --> when you use the marquee tool, it will select the section based on the value selected.
+
+Drag mode:
+Overlap - This will overlap the clip on other if you place some clip on some other clip.
+no overlap - trim the overlapping clip
+
+
+---------------------------------------------------
+
+Cmd + R --> repeate Clip
+Option + R  --> Brings Up Repeate region
+--------------------------------------------------
+
+
+Control + X -> Opens Up Strip Silence.
+Threshold: - Based on the threshold level, logic will strip silence the clip.
+-ve will decrese the silence
++ve will increase the silence.
+
+Minimum time to accept the silence -  this will increase or decrease the length of silence horizontally.
+
+Scratch Zero Crossing - Avoids Clips in sound.

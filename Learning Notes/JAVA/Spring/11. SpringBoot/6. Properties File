@@ -1,0 +1,32 @@
+You can set the logging levels in properties file in springboot application in application.properties for each packages in project 
+logging.level.org.springframework=DEBUG  
+logging.level.org.hibernate=TRACE
+logging.level.org.demo=INFO
+
+Diffrent Logging Levels:
+
+    TRACE
+    DEBUG
+    INFO
+    WARN
+    ERROR
+    FATAL
+    OFF
+
+
+
+We Can also provide context path
+
+server.servlet.context-path=/my-demo-app
+
+    this means that whenever you want to access the URL you need to enter,
+
+    localhost:8081/my-demo-app/users
+
+
+server.servlet.session.timeout=15m
+
+
+You can also channge the base path for actuator:
+
+management.endpoints.web.base-path=/actuator

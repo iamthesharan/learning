@@ -1,0 +1,25 @@
+What is Spring Auto Wiring.
+
+1. For Dependency Injection Spring can use auto wiring
+
+    For Dependency Injection Spring can automatically wire ups the dependency Injection
+
+2. Spring will look for a class that matches the given Property
+    
+    It will Actaully Match the type : class or interface
+    
+3. Spring will inject it Automatically ... hence it is called autowiring    
+
+
+-------------------------------------------------------------------------------------------------------------------------
+
+Spring will scan all the  @Components and will say it needs to satisfy Dependencies.Is there anyone who implements the fortune Service? It needs to inject a fortune Service
+So Spring Will ask that is there any class that implements FortuneServices Interface
+If it exist then spring will grab that bean and actually inject it
+
+
+---------------------------------------------------------------------------------------------------------------------
+
+
+As of Spring Framework 4.3, an @Autowired annotation on such a constructor is no longer necessary if the target bean only defines one constructor to begin with. However, if several constructors are available, at least one must be annotated to teach the container which one to use.
+

@@ -1,0 +1,38 @@
+                    ______________                    ______________                    ______________
+                   |             |                   |             |                   |             |                                                                                                                                 
+     @Before       |             |     @Before       |             |     @Before       |             |                                                                                                                                        
+ ----------------->|  Customer   | ----------------->|  Customer   | ----------------->|  Customer   |                                                                                                                                                   
+                   | Controller  |                   |  Service    |                   |    DAO      |                                                                                                                                 
+  Logging Aspect   |             |  Logging Aspect   |             |  Logging Aspect   |             |                                                                                                                                 
+                   |             |                   |             |                   |             |                                                                                                                                 
+<------------------|             |<------------------|             |<------------------|             |                                                                                                                                 
+   @AfterReturning |_____________|  @AfterReturning  |_____________|  @AfterReturning  |_____________|                                                                                                                                 
+                                                                                                                                                    
+                                                                                                                                                    
+                                                                                                                                                    
+                                                                                                                                                    
+                                                                                                                                                    
+                                                                                                                                                    
+Development Process:
+1. Add the Maven Dependencies
+2. Enable AspectJ Auto Proxy with @EnableAspectJAutoProxy
+3. Create Aspect
+    a. Adding Logging Support
+    b. Set up Pointcut Decleration
+    c. Add @BeforeAdvice
+    d. Add @AfterReturning advice                                                                                                                            
+                                                                                                                                                    
+                                                                                                                                                    
+                                                                                                                                                    
+                                                                                                                                                    
+                                                                                                                                                    
+                                                                                                                                                    
+                                                                                                                                                    
+                                                                                                                                                    
+                                                                                                                                                    
+                                                                                                                                                    
+                                                                                                                                                    
+                                                                                                                                                    
+                                                                                                                                                    
+                                                                                                                                                    
+                                                                                                                                                    

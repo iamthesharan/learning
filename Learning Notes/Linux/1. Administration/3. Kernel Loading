@@ -1,0 +1,53 @@
+1. Kernel is just a program that loaded into the system memory
+2. It's loaded by a program called Boot Loader that executed from ROM.
+3. Kernel Loading can't be controlled by linux, it out of the OS scope.
+--------
+
+Process Status:
+ps command is used to get the process status.
+ps -e displays all the process which are also not crontolled by terminals.
+-f --> displays UID, PID, parent ID.
+
+
+-----------------
+
+
+Creating a Custom Demon:
+
+A daemon is a type of program on Unix-like operating systems that runs unobtrusively in the background, 
+rather than under the direct control of a user, waiting to be activated by the occurance of a specific event or condition. 
+Daemons are usually instantiated as processes
+
+Step 1: Create a file that needs to be run as daemon process. Its a good practive to keep the script name ending with d, like timed, messaged.
+Step 2: Create a file in etc/init.d/ and here create a daemon Script.
+
+#!/bin/sh
+#chkconfig: 345 80 20
+#
+start(){
+        nohup /root/Sharan/timed &
+}
+stop(){
+        pkill timed
+}
+
+case "$1" in 
+        start)
+                start
+        ;;
+        stop)
+                stop
+        ;;
+        *)
+                echo $"Usage:$0{start|stop}"
+                RETVAL=1
+esac
+exit 0
+
+
+------------------------------------
+chkconfig:
+
+345 – runlevels that the service will be enabled for by default.
+85 – start priority. The lower the number the higher the priority and the sooner a service will be started within a given runlevel.
+15 – stop priority. The lower the number the higher the priority and the sooner a service will be stopped within a given runlevel.

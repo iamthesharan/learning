@@ -1,0 +1,22 @@
+Example for Many to Many Association is Reader and Book.
+A Book Can have multiple Readers.
+A Readers can read Multiple Books.
+
+It is very Imp to Understand the Association betweent the two Entities. You should Carefully Choose the Managing Entity and the Entity Which is managed by.
+The Managing entity Should Containt @JoinTable Annotation.
+Note.** If the association is by Dir. and you arte trying to add the Data from the Inverse Side , then the Join Table data will not be populated.
+where if you try to add the Data from the Managing side. Then only Join table data will be Populated.
+
+Here we have made the Book entity as our managing Entity.
+
+    So inside book entity we will have 	
+    
+    @ManyToMany(cascade = CascadeType.ALL)
+	@JoinTable(name="reader_books", joinColumns = {@JoinColumn(referencedColumnName = "id")}, inverseJoinColumns = {@JoinColumn(referencedColumnName = "id")})
+	List<Reader> readers;
+
+
+    And Inside Managable Entity:
+
+    @ManyToMany(cascade = CascadeType.ALL, mappedBy = "readers")
+	List<Book> books;

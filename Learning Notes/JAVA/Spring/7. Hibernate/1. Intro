@@ -1,0 +1,105 @@
+Hibernate is the system for saving Java Objects into the database.
+
+
+    Your Java App <<===========>> Hibernate <<==================>> DB
+
+
+Hibernate minimizes the JDBC code that we have to develop
+
+Hibernate Provides Object to relational Mapping
+
+The Developer defines mapping between JAVA Class and dataBase Table
+
+
+        JAVA Class                                                                                          DB Tables
+    
+    
+        Student                   <<===========================>> Hibernate <<=============>>                Student     
+        id: in                                                                                              id INT
+        name: String                                                                                        NAME VARCHAR(20)
+
+
+
+HOW TO SAVE A JAVA OBJECT WITH Hibernate.
+
+
+Step 1: Create the JAVA Object
+Step 2: then we save this java object into the DB with the Special Hibernate object called session
+
+        Student theStudent=new Student("Jhon","Doe");
+        int theID  =  session.save(theStudent);
+
+        so once you save the session, the Hibernate will provide you one ID and that we have saved it in theID variable
+
+
+        How to retrive the object
+
+        1. Using ID
+
+            Student myStudent=session.get(Student.class, theId);
+            So here the Hibernate will find the Student Table and find the Student whose primary key matches this ID.
+
+        2 Retrive all the student ojects.
+
+            For retriving all the object hibernate has special method called createQuery.
+
+            Query query=session.createQuery("from Student");
+            List<Student> students=query.list();
+========================================================================================================================================
+
+Hibernate Architecture
+
+Hibernate Architecture is Categorized into 4 layers:
+
+    1. JAVA Application Layer
+    2. Hibernate Framework Layer
+    3. Backend API Layer
+    4. Database Layer
+
+
+                                                ________________________________________________________________       ______
+                                                |                                                               |     |      |
+                                                |       Session Factory             Query                       |     | JNID |           _______
+                                                |                                                               |     |      |          |       |       
+                                                |                                   Configuration               |     |      |          |       |
+                                                |                                                               |     |------|          |       |
+                                                |                                                               |     |      |          |   DB  | 
+     _______________________          __________|__________                                                     |---->| JDBC |  ---->   |       |
+    |                       |        /                     \                                                    |     |      |          |       |
+    |   JAVA Application    | ----> |   Persistance Object  |           Session                                 |     |      |          |       |
+    |_______________________|        \_____________________/                                                    |     |------|          |_______|
+                                                |                                                               |     |      |
+                                                |                                    Criteria                   |     | JTA  |
+                                                |               Transaction                                     |     |      |
+                                                |                                                               |     |      |
+                                                |                                                               |     |      |
+                                                |_______________________________________________________________|     |______|
+
+                                                        Core Object Of Hibernate (Hibernate Framework Layer)         Internal API
+
+Hibernate uses various existing JAVA API like JDBC, Java Transaction API (JTA) and JAVA Naming and Directory Interface(JNDI).
+
+
+JDBC Provides the Functionality Common to the Database. The DBs which are provided with the JDBC Driver can support Hibernate.
+JNDI and JTA allow Hibernate to be integrated with J2EE application servers.
+
+
+1. Configuration Object: 
+
+    The Configuration object is the first Hibernate object you create in any Hibernate application. It is usually created only once during application initialization. It represents a configuration or properties file required by the Hibernate. It is Defined in Hibernate.cfg.xml
+
+2. Session Factory Object:
+
+    The SessionFactory is a heavyweight object; it is usually created during application start up and kept for later use. You would need one SessionFactory object per database using a separate configuration file. So, if you are using multiple databases, then you would have to create multiple SessionFactory objects.
+
+3. Session Object:
+
+    A Session is used to get a physical connection with a database. The Session object is lightweight and designed to be instantiated each time an interaction is needed with the database. Persistent objects are saved and retrieved through a Session object.
+
+4. Transaction Object:
+
+    A Transaction represents a unit of work with the database and most of the RDBMS supports transaction functionality. Transactions in Hibernate are handled by an underlying transaction manager and transaction (from JDBC or JTA).
+
+5. Query Object:
+
+    Query objects use SQL or Hibernate Query Language (HQL) string to retrieve data from the database and create objects. A Query instance is used to bind query parameters, limit the number of results returned by the query, and finally to execute the query.

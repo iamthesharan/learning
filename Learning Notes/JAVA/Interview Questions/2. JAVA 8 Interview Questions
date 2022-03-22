@@ -1,0 +1,222 @@
+1. Describe the newly added features in Java 8?
+
+    Lambda Expressions, FI, Method Reference, Default Method, Stream API, Optional
+
+2. In which programming paradigm Java 8 falls?
+
+    OOPS, Functional Programming Language.
+
+3. What are Functional Interface?
+
+    The interface which have only 1 abstract method.
+    @FunctionalInterface Annotation is optional to Use.
+
+4. Can A Functional Interface Extends Or Inherits another interface.
+
+    Yes. But there are Special Conditions.
+    1. If FI-1 has m1() and FI2 extends Fi1 and has no method-> Valid
+    2. If FI-1 has m1() and FI2 extends FI1 and overrides m1() --> Valid
+    3. If FI-1 has m1() and FI2 extends FI1 and has m2() --> Invalid as it breaks the law of FI.
+
+5. What is a default Method? Why it is required?
+    A interface Default method is a pre-defined method with implementation in the interface itself.
+    
+    Scenario 1:
+    Suppose if multiple classes which Extends this interface and the interface is having thousand methods 
+    which is implemented by the class.
+    Now in future , we wanna add 1 more method which on this interface. now we have to implement this method on every class.
+    So in order to make it abstract, we can make it default so that the defualt implementation is provided in the interface itself.
+
+
+6. What are static methods?
+
+    If some method donot require object initializations in order to execute it, we use static methods inside interface for that.
+    Usually class costlier than interface. so we can use static methods without the instantiation of the class.
+
+7. What are the Various Predefined Functional Interface?
+
+    1. Predicate --> For Conditional Checks
+    2. Function  --> To perform any Business Logic with Inputs arguments and return Value.
+    3. Consumer  --> To perform any Business Logic with only input arguments and no return Value
+    4. Supplier  --> To perform any Business Logic with only return value.
+
+8. What is Lambda Expression and how is it related to FI?
+
+    Lambda Expressions are like mehtods without name.
+    Since FI has single abstract method so we can use the Lambda Expression with FI.
+    Interf i=()-> System.out.prinln("Hello");
+
+9. What are the features of Lambda Expressions?
+    1. It can be passed as an argument to another method.
+    2. Can be standalone without belonging to the class. Example Runnable r=(Integer a)-> Math.sqrt(a);
+
+10 What is Method Reference ?
+
+    Whenever you want to reuse the method you can use method reference. 
+
+    For Static Methods,
+
+    class Test{
+        public static void m1() {
+            System.out.println("Hi there");
+        }
+        public static void main(String ...args) {
+            Runnable r=Test::m1;
+            Thread t=new Thread(r);
+            t.start();
+        }
+    }
+    
+            Or
+
+    ToIntFunction<String> parseToInteger=Integer::parseInt;
+	System.out.println(parseToInteger.applyAsInt("20"));
+
+    -------------------
+
+    class Sample{
+        Sample(){
+            System.out.println("Sample Class Constructor Executed");
+        }
+    }
+
+    interface Interf{
+        public Sample get(); // Return type is Sample because Sample type object will be returned
+    }
+
+    class Test{
+        public static void main(String ...args){
+            Interf i=Sample::new; // Here Interf get method refrers Sample Class Constructor. Here we are giving the implementation of get method with the retruning object.
+            Sample s1=i.get(); // If you want sample Object. and here the Constructor is going to execute
+        }
+    }
+
+
+    ----------------
+    If there are arguments:
+    class Sample{
+        Sample(String s){
+            System.out.println("Sample Class Constructor Executed " + s);
+        }
+    }
+
+    interface Interf{
+        public Sample get(String s); // Return type is Sample because Sample type object will be returned
+    }
+
+    class Test{
+        public static void main(String ...args){
+            Interf i=Sample::new; // Here Interf get method refrers Sample Class Constructor
+            Sample s1=i.get("Shashank"); // If you want sample Object. and here the Constructor is going to execute
+        }
+    }
+
+
+11. What are JAVA 8 Streams?
+    If You want to perform Certain operations on Collections, then we will go for Streams.
+    The Key Interface is java.util.stream.Stream<T>
+
+12. What are the main Components of Stream?
+
+    Data Source  --> Set of Intermidiate operations to process data source --> Single Treminal Operation to produce the result
+
+    https://s3.ap-south-1.amazonaws.com/myinterviewtrainer-domestic/public_assets/assets/000/000/196/original/Java_8_Components_of_a_Stream.jpg?1616039741
+
+13. What are the most Commonly Used intermididate Operation?
+
+    1. filter <Predicate<T>>  -> Allow Selecting elements of stream based on some Precicate.
+    2. map (Function<T,R>)    -> Allow transforming elements of stream based on some function
+    3. distinct()             -> Only Pass elements to the next stage
+    4. limit(long maxSize)    -> Limit the Stream size to maximum
+    5. skip(long start)       -> Skip the initial elements till the start
+    6. peek(Consumer)         -> Apply a consumer without modification of Streams
+    7. flatMap
+
+14. What are the Common types of terminal Operations?
+
+    1. collect
+    2. reduce  --> Produce single result of all the elements of the Stream Sequences.
+        a. count
+        b. min
+        c. max
+    3. SearchQuery:
+        a. anyMatch()
+        b. noneMatch()
+        c. allMatch()
+        d. findFirst()
+        e. findLast()
+        f. findAny()  --> this is non deterministic.
+        Takes predicate as an input
+    4. Iterative operations
+        forEach
+        forEachOrdered
+
+15. Intermidiate Operations vs Terminal Operations?
+
+    Intermediate operations are those operations that return Stream itself.
+    Terminal Operation Terminates the Pipeline and initiate Stream Processing.
+
+
+16. Map vs flatMap
+17. Stream Pipelining
+18. Optional
+19. ParallelStreams.
+
+
+============================
+
+Programming:
+Q1 Given a list of integers, find out all the even numbers exist in the list using Stream functions?
+
+    Approch 1: using forEach and Stream.Of
+
+        class TestDemo{
+            public static void main(String ...args) {
+                Stream.of(2,4,3,1,5,8,9,90).filter(i->i%2==0).forEach(System.out::println);
+            }
+        }
+
+                            or
+        
+        class TestDemo{
+            public static void main(String ...args) {
+                Stream<Integer> evenNo=Stream.of(2,4,3,1,5,8,9,90).filter(i->i%2==0);
+                evenNo.forEach(System.out::println);
+            }
+        }
+
+
+Q2 Given a list of integers, find out all the numbers starting with 1 using Stream functions?
+
+        List<Integer> l=new ArrayList<Integer>();
+        l.add(20);
+        l.add(21);
+        l.add(19);
+        l.add(12);
+        l.add(29);
+        l.stream().map(i->i+"").filter(s->s.startsWith("1")).forEach(System.out::println);
+
+Q3 How to find duplicate elements in a given integers list in java using Stream functions?
+
+        Set<Integer> s=new HashSet<Integer>();
+		Stream.of(20,10,20,20,4).filter(n->!s.add(n)).forEach(System.out::println);
+
+Q4 Given the list of integers, find the first element of the list using Stream functions?
+        Stream.of(20,10,20,20,4).findFirst().ifPresent(System.out::println);
+
+
+Q5 Given a list of integers, find the total number of elements present in the list using Stream functions?
+    	
+        long count=Stream.of(20,10,20,20,4).count();
+        System.out.println(count);
+
+
+Q6 Given a list of integers, find the maximum value element present in it using Stream functions? 
+
+        int count=Stream.of(20,10,20,20,4).max(Integer::compare).get();
+        System.out.println(count);
+
+
+Q7 Given a list of integers, sort all the values present in it using Stream functions?
+
+        Stream.of(4,3,5,8,2,1).sorted((a,b)->(a>b)?-1:(a<b)?1:0).forEach(System.out::println);

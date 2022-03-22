@@ -1,0 +1,103 @@
+Marker Interface
+
+	If an interface doesn't contains any method and by implementing that interface if ever objects 
+	get some ability. such interfaces are called Marker Interface
+	
+	Example:
+	
+		Serializable Interface --> Requires for sending file over the network
+		Clonable Interface
+		RandomAccess
+		
+		These Interfaces are marked with some ability.
+		
+		
+		
+/*
+	class test implements Serializable{
+		For Sending files through tunnel.
+		Internally JVM is Responsible to provide required ability in marker interfaces.
+	}
+*/
+
+/*
+	Q) Is it possible to create our own interface?
+	Ans) Yes, But Customization of JVM is required. 
+*/
+
+/*
+	Adapter Classes: 
+	
+		interface X{
+			m1();
+			m2();
+			 |
+			 |
+			 |
+			m1000();
+		}
+		
+		
+		// Now i only want implementation for m3 method 
+		class test implements X{
+			now we have to implement all the methods.
+			// not the correct way.
+		}
+		
+		To Solve this problem we use adapter class:
+		
+		
+		abstract class A implements X{
+			m1(){
+			}
+			m2(){
+			}
+			m3(){
+			
+			}
+			|
+			|
+			|
+			|
+			m1000(){
+			}
+		}
+		
+		class test extends A{
+			m3(){
+			
+			}
+		}
+		class Sample extends A{
+			m7();
+		}
+		
+		No use of the Object Of Class A So it is declared as Abstract
+*/
+
+
+/*
+	Q) How many ways i can implement servlet?
+	Ans) 		Servlet(I) ----> Servlet Interface
+					^
+					|
+					|			
+						
+				GenricServlet(AC) ---- > Which is the abstract class
+					^
+					|
+					|
+					
+				HTTPServlet(AC)--->Also Abstract Class
+				
+			How to implement
+			-->myServlet implements Servlet	
+					---> for all five methods we have to provide implementation.
+					---> Bad Approach
+			--> myservlet extends GenricServlet
+					--->GenricServlet has an implementation of all the methods
+						except Service method.
+					--->So in this case myServlet needs to provide the implementation
+						for Service Method.
+			--> myServlet extends HTTPServlets
+*/

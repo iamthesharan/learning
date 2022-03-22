@@ -1,0 +1,19 @@
+A Git repository is just a git Workspace which tracks and manage files within a folder.
+In order to use git we need to tell git when we want to use it and in which directory. So for that I need to create a repo.
+
+Suppose we have multiple projects and if I want to use git, I've to go to separate project Project folder and create a git repository.
+We can create multiple repos in the same project. Each repo will have history
+
+
+Git Command: 
+
+git status  --> gives the current status of the git repository and its content
+git init    --> This will create and initialize the new git repo in the directory where we are
+                This is something that you do once per project. Initialize the repo in the top-level folder containing your project
+
+                So create a project "MyFirstNovel". and inside that project run the command git init.
+                and this will be done once per project
+
+                So when you run git init, a new hidden directory will be created with .git name. so if you run git status in the project folder, you will get some information. If you go back one directory and use git status, the command will no more run as it is not a git folder.
+
+                .git folder contains all the histoies, If you delete that dir, then all the histoies are gone. So that's why this folder is hidden

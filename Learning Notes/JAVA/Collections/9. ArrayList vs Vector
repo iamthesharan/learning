@@ -1,0 +1,58 @@
+ArrayList vs Vector
+
+
+1.  Every Method present in ArrayList is Non- Synchronized.
+    Most of the Vector Methods are Synchronized.
+   
+2.  At a time multiple threads can access arrayList Objects
+    At a time only Single thread can access Vector Objects
+
+3.  Relatively performance is high
+    Relatively performance is low
+    
+    
+By Default Array List is Non- Synchronized but we can get Synchronized version of ArrayList Object by using synchronizedList() method of Collections Class
+Signature:
+public static List synchronizedList(List l);
+
+ArrayList l=new ArrayList();
+List l1=Collections.synchronizedList(l);
+      |
+      |
+      |
+Synced Version
+    
+ArrayList l=(ArrayList)Collections.synchronizedList(new ArrayList());
+
+
+For Set and Map objects:
+Collection Class Contains:
+Collections.synchronizedSet()
+Collections.synchronizedMap()
+
+Signature:
+public static Set synchronizedSet(Set s);
+public static Map synchronizedMap(Map m);
+
+
+
+If we need Insertion and Deletion as frequent Operation, then LinkedList is the best Choice:
+since we just need to change the references of the nodes.
+
+But for retrival of element. LinkedList is the worst Choice.
+
+
+LinkedList:
+Underlined Datastructure is Double LinkedList
+Insertion order is Preserved.
+Duplicate objects are allowed. 
+Hetrogeneous objects are allowed.
+Null insertion is possible
+LinkedList Implements Serializable and Clonable Interface but not randomAccess
+There is no capacity for linked list since the object are not stored in Consecutive memory location.
+Linked List has 2 Constructors:
+
+LinkedList l=new LinkedList();
+LinkedList l=new LinkedList(Collection C);
+
+

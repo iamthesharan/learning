@@ -1,0 +1,31 @@
+Collection Interface Defines the most Common Methods which are applicable for any Collection Object.
+collection Object Can be, ArrayList, LinkedList, etc
+
+Genralized Methods Present in Present in Collection Objects.
+
+1.      boolean add(Object O) --> Adding an Object
+2.      boolean addAll(Collection C) --> It takes Parameter as group Collection Object.  Ex. l.addAll(x)
+3.      boolean remove(Object O) -->removing a Single Object
+4.      boolean removeAll(Collection C) --> Removing a group of Objects
+5.      void clear()--> for removing the all the Objects from the Collection Object. after clear(), size of the Collection will become 0
+6.      boolean retainAll(Collection C) --> Except the Group of objects present in C. All the objects will be removed.
+7.      boolean contains(Object O) -->Checks whether this object is Present in the Collection or not.
+8.      boolean containsAll(Collection C) -> Checks whether this group of objects are present or not.
+9.      boolean isEmpty() --> Checks whether the Collection is Empty or not.
+10.     int size() --> return size of the Collection.
+11.     Object[] toArray()-> Returns the Collection into Array. (For better performance we Use Array).
+
+Example:
+If we Want to remove all the Evening Batch people from Collection. User removeAll(Collection eveningBatch)
+
+
+
+For getting the objects from Collection, we need Cursor.
+The Universal Cursors are:
+1. Iterator --> (Applicable for all Collection Objects) --> Iterator iterator()
+
+There is no Concrete class which implements Collection Interface Directly
+
+
+
+

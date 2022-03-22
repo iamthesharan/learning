@@ -1,0 +1,16 @@
+If we want to represent a group of individual Objects according to some sorting order without  Duplicates then we should go for Sorted Set.
+
+SortedSet Defines some methods which is not applicable for normal Set.  
+
+[100,  101,   104,   106,   110,    115,    120]
+
+Methods:
+
+1.  first() --> 100
+2.  last()  --> 120
+3.  headSet(106)-->  [100, 101, 104] (element less than 106)
+4.  tailSet(106)-->  [106, 110, 115, 120] (element >= 106)
+5.  subSet(101,106)-->[101,104] --> between
+6.  comparator()--> return Compartor objects
+
+

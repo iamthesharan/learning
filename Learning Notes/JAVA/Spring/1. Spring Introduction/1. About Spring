@@ -1,0 +1,85 @@
+Q1) What is Spring?
+
+    Spring is a lightweight framework. It can be thought of as a framework of frameworks because it provides support to various frameworks such as Struts, 
+    Hibernate, Tapestry, EJB, JSF, etc. The Spring framework comprises several modules such as IOC, AOP, DAO, Context, ORM, WEB MVC etc.
+
+Q2) What is Spring Modules ?
+
+    The Spring framework comprises of many modules such as core, beans, context, expression language, AOP, Aspects, Instrumentation, JDBC, ORM, OXM, JMS, 
+    Transaction, Web, Servlet, Struts etc. 
+    These modules are grouped into Test, Core Container, AOP, Aspects, Instrumentation, Data Access / Integration, Web (MVC / Remoting).
+
+
+    a.  Test Layer:
+        This layer provides support of testing with JUnit and TestNG.
+
+    b.  Spring Core Container:
+        The Spring Core container contains core, beans, context and expression language (EL) modules.
+
+        i.      Core and Beans:
+                These modules provide IOC and Dependency Injection features.
+
+        ii.     Context:
+                This module supports internationalization (I18N), EJB, JMS, Basic Remoting.
+
+        iii.    Expression Language:
+                It is an extension to the EL defined in JSP. It provides support to setting and getting property values, method invocation, 
+                accessing collections and indexers, named variables, logical and arithmetic operators, retrieval of objects by name etc.
+        
+        iv.     AOP, Aspects and Instrumentation
+                These modules support aspect oriented programming implementation where you can use Advices, Pointcuts etc. to decouple the code.
+                The aspects module provides support to integration with AspectJ.
+                The instrumentation module provides support to class instrumentation and classloader implementations.
+
+
+        v.      Data Access / Integration:
+                This group comprises of JDBC, ORM, OXM, JMS and Transaction modules. These modules basically provide support to interact with the database.
+
+        vi.     Web:
+                This group comprises of Web, Web-Servlet, Web-Struts and Web-Portlet. These modules provide support to create web application.
+
+
+
+What is Dependency Injection?
+     It is the Way in which you Decouple the Conventional Dependency relationship between objects 
+
+     Say You have 2 Objects that are related to Each other, one is dependent on the other, the idea is to decouple this dependency so that they are not tied to each
+     other.
+
+================================================================================================================================================================
+
+Setting upt the project
+
+download the Spring library. 
+Create a folder in the Project with lib.
+paste all the Jars inside the lib
+
+
+===================================================================================================
+
+
+Goals Of Spring:
+
+1. Light Weight Development with POJO Objects --> Making it much simpler than heavy weight EJBs in Early versions of J2EE
+2. Dependency Injection to promote loose coupling 
+3. Declarative Programming with Aspect Oriented Programming (AOP) 
+4. Minimize boilerplate Java code
+
+===================================================================================================
+
+Sections of the Spring Framework
+
+Core Container -->  
+    It manages how beans are created. 
+    It has a bean Factory for creating the beans
+    Manage Bean Dependencies
+
+Infrastructure:-->
+    AOP --> Allows to create the application wide services,  like login , security, transactions
+
+Data Accsess Layer -->
+    This layer is for Communication with the database.
+
+Web Layer:
+
+    

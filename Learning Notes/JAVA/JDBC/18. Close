@@ -1,0 +1,49 @@
+after completing the exectuion we need to close the resources.
+
+    1. close result set  --> rs.cloase()
+    2. close statement   --> st.close();
+    3. close conncetion. --> con.close();
+    
+Per statement single result set is possible
+Per Connection Multiple Statement is possible
+
+
+Whenever we are closing statement object, we are not required to close resultset
+Whenever we are closing Connection object, we are not required to close statement
+
+
+closing Connection:
+
+try{
+    open declared Connection
+    Perform Action
+}
+catch(SQLException e){
+
+}
+finally{
+    Finally will execute for sure even if there is any exception
+    con.close();
+}
+
+This was till 1.6v
+
+After 1.7v Finally Block becomes zero due to the concept of try with resources
+
+try with resources will close every resource after the competion of try.
+
+syntax:
+
+try (R){
+    Content
+}
+
+
+Ex 
+
+try(Connection con=DriverManager.getConnection("JdbcUrl", "Username","password")){
+    
+}
+catch(SQLException e){
+
+}

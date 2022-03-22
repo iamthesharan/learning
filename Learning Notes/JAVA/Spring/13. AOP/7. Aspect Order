@@ -1,0 +1,68 @@
+Problem:
+How to control the order Advice being applied when they all match with the same condition.
+
+Let Say We have 3 Advices in MyLoggingDemoAspect:
+    1. beforeAddAccountAdvice
+    2. performApiAnalyticsAdvice
+    3. LogToCloudAdvice 
+
+    And these advices match on the Same Section of code in bussiess Logic.
+    So how do I manage the order and which order do I run it.
+    So according to the Sprcification, this order is actually Undefined.
+    
+    To Control the Advices :
+
+    1. Refactor: Place advices in separate pattern
+    2. Control Order on Aspects using @Order annotation.
+    3. This will actually Gurantee order of when Aspects are applied.
+
+
+    Development Process:
+    1. Refactor our code. --> Place advices in separate aspects
+    2. Add @Order annotation to Aspects
+
+
+    1. Refactor our Code.
+
+        a. MyLoggingDemoAspect: beforeAddAccountAdvice()
+        b. MyApiAnalyticsAspect: performApiAnalyticsAdvice()
+        c. MyCloudLogAspects: logToCloudAdvice
+
+    2. Add the @Order Annotation
+        @Component
+        @Aspect
+        @Order(1)
+        public class MyCloudLogAspects{
+
+        }
+
+        @Component
+        @Aspect
+        @Order(2)
+        public class MyApiAnalyticsAspect{
+
+        }
+
+        @Component
+        @Aspect
+        @Order(3)
+        public class MyLoggingDemoAspect(){
+
+        }
+
+
+        so here the Order is followed like this:
+
+
+        Main App ----> AOP Proxy -----> MyCloudLogAspects -----> MyApiAnalyticsAspect  -----> MyLoggingDemoAspect ------> targetObject
+
+        Here in @Order annotaion -ve numbers are allowed and no doesnot have to be consecutive
+
+        Suppose it @Order has same order @Order(6). So any of the advice with order 6 can run first. So order is undefined here for @Order(6)
+
+
+        Also We need to create a Separate class for our pointcut Expressions where we put these point cuts.
+        and we will provide the fully qualified name of this pointcut class in the Advice annotation
+
+
+    3. Add the @Order Annotation to the Aspects and specify the Order

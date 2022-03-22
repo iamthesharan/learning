@@ -1,0 +1,17 @@
+Lets Say we just want to display the Specific text in html.
+ngIf directives works like if statement. It is a Structural Directive which adds or removes the element.
+
+serverCreationStatus=false;
+
+
+<p *ngIf="serverCreationStatus">Server Created</p>
+<p *ngIf="serverCreationStatus()">Server Created</p>
+
+What if we want to add the Else Condition?
+    for that we will create a local refrence of the paragraph by using  #marker
+
+<p *ngIf="serverCreationStatus(); else noServer">Server Created</p>
+<ng-template #noServer>
+    <p>No Server Was Created</p>
+</ng-template>
+

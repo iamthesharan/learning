@@ -1,0 +1,5 @@
+Type 1,2,3 is a thick driver
+Type 4 driver is thin driver
+
+Thick Driver: If the driver reuiqre some extra components to communicate with the database
+Thin Drivers: If the Driver can directly communicate with the database

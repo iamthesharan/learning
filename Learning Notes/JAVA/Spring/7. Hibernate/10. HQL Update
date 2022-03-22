@@ -1,0 +1,4 @@
+Query query=session.createQuery("update Employee set age=:age where name=:name");
+query.setInteger("age", 32);
+query.setString("name", "Lokesh Gupta");
+int modifications=query.executeUpdate();

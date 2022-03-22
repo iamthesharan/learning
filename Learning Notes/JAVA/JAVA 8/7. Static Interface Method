@@ -1,0 +1,40 @@
+Class vs Interface which is costly?
+
+Class is costly.
+When we should use class?
+
+    class test{
+        void m1(){}
+    }
+
+    test t=new test();
+    t.m1();//
+
+
+and Interface is the light weight Component.
+
+In case of class we need to create an object but not in case of interface.
+
+Now I have a static method. and this static method is no way related to object.
+If the static method no way realted to object and if you have only static methods, then why to go for class? just go for interface. It will be less costlier
+
+From 1.8 v onwards, static methods are also allowed in interface
+
+Note Interface Static methods is not available to the implementation class.
+hence Interface Static methods must be called by the interface name only.
+
+
+inferface I{
+    public static void m1(){
+        System.out.println("Interface Static methods");
+    }
+}
+class Test implements I{
+    public static void main(String ...args){
+        I.m1();// valid
+        m1();// Invalid
+        Test.m1(); // Invalid
+        Test t=new test();
+        t.m1();// Invalid
+    }
+}

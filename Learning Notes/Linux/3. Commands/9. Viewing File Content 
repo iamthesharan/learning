@@ -1,0 +1,43 @@
+1. cat:
+    a. cat command can be used to read the file content.
+        cat < filename or cat filename
+
+        cat -n filename --> this prints line number.
+        cat -nb filename --> this skips blank line while numbering line.
+        cat file1 file2 file2.
+
+    b. cat command can also be used to create a file and input the content
+
+        cat > filename1
+        Read Data
+        Control + D
+
+    c. cat can also be used To Append Some Extra Data to an existing file:
+        cat >> filename1
+        Append Data
+        Control + D
+
+    d. cat can be used to copy the file 
+
+        cat file1 > file2
+
+        and for appending cat file1 >> file2
+
+
+2. tac  -> Behaves simalar to cat but it gives vertical Reversion
+
+3. rev  --> Behvaes similar to rev but it gives horizontal Reversion
+
+4. head --> View Specified line from  top
+
+    head -20 filename  --> Provides 20 lines from top.
+    head -n -5 filename --> Provides all the lines from top execpt last 5 lines.
+    head -c 100 filename --> provides first 100 characters.    
+    head -c -100 filename --> provides all characters except last 100 characters.    
+
+5. tail --> displays from bottom.
+
+    tail -n 5 abc.txt --> displays last file lines
+    tail -n -5 abc.txt --> displays all lines except top 5.
+    tail -c 100 abc.txt --> display 100 bytes of content from bottom of the file.
+    tail -c -100 abc.text --> displays all the bytes except first 100 bytes.

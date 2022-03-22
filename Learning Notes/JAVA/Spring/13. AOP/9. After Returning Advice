@@ -1,0 +1,112 @@
+This Advice Run after the method gets complete after successful Execution
+
+Application Architecture:
+
+                    Logging Aspect, Security Aspect
+                |------------------------------------>|
+                |              @Before                |
+    MyApp <---> |                                     | <----> Target Object
+                |          @AfterReturning            |
+                |<------------------------------------|
+
+
+    Most Common Usecase of @AfterReturning:
+
+    1. Logging, Security and Transaction
+    2. Audit Logging:
+        who, what, when and where
+    
+    3. Post Processing Data:
+
+        a. Post Process the data before returning to caller
+        b. Format the data or enrich the data (really cool but be careful)
+
+
+
+    Example:
+    Create an advice that will return after a method call(Success Execution)
+
+        Target Object AccountDAO
+        List<Account> findAccounts() -------------> It will return a List of Accounts.
+
+        After returning, I want my logging Aspect to read that information and Display some data.
+
+        @AfterReturning("execution(* com.spring.dao.AccountDAO.findAccounts(..))")
+        public void afterReturningFindAccountAdvice(){
+            System.out.println("Executing @AfterReturning Advice");
+        }
+
+        Now we need to access the Return Value. Method findAccounts() will return the list of account:
+        So here we will put the Returning value in our Point Cut Expression:
+
+        @AfterReturning(pointcut="execution(* com.spring.dao.AccountDAO.findAccounts(..))", returning="result")
+        public void afterReturningFindAccountAdvice(JoinPoint theJoinPoint, List<Account> result){
+            System.out.println(result);
+        }
+
+
+Development Process:
+    1. Add Constructor to Account Class
+    2. Add new method: findAccounts() in AccountDAO
+    3. Update main app to call the new method: findAccounts()
+    4. Add @AfterReturning advice
+
+
+    1. Add Constructor to Account Class:
+
+        	private String name;
+            private String level;
+            public Account() {
+                super();
+            }
+            public Account(String name, String level) {
+                super();
+                this.name = name;
+                this.level = level;
+            }
+
+
+    2. Add new method: findAccounts() in AccountDAO
+
+            public List<Account> findAccounts(Account theAccount, boolean vip) {
+                List<Account> myAccounts=new ArrayList<>();
+                Account account1=new Account("Saving Account", "403");
+                Account account2=new Account("Current Account", "401");
+                myAccounts.add(account1);
+                myAccounts.add(account2);
+                return myAccounts;
+            }
+
+    3. Update main app to call the new method: findAccounts():
+
+        List<Account> theAccount=theAccountDAO.findAccounts();
+
+
+
+    4. Add @AfterReturning advice:
+
+        	@AfterReturning(
+			pointcut="execution(* com.spring.aop.dao.AccountDAO.findAccounts(..))", 
+			returning="result")
+            public void afterReturnFindAccounts(JoinPoint theJoinPoint, List<Account>result) {
+                MethodSignature theMethodSignature=(MethodSignature)theJoinPoint.getSignature();
+                System.out.println("==================> Executing @AfterReturning Method "+ theMethodSignature);
+                for(Account tempAccount:result) {
+                    System.out.println("Account Name: "+tempAccount.getName());
+                    System.out.println("Account Level: "+tempAccount.getLevel());
+                }
+            }
+
+
+Post Processing the data.:
+
+    You can also Preprocess the data in your advice method which will in turn change the actual data of your application.
+    for Example:
+    At last of the advice method you've mentioned the below line:
+
+    result.get(0).setName("CurrentAccount");
+
+    This will affect the actual Data of your application.
+
+    Usecase:
+    we can change the account result to the upper case account name by including the toUpperCaseConversion(List<Account> account)

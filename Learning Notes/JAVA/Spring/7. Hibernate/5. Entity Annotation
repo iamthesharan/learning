@@ -1,0 +1,32 @@
+Entity Class --> JAVA Class that is Mapped to a database table
+
+There are two options for mapping a class.
+    a. XML config File (legacy)
+    b. JAVA Annotations. (modern ways)
+
+
+Step 1: Map class to database Table
+Step 2: Map Fields to database Columns
+
+Step 1: Map class to database Table
+
+                So for mapping we will be providing two annotations on the class.
+
+                1. @Entity to tell this is an entity Class
+                2. @Table(name="table_name") --> tells which table this class is mapped with
+
+                    here @Table is optional because the JAVA Class name is having the same name as Database table. But writing it is a good practice
+
+Step 2: Map Fields to database Columns
+
+                Here also we have 2 annotations:
+                1. @Id --> this tells its the primary Key of the column
+                2. @Column(name="column_name")
+
+
+            Note we will be using JPA annotations. Hibernate is an implementation oF JPA Specification.
+            Hibernate Team Recommends for the use of JPA annotations for the best practice.
+
+            JPA is just a specification while Hibernate is one of the JPA provider i.e hibernate is implementing various things mentioned in JPA contract. JPA or Java Persistence API is a standard specification for ORM implementations whereas Hibernate is the actual ORM implementation or framework.
+
+Step 3: Create a Getters and Setters for the Mapped Columns

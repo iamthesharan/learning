@@ -1,0 +1,31 @@
+Data Streams:
+
+1. Standard Input
+2. Standard output
+3. Standard Error
+
+
+tee Command:
+When you want to save the output to some file and also to pass the output to some other command, we use tee command.
+
+ls -lrt | tee output.txt | wc -l
+
+this will write the output of ls -lrt into output.txt and also send it to wc -l command.
+
+
+ls | wc -c | tee output.txt  --> First process count and then write output.txt
+
+ls -lrt | tee output.txt | wc -c |tee wc.txt --> 
+this will print the ls -lrt output to output.txt and after that the output of ls -lrt will be transferd to command wc -c
+and then the final output will be printed to wc.txt and on the terminal Screen also.
+
+
+-------------------------
+get the names of file from file and remove those files.
+
+cat input.txt | rm   --> incorrect because rm command only accepts command line arguments and not stream argumnets.
+
+So if we want to transfer the stream output to the rm command, then we need to convert the output to command Line argunment.
+for that we will use xargs. 
+
+cat input.txt | xargs rm

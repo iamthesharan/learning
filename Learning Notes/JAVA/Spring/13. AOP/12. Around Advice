@@ -1,0 +1,71 @@
+This Advice Runs before and After method Execution
+
+@Around is like using @Before and @After Together. But it Gives you more fine grain Control over the process
+
+
+
+Use Cases:
+1. Most Common: Logging, auditing and Security
+2. Pre-processing and Post_processing data
+3. Instrumentation / Profiling Code
+
+    How Long Does it take for a Section of Code to run?
+
+4. Manage Exception
+    Swallow/ handle / Stop Exception
+
+
+Proceeding JoinPoint
+
+When Using @AroundAdvice
+You will get a reference to a "proceeding join Point"
+this is a handle to the Target method
+Your Code can use the proceeding join point to excute the Target method
+
+
+
+Example:
+Create an advice for instrumentation/ profiling Code
+How Long does it take for a Section of code to run?
+
+
+@Around("execution(* com.spring.aop.dao.AccountDAO.findAccounts(..))")
+public Object aroundAdviceFindAccounts(ProceedingJoinPoint theProceedingJoinPoint) throws Throwable{
+
+    long begin=System.currentTimeMillis();
+    Object result=theProceedingJoinPoint.proceed();
+    //theProceedingJoinPoint is handle to target Method. and proceed() is to execute the Target Method
+
+    long end=System.currentTimeMillis();
+    System.out.println("Duration: "+((end-begin)/1000.0 )+" Sec.");
+    return result;    
+}
+
+// in result variable You can return your Custom message.
+
+Resolving the Print Order Issue:
+Root Cause:
+The Data is being printed to the two Diffrent Output Streams
+Spring is Printing to the Logger Output Stream
+System.out.println is printing to the Stndard Output Stream
+
+Solution:
+To have everything in order you Sould send to same output Stream
+Will Change our code to use logger output Stream same as spring
+
+
+Logger myLogger=Logger.getLogger(getClass().getName());
+myLogger.info("Printing Logs......");
+
+Replace all System.out.println with myLogger.info
+
+
+
+Handling Exception:
+
+We will Handle the Exception  thrown by the Bussiness method in Around Advice. 
+If we Handle the Exception in Around Advice, then Our Main app will Never know about the Exception.
+
+But if its is some Improtant Exception then its important to let your app know about the Exception
+
+For important Exception, YOu can rethrow the Exception from the Catch Block

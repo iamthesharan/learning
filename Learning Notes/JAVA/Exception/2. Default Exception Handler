@@ -1,0 +1,9 @@
+The Method on which the exception occurs, That method is responsible to create Exception Object
+After Creating the Exception Object, This method handover the object to the JVM.
+Now JVM will check that the method on which the Exception occur, has exception Handleing code?
+if not --> then JVM will Terminate that method abnormally and remove the Entry from the Runtime Stack
+After that JVM will check who is the caller of that method, and Go to that method and check whether the Exception Handleing code is there or not,
+If not, then JVM will repeat the same process until the JVM destroys main
+
+After the Destuction of the Main, JVM will call Default Exception Handler.
+He will just handover the Exception to default Exception Handler and the Job of Default Exception handler is to print the Exception on Console.

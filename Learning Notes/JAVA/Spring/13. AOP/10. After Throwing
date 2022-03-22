@@ -1,0 +1,38 @@
+Runs After the Method if the Exception is thrown
+
+Application Architecture:
+
+
+                findAccounts()                  findAccounts()                    Exception Thrown
+    Main App <--------------------> AOP Proxy --------------------> Account DAO ----------------------> @AfterThrowingAdvice
+                                        |                                                                       |
+            <===========================|<======================================================================|
+                   Exception                                          Exception 
+
+
+
+Usecase:
+1. Log the Exception
+2. Performing auditing on exception
+3. Notify Devops team via Email or SMS
+4. Encapsulate this Functionality in AOP Aspects for Easy re-use
+
+Example:
+
+Create an advice that will run after an exception is thrown. After throwing the Exception we can post process the Exception with that exception object
+
+@AfterThrowing("execution(* com.spring.dao.AccountDAO.findAccounts(..))")
+public void afterThrowingFindAccountAdvice(){
+    System.out.println("Executing AfterThrowing advice");
+}
+
+Development Process:
+
+1. In the Main App Adding a Try catch block for Exception Handling
+2. Modify AccountDAO to stimulate throwing an exception
+3. After @AfterThrowing advice
+
+    	@AfterThrowing(pointcut="execution(* com.spring.aop.dao.AccountDAO.findAccounts(..))", throwing="theExc")
+        public void afterThrowingFindAccountAdvice(JoinPoint theJoinPoint, Throwable theExc) {
+            System.out.println(theExc.getMessage());
+        }

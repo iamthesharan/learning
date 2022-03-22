@@ -1,0 +1,40 @@
+CSRF: Cross Site Request Frogery
+
+Spring Security Protect Against, CSRF (C-surf)
+
+What is CSRF?
+
+A Security Attact where an evil website tricks you into executing an action on a web application that you're currently Logged in.
+
+You are logged in Banking app, and you tricked into sending money to another person
+You are logged into an e-commerce app and tricked into purchasing unwanted items.
+
+To Protect Against CSRF attacks
+you need to embbed additional Authentication data /token into all HTML forms
+on subsequent Request web app will verify token before processing
+
+Support for CSRF is provided by the Spring Security Filters
+So here the Spring Security Filters will Send the token to the Web Browser. This token will be used in the HTML Form.
+And then you send the data to the Application and Again Spring Security filters will verify the Tokens to make sure they are valid for this given user session before actually processing the request.
+
+CSFR protection is enabled by default in spring Security
+
+Spring Security uses the Synchronizer token pattern
+    - Each request includes a session cookie and randomly generated token
+
+For request Processing Spring Security verifies the token before processing the Request
+All of this is handled  by spring Security Filters
+
+==============================================================================================
+
+Use Spring Security CSRF Protection:
+
+For Form Submission, use POST instead of GET
+Include CSRF Token in form Submission
+
+ <form:form> will automatically add csrf token
+ but if you don't add <form:form>, then you need to manually Add CSRF Token
+
+ <form action="..." method="POST">
+    <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+ </form>

@@ -1,0 +1,16 @@
+A Service is just a TS class so no Decorator is required
+
+Ex:
+
+1. Inside the Service File.
+
+    export class LoggingService{
+        onChangeStatus(status:string){
+            console.log(status);
+        }
+    }
+
+2. Now we can use the instance of this service class and call onChangeStatus where we want.
+
+
+==============================================================================================

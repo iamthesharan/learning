@@ -1,0 +1,22 @@
+We can use throws keyword to delegate responsibility of exception handeling to the caller. It may be another method or JVM.
+Then Caller method is responsible to handle that exception.
+
+class test{
+    public static void main(String ...args) throws IE{
+        doStuff();
+    }
+    public static void doStuff() throws IE{
+        doMoreStuff();
+    }
+    public static void doMoreStuff() throws IE{
+       Thread.sleep(1000); 
+    }
+}
+
+doMoreStuff will ask doStuff to handle the IE exceptions if we use throws IE in doMoreStuff.
+doStuff will then ask Main and main then ask JVM
+
+
+It is Required only for Checked Exceptions and Usage of throws keyword for unchecked Exception there is no impact
+
+It is required only to convince compiler and usage of throws doesn't prevent abnormal termination of program

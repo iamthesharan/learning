@@ -1,0 +1,9 @@
+using the java -jar
+> java -jar app.jar
+
+
+Using the Spring boot Maven Plugin. For this also You don't need maven installed. Springboot uses mvnw
+
+
+mvnw package
+java -jar app.jar

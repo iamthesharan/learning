@@ -1,0 +1,43 @@
+Previously we have discussed abt the Exception handling for a single Controller. In Real time projects, Exception Handling will be used by multiple Contollers
+So here we needs a Global Exception Handler, which will allow use to reuse the Exception Handler and centralize the Exception handling
+
+So here we can use @ControllerAdvice Annotation. 
+This annotation is similar to interceptor or filter
+
+So We can use to,
+
+1. Pre process request to COntrollers
+2. Post-Process response to handle Exceptions
+3. Perfect for Global Exception Handling 
+
+Also @ControllerAdvice, this is the Realtime use of AOP
+
+
+So Architeture :
+
+    Rest Client  <========> ControllerAdvice <========> REST Service.
+
+
+    So here when the Request comes, the ControllerAdvice pre process the Request and then the request goes to REST Service. And if there is something Wrong,
+    The Rest Service will throw an Exception. Now the Exception Handler will not be there in REST Service, instead it will be in ControllerAdvice. and this will 
+    give a support for Global Exception Handling
+
+
+Development Process:
+
+
+    1. Create new @ControllerAdvice
+    2. Refactor REST  Service, Remove Exception Handling Code.
+    3. Add Exception Handling Code to @ControllerAdvice
+
+    1. Create new @ControllerAdvice
+
+        So here we will Create a Class with StudentRestExceptionHandler and Add the Annotation @ControllerAdvice over it 
+
+    2. Refactor REST  Service, Remove Exception Handling Code.
+
+        Cut the Exception Hanler Code from the StudentController  
+
+    3. Add Exception Handling Code to @ControllerAdvice
+
+        Copy the ExceptionHandler Code into the Controller Advice.

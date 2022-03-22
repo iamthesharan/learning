@@ -1,0 +1,262 @@
+Notes 6
+
+
+
+Static Nested Classes
+
+/*
+	Sometimes We Can Declare Inner Class with a Static modifier Such Type of inner Classes are called
+	static nested Classes
+*/
+
+/*
+	class Outer{									class test{
+		static class Inner{		------------->			static int x=10;
+													}
+		}
+	}
+	
+	Without Existing outer Class Object There may be chance of Existing Static inner
+	class Object.
+	
+	
+	1) 	In the case of Normal or regular Inner Class, without Existing Outer Class Object,
+		there is no Chance of Existing Inner Class Object. i.e Inner Class is Strongly associated
+		with Outer Class Object.
+		
+	2) 	But in the case Of Static Nested Classes, Without Existing Outer Class Object, There may Be 
+		a Chance of Existing Nested Class Object. Hence static nested Class Object is not strongly 
+		associated with Outer Class Object.
+	
+	
+*/
+
+
+/*
+	class Outer{
+		static class Nested{
+			public void m1(){
+				System.out.println("Static Nested Class Method");
+			}
+		}
+		public static void main(String ...args){
+			Nested N=new Nested();
+			N.m1();
+		}
+	}
+*/
+
+
+/*
+	If You want to create Nested Class Object from Outside of Outer Class,
+	then we Can Create as Follows. 
+	
+	Outer.Nested Obj=new Outer.Nested();
+	 
+*/
+
+
+/*
+	class Test{
+		static class Nested{
+			public static void main(String ...args){
+				System.out.println("Static Nested Class Main Method");
+			}
+		}
+		public static void main(String ..args){
+			System.out.println("Outer Class Main Method");
+		}
+	}	
+	
+	
+	java Test   -----> Outer Class Main Method
+	java Test.Nested  -----> Static Nested Class Main Method.
+	
+	
+	In Normal Or RegulaR INNER CLASSES we can't Declare Any Static members.
+	But  In Static Nested Classes We Can Declare Static members Including main Method.
+	
+	Hence We can Invoke Static Nested Class Directly from cmd.
+*/
+
+
+
+
+/*
+	1) 	In Normal inner Class, Inner Class Object is Strongly Associated with Outer
+		Class Object.
+	
+		In Static inner Class, Inner Class Object is not Strongly Associated with Outer
+		Class Object.
+	
+	2)	Static members are not allowed in Normal Inner class
+		
+		Static members are allowed in Static Inner Class
+		
+	3)	Main method Cannot be Called From the cmd in Normal Inner Classes
+	
+		Main Method Can be called from the cmd in Static inner Classes
+		
+	4)	Can Access Static as Well as Non-Static members of Outer Class Directly in
+		Normal Inner Classes
+		
+		Can Access Only static members of Outer Class directly in Static Inner Classes 
+*/
+
+
+-------------------------------------------------------------------------------------------------
+
+/*
+	Various Combinations of nested Classes and Interface
+	
+	1) Class Inside a Class ---> Discussed Above
+	2) Multiple Implementations of Interface is required inside a particular Class
+	
+		class Veicle{
+			interface Vehicle{
+				public int getWheels();
+			}
+			class Bus implements Vehicle{
+				public int getWheels(){
+					return 6;
+				}
+			}
+			class Auto implements Vehicle{
+				public int getWheels(){
+					return 3;
+				}
+			}
+		}
+		/*
+			Inside a Class if We Required Multiple Implementation of an Interface
+			and all these Implementations are related to a particular class
+			then we can define interface inside a class.
+		*/
+		
+	3)	We can Declare interface inside Interface.
+		 Example Of Map and Entry-----> An Entry can't exist without a map.
+		 
+		 interface Map{
+		 	interface Entry{
+		 		
+		 	}
+		 }
+		 
+		 
+		 
+		 example::: 
+		 	 
+		 	 
+		 	 interface Outer{
+		 	 	public void m1();
+		 	 	interface Inner{ // Inner Interface is by Default Public Static
+		 	 		public void m2();
+		 	 	}
+		 	 }
+		 	 class test1 implements Outer{
+		 	 	public void m1(){
+		 	 		System.out.println("Outer Interface method");
+		 	 	}
+		 	 }
+		 	 class test2 implements Outer.Inner{
+		 	 	public void m2(){
+		 	 		System.out.println("Inner Interface method");
+		 	 	}
+		 	 }
+		 	 
+		 	 // For Outer Interface we need to Only Override Outer Interface Method;
+		 	 // For Inner Interface we need to Only Override Inner Interface Method; 
+		 	 
+		 	 
+		 	 class test{
+		 	 	public static void main(String ...args){
+		 	 		test1 t1=new test1();
+		 	 		t1.m1();
+		 	 		test2 t2=new test2();
+		 	 		t2.m2();
+		 	 	}
+		 	 }
+		 	 
+		 	 /*
+		 	 	Whenever we are implementing outer interface we are not required to implement 
+		 	 	inner Interface.
+		 	 */
+		 	 
+	4)	Class Inside Interface
+	
+		when----> The Functionality of a class is closly associated with interface.
+		
+		
+		interface EmailService{
+		
+			// This SendMail Functionality is available Only in Email Service. 
+			public void SendMail(EmailDetails e){
+				// This Email Details is required only for Send Mail Functionality
+			}
+		}
+		
+		Therefore;;;
+		
+		interface EmailService{
+			public void SendMail(EmailDetails e){
+			
+			}
+			class EmailDetails{
+				String To;
+				String From;
+				String Subject;
+			}
+		}
+		
+		/*
+			If Functionality Of A Class is Closely Associated With Interface
+			then it is highly recommended to declare class inside interface 
+		*/
+		
+		
+		Case:	We can also implement a class inside interface to provide default implementation 
+				for that interface..
+				
+				
+				/*
+					interface Vehicle{
+						public int getWheels();
+						class DefaultVehicle implements Vehicle{
+							public int getWheels(){
+								return 2;
+							}
+						}
+					}
+					class Bus implements Vehicle{
+						public int getWheels(){
+							return 6;
+						}
+					}
+					class test{
+						public static void main(String ...args){
+							Vehicle.DefaultVehicle v1=new Vehicle.DefaultVehicle();
+							v1.getWheels();
+							
+							Bus b=new Bus();
+							b.getWheels();
+						}
+					}
+				*/
+*/
+
+
+
+/*
+	class A{
+		interface B{
+			// This interface is Static But need not be Public.
+		}
+	}
+	
+	
+	interface A{
+		class B{
+			// This class is Static as well as Public
+		}
+	}
+*/

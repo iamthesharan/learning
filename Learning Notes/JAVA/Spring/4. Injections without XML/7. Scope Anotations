@@ -1,0 +1,24 @@
+How Long the Bean Lives,
+How many instances are created,
+How the Bean Shared?
+
+
+For defining a Scope of a bean use anotation @Scope.
+
+Ex
+
+@Component
+@Scope("Singleton")
+public class TennisCoach implements Coach{
+ 
+}
+
+
+    OR
+    
+    
+@Component
+@Scope("Prototype")
+public class TennisCoach implements Coach{
+ 
+}

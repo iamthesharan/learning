@@ -1,0 +1,9 @@
+Spring Rest MVC provide Support for Rest.
+Here we can use new Annotation @RestController
+Althought It inherits from @Controller but the @RestController has support for REST Request and REST responses.
+
+So here Spring Rest Will Automaticall Convert JAVA POJO to JSON with the help of Jackon API.
+Note** for this Automatic conversion from POJO to JSON, you must specify the dependency for Jackon in pom.xml
+
+
+=================================================================================================================================================

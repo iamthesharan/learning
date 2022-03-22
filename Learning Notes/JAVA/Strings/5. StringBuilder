@@ -1,0 +1,10 @@
+Important Constructors of StringBuilder class
+
+Constructor	Description
+    StringBuilder()	                creates an empty string Builder with the initial capacity of 16.
+    StringBuilder(String str)	    creates a string Builder with the specified string.
+    StringBuilder(int length)	    creates an empty string Builder with the specified capacity as length.
+    
+Methods:
+Same Methods as StringBuffer
+

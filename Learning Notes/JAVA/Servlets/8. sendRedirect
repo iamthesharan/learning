@@ -1,0 +1,11 @@
+in case of RequestDispatcher, Client don't have any idea about the servlet 2. 
+It will think that browser is getting response from the Servlet 1.
+
+but in case of sendRedirect, the Servlet 1 will send the response to client that it is redirecting to servlet 2.
+
+So in this case, the client is sending 2 different request.
+
+so in this case servlet will send the response to client to redirect to another servlet.:
+
+    response.sendRedirect("Square");
+    Now when you add this line in servlet 1, it will change the url to the redirected url automatically once getting the response from Servlet1

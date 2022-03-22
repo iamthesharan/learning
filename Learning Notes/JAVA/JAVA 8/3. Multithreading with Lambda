@@ -1,0 +1,49 @@
+Interface interf{
+    public int squareIt(int n);
+}
+class Test{
+    public static void main(String ...args){
+        Interf i=n->n*n;
+        System.out.println(i.squareIt(4));
+        System.out.println(i.squareIt(5));
+    }
+}
+
+==========================================================================================
+In concept of multithreading also we use runnable Interface which is a FI.
+
+class MyRunnable implements Runnable{
+
+    // This is the job of the Child Thread
+	public void run() {
+		for(int i=0;i<10;i++) {
+			System.out.println("Child Thread");
+		}
+	}
+}
+
+public class test{
+	public static void main(String ...args) {
+		MyRunnable r=new MyRunnable();
+		Thread t=new Thread(r); // This is main thread.
+		t.start();
+		for(int i=0;i<10;i++) {
+			System.out.println("Main Thread");
+		}
+	}
+}
+
+So in this case also we can easily remove the top level class.
+
+so new code:
+
+public class test{
+    public static void main(String ...args){
+        Runnable r=()->{
+            for(int i=0;i<10;i++)
+                System.out.println("Child Thread");
+        }
+        Thread t=new Thread(r);
+        t.start();
+    }
+}

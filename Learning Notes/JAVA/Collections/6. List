@@ -1,0 +1,16 @@
+List is Child interface of Collection.
+In List, Insertion order is preserved  via Index
+Methods inside list Interface:
+    1.  boolean add(int index, Object O)--> ex l.add(3,'A').  --> This allows adding the element 'A' at 3rd index.
+    2.  boolean addAll(int index, Collection C)--> ex l.addAll(3, C ) --> Adding Collection Object from index 3.
+    3.  boolean remove(Object o)-->example l.remove('A') --> removing 'A' from Collection
+    4.  boolean remove(int index)---> l.remove(3) -->removing element from index 3.
+    5.  Object get(int index) --> getting the Object from the provided Index
+    6.  Object set (int index, Object O) --> set the object O at the Particular index.
+    7.  indexOf(object O)
+    8.  lastIndexOf(Object o)
+    
+For getting the elements one by one, Iterator is required.
+For List, listIterator() method is required.
+
+ListIterator listIterator() --> Method present in ListIterator Interface.

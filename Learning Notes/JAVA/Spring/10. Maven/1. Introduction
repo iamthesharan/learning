@@ -1,0 +1,23 @@
+What is Maven?
+    Maven is a Popular Open Source Build Tool build by Apache Group to build, publish and deploy Several project at once.
+    Maven is written in JAVA and is used to build projects written in C#, Scala, Ruby etc.
+    Maven is based on Project Object Model(POM) and is focused on Simplification and Standardization of the building process.
+    In the process it takes care of the following:
+    1. Builds
+    2. Dependencies
+    3. Reports
+    4. Distribution
+    5. Releases
+    6. Mailing List
+
+Install Maven : Bin zip archive
+
+
+There are two Repositories:
+    1. Maven Local Repository
+
+        Location: C:\Users\sharans\.m2\repository
+        
+    2. Maven Central Repository(remote)
+
+If the dependency files are not present in Local Repository, then Maven will fetch it from the Maven Central Repository

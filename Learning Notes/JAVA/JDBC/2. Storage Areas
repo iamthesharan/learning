@@ -1,0 +1,21 @@
+Ther Places where we can store the data is Storage Area
+
+
+Storage Area:
+
+1. Temporary Storage Areas  --> All JVM memory areas are temporary Storage Areas. Once the JVM Shuts Down, all data s are gone 
+2. Permanent Storage Areas  --> Persistant storage Areas
+
+From JAVA Application, the technology used to communicate with database is JDBC
+
+JDBC is a specification
+
+
+JAVA Vendor provide this specification.
+database Vendors like oracle implements datatbase vendor
+
+
+
+Features of JDBC
+
+1. Standart API, means never going to change database to database, means same format

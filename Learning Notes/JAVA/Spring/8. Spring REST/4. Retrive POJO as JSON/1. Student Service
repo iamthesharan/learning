@@ -1,0 +1,65 @@
+Here we will create a new Rest Service which will get the list of students.
+
+So there will be a REST Client and a REST Service. So REST Client will make a request to REST Service and then The REST service will send the response in JSON.
+
+Now here we will Convert JAVA POJO to JSON because our Rest Service will return the List of student objects.
+and we need to convert that Student Object to JSON.
+
+So here Spring will automatically integrate Jackson as long as Jackson dependency is there in pom.xml
+So whenever JAVA POJO is being Returned from REST Controller, it will get Converted to JSON automatically with the help of Jackson.
+
+====================================================================================================================================================
+
+Development Process:
+
+    1. Create JAVA POJO class for Student
+    2. Create Spring RestController using @RestController
+
+    1. Create a Simple POJO class with fields firstName and lastName.
+
+    2. Create a RestController:
+
+        @RestController
+        @RequestMapping("/api")
+        public class DemoRestController {
+
+            @GetMapping("/students")
+            public List<Student> getStudents() {
+                List<Student> theStudent=new ArrayList<Student>();
+                theStudent.add(new Student("Shashank","Sharan"));
+                theStudent.add(new Student("Khushboo","Shivhare"));
+                return theStudent;
+            }
+        }
+
+
+Now we will Refactor the Code.
+
+        So in the REst Controller We will Create a list for Students as instance Variable.
+
+            @RestController
+            @RequestMapping("/api")
+            public class DemoRestController {
+                 List<Student> theStudent;
+            }
+
+        After that we will add the @PostConstruct annotation.
+        Note @PostConstruct is called only once when this given bean in constructed.
+
+            @RestController
+            @RequestMapping("/api")
+            public class DemoRestController {
+                List<Student> theStudent;
+                @PostConstruct
+                public void loadData(){
+
+                        /* This approach is better since we only load student at once*/
+
+                    theStudent=new ArrayList<Student>();
+                    theStudent.add(new Student("Shashank","Sharan"));
+                    theStudent.add(new Student("Khushboo","Shivhare"));
+                    return theStudent;
+                }
+            }
+
+

@@ -1,0 +1,200 @@
+IoC stands for Inversion of Control:
+
+It is the approach for outsourcing theconstruction and Management of objects
+
+The IoC container is responsible to instantiate, configure and assemble the objects. The IoC container gets informations from the XML file and works accordingly. The main tasks performed by IoC container are:
+-
+to instantiate the application class
+to configure the object
+to assemble the dependencies between the objects
+
+There are two types of IoC containers. They are:
+
+BeanFactory -> BeanFactory is like a factory class that contains a collection of beans. It instantiates the bean whenever asked for by clients
+ApplicationContext -->  Spring Container is generally known as applicationContext. The ApplicationContext interface is built on top of the BeanFactory interface. It adds some extra functionality than BeanFactory 
+                        such as simple integration with Spring's AOP
+
+
+"Spring Bean" is simply a Java object.
+
+When Java objects are created by the Spring Container, then Spring refers to them as "Spring Beans".
+
+Spring Beans are created from normal Java classes .... just like Java objects.
+
+===============================================================================================
+
+                getDailyWorkout()
+        |------------------------------>|
+MyApp   |                               | BaseballCoach
+        |<------------------------------|
+        
+        
+My App will make use of a coach ie baseball coach
+
+
+Now this app should easily work with another coach of different Sport.
+
+
+=================================================================================================
+
+So here we will create a prototype.
+
+MyApp.java  --> main method
+BaseballCoach.java --> 
+Coach.java  --> interface after refactoring
+TrackCoach.java ----> just to switch within the Coach
+
+
+BaseballCoach.java:
+
+    package com.spring.ioc;
+
+    public class BaseballCoach implements Coach{
+        @Override
+        public String getDailyWorkout() {
+            return "Spend 30 minutes on batting practice";
+        }
+    }
+--------------------------------------------------------------------------
+Coach.java:  basically to follow the good Software Engineering Practice
+
+    package com.spring.ioc;
+
+    public interface Coach {
+        public String getDailyWorkout();
+    }
+----------------------------------------------------------------------------    
+MyApp.java: 
+
+    package com.spring.ioc;
+
+    public class MyApp {
+        public static void main(String args[]) {
+            Coach theCoach=new BaseballCoach();
+            System.out.println(theCoach.getDailyWorkout());
+        }
+    }
+----------------------------------------------------------------------------------
+
+TrackCoach.java
+
+    package com.spring.ioc;
+
+    public class TrackCoach implements Coach {
+        @Override
+        public String getDailyWorkout() {
+            return "Run a hard 5k";
+        }
+
+    }
+
+=================================================================================================
+
+So here:
+
+App Should be configurable  -> not Followed. We are dooing hard codeing for creating objects of BasballCoach and TrackCoach.
+Easy Change of the Coach for Another Sport. --> followed
+
+
+So it would be better if we read the Actual implementation name from config file. this will avoid making changes in Source Code.
+
+
+Previously we don't have support for the configuration. So here we need a help of Object Factory that can help us out with this solution.
+
+
+===================================================================================================
+
+Now Here Spring Comes into Play. Spring Provides an Object Factiory, so we can have our application talk to Spring for providing an object and based on the configuration file or anotation, Spring will give you the appropriate implementation.
+
+
+===================================================================================================
+
+The Spring Container:
+
+The primary functions of the Spring COntainer are:
+1. Create and Manage Objects(Inversion Of Control)
+2. Inject Object Dependency.(Dependency Injection)
+
+
+====================================================================================================
+
+
+There are 3 ways for Configuring the Spring Container:
+
+1. XML Config file(legacy)
+2. Java Anotations (mordern)
+3. Java Source Code (modern)
+
+====================================================================================================
+
+Spring Development Process:
+
+1. Configuring a Spring Beans.
+2. Create a Spring Container
+3. Retrinve Beans from Spring Container
+
+1. Configuring Spring Beans: using XML Config file -->applicationContext.xml
+    
+    <beans ...>
+        <bean  id="myCoach" class="com.spring.ioc.BaseballCoach"></bean>
+        <!-- id is like alias.  -->
+    </bean>
+    
+2. Create a Spring Container:
+
+    Spring Container is generally Known as ApplicationContext in Spring Documentation and in Spring App
+    So they Have Specialized implementation of it 
+    1. ClassPathXmlApplicationContext
+    2. AnotationConfigApplicationContext and so on....
+    
+    
+    The ClassPathXmlApplicationContext class is the implementation class of ApplicationContext interface. We need to instantiate the ClassPathXmlApplicationContext class to use the ApplicationContext.
+    
+    So Creating a Spring Container:
+    ClassPathXmlApplicationContext context=new ClassPathApplicationContext("applicationContext.xml"); 
+    
+    So here we have Created the Container.
+    
+3. Retrive Beans from the Container
+    
+    So MyApp will sit on top of the Container and talk to spring container for providing the implementation Object based on the information configuration file. it will give the implementation of that interface
+    
+    
+    retriving the beans from Spring container:
+    
+    Coach theCoach=context.getBean("myCoach", Coach.class);
+                                       |         |   
+                                       |         |---------------------> Name of the interface that the
+                                                                        actual BaseballCoach class implements
+                                This is the Bean
+                                id defined in the Conf file
+                                
+                                
+                                
+========================================================================================================================
+
+HelloSpringApp.java:
+
+package com.spring.ioc;
+
+    import org.springframework.context.support.ClassPathXmlApplicationContext;
+
+    public class HelloSpringApp {
+        public static void main(String ...args) {
+            // load the Spring Config File.
+            ClassPathXmlApplicationContext context=new ClassPathXmlApplicationContext("applicationContext.xml");
+            
+            //Retrive a Bean from Container
+            Coach theCoach=context.getBean("myCoach", Coach.class);
+
+            // Call the method of the Bean
+            System.out.println(theCoach.getDailyWorkout());
+
+            // Close the Context 
+            context.close();
+        }
+    }
+
+==========================================================================================================================
+So Now Our app is Configurable now
+

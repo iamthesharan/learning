@@ -1,0 +1,47 @@
+We need to tell git who we are, who it should attribute to work to.
+So Idea of providing the name and Email is to track who made the changes.
+
+You can see the person who made changes in Git logs
+
+command:
+git log
+
+=========================================================================================
+How to set the name that Git will associate with our work?
+
+
+    So before setting the name we should always check that Git has name for me already?
+    command:
+    git config user.name
+
+    command:
+    git config --global user.name "Shashank Sharan"
+
+    here global means the name is used across every time for every instance
+
+
+    Similarly we do for Email
+    1. For checking if email already exist: git config user.email
+    2. For Setting email: git config --global user.email "iamthesharan@outlook.com"
+
+
+==========================================================================================
+Config Commands:
+
+cat .gitconfig --> this will display the content of the global git config file and is will be the default configuration value for all the git Projects.
+cat .get/config --> this is the local config file. Contains the configuration of the local repository
+
+git config user.name --> if the local repository doesn't have set the username, then git config will show global username.
+git config --local user.name --> show the local username
+git config --global user.name --> shows the global username.
+git config --local -l --> list the local config variables
+git config --global -l --> list the global config variables.
+git config user.email --> give the value of the user email
+
+Setting up an alias ----->
+
+git config --local alias.gitstat status --> now if you type "git gitstat" you will get the git status in your local repository
+
+
+Setting the type----->
+git config --local --int user.age 25

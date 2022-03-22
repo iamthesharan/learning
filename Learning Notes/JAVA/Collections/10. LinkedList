@@ -1,0 +1,15 @@
+LinkedList are Commonly used to implements Stacks and Queues.
+
+                 
+                                                     |------ Stack ---> LIFO
+LinkedList--->using LinkedList Class we Can make --->|
+                                                     |------ Queue ---> FIFO
+                
+                
+LinkedList Class Specific Methods:
+void addFirst(Object o)
+void addLast(Object o)
+Object getFirst()
+Object getLast()
+Object removeFirst()
+Object removeLast()

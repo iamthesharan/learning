@@ -1,0 +1,124 @@
+Java Source File Structure
+
+/*
+	class A{
+	}
+	class B{
+	}
+	class C{
+	}
+	
+	
+	Here File name same as any class name will Compile.
+	But If you make any of the class as public, Then The File name with only Public class
+	name will Compile.
+	In a file only one class must be public.
+*/
+
+
+/*
+	File Name: Sharan.java
+	
+	class A{
+		public static void main(String ...args){
+			System.out.println("A");
+		}
+	}
+	class B{
+		public static void main(String ...args){
+			System.out.println("B");
+		}
+	}
+	class C{
+	
+	}
+	----------------------------------
+	javac Sharan.java
+	
+	After Compiling Three Class file will be Generated
+	A.class , B.class , C.class
+	O/P
+		Now,
+			
+			java A ----> A
+			java B ----> B
+			java C ----> No main method Found
+			java Sharan ---> Runtime Exception
+			
+	
+*/
+
+
+
+
+/*
+	import java.util.*;
+	import java.sql.*;
+	class test{
+		public static void main(String ...args){
+			Date d=new Date();
+		}
+	}
+	
+	This code won't Compile as Date class is present in both util and sql package
+	Compile Time Error.-- Reference to date is ambigious
+	
+	
+	
+	Util		Awt
+		\		/
+		 \	   /
+		  \   /
+		   \ /
+		   	|
+		   
+		   List
+		   
+		   Same with the case of List. List is available in Both Util and Awt Package;
+		   
+		   
+		   
+		   Now
+		   
+			import java.util.List;  // Explicit Import
+			import java.sql.*;	//Implicit Class Import
+			class test{
+				public static void main(String ...args){
+					Date d=new Date();
+				}
+			}
+			
+			
+			
+			Now This time the code will Compile because Explicit import has More Priority.
+			
+			
+			So Priority:
+			
+			Explicit Class Import > Current Working Directory(Default Package) > Implicit Class Import
+*/
+
+
+/*
+	The Two Packages that are by default imported in JAVA Program are:
+		1) java.lang
+		2) default package
+			
+*/
+
+
+/*
+	Import statement is totally compile time related concept. If More Number of imports
+	then more will be the compile time but there is no effect on Execution Time(Runtime).
+*/	
+
+/*
+	The Difference between C language #include<stdio.h> and java language import statement
+	
+	--> in the case of C language #include, all input/output header files will be loaded
+		at begining only(at translation time) hence it is static include
+		
+	-->	But in the case of java import statement, No .class file will be loaded at the begining.
+		whenever we are using a particular class, then only corresponding class file will be loaded
+		This is like dynamic Include or load on demand.
+*/

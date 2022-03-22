@@ -1,0 +1,10 @@
+1.  Underlined Datastructure with HashSet is HashTable
+    Underlined Datastructure with LinkedHashSet is LinkedList + HashTable
+
+2.  Insertion Order are not Preserved and Duplicates Are not Allowed
+    Insertion Orders are preserved but Duplicates are not allowed.  
+
+    
+    
+Common use of LinkedHashSet is to Develop Cache Based Memory.
+In Cache, Duplicates are not allowed and Insertion Order must be preserved.

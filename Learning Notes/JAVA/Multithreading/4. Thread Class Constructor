@@ -1,0 +1,58 @@
+1. Thread t=new Thread();
+2. Thread t=new Thread(Runnable r);
+3. Thread t=new Thread(String name); // You can define the name of the thread
+4. Thread t=new Thread(Runnable r, String name);
+5. Thread t=new Thread(ThreadGroup g, String name);
+6. Thread t=new Thread(ThreadGroup g, Runnable r, String name);
+
+
+7. For Every thread JVM will created a runtime stack
+
+    Thread t=new Thread(ThreadGroup g, Runnable r, String name, long stackSize);
+
+
+Durga's approach to define a Thread. (Not Recommended to use)
+
+class MyThread extend Thread{
+    public void run(){
+        System.out.println("Child Thread");
+    }
+}
+
+class ThreadDemo{
+    public static void main(String ...args){
+        MyThread t=new MyThread();
+        Thread t1=new Thread(t); // This is possible because MyThread implements Runnable
+        t1.start();
+        System.out.println("Main Thread");
+    }
+}
+
+
+
+Thread.currentThread().getName()  --> This will provide the current Thread Name: example main
+Now suppose we create a Thread with the below line:
+
+    Thread t=new Thread();
+    t.start();
+    System.out.println(t.getName()); // If we don't specify the thread name, JVM will define the name of the thread.
+                                     // JVM will define Thread-0, Thread-1
+
+
+
+Setting the name of the current Thread.
+
+    Thread.currentThread().setName("Demon Thread");
+
+Setting the name of the Thread:
+    t.setName("Sharan");
+
+
+
+Note**  Within the main thread, 
+
+Thread.currentThread() --> Main Thread
+
+        Within the child thread( inside run method), 
+        
+Thread.currentThread() --> Child Thread

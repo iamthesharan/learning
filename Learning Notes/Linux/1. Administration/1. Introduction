@@ -1,0 +1,25 @@
+Linux Kernels are the program that talks directly to the Hardware.
+Its the Only program that talks to the Hardware directly.
+
+Everything else has to talk to linux Kernel through System Calls.
+
+Linux Ditribution:
+When Linux Kernel is bundled with OS Software and Shipped Together, that is called Linux Distribution.
+Example: Ubuntu, Android.
+
+
+Distributions Family:
+1. Red Hat Family
+2. Debian Family
+3. Source Code Distribution
+
+
+Red Hat Family is the Oldest Family. 
+But It has a problem. How Do you package and ship the Software?
+Which version of Linux you are using? It doesn't explain Much.
+So Red Hat Created Redhat package Management Software (rpm). 
+
+
+----------------
+
+

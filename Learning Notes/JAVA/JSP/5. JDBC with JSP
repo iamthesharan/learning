@@ -1,0 +1,1 @@
+For JDBC you need to import java.sql.* package in taglib

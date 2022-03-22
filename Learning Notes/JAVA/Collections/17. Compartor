@@ -1,0 +1,157 @@
+Compartor interface is present in Util Package.
+If we Want Customized Sorting, we must go for Comparator.
+
+
+Comparable defines only One Method:
+1. CompareTo()
+
+Compartor defines two Methods:
+1.  Compare()
+2.  equals()
+
+Signature:
+
+1.  public int compare(Object o1, Object o2);
+            |
+            |-----> returns -ve if o1 has to come before o2
+            |
+            |-----> returns +ve if o1 has to come after o2
+            |
+            |-----> returns 0 if o1 is equal to o2
+            
+2.  public boolean equals(Object o);
+
+
+Implementing Comparator.
+
+class MyComparator implements Comparator{
+    public int compare(Object o1, Object o2){
+        
+    }
+}
+
+While Implementing Comparator, we must need to provide implementation for compare Method while the implementation of equals method is not necessary.
+In this case we are voilating the rules of interface because, Every Class is a sibling of Object Class. and hence equals is defined in Object Class.
+
+
+Q) Write a program to insert Integer Objects in treeset where the Sorting order is Descending Order.
+
+-->
+    TreeSet t=new TreeSet();
+    t.add(10);
+    t.add(0);
+    t.add(15);
+    t.add(5);
+    t.add(20);
+    t.add(20);
+    System.out.println(t);
+    
+    class MyCompartor implements Comparator{
+        public int compare(Object o1, Object o2){
+            
+        }
+    }
+    
+    TreeSet t=new TreeSet(new MyComparator());// Passing Anonymous Object of MyCompartor since we need Customized Sorting in this Case.
+    // If we Dont pass this as an argument, Then the JVM will perform Default Sorting Order ie Ascending.
+    t.add(10);
+    t.add(0);
+    t.add(15);
+    t.add(5);
+    t.add(20);
+    t.add(20);
+    System.out.println(t);
+    
+    
+    // Now within the compare method what logic we write based on that the elements will be inserted
+    
+    // For First Element no Comparison is required. hence.
+                                
+                                10
+                                
+    //for 2nd element  Comparison will required and hence JVM will call compare(object to be inserted, Object Already inserted) method.
+    // So in this Case compare(0,10).
+    // Now our required Sorting is descending and hence 0 should come after 10 ie compare method must return +ve.
+    //therefore our compare method must be implemented in this style.
+    
+     class MyCompartor implements Comparator{
+        public int compare(Object o1, Object o2){
+            Integer i1=(Integer)o1;
+            Integer i2=(Integer)o2;
+            if(i1<i2)
+                return +1;
+            else if(i1>i2)
+                return -1;
+            else
+                return 0;
+        }
+    }
+    
+    now:
+                10              compare(0,10);  right
+                 \
+                  \
+                   0
+                   
+                   
+                10
+                /\             compare(15,10); left
+               /  \
+              15   0      
+              
+              
+              
+                10
+                /\             compare(5,10); right but 0 is there in right
+               /  \            therefor compare(5,0) hence left
+              15   0
+                  /    
+                 /
+                5
+                
+                
+                Similarly
+                
+                
+                
+                10
+                /\             
+               /  \            
+              15   0
+              /   /    
+             20  5
+            
+            
+            
+            [20,15,10,5,0]
+            
+            
+            
+            
+Various Possible Implementations of Compare Method.
+
+class MyCompartor implements Comparator{
+     public int compare(Object o1, Object o2){
+            Integer i1=(Integer)o1;
+            Integer i2=(Integer)o2;
+            if(i1<i2)
+                return +1;
+            else if(i1>i2)
+                return -1;
+            else
+                return 0;
+     }
+}
+    
+Internally In this Case JVM is Calling compareTo() Method.
+
+So Moified Code.
+
+class MyCompartor implements Comparator{
+     public int compare(Object o1, Object o2){
+            Integer i1=(Integer)o1;
+            Integer i2=(Integer)o2;
+            return i2.compareTo(i1);
+            or -i1.compareTo(i2);
+     }
+}

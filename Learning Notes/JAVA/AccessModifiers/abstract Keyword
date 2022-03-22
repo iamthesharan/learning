@@ -1,0 +1,41 @@
+Abstract Modifier
+					
+				|-----------Final
+	Enimies		|-----------Native (Non Java Method)
+				|-----------Synchronized Method
+				|-----------Static
+Abstract--------------------Strictfp
+
+
+
+/*
+	abstract final void m1(){
+		CE: Illegal Combination of Modifiers:Abstract and Final
+	}
+*/
+
+
+/*
+	Abstract Class--> The class That is having Partial Implementation.
+	
+	
+	If we are extending abstract class then for each and every abstract method of parent class
+	we should provide implementation otherwise we have to declare child class as abstract.
+	
+	
+*/
+
+
+/*
+	case 1:
+	
+		abstract class A{
+			public final void m1(){
+			
+			}
+		}
+		
+		Case 1 is valid. This means you can't override m1 but can override other methods.
+		
+		
+*/

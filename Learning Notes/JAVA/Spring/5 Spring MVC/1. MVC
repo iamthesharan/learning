@@ -1,0 +1,46 @@
+A Typical Web Application Developed with Servlet Technology works like this:
+
+
+            Hits URL
+ Client ----------------->  Servlet 1 - n 
+
+ Here the Client request to the Servlet Container for web Page. Based on the URL the Request is mapped to the Particular Servlet.
+ The Servlet Processes the Request and Send the Data Along with Web Page to the Client.
+
+
+ This is a Bad Approach because the Servlet has to Manage two things, 
+ 1. Perform the Bussiness Logic
+ 2. Renders the Data to the Web Page
+
+ The Problem here is If in  future you need to Change the UI of the Web Page, You need to Make changes in the Servlet Code
+
+
+ ==========================================================================================================================
+
+ MVC Says, we can overcome the Above problem if we separate Presentation (UI Building Code) from Bussiness Logic
+ (Some Code which is generating Data by Applying Some Bussiness Logic)
+
+
+ It Says an application should Always be divided into 3 Components:
+
+    1. M - Model        --> Represents the Data
+    2. V - View         --> It is the UI Part
+    3. C - Controller   --> Manages the Application Flow, Makes a Call to some Sort of Service producing Model and then Pass
+                            on the Model to the View
+
+
+                 View
+                  |
+                  | (Model)
+                  |
+              Controller  <-----------> Some Sort of Service Producing Model 1, Some Sort of Bussiness Service Producing Model 2
+
+
+              The Request Comes to The Application, The Controller Analyses it and makes a Decission to Call and Appropriate
+              bussiness Service to Get the Model.
+
+              Once Controller Receives the Model from Bussiness Service, It passes on the Model to the View Component.
+
+
+    In case you are developing a web application using JAVA, the Model is a Simple JAVA POJO.
+    View is HTML Code with Retrive data from Model

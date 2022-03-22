@@ -1,0 +1,10 @@
+Delete the branch:
+
+Note Before delting the branch you should be outside the branch.
+git branch -d <branch name>   -> This will prompt if the branch is not fully merged.
+git branch -D <branch name>  --> Forcefull Delete
+
+
+rename the branch:
+
+Go to the branch  --> git branch -m <New Name>

@@ -1,0 +1,786 @@
+Hibernate is the system for saving Java Objects into the database.
+
+
+    Your Java App <<===========>> Hibernate <<==================>> DB
+
+
+Hibernate minimizes the JDBC code that we have to develop
+
+Hibernate Provides Object to relational Mapping
+
+The Developer defines mapping between JAVA Class and dataBase Table
+
+
+        JAVA Class                                                                                          DB Tables
+    
+    
+        Student                   <<===========================>> Hibernate <<=============>>                Student     
+        id: in                                                                                              id INT
+        name: String                                                                                        NAME VARCHAR(20)
+
+
+
+HOW TO SAVE A JAVA OBJECT WITH Hibernate.
+
+
+Step 1: Create the JAVA Object
+Step 2: then we save this java object into the DB with the Special Hibernate object called session
+
+        Student theStudent=new Student("Jhon","Doe");
+        int theID  =  session.save(theStudent);
+
+        so once you save the session, the Hibernate will provide you one ID and that we have saved it in theID variable
+
+
+        How to retrive the object
+
+        1. Using ID
+
+            Student myStudent=session.get(Student.class, theId);
+
+            So here the Hibernate will find the Student Table and find the Student whose primary key matches this ID.
+
+        2 Retrive all the student ojects.
+
+            For retriving all the object hibernate has special method called createQuery.
+
+            Query query=session.createQuery("from Student");
+            List<Student> students=query.list();
+
+
+=========================================================================================================================================
+
+
+How Hibernate is related to JDBC.
+
+Hibernate internally uses JDBC
+
+
+How to set up your development environment
+
+Requirements:   1. IDE
+                2. DB Server
+                3. Hibernate JAR Files and JDBC Driver
+
+
+
+======================================================================================================================================
+
+
+Hibernate development Process Overview:
+
+1. Add Hibernate Configuration File
+2. Annotate Java Class
+3. Develop JAVA code to perform database operation
+
+
+
+1. Hibernate Config file:
+
+        The configuration File basically tells Hibernate how to connect to the database.
+
+        Since hibernate internally Execute JDBC. So most of the information we will be providing on the Config file will be JDBC url, username, password etc.
+
+
+            <?xml version="1.0" encoding="UTF-8"?>
+            <!DOCTYPE hibernate-configuration PUBLIC
+                    "-//Hibernate/Hibernate Configuration DTD 3.0//EN"
+                    "http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
+            <hibernate-configuration>
+                <session-factory>
+                    
+                    <!--IMP  -->
+                    <property name="connection.driver_class">oracle.jdbc.OracleDriver</property>
+                    <property name="connection.url">jdbc:oracle:thin:@localhost:1521:xe</property>
+                    <property name="connection.username">sharan</property>
+                    <property name="connection.password">system</property>
+                    <!--IMP  -->
+                    
+                    
+                    <property name="connection.pool_size">1</property>
+                    <property name="dialect">org.hibernate.dialect.Oracle10gDialect</property> <!-- for oracle 11g. So here when hibernate generate oracle SQL, it knows how to talk to oracle -->
+                    <property name="show_sql">true</property> <!-- prints the SQLs in console. used for testing -->
+                    <property name="current_session_context_class">thread</property>  <!-- current Session will follow the threaded model -->
+                </session-factory>
+            </hibernate-configuration>
+
+
+
+2. Annotate JAVA Class
+
+            Hibernate has a concept called Entity Class.
+            So this EntityClass Directly Maps with Database Table. This is what known as ORM -> Object Relational Mapping.
+
+
+            There are two options for mapping a class.
+                a. XML config File (legacy)
+                b. JAVA Annotations. (modern ways)
+
+
+        Step 1: Map class to database Table
+        Step 2: Map Fields to database Columns
+
+
+
+        Step 1: Map class to database Table
+
+                So for mapping we will be providing two annotations on the class.
+
+                1. @Entity to tell this is an entity Class
+                2. @Table(name="table_name") --> tells which table this class is mapped with
+
+                    here @Table is optional because the JAVA Class name is having the same name as Database table. But writing it is a good practice
+
+        
+        Step 2: Map Fields to database Columns
+
+                Here also we have 2 annotations:
+                1. @Id --> this tells its the primary Key of the column
+                2. @Column(name="column_name")
+
+
+            Note we will be using JPA annotations. Hibernate is an implementation oF JPA Specification.
+            Hibernate Team Recommends for the use of JPA annotations for the best practice
+
+
+    3. Develop JAVA code to perform database operation
+
+        Important Key Players:
+            1. Session Factory --> This is the person that reads the hibernate config files, gives the connection to DB and it will create the session object for us.
+                                   Note** Session Factory is a heavy Weight Object. It is only created once in your application. Now when Session Factory is created,
+                                   it is used to Create Session
+
+            2. Session  --> Its a Wrapper arround the JDBC connection to the DB. Session is the main object that you will create for Saving and retriving objects to the DB.
+
+
+
+            Step 1. So At first we will get the reference to a Session Factory.
+
+                        SessionFactory factory=new Configuration().configure("hibernate.cfg.xml").addAnnotatedClass(Student.class).buildSessionFactory();
+
+                        // Note** "hibernate.cfg.xml" is not required, you can only give configure() and hibernate will fetch the Conf file with this name on our classpath
+                        Session session=factory.getCurrentSession();
+
+                        try{
+
+                        } finally{
+                            factory.close();
+                        }
+
+
+
+            Step 2: Saving the JAVA Object .
+
+                    1. Create a Student.
+
+                        Student tempStudent=new Student("id","Shashank","Sharan","shashank.sharan01@gmail.com");
+
+                    2. Starting a TRX on that Session.
+                        session.beginTransaction();
+                    
+                    3. Saving the Given Object to the db. Behind the Scene, HIbernate knows how to connect to our DB based on our Config file.
+                        Also Behind the Scene Hibernate knows how to map that class with tables based on the annotated Class.
+
+                        session.save(tempStudent);  
+
+                    4. Commit it TRX.
+                        session.getTransaction().commit;
+
+
+
+
+                    	public static void main(String ...args) {
+                            //create Session Factory
+                            
+                            SessionFactory factory =new Configuration().configure("hibernate.cfg.xml").addAnnotatedClass(Student.class).buildSessionFactory();
+                            
+                            // Create Session
+                            
+                            
+                            Session session=factory.getCurrentSession();
+                            
+                            try {
+                                
+                                System.out.println("Create a new Student Class");
+                                Student student=new Student("Shashank","Bolia","sbolia@amdocs.com");
+                                
+                                
+                                System.out.println("Starting TRX");
+                                session.beginTransaction();
+                                
+                                System.out.println("Saving the Object to DB");
+                                session.save(student);
+                                
+                                System.out.println("Commiting TRX");
+                                session.getTransaction().commit();
+                                
+                            }finally {
+
+                                factory.close();
+                                
+                            }
+                        }
+
+=========================================================================================================================================================
+
+
+Hibernate Primary Key
+    
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
+    GenerationType.IDENTITY --> Assign PK using Database Identity Column.  -- in oracle
+
+    For Generating the primary key from hibernate using some specail Logic. we need to use annotation @GeneratedValue
+
+    you can create your own custom generation strategy.
+
+    So here we need to implement the IdentifierGenerator Interface
+
+    and then we will Override the Serializable generate() method where we will write Custom Logic.
+        you can add custom generator but need to take care a lot. epecially in cluster env, you may not get the unique value for PK.
+
+
+=========================================================================================================================================================
+
+
+Retriving the Object from the DB.
+
+    In hibernate you retrive the object with the help of Primary Key.
+
+    Student student=session.get(Student.class, theStudent.getId());
+                                                            |
+                                                            |
+                                             you need to privide the primary key ID   
+
+                try{
+        			session.beginTransaction();
+                    Student myStudent=session.get(Student.class, 3);
+                    System.out.println(myStudent.getId());
+                    System.out.println(myStudent.getFirstName());
+                    System.out.println(myStudent.getLastName());
+                    System.out.println(myStudent.getEmail());
+                    session.getTransaction().commit();
+                }finally{
+
+                }
+
+
+==========================================================================================================================================================
+
+
+
+Querying the object with Some Condition.
+
+    So here we use HQL
+    Its Similar to SQL where you query Similarly like SQL with where, like, order by, join, in , etc.
+
+    Simple Select:
+
+        List<Student> theStudent=session.createQuery("from Student").getResultList();  --> gives the list of all student objects
+    
+    Select with Where Condition:
+
+        session.createQuery("from Student s where s.lastName='Doe'").getResultList();                                   --> WHERE
+        session.createQuery("from Student s where s.lastName='Doe' OR s.firstName='John'").getResultList();             --> OR
+        session.createQuery("from Student s where s.lastName='Doe' OR s.firstName LIKE '%John'").getResultList();       --> LIKE
+
+
+
+        public class QueryStudentDemo {
+            public static void main(String ...args) {
+                SessionFactory factory =new Configuration().configure("hibernate.cfg.xml").addAnnotatedClass(Student.class).buildSessionFactory();
+                Session session=factory.getCurrentSession();
+                try {
+                    session.beginTransaction();
+                    List<Student> createStudent=session.createQuery("from Student where FIRST_NAME LIKE 'Shas%'").getResultList();
+                    for(Student myStudent:createStudent) {
+                        System.out.println(myStudent.getId());
+                        System.out.println(myStudent.getFirstName());
+                        System.out.println(myStudent.getLastName());
+                        System.out.println(myStudent.getEmail());
+                    }
+                    session.getTransaction().commit();
+                }
+                finally {
+                    factory.close();
+                }
+            }
+        }
+
+
+    For logging the Actual QUery: --> tutorial -198
+
+
+==========================================================================================================================================================
+Update.
+
+
+    1. Using ID:
+
+        Student myStudent=session.get(Student.class, 1);
+        mystudent.setFirstName("Shashank");
+        session.getTransaction().commit(); // After this the daya will automatically updated  because myStudent is the persistance object and we made changes on that.
+
+
+    2. Using createQuery:
+
+        session.createQuery("update Student set email='shashank@gmail.com'").executeUpdate();
+
+
+==========================================================================================================================================================
+
+Delete
+
+
+    Method 1: using session.delete(); This method is used only for deleting Single Object.
+
+        Step 1: Get the Student Object ie.e Persistance Object.
+
+            Student student =session.get(Student.class, 1);
+
+        Step 2: perform session.delete();
+
+                session.delete(student);
+
+        Step 3: Commit Changes.
+
+                session.getTransaction().commit();
+
+    
+    Method 2: Delete with HQL
+
+        session.createQuery("delete from Student where id=2").executeUpdate();
+
+
+==========================================================================================================================================================
+
+Reading Dates from Command Line:
+
+
+    For this you need to make use of JAVA Date Formatting Class and Hibernate Annotations.
+   
+    Development Process Overview
+
+        1. Alter database table for student
+
+            alter table STUDENT
+            modify column  CTDB_CRE_DATETIME  NOT NULL;
+
+        2. Add a date utils class for parsing and formatting dates
+
+            public class DataUtils {
+                private static SimpleDateFormat formatter=new SimpleDateFormat();
+                
+                // read a date string and parse/convert to a date
+                public static Date parseDate(String dateStr) throws ParseException{
+                    Date theDate=formatter.parse(dateStr);
+                    return theDate;
+                }
+                
+                // read a date and format/convert to a string
+                public static String formatDate(Date theDate) {
+                    String result=null;
+                    if(theDate!=null) {
+                        result=formatter.format(theDate);
+                    }
+                    return result;
+                }
+            }
+
+        3. Add date field to Student class
+
+            Also, we make use of the @Temporal annotation. This is a Java annotation for storing dates.
+
+
+            @Column(name="CTDB_CRE_DATETIME")
+            @Temporal(TemporalType.DATE)
+            private Date CtdbCreDatetime;
+            
+        4. Add toString method to Student class
+        5. Update CreateStudentDemo
+
+==========================================================================================================================================================
+
+Advance Mapping:
+
+    We usually Have Dependencies on the tables
+
+
+    1. One-to-One
+    2. One-to-Many , Many-to-One
+    3. Many-to-Many
+
+     1. One-to-One
+
+        TABLE_CUSTOMER ------> TABLE_CONTACT
+
+    2. One-to-Many
+
+        TABLE_CUSTOMER ----> TABLE_BLG_ARGMNT
+
+
+    3. Many-to-One
+    
+        TABLE_BLG_ARGMNT  -----> TABLE_CUSTOMER
+
+    4. Many-to-Many
+
+        TBAP_ITEM ---> TBAP_PRICE_PLAN
+==========================================================================================================================================================
+
+    Unidirectional RelationShip:
+
+
+    1. TBAP_ITEM  --> TBAP_PRICE_PLAN
+    2. TBAP_PRICE_PLAN --> TBAP_ITEM
+
+
+==========================================================================================================================================================
+1. One-to-One and Unidirectional
+
+
+    Prep Work:
+
+        1. Create required Tables --> TABLE_CUSTOMER AND TABLE_CONTACT
+
+                For Creating AutoIncrement in Oracle
+                
+                CREATE SEQUENCE table_contact_seq START WITH 1;
+
+                CREATE OR REPLACE TRIGGER table_contact_trg
+                BEFORE INSERT ON table_contact 
+                FOR EACH ROW
+
+                BEGIN
+                SELECT table_contact_seq.NEXTVAL
+                INTO   :new.id
+                FROM   dual;
+                END;
+                /
+
+
+
+            after that add the foreign key references
+
+
+        2. Create CONTACT class
+
+            @Entity
+            @Table(name="TABLE_CONTACT")
+            public class Contact {
+                
+                @Id
+                @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "TABLE_CONTACT_SEQ")
+                @SequenceGenerator(name = "TABLE_CONTACT_SEQ", sequenceName = "SHARAN.TABLE_CONTACT_SEQ", allocationSize = 1)
+                @Column(name="OBJID")
+                private int objid;
+                
+                @Column(name="CONTACT_ID")
+                private int contactId;
+                
+                public Contact(int contactId) {
+                    super();
+                    this.contactId = contactId;
+                }
+                
+                public int getObjid() {return objid;}
+                public void setObjid(int objid) {this.objid = objid;}
+                public int getContactId() {return contactId;}
+                public void setContactId(int contactId) {this.contactId = contactId;}
+            }
+
+
+        3. Create Customer class
+
+
+            @Entity
+            @Table(name="TABLE_CUSTOMER")
+            public class Customer {
+
+                @Id
+                @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "TABLE_CUSTOMER_SEQ")
+                @SequenceGenerator(name = "TABLE_CUSTOMER_SEQ", sequenceName = "SHARAN.TABLE_CUSTOMER_SEQ", allocationSize = 1)
+                @Column(name="OBJID")
+                private int objid;
+                
+                @Column(name = "CUSTOMER_ID")
+                private int customerId;
+
+                @OneToOne(cascade=CascadeType.ALL)     // by default for one to one te fetch type is eager
+                @JoinColumn(name="CUSTOMER2CONTACT")   // SO here Hibernate will go to the Column and Check for foreign key reference and put its value in this column in the table
+                private Contact contact;
+                
+
+                
+                public Contact getContact() {
+                    return contact;
+                }
+                public void setContact(Contact contact) {
+                    this.contact = contact;
+                }
+                public Customer(int customerId) {
+                    super();
+                    this.customerId = customerId;
+                }
+                public int getObjid() {return objid;}
+                public void setObjid(int objid) {this.objid = objid;}
+                public int getCustomerId() {return customerId;}
+                public void setCustomerId(int customerId) {this.customerId = customerId;}
+            }
+ 
+
+
+    
+                Entity Life Cycle: Tutorial 208 --> 4:18
+
+                    1. Detach   --> If the Entity is Detach, it is not associated with the hibernate session.
+                    2. Merge    --> this will reattach the entity with the session
+                    3. Persist  --> Transition new instance to the managed State. Next Flush and Commit will Save it in DB
+                    4. Remove   --> Transition Managed entitiy to be removed. Next Flush/ Commit will delete it from DB.
+                    5. Refresh  --> Reload / Sync object with data from DB. Prevents Stale Data
+
+
+
+
+                @OneToOne Cascade Types:
+
+                1. Persist --> If entity is persisted/saved , related entity will also be persisted.
+                2. Remove  --> If the Entity is removed/deleted, related entity will also be deleted.
+                3. Refresh --> If the entity is refreshed, the related Entity will also be refreshed.
+                4. Detach/Merge
+                5. ALL     --> All of Above cascade types
+
+
+                Configuring Cascading Types.
+
+                @OneToOne(cascade=CascadeType.ALL). --> need to put over the Join Column
+
+                Note** by default no Cascade type is set
+
+
+                For selection a particular Cascade Type:
+
+                    @OneToOne(Cascade={
+                        CascadeType.DETACH,
+                        CascadeType.MERGE
+                    })
+
+
+            4. Create Main App
+
+
+                public class App {
+
+                    public static void main(String[] args) {
+                        
+                        SessionFactory factory=new Configuration().configure("hibernate.cfg.xml").addAnnotatedClass(Customer.class).addAnnotatedClass(Contact.class).buildSessionFactory();
+                        Session session=factory.getCurrentSession();
+                        try {
+                            
+                            Customer customer=new Customer(165571);
+                            Contact contact=new Contact(98765);
+                            customer.setContact(contact);
+                            session.beginTransaction();
+                            session.saveOrUpdate(customer);
+                            session.getTransaction().commit();
+                        }finally {
+                            factory.close();
+                        }
+                    }
+                }
+
+            Note** Don't apply trigger on on table_contact;
+		
+=================================================================================================================================================================
+
+for Delete:
+    			
+			int objid=67;
+			session.beginTransaction();
+			Customer customer =session.get(Customer.class, objid);
+			if(customer!=null)
+				session.delete(customer);
+			session.getTransaction().commit();
+
+=================================================================================================================================================================
+
+
+2. @OneToOne --> Bidirectional
+
+
+    Steps:
+    1. Make updates on Contact class:
+
+        a. add a new Field to Reference Customer
+	        private Customer customer; 
+
+        b. Add a getters and setters for Customer
+        c. Add @OneToOne annotation
+
+            	@OneToOne(mappedBy="contact", cascade=CascadeType.ALL) // customer field is mapped by the contact property in the Customer Class
+	            private Customer customer; 
+
+                In Customer class hiberate will Search for the @JoinColumn and Map the Relation.
+
+                Note**
+                    mappedBy: looks at the contact property in the Customer class
+                    Use the information from the Customer class @JoinColumn
+                    to help to find associated Customer for that contact.
+
+    2. Create Main App
+
+
+        	int objid=48;
+			session.beginTransaction();
+			Contact contact =session.get(Contact.class, objid);
+			Customer customer=contact.getCustomer();
+
+
+    also to avoid session pool leaks, put session.close();
+
+
+    For deletion also use the same tecnique and it will delete the relation too.
+
+    But for only deleting Contact.
+
+            Also We need to keep the CascadeType --> detach, merge, persist, refresh but not Remove for customer field in Contact Class
+
+            int objid=50;
+			session.beginTransaction();
+			Contact contact =session.get(Contact.class, objid);
+			contact.getCustomer().setContact(null);   // Breaking the bi - directional link since it is the foreign Key
+			session.delete(contact);
+
+=================================================================================================================================================================
+
+3. @OneToMany - Bidirectional
+
+    Example TBAP_ITEM -----> TBAP_PRICE_PLAN 
+
+    so an item object has multiple pricing BOs
+
+    If you delete the item, delete the pricing too
+    If you delete the pricing, do not delete the item
+
+
+    So Prep Work
+    1. Create tables on DB  --> Don't add Triggers
+    2. Create AP_ITEM Class
+    3. create PRICE_PLAN class
+    4. create a main App
+
+    class ApItem:
+    
+        @Id
+        @GeneratedValue(strategy = GenerationType.SEQUENCE, generator="TBAP_ITEM_SEQ")
+        @SequenceGenerator(name = "TBAP_ITEM_SEQ", sequenceName = "TBAP_ITEM_SEQ", allocationSize=1)
+        @Column(name="AP_ID")
+        private int apId;
+        
+        @Column(name="SERVICE_TYPE")
+        private String serviceType;
+        
+        @OneToMany(mappedBy="apItem", cascade=CascadeType.ALL)
+        private List<PricePlan> pricePlan;
+
+        public ApItem() {}
+        public ApItem(String serviceType) {
+            super();
+            this.serviceType = serviceType;
+        }
+
+        public int getApId() {return apId;}
+        public void setApId(int apId) {this.apId = apId;}
+        public String getServiceType() {return serviceType;}
+        public void setServiceType(String serviceType) {this.serviceType = serviceType;}
+        public List<PricePlan> getPricePlan() {return pricePlan;}
+        public void setPricePlan(List<PricePlan> pricePlan) {this.pricePlan = pricePlan;}
+        
+        public void addPricePlan(PricePlan tempPricePlan) {
+            if(this.pricePlan==null) {
+                this.pricePlan=new ArrayList<PricePlan>();
+            }
+            this.pricePlan.add(tempPricePlan);
+            tempPricePlan.setApItem(this);
+        }                   
+
+
+    class PricePlan:
+
+    	@Id
+        @GeneratedValue(strategy = GenerationType.SEQUENCE, generator="TBAP_PRICE_PLAN_SEQ")
+        @SequenceGenerator(name = "TBAP_PRICE_PLAN_SEQ", sequenceName = "TBAP_PRICE_PLAN_SEQ", allocationSize=1)
+        @Column(name="AP_ID")
+        private int apId;
+        
+        @Column(name="OFFER_NAME")
+        private String offerName;
+        
+        @Column(name="ITEM_DEF_ID")
+        private int itemDefId;
+        
+        @ManyToOne(cascade={CascadeType.ALL})
+        @JoinColumn(name="AP_ID_DOMINANT")
+        private ApItem apItem;
+
+        public PricePlan() {}
+        public PricePlan(String offerName, int itemDefId) {
+            super();
+            this.offerName = offerName;
+            this.itemDefId = itemDefId;
+        }
+
+        public int getApId() {return apId;}
+        public void setApId(int apId) {this.apId = apId;}
+        public String getOfferName() {return offerName;}
+        public void setOfferName(String offerName) {this.offerName = offerName;}
+        public int getItemDefId() {return itemDefId;}
+        public void setItemDefId(int itemDefId) {this.itemDefId = itemDefId;}
+        public ApItem getApItem() {return apItem;}
+        public void setApItem(ApItem apItem) {this.apItem = apItem;}
+
+
+
+======================================================================================================================
+
+OneToMany: Unidirectional:
+
+The table in which it is found depends upon the context.
+
+- If the join is for a OneToOne or ManyToOne mapping using a foreign key mapping strategy, the foreign key column is in the table of the source entity or embeddable.
+
+- If the join is for a unidirectional OneToMany mapping using a foreign key mapping strategy, the foreign key is in the table of the target entity.
+
+- If the join is for a ManyToMany mapping or for a OneToOne or bidirectional ManyToOne/OneToMany mapping using a join table, the foreign key is in a join table.
+
+- If the join is for an element collection, the foreign key is in a collection table.
+
+
+Many TO Many
+
+lets take an Example to Student and courses
+ An Student can have many courses
+ A Course can be taught by many Students.
+
+ In this we will take the help of Join table which will maintain the relationship between the Student and Courses.
+
+ Join Table Contains the foreign key of each Table and those to foreign keys will be the primary key of the Join Table
+
+ Here we will tabke an Example of TABLE_CONTACT , TABLE_CON_BUS_ROLE and  TABLE_CUSTOMER
+
+ Step 1. Create Table. Here no need to create join Table ORM
+ Step 2. Create Customer Class
+
+            and Specify @ManyToMany  and @JoinTable Annotation over contact collection Variable
+
+            @ManyToMany(fetch=FetchType.LAZY,cascade = CascadeType.ALL)
+            @JoinTable(
+                    name="TABLE_CON_BUS_ROLE",
+                    joinColumns = @JoinColumn(name="CON_BUS_ROLE2CUSTOMER"),        // for same side 
+                    inverseJoinColumns = @JoinColumn(name="CON_BUS_ROLE2CONTACT")   // for other side
+                    )
+            private List<Contact> contact;
+
+
+    same do it on contact class.
+
+    and set unidirectional relation ship

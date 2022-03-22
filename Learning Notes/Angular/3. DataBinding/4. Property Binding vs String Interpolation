@@ -1,0 +1,15 @@
+We can use interpolation like below:
+
+    <p>{{allowNewServers}}</p>
+
+But we can also make use of property Binding here:
+
+    <p [innerText]="allowNewServers"></p>    // this will also output the Same Result
+
+
+Now the Best practice is to use String Interpolation when you want to change the HTML in the template.
+and Use property Binding when you want to modify the element property.
+
+Don't mix Property Binding with String Interpolation.
+String Interpolation:   always done inside {{}}  --> {{allowNewServers}}
+Property Binding:       always done in ""   -> [disabled]="allowNewServers"

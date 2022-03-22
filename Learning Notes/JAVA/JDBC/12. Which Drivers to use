@@ -1,0 +1,4 @@
+Type 4 Driver----> When the Project is small and Standalone and require only one DB
+Type 3 Driver----> When the Project is large and Diffrent DB is required to store the Data
+Type 2 Driver----> when type 4 and 3 driver is not there.
+Type 1 Driver----> When type 2,3,4 is not available

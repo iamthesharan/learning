@@ -1,0 +1,12 @@
+
+
+How Hibernate is related to JDBC.
+
+Hibernate internally uses JDBC
+
+
+How to set up your development environment
+
+Requirements:   1. IDE
+                2. DB Server
+                3. Hibernate JAR Files and JDBC Driver

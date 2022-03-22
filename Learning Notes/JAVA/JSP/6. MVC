@@ -1,0 +1,51 @@
+MVC
+
+
+
+
+                Controller
+            /       |       
+           /        |      ___________
+          /         |      |Model    |
+         /          |      |Object   |   
+        /           |      |_________|
+client              |
+        \           |
+         \          |
+          \         |
+           \        |
+            \     View  (Just a Layout)
+
+As a client we are only concern about view
+Controler will send the data in the form of model object
+
+
+In java 
+Controller: is the Servlet.
+View      : is the JSP
+Model     : POJO format --> Plain old java Object
+
+
+Never write Bussiness Logic on JSP Page.
+Never write Operation code like Fetching data from DB in controller. rather just create a service class and Let Controller to fetch data from there. Service class will fetch data form DB. 
+Controller is just to route the data to view.
+        
+
+Student.java: Simple POJO Class with constructor and getters and setters
+StudentDataUtil.java: Model Class. Basically it is used for creating an object of POJO class and perform Operation on it.
+    public static List<Student>getStudent(){
+		List<Student> students=new ArrayList<Student>();
+		students.add(new Student("Shashank","Sharan","sharans@amdocs.com"));
+		students.add(new Student("Khushboo","Shivhare","kushi001@amdocs.com"));
+		return students;
+	}
+    
+MvcDemoServlet Class: Required to send the data to JSP 
+
+protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		List<Student> students=StudentDataUtil.getStudent();
+		request.setAttribute("StudentList", students);
+		RequestDispatcher dispatcher =request.getRequestDispatcher("/viewStudents.jsp");
+		dispatcher.forward(request, response);
+	}
+        

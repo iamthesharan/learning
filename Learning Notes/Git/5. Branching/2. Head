@@ -1,0 +1,6 @@
+HEAD --> master
+
+Head is simply a pointer that refers to the current location in your repository. It points to a particular branch reference,
+So far the Head always points to the latest commit you made on the master branch, but soon we can see that we can move around and head will change.
+
+Head will always points to the last commit in a PARTICULAR BRANCH.

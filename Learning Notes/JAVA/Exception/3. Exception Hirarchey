@@ -1,0 +1,45 @@
+Which Class acts as a root for all JAVA Exceptions?
+Answer: Throwable Class
+
+There are two Child Classes of Throwable:
+
+    1. Exception
+    2. Error
+
+
+
+Exception vs Error:
+
+Exception:
+Most of the Time Exceptions are cause by our Program. Exceptions are recovorable and can be handled
+
+Error:
+Most of the times errors are not caused by program. Errors are due to lack of system Resources. Example Stack OVerflowError. It Can't be handled
+
+
+Exception Child Class:
+1. Runtime Exception
+    a. Arethemic Exception
+    b. Null Pointer Exception
+    c. ClassNotFoundException
+    d. IndexOutOfBound Exception
+        - ArrayIndexOutOfBoundException
+        - StringIndexOutOfBoundException
+    e. IllegalArgumentException
+
+2. IOException
+    a. EOFException
+    b. FileNotFoundException
+    c. InterruptedIOExcetpion
+3. Servlet Exception
+4. Remote Exception
+5. Interrupted Exception
+
+
+
+Error:
+    a. VM Error
+        - StackOverflowError
+        - OutOfMemoryError
+    b. AssertionError
+    c. ExceptionInInititalizerError

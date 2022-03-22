@@ -1,0 +1,18 @@
+BuiltIn Objects:
+Request(HttpServletRequest)
+Response(HttpServletResponse)
+PageContext(PageContext)
+Out (JSPWriter) ~ PrintWrite object
+Session (HttpSession)
+Application(ServletContext)
+Config(ServletConfig)
+
+
+Example:
+request.getParameter();
+
+pageContext.setAttribute("name","Sharan");  -> Its Scope will be inside the page
+
+for providing the scope in the session.
+
+pageContext.setAttribute("name","Sharan",PageContext.SESSION_SCOPE); 

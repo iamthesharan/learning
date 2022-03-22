@@ -1,0 +1,121 @@
+class Employee{
+    String name;
+    int eno;
+    Employee(String name , int eno){
+        this.name=name;
+        this.eno=eno;
+    }
+    public String toString(){
+        return this.eno+" : "+this.name;
+    }
+}
+class test{
+    public static void main(String ...args){
+        ArrayList<Employee> l=new ArrayList<Employee>();
+        l.add(new Employee("Sharan",23));
+        l.add(new Employee("Kiran",20));
+        l.add(new Employee("Namrata",21));
+        System.out.println(l);
+        // Now we will sort the array list of employees by using Collections.sort(l, Comparator c) based on eno.
+    }
+}
+
+
+So for Sorting we use:
+
+class MyCompartor implements Comparator{
+    public int compare(Employee e1, Employee e2){
+        (e1.eno<e2.eno)?-1:(e1.eno>e2.eno)?1:0;
+    }
+}
+
+=====>
+
+class MyCompartor implements Comparator{
+    (e1,e2)=>(e1.eno<e2.eno)?-1:(e1.eno>e2.eno)?1:0;
+}
+
+==> Remove MyComparator Class and just use test Class:
+class test{
+    public static void main(String ...args){
+        ArrayList<Employee> l=new ArrayList<Employee>();
+        l.add(new Employee("Sharan",23));
+        l.add(new Employee("Kiran",20));
+        l.add(new Employee("Namrata",21));
+        System.out.println(l);
+        // Now we will sort the array list of employees by using Collections.sort(l, Comparator c) based on eno.
+        Collections.sort(l,(e1,e2)=>(e1.eno<e2.eno)?-1:(e1.eno>e2.eno)?1:0;);
+        System.out.println(l);
+    }
+}
+
+===============================================================================================================
+
+lambda Expression  classes is not replacement of Annonymous Inner Classes
+
+
+Annonymous Inner Class: The Class without having name is called Anonymous Inner Class:
+
+    Thread t=new Thread(){
+        //This block is class which extends Thread Class
+
+        // Some Code.
+    };
+
+
+    Runnable r=new Runnable(){
+        //This is the implementation class for Runnable with no name.
+    };
+
+
+
+    class test{
+        public static void main(String ...args){
+            Runnable r=new Runnable(){
+                // We are creating an object of the class which implements runnable and refrenceing it to r varibale
+                public void run(){
+                    for(int i=0;i<10;i++){
+                        System.out.println("Child Thread");
+                    }
+                }
+            };
+            Thread t=new Thread(r);
+            t.start();
+            for(int i=0;i<10;i++){
+                System.out.println("Main Thread");
+            }
+        }
+    }
+
+    Now here we can also use Lambda Expression:
+
+    class test{
+        public static void main(String ...args){
+            Runnable r=()->{
+                for(int i=0;i<10;i++)
+                    System.out.prinln("Child Thread");
+            }
+            Thread t=new Thread(r);
+            t.start();
+            for(int i=0;i<10;i++){
+                System.out.println("Main Thread");
+            }
+        }
+    }
+
+    Note **** Now Runnable is a FI. But suppose If there is an Interface which is not Functional then there lambda Expression will not work.
+    Hence in that case, we need to use Anonymous Inner Class.
+
+
+    interface A{
+        public void m1();
+        public void m2();
+    }
+    A a=new A(){
+        // Now here we can't use lamda Expression because A is not FI as it has 2 abstract methods
+        public void m1(){}
+        public void m2(){}
+    }
+
+
+    Hence There are some cases where we can't go for Lambda Expression and hence we need to use Anonymous Inner class

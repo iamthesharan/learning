@@ -1,0 +1,25 @@
+wc - print newline, word, and byte counts for each file
+
+root@d87ed6b05871:~/Sharan# echo APPLE | wc
+      1       1       6
+
+
+-------
+
+echo "HELLO" | wc -c --> this will give the length of the String inluding new line character. so it will give 6 as output.
+
+If we dont want new line, the use 
+echo -n "Hello" | wc -c
+
+Inside the Shell Script if we want to assign the value to variable, we have to use command Substitution.
+
+len=$(echo -n "Hello" | wc -c)
+
+
+
+Options:
+
+wc -c --> charactes.
+wc -l --> lines
+wc -w --> Word
+wc -L --> No of charactes in longest lines.

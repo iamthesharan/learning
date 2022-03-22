@@ -1,0 +1,276 @@
+
+Notes 3
+
+
+Method Local Inner Classes
+
+
+Sometimes we can declare a class inside a method such type of inner Classes are Called Method 
+Local Inner Classes
+
+Applicable Modifiers: final, abstract, strictfp
+class Test{
+	public void m1(){
+		// Let Us Suppose this method is of 1500 Lines and
+		// We have the Same Functionality repeatedly required
+		// So in this case we can declare that functionality inside a method
+		// and we can call that method based on our Requirement
+		/*
+
+			public void m2(){
+				//Some Functionality
+			}
+			Note* -  We Cannot Declare Nested Methods in java
+
+			So Ways to Solve this Problem:
+			
+			
+				1) Either Declare m2 outside m1-- 
+						but the problem with this is we have functionality
+						related to m1 method. We don't want to expose the functionality 
+						outside m1 method.
+				2) Or We Can Declare a Class and within that class we can declare a method.
+					Therefore wherever nested method is required, We can directly go for method 
+					Local Inner Class
+		*/
+		
+		
+		
+		
+		class Inner{
+			public void m2(){
+				//Some Functionality
+			}
+		}
+		Inner i=new Inner();
+		i.m2();
+		
+		
+		/*
+			The Main Purpose of Method Local Inner Class is to define Method Specific repeatedly
+			required Functionality.
+			
+			Method Local Inner Classes are Best Suitable to Meet Nested Method Requirements.
+			
+			The Most Rarely Used Inner Classes is Method Local Inner Classes
+		*/
+		
+		/*
+			We Can Access Method Local Inner Classes Only Within a Method where as 
+			outside of the method we can't Access because of it's less scope. Method local inner
+			classes are most rarely used type of inner classes.
+			
+		*/
+	}
+}
+
+
+---------------------------------------------------------------------------------------------------
+
+
+class test{
+	public void m1(){
+		class Inner{
+			public void sum(int x, int y){
+				System.out.println(x+y);
+			}
+		}
+		Inner i=new Inner();
+		i.sum(10,20);
+		i.sum(10,30);
+	}
+	public static void main(String ...args){
+		test t=new test();
+		t.m1();
+	}
+}
+
+--------------------------------------------------------------------------------------------------
+
+
+We can declare method local inner class inside both instance and a static methods 
+but if We Declare method local inner class inside Static method then:
+
+
+class test{
+	int x=10;
+	static int y=20;
+	public static void m1(){
+		class inner{
+			public void m2(){
+				System.out.println(x);  // Compilation Error; because we need to connect x with Object
+				System.out.println(y);  
+			}
+		}
+	}
+}
+
+
+/*
+	If We Declare Inner Class Inside instance method then from that method local inner 
+	class we can access both static or Non-static members of Outer Class Directly.
+	
+	If We Declare Inside Static method Then We Can Access Only Static members of the outer Class
+	Directly from that method local inner class.
+*/
+
+
+
+------------------------------------------------------------------------------------------------------
+
+
+class test{
+	public void m1(){
+		int x=1;		
+		class Inner{
+			public void m2(){
+				System.out.println(x);  // Compiler Error
+			}
+		}
+		Inner i=new Inner();
+		i.m2();
+	}
+	public static void main(String ...args){
+		test t=new test();
+		t.m1();
+	}
+}
+
+
+/*
+
+	from Method local inner class we can't access local variables of the method in which we declare 
+	Inner Class.
+	
+	If the local variable declared as Final, Then it can be accessed.
+*/
+
+
+class test{
+	public void m1(){
+		final int x=1;
+		class Inner{
+			public void m2(){
+				System.out.println(x);  // Compiler Pass
+			}
+		}
+		Inner i=new Inner();
+		i.m2();
+	}
+	public static void main(String ...args){
+		test t=new test();
+		t.m1();
+	}
+}
+
+
+---------------------------------------------------------------------------------------------
+
+Every Final variable will be replaced by the value at the compile time.
+Local variable will be stored in stack
+Object will be stored in Heap
+
+
+Reason For Above Code which has Final int x=1;;
+
+let us suppose final is not there,
+So When Compiler calls t.m1();
+the call goes like this-->
+ 
+ ---> t.m1() 
+ ---> x variable will be stored in stack 
+ ----> Inner Class Object is created
+ ---> and then i.m2() is called 
+ ----> after that x variable goes out of the scope and also from stack
+ But remember, the object i may be there in heap Area and someone may call it from outside 
+ from the heap area and an access m2 method.
+ so while accessing m2 method, x is not there in stack. So compiler will give error.
+ 
+ 
+ Now, If we Put Final on x then-->
+ Every Final variable will be replaced by the value at the compile time.
+ 
+ So at compile time only the x variable present in m2 is replaced by 1
+ So even after X goes out of scope, the value of x in m2 method will retain 
+ as it is assigned during the compile time. So compiler will execute the code properly.
+ 
+ 
+ 
+ 
+ 
+ --------------------------------------------------------------------------------------------------
+ 
+ 
+ class test{
+ 	int i=10;
+ 	static int j=20;
+ 	public void m1(){
+ 		int k=30;
+ 		static int m=40;
+ 		class Inner{
+ 			public void m2(){
+ 				Line(1);
+ 			}
+ 		}
+ 	}
+ }
+ 
+ Q) Which Variable Can be Accessed?
+ Ans) i,j,k
+ Accessing a method's member variable from within method-local inner class is a feature of JDK 1.8 only, prior to that version of JDK, it gives an error.
+ 
+class test{
+ 	int i=10;
+ 	static int j=20;
+ 	public static void m1(){
+ 		int k=30;
+ 		static int 	m=40;
+ 		class Inner{
+ 			public void m2(){
+ 				Line(1);
+ 			}
+ 		}
+ 	}
+ }
+ 
+ 
+ Q) Which Variable Can be Accessed?
+ Ans) j and We Can't Declare Static variables in method. Static is always related to Class.
+ 
+ 
+ 
+   class test{
+ 	int i=10;
+ 	static int j=20;
+ 	public void m1(){
+ 		int k=30;
+ 		static int 	m=40;
+ 		class Inner{
+ 			public static void m2(){
+ 				Line(1);
+ 			}
+ 		}
+ 	}
+ }
+ 
+  Q) Which Variable Can be Accessed?
+ Ans) Compile Time Error --- > Inside Inner Class We Can't Declare Static members.
+ 
+ 
+ 
+ 
+ ------------------------------------------------------------------------------------------------
+ 
+public void m1(){
+ 	int x=10;
+}
+ 
+ X cannot have Public, private, protected Modifier. It can only have Final Modifier. As x can
+ be looses its scope as soon as it method ends.
+ 
+ 
+Therefore Method Local Inner Classes can have only Final, Abstract, Strictfp,
+Modifier or else don't have any modifier
+ 
+ 
+ 

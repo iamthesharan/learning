@@ -1,0 +1,20 @@
+Child Interface of MAP.
+Here Sorting is based on Key not the Values
+
+
+101 - A 
+102 - B
+103 - C
+104 - D
+105 - E
+106 - F
+
+
+mehtods
+
+Object firstKey() --> 101
+Object lastKey()  --> 106
+Object headMap(104)  --> [101=A,102=B,103=C]
+Object subMap(102,105) --> [102=B,103=C,104=D]
+comparator();  --> if we are following default method sorting order comparator method returns null
+

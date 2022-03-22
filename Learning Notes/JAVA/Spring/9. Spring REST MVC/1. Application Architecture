@@ -1,0 +1,8 @@
+CRM Service (Spring REST API) <------------> CustomerService <----------------> CustomerDAO <---------> DB
+
+In this Module we will develop an application that will:
+1. Get Customers
+2. Get Single Customer by ID
+3. Add a new Customer
+4. Update an existing Customer
+5. Delete an existing Customer

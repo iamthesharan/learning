@@ -1,0 +1,31 @@
+How to write a servlet class
+1. Servlet interface 
+2. Genric Servlets (AbstractClass)
+3. Http Servlet (abstract Class)
+
+
+A. Servlet Interface:
+
+There are 5 abstract methods:
+    1. void init(ServletConfig config);
+    2. void service(ServletRequest, ServletResponse);
+    3. void destroy();
+    4. String getServletInfo();
+    5. ServletConfig getServletConfig();
+    
+    
+    
+    
+B. Generic Servlet:
+
+This class implements Servlets:
+Only Single abstract method is: service(ServletRequest, ServletResponse);
+So we only have to implement this methods
+
+
+C. HttpServlet:
+
+    The HttpServlet class extends the GenericServlet class and implements Serializable interface.
+    
+        abstract methods: 1. doGet(HttpServletRequest, HttpServletResponse);
+                          2. doPost(HttpServletRequest, HttpServletResponse);

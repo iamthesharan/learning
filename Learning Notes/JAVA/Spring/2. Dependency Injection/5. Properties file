@@ -1,0 +1,36 @@
+Injecting the values from the property file.
+
+Step 1: Create a property file
+Step 2: Load Properties file in config File  --> using Context tag. Context tag loads the property file.
+Step 3: Reference values from properties file  --> ${property name}
+
+
+
+Loading property File:
+
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+            http://www.springframework.org/schema/beans/spring-beans.xsd
+            http://www.springframework.org/schema/context
+            http://www.springframework.org/schema/context/spring-context-3.0.xsd">
+	
+	<context:property-placeholder location="classpath:Sports.properties" />
+	<bean id="myFortune" class="com.spring.ioc.HappyFortuneService"></bean>
+	<bean id="myCoach" class="com.spring.ioc.CricketCoach">
+		<property name="fortuneService" ref="myFortune"/>
+		<property name="email" value="${foo.email}"/>
+	</bean>
+</beans>
+
+
+Method: --->
+
+    private String email;
+    public void setEmail(String email) {
+        System.out.println(email + "Set");
+        this.email=email;
+    }
+    

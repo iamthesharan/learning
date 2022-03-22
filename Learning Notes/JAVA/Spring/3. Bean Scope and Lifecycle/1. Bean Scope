@@ -1,0 +1,165 @@
+Bean Scope:
+
+Refers the lifecycle of the Bean
+How long does it live?
+How many instances are created?
+How is the bean Shared?
+
+
+The Default Scope of Bean is Singleton
+
+For Singleton: The Spring Instance will create only one instance of the bean
+It is Cached in the memory
+
+
+All request for the bean will return a shared refrence to the same bean  -> Ex
+
+
+                                                                      __________________    
+Coach theCoach=context.getBean("myCoach", Coach.class);-------------->|                | 
+                                                                      |                | 
+                                                                      |   TrackCoach   | 
+                                                                      |                | 
+Coach alphaCoach=context.getBean("myCoach", Coach.class);------------>|________________|
+
+
+So By Default Both request will point to the Same Bean inside a Spring Container
+So Spring makes use of Singleton and create only one bean and then Share it
+
+
+So for Explicitly Specifying the Scope use Scope Attribute
+
+
+	<bean id="myCoach" class="com.spring.ioc.CricketCoach" scope="singleton"></bean>
+    
+    
+
+Singleton --> Creates a Single Shared instance of bean. Default Scope.
+prototype --> Creates a new bean instance for each container Request
+request   --> Scoped to an HTTP web request. Only Used in Web Apps
+session   --> Scoped to an HTTP web session. Only used for web apps.
+global-session --> Socped to an HTTP web session. Only used for web apps
+
+
+Default: Singleton:
+
+package com.spring.ioc;
+
+import org.springframework.context.support.ClassPathXmlApplicationContext;
+
+public class BeanScope {
+	public static void main(String ...args) {
+		ClassPathXmlApplicationContext context=new ClassPathXmlApplicationContext("beanScope-applicationContext.xml");
+		Coach theCoach=context.getBean("myCoach", Coach.class);
+		Coach alphaCoach=context.getBean("myCoach", Coach.class);
+		
+		boolean result=(theCoach==alphaCoach);
+		System.out.println(result);
+		
+		context.close();
+	}	
+
+}
+
+
+
+
+Prototype:
+
+<bean id="myCoach" class="com.spring.ioc.CricketCoach" scope="prototype"></bean>
+
+
+Coach theCoach=context.getBean("myCoach", Coach.class); --> TrackCoach
+
+Coach alphaCoach=context.getBean("myCoach", Coach.class); --> TrackCoach
+
+=====================================================================================================================================
+
+
+Lifecycle and Prototype Scope
+There is a subtle point you need to be aware of with "prototype" scoped beans.
+
+For "prototype" scoped beans, Spring does not call the destroy method.  Gasp!  
+
+
+
+---
+
+In contrast to the other scopes, Spring does not manage the complete lifecycle of a prototype bean: the container instantiates, configures, and otherwise assembles a prototype object, and hands it to the client, with no further record of that prototype instance.
+
+Thus, although initialization lifecycle callback methods are called on all objects regardless of scope, in the case of prototypes, configured destruction lifecycle callbacks are not called. The client code must clean up prototype-scoped objects and release expensive resources that the prototype bean(s) are holding. 
+
+
+
+---
+
+This also applies to both XML configuration and Annotation-based configuration.
+
+
+
+---
+
+QUESTION: How can I create code to call the destroy method on prototype scope beans
+
+
+
+ANSWER:
+
+You can destroy prototype beans but custom coding is required.
+
+You can download the example source code from here: destroy-prototype-scope-bean-with-custom-processor-xml-config.zip
+
+
+
+Development Process
+
+1. Create a custom bean processor. This bean processor will keep track of prototype scoped beans. During shutdown it will call the destroy() method on the prototype scoped beans. The custom processor is configured in the spring config file.
+
+
+
+	<!-- Bean custom processor to handle calling destroy methods on prototype scoped beans -->
+        <bean id="customProcessor"
+    		class="com.luv2code.springdemo.MyCustomBeanProcessor">
+   	</bean>
+
+
+
+
+2. The prototype scoped beans MUST implement the DisposableBean interface. This interface defines a "destory()" method.
+
+
+
+public class TrackCoach implements Coach, DisposableBean {
+ 
+	...
+	
+	// add a destroy method
+	@Override
+	public void destroy() throws Exception {
+		System.out.println("TrackCoach: inside method doMyCleanupStuffYoYo");		
+	}
+ 
+}
+
+
+
+
+3. The spring configuration must be updated to use the destroy-method of "destroy".
+
+
+
+ 	<bean id="myCoach"
+ 		class="com.luv2code.springdemo.TrackCoach"
+ 		init-method="doMyStartupStuff"
+ 		destroy-method="destroy"
+ 		scope="prototype">	
+ 		
+ 		<!-- set up constructor injection -->
+ 		<constructor-arg ref="myFortuneService" />
+ 	</bean>
+
+
+
+
+4. In this app, BeanLifeCycleDemoApp.java is the main program.  TrackCoach.java is the prototype scoped bean. TrackCoach implements the DisposableBean interface and provides the destroy() method. The custom bean processing is handled in the MyCustomBeanProcessor class.
+

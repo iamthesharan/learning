@@ -1,0 +1,54 @@
+In this Project we will Convert JSON to JAVA POJO.
+
+So here is the Full Development Process.:
+
+    1. Download and Import Maven Starter File
+    2. Add Maven Dependency for Jackson Project
+    3. Create JAVA POJO Class
+    4. Create a Main Driver App --> which will pull everything together.
+
+
+    2. Add Maven Dependency:
+
+        <!-- https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-databind -->
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-databind</artifactId>
+            <version>2.12.1</version>
+        </dependency>
+
+    
+    3. Create a Student POJO:
+
+            fields: 
+                int id;
+                int FirstName;
+                int lastName;
+                boolean active;
+
+    3. Creating a Driver app:
+
+        This class will Drive our app. It will have main Method.
+
+            public static void main(String ...args){
+                try{
+
+
+                    /* a. Will Create an Object mapper*/
+                        ObjectMapper mapper=new ObjectMapper();
+
+                    /* b. Read JSON File and Map it To POJO */
+
+                        Student student=mapper.readValue(new File("data/Student.json"), Stdeunt.class);
+
+                    /* Printing the Data*/
+
+                        System.out.println("Id: "+student.id);
+                        System.out.println("First Name: "+student.firstName);
+                        System.out.println("LastName: "+student.lastName);
+                        System.out.println("Is Active: "+student.Active);
+                }   
+                catch(Exception e){
+                    e.printStackTrace();
+                }
+            }

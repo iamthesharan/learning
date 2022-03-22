@@ -1,0 +1,256 @@
+Notes 4
+
+Anonymous Inner Classes --> Without Name
+
+Just for one time usage or instant use 
+purpose created array or class is called Anonymous Arrays or Anonymous Class.
+
+
+Based On Declaration and behavior Anonymous Inner Classes Types:
+
+	1)Anonymous Inner Class That extends a Class
+	2)Anonymous Inner Class that implements an interface
+	3)Anonymous Inner Class that define inside arguments
+
+
+
+1)Anonymous Inner Class That extends a Class
+
+ex-1
+	PopCorn p=new PopCorn(){
+	
+	
+			// This is Anonymous inner class that extends PopCorn Class
+		/*
+			here We Have Child Class Object With Parent Class Reference.
+			
+		*/
+	};
+
+Ex -2 
+	Thread t=new Thread();
+	Thread t=new Thread(){
+	
+			// This is Anonymous inner class that extends Thread Class
+		/*
+			Here We Are Creating a class that extends thread Class without Name.
+			Such Type Of Class is Called Anonymous Thread class
+		*/
+	};
+	
+Ex - 3
+	Runnable r=new Runnable(); // Compiler Error -  Runnable is an Interface
+	Runnable r=new Runnable(){
+		/*
+			I Am writing a class which implements an Interface
+		*/
+	};
+	
+	
+	
+	
+------------------------------------------------------------------------------------------------
+
+
+class PopCorn{
+	public void taste(){
+		System.out.println("Salty");
+	}
+}
+class SubPopCorn extends PopCorn{
+	public static taste(){
+		System.out.println("Spicy");
+	}
+}
+
+// But Suppose SubPopCorn Class is Needed Only Once
+// Then there is no need to create a separate Class
+// So the Other Approach is:
+
+class PopCorn{
+	public void taste(){
+		System.out.println("Salty");
+	}
+}
+class test{
+	public static void main(String ...args){
+		PopCorn p=new PopCorn(){
+			public void taste(){
+				System.out.println("Spicy");
+			}
+		};
+		p.taste();
+	}
+}
+
+
+Output:::: Spicy----> Because p is Referencing the Child Class Object
+
+
+Therefore Number of Class Files Generated:
+
+1) PopCorn.class
+2) test.class
+3) test$1.class--> For First Anonymous Class
+ For Second anonymous Class test$2.class
+
+
+/*
+	To get the name of the class:
+	p.getClass().getName();
+*/
+
+
+----------------------------------------------------------------------------------------------
+
+
+Normal Class Approach
+
+/*
+
+	class MyThread extends Thread{
+		public void run(){
+			for(int i=0;i<10;i++){
+				System.out.println("Child Thread");
+			}
+		}
+	}
+	//This Whole Process is called Defining a Thread
+
+*/
+
+So Here MyThread Extends Thread Class and Override Thread Method.
+
+/*
+		class MyThread extends Thread{
+			public void run(){
+				for(int i=0;i<10;i++){
+					System.out.println("Child Thread");
+				}
+				
+				// this is Job Of Thread
+			}
+		}
+		class ThreadDemo{
+			public static void main(String ...args){
+				MyThread t=new MyThread(); // This Line Executed By Main Thread
+				t.start();// MainThread Starts Child Thread
+				for(int i=0;i<10;i++){
+					System.out.println("Main Thread");
+				}
+			}
+		}
+*/
+
+
+Anonymous Class Approach
+
+
+/*
+	class ThreadDemo{
+		public static void main(String ...args){
+			MyThread t=new MyThread(){
+				public void run(){
+					for(int i=0;i<10;i++){
+						System.out.println("Child Thread");
+					}
+				}
+			};
+			
+			// Note* Child Thread is Responsible for Executing Run Method
+			//			and after t.start() parent thread will execute everything
+			t.start();
+			for (int i=0;i<10;i++){
+				System.out.println("Main Thread");
+			}
+		}
+	}
+*/
+
+-------------------------------------------------------------------------------------------------
+
+
+2) Anonymous Inner Class That implements Runnable Interface
+
+ /*Defining a thread by implementing Runnable Interface
+ 
+ class myRunnable implements Runnable{
+ 	public void run(){
+ 		for(int i=0; i<10; i++){
+ 			System.out.println("Child Thread");
+ 		}
+ 		
+ 		// Job Of a Thread
+ 	}
+ }
+ 
+ */
+ 
+/*
+	 
+	 class myRunnable implements Runnable{
+	 	public void run(){
+	 		for(int i=0; i<10; i++){
+	 			System.out.println("Child Thread");
+	 		}
+	 		
+	 		// Job Of a Thread
+	 	}
+	 }
+	 class ThreadDemo{
+	 	public static void main(String ...args){
+	 		MyRunnable r=new MyRunnable();
+	 		Thread t=new Thread(r); // Thread Class is having start capability to Start this Runnable 
+	 									Object
+	 		t.start();
+	 		for(int i=0;i<10;i++){
+	 			System.out.println("Main Thread");
+	 		}
+	 									
+	 									
+	 	}
+	 }
+*/ 
+ 
+ /*
+ 	Anonymous Class Approach
+ 	
+ 	class ThreadDemo{
+ 		public static void main(String ...args){
+ 			Runnable r=new Runnable(){
+ 				public void run(){
+ 					for(int i=0;i<10;i++){
+ 						System.out.println("Child Thread");
+ 					}
+ 				}
+ 			};
+ 			Thread t=new Thread(r);
+ 			t.start();
+ 			for(int i=0;i<10;i++){
+	 			System.out.println("Main Thread");
+	 		}
+ 		}
+ 	}
+ 	
+ */
+ 
+ -----------------------------------------------------------------------------------------
+ 
+ 3) Anonymous inner class thar defines Arguments
+ 
+ // Above, Thread t=new Thread(r); r is runnable implemented Class Object
+ 
+ 	class ThreadDemo{
+ 		public static void main(String ...args){
+ 			Thread t=new Thread(new Runnable(){
+ 				public void run(){
+ 					for(int i=0;i<10;i++){
+ 						System.out.println("Child Thread");
+ 					}
+ 				}
+ 			}).start();
+ 			for(int i=0;i<10;i++){
+ 				System.out.println("Main Thread");
+ 			}
+ 		}
+ 	}

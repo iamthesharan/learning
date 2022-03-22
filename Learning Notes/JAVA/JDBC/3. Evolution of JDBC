@@ -1,0 +1,3 @@
+Earlier when JAVA was not there, C/C++ uses my sql libraries for connecting mysql db, oracle lib for oracle DB.
+For connecting with new databas, new progam was created with new library
+

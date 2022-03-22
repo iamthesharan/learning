@@ -1,0 +1,377 @@
+Creating CRM
+Steps:
+
+    1. SetUp Dev environment
+    2. List Customers
+    3. Add a New Customer
+    4. Update Customer
+    5. Delete Customer
+
+
+    1. Create a Customer table
+    2. Create a new Web Dynamic Project and Add the JDBC Connection JAR file in lib Directory
+    3. Setup Dev environment
+
+        a. Copy Starter Config File
+            1. Web.xml and Spring.config
+
+        b. Copy over JSTL libs
+
+        c. Copy Latest Spring Jar Files
+
+        d. Copy Latest Hibernate JAR Files 
+
+        e. Add the database connection pooling JAR Files: c3po folder
+
+    4. Configuring the Environment.
+
+        a. Define database dataSource / Connection Pool
+
+            We will define the dataSource and Connection Pool on SprinConfig.xml. This is because Hibernate will make the use of Connection Pool for Connecting to the 
+            database.
+
+            	<bean id="myDataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource" destroy-method="close">
+                    <property name="driverClass" value="oracle.jdbc.OracleDriver"/>
+                    <property name="jdbcUrl" value="jdbc:oracle:thin:@localhost:1521:xe"/>
+                    <property name="user" value="sharan"/>
+                    <property name="password" value="system"></property>
+                    
+                    <property name="minPoolSize" value="5"/>
+                    <property name="maxPoolSize" value="20"/>
+                    <property name="maxIdleTime" value="30000"/>
+                </bean>
+
+        b. Setup Hibernate Session Factory
+
+                	<bean id="sessionFactory"
+                        class="org.springframework.orm.hibernate5.LocalSessionFactoryBean">
+                        <property name="dataSource" ref="myDataSource"/>
+                        <property name="packagesToScan" value="com.spring.demo.entity"/>
+                        <property name="hibernateProperties">
+                            <props>
+                                <prop key="hibernate.dialect">org.hibernate.dialect.Oracle10gDialect.</prop>
+                                <prop key="hibernate.show_sql">true</prop>
+                            </props>
+                        </property>
+                    </bean>
+
+        c. Setup Hibernate transaction manager
+
+            	<bean id="myTransactionManager" class="org.springframework.orm.hibernate5.HibernateTransactionManager">
+                    <property name="sessionFactory" ref="sessionFactory"/>	
+                </bean>
+
+        d. Enable configuration of transactional annotations.
+
+                	<tx:annotation-driven transaction-manager="myTransactionManager" />
+
+
+
+
+
+===================================================================================================================================================
+
+2. List Customer:
+
+    ********NOTE*******
+
+    Here we will create a customer-controller and that customer contoller will make the use of the Data Access Object. This DAO will help hus to access the DB 
+    using Hibernate API. Then we will get the data back from DB and then the controller will place that in Spring MVC model and then Send that over to the JSP pages.
+    and Finally JSP pages will render that data.
+
+===================================================================================================================================================
+
+
+            Customer Controller  <========= DAO=======> Database
+
+            The DAO will have methods for retriving, adding, updating or deleting the data
+
+            so here it will be
+
+            saveCustomer()
+            getCustomer()
+            getCustomers()
+            updateCustomer()
+            deleteCustomer()
+
+
+            Development Process:
+
+            Steps:
+
+                1. Create an Entity Class Customer.java
+                2. Create DAO  -> CustomerDAOImpl.java
+                3. Customer Controller.java
+                4. Creating a JSP Page for Listing the customer
+
+
+                1. Create an Entity Class Customer.java
+
+                    This Class Will be same as the Hibernate ORM Class
+
+
+                2. Create DAO  -> CustomerDAOImpl.java
+
+                    For Hibernate , Our DAO needs a Hibernate Session Factory
+                    So Somehow we need Session Factory to our DAO
+                    and Session Factory ACtually needs a Data Source. So here the Data Source actually defines database connection information.
+
+                    DAO  <========> SessionFactory <=================> DataSource <=================> Database
+
+                    So all these are dependencies and we will wire them together with the dependency Injection
+
+                    We have DataSource Define in SpringConfig.xml and then we have SessionFactory define in the Same Config file which make the use of 
+                    dataSource. We have Ijected the property
+
+                    Steps: 
+                    a. We need to Define DAO interface
+                    b. We need to define DAO Implementation --> here we inject Session Factory.
+
+                        Spring Provides and @transactional Annotation.
+                        It will Automagically begin and end transaction for your hibernate code.
+                        No need for you to explicitly do this in your code.
+
+                        no need to do session.beginTransaction() or session.getTransaction().commit
+
+                        So in the DAO implementation Class above the method that getCustomer we need to provide @Transactional
+                        Basically @Transactional needs to be provided 
+
+
+
+                        Spring has other Special Annotations and these Special Annotations are for DAO
+
+                                        @Component
+                                            |
+                            ________________|________________
+                            |                               |
+                       @Controller                     @Repository
+
+                       @Repository --> This annotation we need to place on Actual DAO Implementation Classes
+
+                            This annotation is applied to DAO implementations
+                            Spring will automatically register the DAO implementation
+
+                            Spring also provides translation of any JDBC related Exceptions 
+
+
+
+                    
+
+                    DAO Interface:
+
+                        public interface CustomerDAO {
+        
+                            public List<Customer> getCustomer();
+
+                        }
+
+                    CustomerDAOImpl:
+
+                        @Repository   -- This will tranlate the JDBC related Exceptions
+                        public class CustomerDAOImpl implements CustomerDAO{
+
+                            @Autowired
+                            private SessionFactory sessionFactory;
+                            
+                            @Override
+                            @Transactional
+                            public List<Customer> getCustomer() {
+                                Session session=sessionFactory.getCurrentSession();
+                                
+                                Query<Customer> theQuery=session.createQuery("from customer", Customer.class);
+                                
+                                List<Customer> customers=theQuery.getResultList();
+                                return customers;
+                            }
+                        }
+
+
+
+            Now After this we need to Inject the DAO into our Controller
+
+                @Controller
+                @RequestMapping("/customer")
+                public class CustomerController {
+                    
+                    @Autowired
+                    private CustomerDAO customerDAO;
+
+                    @RequestMapping("/list")
+                    public String listCustomers(Model theModel){
+                        
+                        List<Customer> theCustomers=customerDAO.getCustomer();
+                        theModel.addAttribute("customers",theCustomers);
+                        return "list-customers";
+                    }
+                    
+                }
+
+
+
+
+Adding A welcome File:
+
+    Wen you hit the Server URL, the server will look for Welcome File, If it doesn't find one then it will give the 404 error
+
+    Open Web.xml --> here the welcome files are configured
+
+    <welcome-file-list>
+		<welcome-file>index.jsp</welcome-file>
+	</welcome-file-list> 
+
+
+=====================================================================================================================================
+
+@GetMapping and @SetMapping
+
+These mapping annotations will Handle All HTTP Methods
+
+    GET, POST, etc
+
+
+    Ex:
+
+    @RequestMapping(path="/processForm", method="RequestMethod.GET)
+
+        So by using this new Annotation we will get the Shortcut.
+
+        @GetMapping("/processForm")
+
+            for post method
+        
+        @PostMapping("/processForm")
+
+
+        GET vs POST
+
+        GET:
+        Get is good for debugging. It is in name value format
+        but it has limitation on data length. like 1000 Characters
+
+        POST:
+        Post has no limitations of data length. it is also used to Send the binary Data or uploading a file
+
+
+=========================================================================================================================================
+
+Service Layer:
+
+We will Now refactor our Architecture here.
+
+
+We will make the Customer Service Layer between Customer Controller and CustomerDAO
+
+    Customer Controller <=========> Customer Service <===========> Customer DAO <===============> Database
+
+
+Purpose of Service Layer:
+
+    1. Its an implementation of Service Facade Pattern
+    2. Its an intermidiate layer for custom business Logic.
+    3. You can also use to integrate data from multiple sources
+
+
+    Here is an Example for Integrating data from Multiple Sources.
+
+                                                           ==============> Customer DAO  <=========> DB1
+                                                          /
+                                                         /
+                                                        /
+    Customer Controller <===========> Customer Service |=================> Sales DAO     <=========> DB2
+                                                        \
+                                                         \
+                                                          \
+                                                           ==============> License DAO   <=========> DB3
+
+
+
+        So now there is a new Annotation @Service
+
+
+                        @Component
+                            |
+            ________________|_______________
+            |               |               |
+    @Controller        @Repository      @Service
+
+
+
+        So @Service annotation is applied to the Service annotation
+
+        Spring will automatically register the Service Implementation
+
+
+
+        Development process for building up the Customer Serivice:
+
+            Step 1 : Defining up the Service Interface
+
+                    public interface CustomerService{
+                        public List<Customer> getCustomers();
+                    }
+
+            Step 2 : Define Service Implementation
+
+                    We will define a Class here CustomerServiceImpl which will implement CustomerService
+
+                    @Service
+                    public class CustomerServiceImpl implements CustomerService{
+
+                        @Autowired
+                        private CustomerDAO customerDAO;
+
+                        @Override
+                        @Transactional
+                        public List<Customer> getCustomer(){
+                            
+                            return customerDAO.getCustomer();
+
+                        }
+                    }
+                
+            Step 3: Defining the DAO Implementation Class:
+
+                    From the DAO Implementaion class we will remove @Transactional because we need to perform transaction from the Service Layer
+
+
+========================================================================================================================================================
+
+Adding the  Customer 
+
+
+    in the customer Controller class define the method that will return to Add Customer Form using @GetMapping.
+    Then Create a new Model Object 
+
+    Customer customer=new Customer();
+    
+    // and then add it to the Model.
+
+    theModel.addAttribute("customer", theCustomers);
+
+    In CustomerController:
+
+
+    @GetMapping("/showFormForAdd")
+	public String showFormForAdd(Model theModel) {
+		
+		Customer customer=new Customer();
+		theModel.addAttribute("customer", customer);
+		return "customer-form";
+	}
+
+    We will be pointing the Post request comming from save from to /saveCustomer.
+
+    So in Customer controller:
+
+    	@PostMapping("/saveCustomer")
+        public String saveCustomer(@ModelAttribute("customer") Customer customer) {
+            
+            customerService.saveCustomer(customer); // customer service interface will have saveCustomer method. which will internally autowire DAO class saveCustomer Method
+            
+            
+            return "redirect:/customer/list";
+            
+        }	
+
+    
+

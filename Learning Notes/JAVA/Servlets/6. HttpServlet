@@ -1,0 +1,52 @@
+
+The HttpServlet class extends the GenericServlet class and implements Serializable interface. It provides http specific methods such as doGet, doPost, doHead, doTrace etc.
+
+HttpServlet can handle only HTTP Protocol whereas GenericServlet can handle other protocols too.
+
+
+package com.servlets;
+
+import java.io.IOException;
+import java.io.PrintWriter;
+
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+public class MyServlet extends HttpServlet{
+		public void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, 
+		IOException{
+			System.out.println("this is doget method");
+			resp.setContentType("text/html");
+			PrintWriter out =resp.getWriter();
+			out.println("<h1>This is doGet method</h1>");
+		}
+}
+
+
+================================================================================
+
+Without get and post:
+
+
+public class AddServlets extends HttpServlet{
+	public void service(HttpServletRequest request, HttpServletResponse response) {
+		int i=Integer.parseInt(request.getParameter("num1")); // getParameterMethod is present in                                                                         HttpServletRequest Interface
+	   		
+		int j=Integer.parseInt(request.getParameter("num2"));
+		System.out.println(i+j);
+    }
+}
+
+================================================================================
+
+get --> when we use to fetch the data from the server (by default it is get in form)
+post --> when we use to send the data to the Server
+
+now we can control the traffic of only post and only get by these two methods
+
+doPost(HttpServletRequest request, HttpServletResponse response); --> only accepts post traffic
+
+doGet() and doPost() are called instide service().
+since service is a part of a Servlet LifeCycle, it is executed by the container

@@ -1,0 +1,42 @@
+<bean id="myFortuneService" class="com.spring.ioc.HappyFortuneService"></bean>
+<bean id="myCricketCoach" class="com.spring.ioc.CricketCoach">
+    <property name="fortuneService" ref="myFortuneService"></property>
+</bean>
+
+So basically name of the property will be same as setter method name with First Letter as Small and withou set keyword.
+
+Example: setFortuneService  --> name="fortuneService"
+
+Note CricketCoach Class will be constructed based on the No Argument Constructor
+
+--------------------------------------------------------------------------------------------
+
+CricketCoach.java
+
+    package com.spring.ioc;
+
+    public class CricketCoach implements Coach {
+        private FortuneService fortuneService;
+        public  CricketCoach() {
+            System.out.println("Insice Cricket Coach");
+        }
+
+        public void setFortuneService(FortuneService fortuneService) {
+            System.out.println("Inside Setter method");
+            this.fortuneService = fortuneService;
+        }
+
+        @Override
+        public String getDailyWorkout() {
+            return "Practice Fast Balling for 50 min in a day";
+        }
+
+        @Override
+        public String getDailyFortune() {
+            return fortuneService.getFortune();
+        }
+
+    }
+
+
+

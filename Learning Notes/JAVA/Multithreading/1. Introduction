@@ -1,0 +1,64 @@
+We will Discuss here
+
+1. There are two ways to define a thread.:
+
+    A. By Extending the Thread Class
+    B. By Implementing Runnable Interface
+
+
+2. Getting and Setting Name of thread.
+
+3. Thread Priorities
+
+4. Method to prevent Thread Execution
+    1. yield();
+    2. join();
+    3. sleep();
+
+6. Synchronization
+
+7. Inter Thread Communication.
+
+8. Deadlock
+
+9. Demon Threads
+
+10. Multithreading enhancement
+
+=========================================================================================================
+
+Multitasking :Execution multiple task Simultaneously
+
+
+There are two types of multitasking:
+    1. Process based multitasking
+    2. Thread based multitasking.
+
+        1. Process based multitasking
+            Executing several task Simultaneously where each task is a separate individual process.
+
+            Example:
+            Listening the music at the same time writing a java program
+            Download a file from net at the same time
+
+            So Process based multitasking is best suitable on OS level and not programatic level
+
+        2. Thread based multitasking.
+
+            JVM is an interpreter . It will always execute program one by one line by line.
+
+            So if I write 10k lines of code. Assume that 10k line of code required 10hrs time to completion.
+
+            So now I thought to make 1st 5k lines of code and 2nd 5k lines of code having no dependency.
+            so now 5 to 6 hrs are required.
+
+            Executing several task Simultaneously where each task is a separate independent part of the same program.
+            and each independent part is called a thread.
+
+
+
+What is the main advantage of multitaking?
+    1. Improved performance
+    2. Reduce the response time of the system
+
+    

@@ -1,0 +1,134 @@
+HQL --> Hibernate Query Language
+It is Similar to SQL
+
+Points To note:
+
+1. Keywords like from , where, like are not case sensitve. You can ignore the cases here.
+2. Table name --> It will be the Persistance Object. So inside SQL you need to write the POJO Class name.
+3. Column Name --> While Selection i.e during projection. you need to put the POJO field name.
+
+1. Retriving all Students:
+
+    List<Student> students=session.createQuery("from student").getResultList();
+
+
+2. Retriving with Condition
+
+    List<Student>students=session.createQuery("from student s where s.last_name='Doe'")
+
+    from students s where s.id>100
+
+3. Projection: return only Specific columns.
+
+    select a.name_text from tbname a
+
+4. HQl with Named parameters:
+
+    String HQL = "from student where id>:id";
+    Query query=session.createQuery(HQL);
+    query.setParameter("id",2);
+    List<Student> result=query.getResultList();
+
+5. HQL Paging Through ResultSet:
+
+    Pagination through the result set of a database query is a very common application pattern. Typically, you would use pagination for a web application that returned a large set of data for a query. The web application would page through the database query result set to build the appropriate page for the user.
+
+    The application would be very slow if the web application loaded all of the data into memory for each user. Instead, you can page through the result set and retrieve the results you are going to display one chunk at a time.
+
+    There are two methods on the Query interface for paging: 
+    1. setFirstResult() --> This method takes an integer that represents the first row in your result set, starting with row 0.
+    2. setMaxResults()  --> You can tell Hibernate to only retrieve a fixed number of objects with the setMaxResults() method.
+
+
+    Query query = session.createQuery("from Student");
+    query.setFirstResult(0);
+    query.setMaxResults(3);
+    List<Student> students=query.getResultList();
+
+6. HQL – Getting a Unique Single Result
+
+    HQL’s Query interface provides a uniqueResult() method for obtaining just one object from an HQL query. Although your query may yield only one object, you may also use the uniqueResult() method with other result sets if you limit the results to just the first result. You could use the setMaxResults() method discussed in the previous section.
+
+    The uniqueResult() method on the Query object returns a single object, or null if there are zero results. If there is more than one result, then the uniqueResult() method throws a NonUniqueResultException.
+    
+
+    try{
+        Query query=session.createQuery("from Student");
+        query.setMaxResults(1);
+        Student student=(Student)query.uniqueResult(); // Note we need to cast according to the DataType
+    }
+    catch(NonUniqueResultException e){
+        e.printStackTrace();
+    }
+
+7. Sorting the Results
+
+    String hql="from Student where id>2 order by id desc"
+                        or
+    String hql="from Student where id>1 order by id desc"
+
+8. Joins
+
+    Will Explain Later in Mapping part
+
+9. HQL Aggregate Methods
+
+
+    The aggregate functions available through HQL include the following:
+
+    1. avg(property name): The average of a property’s value
+    2. count(property name or *): The number of times a property occurs in the results
+    3. max(property name): The maximum value of the property values
+    4. min(property name): The minimum value of the property values
+    5. sum(property name): The sum total of the property values
+
+
+10. HQL Named Queries
+
+    Named queries are created via class-level annotations on entities; normally, the queries apply to the entity in whose source file they occur, but there’s no absolute requirement for this to be true.
+
+    Named queries are created with the @NamedQueries annotation, which contains an array of @NamedQuery sets; each has a query and a name.
+
+
+    @NamedQueries({
+        @NamedQuery(name="student.findAll", query="from student s")
+    })
+
+    Query query =session.getNamedQuery("Student.findAll");
+    List<Student> students=query.getResultList();
+
+
+11. HQL – Native SQL Queries
+
+    HQL is database Independent. Tomorrow If your database gets changed, the HQL query will remain same in the code. You don't need to change the Code.
+    This doesn't work with Native SQL. If you Change your DB Tomorrow, then you also need to change the Native SQL in Code. So Its never recommeded to use native SQL.
+
+    Native SQL is only use if you want to specify some Database specific Features. such as window function or Connect By option in Oracle
+    It Also Provides a clean migration path from a direct SQL/JDBC based Application to Hibernate/JPA
+    It Also Provide us to specify Hand written SQL
+
+    Underlying Hibernate’s native SQL support is the org.hibernate.SQLQuery interface, which extends the org.hibernate.Query interface. Your application will create a native SQL query from the session with the createSQLQuery() method on the Session interface.
+
+    public SQLQuery createSQLQuery(String queryString) throws HibernateException
+
+        
+        11.1. Hibernate SQL Query Example:
+
+                Select the Scalar Result:
+
+                    String sql = "select avg(product.price) as avgPrice from Product product";
+                    SQLQuery query = session.createSQLQuery(sql);
+                    query.addScalar("avgPrice",new DoubleType());
+                    List results = query.list();
+
+                    addScalar --> This is declaring that you want the result of the query to return objects for individual named columns, rather than entities.
+
+                Bit Complex:
+
+
+                    String sql = "select {supplier.*} from Supplier supplier";
+                    SQLQuery query = session.createSQLQuery(sql);
+                    query.addEntity("supplier", Supplier.class);
+                    List results = query.list();
+
+

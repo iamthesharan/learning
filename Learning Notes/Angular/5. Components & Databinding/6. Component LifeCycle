@@ -1,0 +1,22 @@
+Whenever a component is created, there are diffrent phases the angular goes through.
+During these phases angular allow us to hook into.
+
+ngOnChanges --> can be executed right at start but thereafter this is also called when the bound input properties are changed --> @Input()
+ngOnInit() --> Once the component is inititalized. this is done after the constructor.
+ngDoCheck() --> whenever anything (event, form, display) changes on the template or view, it can be a timer or some value in page, them the page has to render everytime. ngDoCheck helps to do that
+mgAfterContentInit() --> this will be initiated after the ng-content part is initialized
+ngAfterContentChecked()--> called every time the projected content has been checked
+ngAfterViewInit() --> once the view Has been initialized or rendered, it will be executed after that
+ngAfterViewChecked() --> either the changes done on the view is displayed on the page
+
+All these hooks interface needs to be implemented in the class if we are using it.
+Example OnChanges interface
+ 
+ngOnChanges(changes:SimpleChanges){ /caaled before ngOnInit()
+    console.log("ngOnChanges called";)
+    console.log(changes); // if there is an @Input() in the component, then the changes object will store that as it is bound properties
+}
+
+SimpleChanges  --> object of Simple change will have current Value and Previous Value of the bound Variable. So after the changes you can make the use of the previous Value 
+
+ngDoCheck will detect any changes on the page, it can be event trigger, input event, button click event any thing

@@ -1,0 +1,185 @@
+Modes :
+    1. Poly: 2 notes can be played at the same time together.
+    2. mono: while changing the notes, the new note override the previous note but not smoothly.
+    3. Legato: While Changing the notes, the new note override the previous note but smoothly.
+
+---------------
+Oscilators: generates Sounds.
+Oscilator Start: Options (free, soft, hard)
+        - free: oscilator start at any position when you change the key. It can be 0 and not 0
+        - soft: Oscilator always start at 0 position.
+        - hard: Oscilator starts from highest level of waveform having very fast attack(low value of attack value).
+                Recommended for electronic music, percussion and hard bases.
+
+Oscilators Type:
+1. Sine: Basic Oscilator without any harmonics.
+2. Triangle Wave ( /\/ ) : Has a very little overtone(harmonics).
+                            1st harmonics: high gain
+                            2nd harmonics: bit lower gain
+                            3rd harmonics: lowest gain.
+
+3. Saw Wave ( |\| ) : More harmonics than Triangle wave.
+4. Square Wave : Highest No of harmonics.
+5. Ring Module : Creates a ring. This works good with Poly. The ring is created by adding and substracting the frequencies of OSC1 and OSC2.
+                 OSC1 : 1000hz
+                 OSC2 : 500HZ
+                 Ring will be created with 1500Hz and 500Hz.
+
+-------------------
+
+CDB: Constant Beat Detuning.
+When hitting the higher notes when unison and Analog on, then the overall sound gets detuned.
+CDB allows not to detune when hitting the higher notes.
+
+------------------
+
+Glide: Allows gliding beteen the notes.
+------------------
+
+Bend Range - Allows to configure your pitch wheel.
+========================================================================================================================
+========================================================================================================================
+========================================================================================================================
+
+Filters: Filters are used to cut some frequencies
+
+ES2 has 2 Filters.
+These Filters can be applied in Both Parallel and Series.
+
+Parallel: Sum up all the Oscilators output --> Equally Distribute it to both the Filters --> Ads Up the output.
+Cutoff: Increases the level of certain range of frequencies base on selected  Filter type.
+Low Pass Filter: when Cutoff increases, it allows to broden the low pass filter -\
+High Pass Filter: When Cutoff Increases, it allows to narrow the high pass filter /-
+
+Band Pass Filter:  Slide the /-\ band pass when cutoff is increased from 20hz - 20khz.
+Band Reject Filter: Slides the \/  band reject when Cutoff is increased from 20hz - 20khz.
+Peak Filter: Slides _/\_ Peak Filter when cuttoff is increased from 20hz - 20khz.
+
+
+
+
+1st Filter has 3 Knobs:
+    1. cutoff
+    2. resonance
+    3. drive
+
+2nd Filter has 3 Knobs:
+    1. cutoff
+    2. Resonance
+    3, FM
+
+
+Resonance Create a boost at cutoff frequencies.
+Drive is just like a Gain.
+FM --> creates dull to sharp effect.
+
+
+Filter 2 is by default low pass by default.
+Note** if you make filter 1 as high pass filter, then you might loose some low levles fundamental frequencies
+So Sine Level adds some extra sile level bass to OSC1 post filtering.
+
+
+Phaser: creates a phase effect. you can increase the intensity by regulating the intensity knob.
+
+========================================================================================================================
+========================================================================================================================
+========================================================================================================================
+
+LFO : Low frequency Ossilators --> These are below 20hz i.e its not audible.
+But it creates some amazing effects like vibrator when used with Audible Ossilators
+
+Source is LFO
+By Default LFO 1 in Polyponic --> when you press other key, it won't be in sync with the previous keys. 
+and LFO 2 is Monophonic --> When you press other key, it is by default in sync.
+
+Target: You need to select what you want to modulate--> Cutoff knob, OSC, 
+
+Rate: you can adjust the LFO rate.
+Delay: Control time taken for LFO effects that goes to oscilators.
+
+
+========================================================================================================================
+========================================================================================================================
+========================================================================================================================
+
+Envelops:
+Envelops doesn't create repeating effect like LFO instead it only creates one time effect.
+
+
+ENV3: Envelop 3 is hardwired to Volume.
+Envelope 3 is polyphonic. 
+There are 4 basic stages of any Envelope:
+A, D, S, R
+
+A - attack
+D - Decay
+S - Sustain (is the percentage of the attack value). 
+R - Release 
+
+
+Attack  -   low  - immediately Comes
+        -   high - slowly Comes
+
+Release -   short - immediately goes
+        -   high  - slowly fades
+
+Sustain: When the Sustain is full, The volume will never go down until and unless you don't release the key.
+         When the Sustain is low, the volume will go down based on how much the sustain is decreased.
+
+Decay:  Decay tells how fast the volume should go down when Sustain period completes.
+
+Rise: if rise is positive the volume will rise again once lowed due to sustain completes.
+      if rise is -ve the volume will go down and vanish once the Sustain complete.
+      if rise is infinity, the sustain goes till infinity. 
+
+
+
+
+ENV2:   It is not restricted to volume knob. 
+        It can be used with filter and works at the time of attack and release.
+        Env 2 is Polyphonic
+
+
+ENV1: Retrig --> Everytime you press the note, the Envelope Starts again.
+      mono   --> Eveytime you press the note, the envelope starts with the position of the previous envelope.
+      Poly   --> envelope Overlaps smoothly. 
+
+
+========================================================================================================================
+========================================================================================================================
+========================================================================================================================
+
+
+Vector envelope:
+
+Typically LFOs Create Repeating Effect where as envelope Create repeating effects only once in rise or fall.
+Vector Envelope is the Special Type of envelope that creates Repeating Effect.
+
+
+Vector Mode mix: 
+Here we will be automating the Mix of the Oscilator at diffrent duration. Basically we are manipulating the triangular pad parameter.
+
+
+Vector Mode XY 
+Here We are manipulating the XY pad parameter.
+
+Vector Mode MIX and XY:
+Here we are manipulating XY as well as Triangular pad parameter.
+
+
+In the duration Line, You have Small S which is Sustain:
+once you press the Key, It will Come and stop here till you release the key. Once you Release the Key, the sound will goes to the rest of the Stage.
+
+
+You Can Set X Target and Y target.
+
+
+Solo Point: 
+You can use this to listen to a particular stage.
+
+
+
+
+Env Mode: 
+Normal: Once you release the key the Envelope leaves the sustain Stage and the Sound dies instantly and get release based on the Release time.
+Finish mode: Once you release the key the Envelope leaves the sustain Stage and the Sound dies till the sound finish and get release based on the Release time.

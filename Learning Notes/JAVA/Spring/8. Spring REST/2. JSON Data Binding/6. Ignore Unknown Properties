@@ -1,0 +1,5 @@
+@JsonIgnoreProperties(ignoreUnknown=true/false)
+
+If We put this annotation over the POJO class, then while Data Binding, Jackson will not search for the 
+getters and Setters for the JSON object for which the Field is not defined..
+

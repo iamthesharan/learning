@@ -1,0 +1,22 @@
+Application Folder
+        |
+        |-----> WEB-INF
+        |           |
+        |           |-------->  Classes :   contains servlets classes
+        |           |
+        |           |-------->  lib  : external libraries for servlets, spring     
+        |           |
+        |           |--------> web.xml: contains mapping data.  -> with this servlet container will understand
+        |                                                          for which file which servlet class is required
+        |
+        |-----> View Resources : html , css, javascript                 
+        
+        
+
+
+If i put this whole Application folder in tomcat container  is in root folder
+Now if you start the server, it will first read web.xml file, and read all the mappings
+
+After Servlet 3, web.xml is not required.
+you can use anotations
+

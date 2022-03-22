@@ -1,0 +1,65 @@
+JDBC API defines several classes and interfaces that is require for JDBC application
+
+JDBC API:
+
+Programmers can use this API to develop JDBC Application
+Driver Software vendor can use this API to develop driver Software
+
+JDBC API Contains
+
+java.sql package and javax.sql
+    |                    |
+    |                    |
+Basic classes       Advanced Classes and interfaces
+and interfaces
+
+Who provide drivers Software --> database Vendor
+Driver Software. We have to ask oracle to provide the driver Software. so they will provide jars.
+        
+        
+Oracle Driver Software has classes that inplements interfaces of JDBC API which can be used for communication with Oracle Database
+
+
+Multiple classes are there in Driver Software that implements interface of JDBC API. There is a Special Class called Driver class.
+
+Every Driver Software is identified by driver Class
+
+For Type 1 Driver Software define by SUN:
+
+Driver Class name of type 1 driver Softeware: sun.jdbc.odbc.JdbcOdbcDriver
+
+For Type 4: oracle thin
+
+Driver class : oracle.jdbc.OracleDriver
+
+
+
+
+===================================================================================
+
+In JDBC API there is an INterface called Driver INterface
+
+
+Driver Interface is present in java.sql package
+
+If You want to develop your driver class , then you must Implement Driver Interface.
+Driver Interface acts as requirement specification to develop Driver Class
+
+
+
+    -------------------------------------------------------
+    |oracle.jdbc.OracleDriver implements java.sql.Driver   |
+    |______________________________________________________|
+    
+    
+    
+who will provide Driver Software:
+
+1. Type 1 --> (provided by JAVA only but till 1.7 version )
+2. Thin -->(provided by Database Vendor)
+3. 3rd paryy like Inet
+
+
+
+Driver Softwares developed only in JAVA --> Pure JAVA Drivers
+Driver Software developed in JAVA + othere language --> Partial JAVA Drivers 

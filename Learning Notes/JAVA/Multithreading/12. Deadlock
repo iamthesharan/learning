@@ -1,0 +1,149 @@
+If Two threads are waiting for each other forever, Such type of infinite waiting is called deadlock.
+Synchroinized Keyword is the only problem of deadlock. Hence we should think before using synchronized Keyword
+We need to take special care while using synchronized keyword.
+
+Let us suppose we have below Classes
+
+class A{
+    d1(B b){
+        b.last();
+    }
+    last(){
+
+    }
+}
+
+class B{
+    d2(A a){
+        a.last();
+    }
+    last(){
+
+    }
+}
+
+Now Ive Created A and B object
+
+A a=new A();
+B b=new B();
+
+Now Thread t1 call d1(b) on a object by passing b as an argument
+and Thread t2 call d2(a) on b object by passing a as an argument
+
+Now in this case when we execute the program, t1 or t2 any thread can run first and since last method is not sync, so after completing 
+both threads will be terminated.
+
+Now we declare d1 and d2 method as sync.:
+
+class A{
+    sync d1(B b){
+        b.last();
+    }
+    last(){
+
+    }
+}
+
+class B{
+    sync d2(A a){
+        a.last();
+    }
+    last(){
+
+    }
+}
+
+Now Thread t1 call d1(b) on a object by passing b as an argument, then t1 will require object lock of a.
+and Thread t2 call d2(a) on b object by passing a as an argument, then t2 will require object lock of b.
+
+Since last() is not sync so both the threads will terminate easily
+
+Now we will make last as sync.
+
+class A{
+    sync d1(B b){
+        b.last();
+    }
+    sync last(){
+
+    }
+}
+
+class B{
+    sync d2(A a){
+        a.last();
+    }
+    sync last(){
+
+    }
+}
+
+Now Thread t1 call d1(b) on a object by passing b as an argument, then t1 will require object lock of a.
+and Thread t2 call d2(a) on b object by passing a as an argument, then t2 will require object lock of b.
+
+Now T1 has a lock, hence t2 will get into waiting state.
+and T2 has b lock, hence t1 will get into Wating state.
+
+Hence this is a deadlock situation
+
+
+class A{
+    public synchronized void d1(B b){
+        System.out.println("Thread1 Starts Execution for d1() method");
+        try{
+            Thread.sleep();
+        }
+        catch(InterruptedException){
+           
+        }
+        System.out.println("Thread trying to call B's last Method");
+        b.last();
+    }
+    public synchronized void last(){
+        System.out.println("Inside A last Method");
+    }
+}
+
+
+class B{
+    public synchronized void d2(A b){
+        System.out.println("Thread2 Starts Execution for d2() method");
+        try{
+            Thread.sleep();
+        }
+        catch(InterruptedException){
+           
+        }
+        System.out.println("Thread trying to call A's last Method");
+        a.last();
+    }
+    public synchronized void last(){
+        System.out.println("Inside B last Method");
+    }
+}
+
+
+
+Class MyThread extends Thread{
+    A a=new A();
+    B b=new B();
+    public void m1(){
+        // Main thread is resposible to execute  this method.
+        this.start(); // Main thread is starting child thread.
+        a.d1(b); // Main Thread Calls d1 method on a object.
+    }
+    public void run(){
+        b.d2(a); // This line is executed by child thread
+    }
+    public static void main(String ...args){
+        MyThread t=new MyThread(); // Creating a child thread inside a main thread.
+        t.m1();
+    }
+}
+
+===========================================================================================
+
+Deadlock vs Starvation:
+
+Long waiting of the thread where waiting never ends, that is called Deadlock.
+Long waiting of the thread where waiting ends, that is called Starvation.

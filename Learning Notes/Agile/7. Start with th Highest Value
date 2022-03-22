@@ -1,0 +1,36 @@
+First Principle of Agile menifesto is that Our Highest priority is to satisfy the customer through early and Continious delivery of valueable software.
+
+What is prioritizing high value Software?
+
+80 - 20 rule -> also known as vifredo pareto.
+
+He saw that in his garden 20% of the Pea Pots produced 80% of peas.
+So he Applies this logic in real world.
+20% of the Population owns 20% of the city's land.
+
+Conclusion: 80% of the Effects comes from 20% of the causes.
+
+Most of the Software Projects in 1990's we failing due to focusing and giving too much time to the software features
+that were never be used or rarely used by the customer.
+
+Reports from Standish Group Says that,
+45% of the features of the Software product were never used.
+19% are rearly used.
+16% are sometimes used.
+13% are often used
+7 % are always used.
+
+So only 20% of the features are only used and this satisfy Pareto rules.
+So in an agile team, this 20% is the most valueable part of the Software.
+So this would be the part of the very first Sprint and you should prioritize this 20%.
+
+So there Development team will first move to the Highest Priority feature
+and then goes down to the lowest priority.
+
+For Prioritizing the task, Agile Team uses Taskboard.
+Like in JIRA Software 
+Columns: User Stories, To Do, Doing, Done --> These columns are called Work Queues.
+
+
+
+As per Agile Menifesto, The working Software is the primary mesuare of the progress.

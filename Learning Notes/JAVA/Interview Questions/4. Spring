@@ -1,0 +1,351 @@
+Spring:
+
+Special Annotations:
+
+@Component —> Allows to automatically detect our custom beans. Here we let Spring to pick up the Beans
+
+@Autowired 	—> Auto Coupling of the Dependencies
+
+@Value	—> to Pick the value from the properties file
+
+@Qualifier —> Used differently in case of constructor. Used to explicitly define the dependencies if there are multiple dependencies in order to avoid confusion during the auto Component Scan.
+
+@ComponentScan —> Scans all the Beans in the package Specified.
+
+@Configuration. —> For defining the Configuration Class
+
+@PropertySource
+
+@Scope
+
+@Bean —> for explicitly declaring the bean
+
+@Controller —> Its a Special annotation which indicates that the class is a controller
+
+@RequestMapping —> Maps the request to the handler methods of MVC and Rest Controllers.
+
+@ModelAttribute.  —> this annotation is used to attach the model object sent from the web page.
+
+@Valid -> Is use to Check all the validations provided in the bean.
+
+@InitBinder --> is used for preprocessing all the web request comming to the Controller
+
+@JsonIgnoreProperties(ignoreUnknown=true)
+
+@RestController --> Handles the Restful Services withing the Client and the Application
+
+@GetMapping --> for Get Request.
+
+@PathVariable --> use to retrive the result based on the url Parameter
+
+@ExceptionHandler --> used to handle the Exception in our custom way.
+
+
+
+Spring Configuration Tags
+
+1. <context:property-placeholder location=“classpath:message.properties”/>
+
+This is used to refer to the Properties File from which you can retrieve the Values in the Pojo Class using @Value AnnotationS
+
+2. <context:component-scan base-package=“com.spring.ioc”/>
+	
+@Component is an annotation that allows Spring to automatically detect our custom beans.
+
+3. 	<bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+		<property name="prefix" value="/WEB-INF/view/"/>
+		<property name="suffix" value=".jsp"/>
+	</bean>
+
+For Creating InternalResourceViewResolver which will send the Actual View Path to the DispatcherServlet
+
+================================================================================================================================
+
+Q1 What is Spring Framework?
+
+Spring Framework is a light weight Framework which provides supports for Several Other Frameworks and comprises of many other modules like
+OC, AOP, DAO, Context, ORM, WEB MVC etc.
+
+Q2. How the Spring modules are distributed into Layers.
+
+	1. Test Layer -> Provide Support for testing with JUnit.
+	2. Core Container -> Provide Support for Core Beans, context
+	3. AOP, Aspects and Instrumation ->
+	4. Data Access Integration Layer-> comprises of JDBC, ORM, JMS, transactions
+	5. Web Layer -> Provide Supports for MVC, Web Servlet.
+
+Q3. What is Dependency Injection?
+	It is the way in which you can decouple the dependencies between the objects.
+	It increases the Code reusablity and readbiliity.
+
+Q4. What is Spring Container?
+	Spring Container is a Container of Beans. 
+	It manages the Creation of the Beans as well as Configuration of dependencies between the beans.
+	It Also Handles the Initialization of Bean, LifeCycle of Beans and Distruction of Beans.
+
+Q5. Which pattern Spring Container Follows?
+
+	Spring Container Follows Factory Pattern.
+	So Basically Obejct Factory Creates Object based on the configuration file.
+
+Q6. What is IoC Container?
+	IoC container->
+	1. Instantiate the Bean
+	2. configure the Object
+	3. Assembles dependencies within the Object.
+
+	Application Context and Bean Factory are the IOC Containers.
+
+Q7.	What is Inversion Of Control?
+	outsourcing the Creating and Management of the objects.
+
+Q8. What is the bean life cycle.
+
+	container Started
+	Bean Instantiated
+	dependency Injected
+	Internal Spring Processing
+	init method
+	beans ready to use
+	container stopped
+	destroy method
+
+Q9.	What is the Class name for Creating Annotation Based IOC Container?
+	AnotationConfigApplicationContext
+
+Q	How To create the Spring Core Config file?
+
+	1. Name the File as applicationContext.xml inside the src folder.
+	2. You can add Beans or inject beans inside other Beans.
+	3. In the Main App you need to Instantiate a IOC container:
+		ClassPathXmlApplicationContext context=new ClassPathXmlApplicationContext("applicationContext.xml");
+
+Q	How to Create a Spring Core Config File Without Xml.
+	1. Create a Config Class
+	2. Add the Annotation @Configuration.
+	3. You can also Add the Annotation @ComponentScan(basePackage="com.spring.ioc") over the class.
+
+	@ComponentScan will automaitcally Scan the Classes with @Component Annotation and automatically.
+	If There is Multiple Implementation of Dependencies then We should not use @Component because with this annotation
+	we automatically let Spring to Decide which Bean to Chose in order to inject Dependencies.
+
+Q	How To inject Beans when you want explicit defination of beans.
+
+	1. In the Config File, with the name of the class name, we will create a bean.
+		If the Bean Name is SwimCoach, we need to create a method swimCoach()
+	2. Now add the @Bean Annotation over this method.
+	3. To inject the Bean, Smilarly create a bean that you want to inject.
+	4. Inside the Main bean, you create the Object of the SwimCoach and add the injecting method in Constructor for Constructor injjection,
+		for method inject add the injecting bean on the injector method of SwimCoach.
+
+	5. retrun the SwimCoach object.
+
+
+–––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+
+Spring MVC:
+
+Q How to Configure the Dispatcher Servlet?
+
+	<web-app>
+        <servlet>
+            <servlet-name>dispatcher</servlet-name>
+            <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+            <init-param>
+                <param-name>contextConfgLocation</param-name>
+                <param-value>/WEB-INF/spring-mvc-demo-servlet.xml</param-value>   -----> this will thell where your applicationContext.xml file is kept.
+            </init-param>
+            <load-on-startup>1</load-on-startup>
+        </servlet>
+		<servlet-mapping>
+			<servlet-name>Dispatcher</servlet-name>
+			<url-pattern>/</url-pattern>
+		</servlet-mapping>
+    </web-app>
+
+
+						OR
+
+	class DispatcherServletConfigDemo extends AbstractAnnotationConfigDispatcherServletInitializer{
+		@Override
+		protected Class<?>[] getRootConfigClasses() {
+			// TODO Auto-generated method stub
+			return null;
+		}
+
+		@Override
+		protected Class<?>[] getServletConfigClasses() {
+			// TODO Auto-generated method stub
+			return new Class[] {WebConfig.class};
+		}
+
+		@Override
+		protected String[] getServletMappings() {
+			// TODO Auto-generated method stub
+			return new String[] {"/"};
+		}
+	}
+
+Q How to Do the Spring MVC Configuration?
+	<context:component-scan base-package="com.spring.demo"></component-scan>
+	<bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+        <property name="prefix" value="/WEB-INF/view/"></property>
+        <property name="suffix" value=".jsp"></property>
+    </bean>
+
+					OR
+	@Configuration
+	@EnableWebMvc
+	@ComponentScan
+	class MvcConfig{}
+
+
+Q10.	How to Bind the Validation rules to the form?
+
+	// BindingResult holds the Validation Result.
+	@RequestMapping("/processForm")
+	public String processForm(@Valid @ModelAttribute("student") Student theStudent, BindingResult theBindingResult) {
+
+		if(!theBindingResult.hasErrors())
+			return "student-confirmation";
+		return "show-form";
+	}
+
+Q.11 How to ensure the white Spaces don't take in Not null Validation Field?
+
+	Use Init Binder
+
+	@InitBinder
+	public void initBinder(WebDataBinder dataBinder) {
+		StringTrimmerEditor stringTrimmerEditor=new StringTrimmerEditor(true);
+		dataBinder.registerCustomEditor(String.class, stringTrimmerEditor);
+	}
+
+Q.12 How To perform Spring MVC Custom Form validation.
+
+	@Constraint(validatedBy = LastNameValidator.class)
+	@Target({
+		ElementType.METHOD,
+		ElementType.FIELD
+	})
+	@Retention(RetentionPolicy.RUNTIME)
+	public @interface LastName {
+		public String value() default "Sharan";
+		public String message() default "Last Name Must be Sharan";
+		public Class<?>[] groups() default {};
+		public Class<? extends Payload>[] payload() default {};
+	}
+
+
+				AND 
+	
+
+	public class LastNameValidator implements ConstraintValidator<LastName, String> {
+		private LastName lastName;
+		public void initialize(LastName lastName) {
+			this.lastName=lastName;
+		}
+		public boolean isValid(String theFormData, ConstraintValidatorContext constraintValidatorContext) {
+			System.out.println(this.lastName.value());
+			boolean result;
+			if(theFormData!=null)
+				result=this.lastName.value().equals(theFormData);
+			else    
+				result=true;
+			return result;
+		}
+	}
+
+
+Q13. What is REST?
+	Representational State Transfer
+
+@14.  	Conversion of Data from JSON to POJO or Vise Versa. What is it called?
+		Marshalling/Unmarshalling
+		Deserialization/Serialization
+
+@15. What to use for Pretty Printing of JSON output?
+
+	SerializationFeature.INDENT_OUTPUT
+
+Q16	What are the Different Features of Maven?
+
+	Dependencies Management
+	Building and running your project. -> No more build Path/ Class Path Issues.
+	Standard Directory Structure
+
+		MyApp
+		|--- pom.xml
+		|--- ./src
+		|       |--- ./main
+		|       |       |--- ./java           --> Here Your Source JAVA code will reside
+		|       |       |--- ./resources      --> Here you will keep you properties file as well as config files of your app
+		|       |       |--- ./webapp         --> JSP files, web Config files and web assets (images, css, js).
+		|       |
+		|       |
+		|       |--- ./test
+		|               | --- ./java          --> Unit Testing code and properties
+		|               | --- ./resources     
+		|         
+		|--- ./target                         --> Destination Directory for Compiled Code. Automatically Created by Maven.
+
+
+
+Q17. What are the pom.xml Structure.
+
+	Project Metadata, Dependencies, Plugins
+
+Q18. What are maven Architypes?
+	Architypes basically defines Maven Projects
+	maven-architype-quickstart  -> For Simple maven Project
+	maven-architype-webapp		-> For Web App projects
+
+
+Q How to Handle the Exception?
+
+	1. Create an Exception Response Class AbcErrorResponse with attributes:
+
+			private int status;
+			private String message;
+			private long timeStamp;
+
+	2. Now Create a custom Exception Class with AbcErrorException by Extending RuntimeException
+	3. thow this Exception based on Some bussiness Logic in Controller.
+	4. add a Handler Method in the Conntroller with @ExceptionHandler annotation.
+
+		@ExceptionHandler
+		public ResponseEntity<StudentErrorResponse> handleException(StudentNotFoundException e){
+			StudentErrorResponse error=new StudentErrorResponse();
+			error.setStatus(HttpStatus.NOT_FOUND.value());
+			error.setMessage(e.getMessage());
+			error.setTimeStamp(System.currentTimeMillis());
+			return new ResponseEntity<StudentErrorResponse>(error,HttpStatus.NOT_FOUND);
+		}
+
+Q How To handle the Generic Global Exception.
+
+	1. For this We can make a ControllerAdvice.
+	2. Create a class with @ControllerAdvice on the class.
+
+		@ExceptionHandler
+		public ResponseEntity<StudentErrorResponse> handleGenericException(Exception e){
+			StudentErrorResponse error=new StudentErrorResponse();
+			error.setStatus(HttpStatus.BAD_REQUEST.value());
+			error.setMessage(e.getMessage());
+			error.setTimeStamp(System.currentTimeMillis());
+			return new ResponseEntity<StudentErrorResponse>(error,HttpStatus.BAD_REQUEST);
+		}
+
+Q What is Hibernate?
+
+	Hibernate Provides Object to Relational Mapping.
+
+Q What are the Different types of Object in Spring?
+
+	1. Configuration Object
+	2. Session Factory Object --> Heavy Weigh
+	3. Session Object		 --> Light Weight
+	4. Transaction Object
+	5. Query Object
+
+Q 

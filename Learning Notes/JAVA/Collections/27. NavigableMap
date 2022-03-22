@@ -1,0 +1,11 @@
+Navigable Map is the Child interface of Sorted Map
+
+methods are similar to NavigableSet
+======================================
+lowerKey(e)
+floorKey(e);
+higherKey(e);
+cielingKey(e);
+pollFirstEntry(); //only key you can't remove hence you need to remove Entry
+pollLastEntry();  
+descendingMap();

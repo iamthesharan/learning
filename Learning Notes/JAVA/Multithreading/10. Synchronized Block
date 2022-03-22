@@ -1,0 +1,226 @@
+Suppose There is a bomb blast in Mumbai and Local Trains in Sydney is Stopped.
+Flights from Newyork Cancelled.
+
+If we implement this kind of programming language, then this is the worst kind of implementation
+
+Now Suppose we have a 10k lines of code inside a method and only 10 lines of code requires Synchronization. Then making the whole method as Synchronized will decrease the performance because the waiting time of the thread is more.
+So to overcome this, declare those few lines of the code as Synchronized. and that block will be executed by Single thread at a time.
+
+How to declare Synchronized Block:
+
+    1. To get lock of this object
+        Synchronized(this){
+            // If a thread got lock of current object, then only it is allowed to execute this aread
+        }
+
+    2. To Get lock of b object:
+
+        synchronized(b){
+            // If a Thread got lock of particular object b, then only it is allowed to execute this area.
+        }
+
+    3. To get Class level Lock:
+
+        synchronized(Display.class){
+            // If a thread got class level lock of Display class then only it is allowed to execute this area.
+        }
+
+
+class Display{
+    public void wish(String name){
+        // Lets assume here is 10k lines of code.
+        // And after that we have for loop.
+        for(int i=0;i<10;i++){
+            System.out.print("Good Morning: ");
+            try{
+                Thread.sleep(2000);
+            }
+            catch(InterruptedException exc){
+                exc.printStackTrace();
+            }
+            System.out.println(name);
+        }
+        // Again We have 1 Lakh lines of code.
+    }
+}
+
+class MyThread extends Thread(){
+    Display d;
+    String name;
+    MyThread(Display d, String name){
+        this.d=d;
+        this.name=name;
+    }
+    public void run(){
+        d.wish(name);
+    }
+}
+
+class SynchronizedDemo{
+    public static void main(String ...args){
+        Display d=new Display();
+        MyThread t1=new MyThread(d,"Sharan");
+        MyThread t2=new MyThread(d,"Kiran");
+        t1.start();
+        t2.start();
+    }
+}
+
+Now here we will get irrgeular output.
+But to get the regular output We have 2 approach:
+1. making the method as Synchronized
+2. Creating a Synchronized block
+
+Now Here we will discuss ->  Creating a Synchronized block:
+
+    So the Sync block will be created for few lines of code only.
+    class Display{
+        public void wish(String name){
+            // Lets assume here is 10k lines of code.
+            // And after that we have for loop.
+            synchronized(this){
+                for(int i=0;i<10;i++){
+                    System.out.print("Good Morning: ");
+                    try{
+                        Thread.sleep(2000);
+                    }
+                    catch(InterruptedException exc){
+                        exc.printStackTrace();
+                    }
+                    System.out.println(name);
+                }
+                // Again We have 1 Lakh lines of code.
+            }
+        }
+    }
+
+Now here we will get Regular Output if the display Object is same.
+
+
+
+If there are 2 Display objects then there will be irrgeular output.
+
+class SynchronizedDemo{
+    public static void main(String ...args){
+        Display d1=new Display();
+        Display d2=new Display();
+        MyThread t1=new MyThread(d1,"Sharan");
+        MyThread t2=new MyThread(d2,"Kiran");
+        t1.start();
+        t2.start();
+    }
+}
+
+
+=========================================================================================
+
+Creating a class Level lock:
+
+
+    class Display{
+        public void wish(String name){
+            // Lets assume here is 10k lines of code.
+            // And after that we have for loop.
+            synchronized(Display.class){
+                for(int i=0;i<10;i++){
+                    System.out.print("Good Morning: ");
+                    try{
+                        Thread.sleep(2000);
+                    }
+                    catch(InterruptedException exc){
+                        exc.printStackTrace();
+                    }
+                    System.out.println(name);
+                }
+                // Again We have 1 Lakh lines of code.
+            }
+        }
+    }
+
+Now If we call tho threads with diffrent display object , then the output will be regular because there is a class level lock.
+class SynchronizedDemo{
+    public static void main(String ...args){
+        Display d1=new Display();
+        Display d2=new Display();
+        MyThread t1=new MyThread(d1,"Sharan");
+        MyThread t2=new MyThread(d2,"Kiran");
+        t1.start();
+        t2.start();
+    }
+}
+
+=====================================================================================================
+int x=10;
+synchronized(x){
+
+}
+
+Here we will get Compile time error. Synchronized can't be used with variable.
+Lock concept applicable for object types and Class types but not for primititves hence we can't pass primitive type as agruments in Synchronized block.
+Otherwise we will get Compile time error : unexpected Type
+
+======================================================================================================
+
+FAQ:
+
+1. What is Synchronized Keyword. Where we can apply?
+    Synchronized is a keyword applicable for methods and blocks but not for classes and Variables.
+    Synchronized is used where we want to apply the lock. Example bank Account Transaction
+
+2.  Explain Advantage of Synchronized Keyword.
+    We can resolve Data inconsistency Problem.
+
+3. Explain disadvantage of Synchronized keyword.
+
+    It increases waiting time of thread and increases performance problem.
+
+4. What is a Race Condition?
+    If a multiple threads operating on the same java object then there is a data inconsistency problem. This is called Race Condition.
+    It can be resolved by using Synchronized method concept.
+
+5. What is Object lock and when it is required?
+    Every Object has a unique lock and that is called, object lock.
+    Whenever thread wants to execute instance synchronized method, then that thread required object lock.
+
+6. What is class level lock and when it is required?
+
+    Whenever a thread wants to execute static synchronized method, then the thread require Class level lock.
+
+7. What is the diffrence between Class level lock and Object level lock?
+
+    If the Thread wants to execute static synchronized  method, class level lock is required, 
+    If the thread wants to execute instance synchronized method, then object level lock is requried.
+
+8. While a Thread Executing synchronized method on the give object, is the remaining threads are allowed to execute any other synchronized method simultaeously on the same object?
+
+    no.
+
+9. What is synchronized Block?
+10. How to declare Synchronized Block to get lock of current object?
+    synchronized(this){}
+
+11. How to declare synchronized block to get class level lock?
+
+12. What is the advantage of synchronized block over synchronized method?
+
+    Performace will be improved.
+
+13. Is a thread can aquire multiple locks simultaneously?
+
+    Yes ofcourse From diffrent object
+
+
+    class x{
+        public synchronized void m1(){
+            // This method will be call be Class X's object. So that thread will required that x object lock. And lets assume that thread name is t.
+            Y y=new Y();
+            synchronized(y){
+                // here t needs to lock Y class object. so thread has lock of X's object and Y's object.
+                Z z=new Z();
+                synchronized(z){
+                    // Here t needs to lock Z class object. So here thread has locks of X's, Y's and Z's class object.
+                    // Hence thread can have multiple lock
+                }
+            }
+        }
+    }

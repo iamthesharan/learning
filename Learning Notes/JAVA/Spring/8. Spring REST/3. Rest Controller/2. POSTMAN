@@ -1,0 +1,10 @@
+Postman is a rest client.
+Its not mandatory to Signin. Just skip it.
+
+Install Postman.
+
+We will also be making of the Backend webservice to test our app.
+Use this website: jsontest.com -> This provides the backend rest Services to test against
+also : https://jsonplaceholder.typicode.com/
+
+and put the url in postman Client

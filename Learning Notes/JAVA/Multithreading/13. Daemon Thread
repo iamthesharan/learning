@@ -1,0 +1,86 @@
+A Thread Which is executing in the Background.
+
+Examlple: Garbage Collector, Attach Listener, Signal Dispatcher.    
+
+Let us take an example of movie, Producers, directors, music directors doesn't comes to the picture but plays an important role. Whithout them picture can't be made.
+Hence these people are like Daemon Threads.
+
+
+What is the purpose of Daemon thread?
+    To provide support for non daemon Thread. Suppose if Thread 1 is facing a memory Problem, then Automatically, JVM will call Garbage Collector.
+    So in this process GC will increase the priority compared to Thread 1 and then GC will get the chance to execute. Once the memory gets freed, then JVM will decrease the Priority of GC.
+
+    Usually Daemon threads having low priority, but based on our requirement daemon threads can run with High Priority Also.
+    
+How we can check whether the thread is Daemon or not?
+    With the help of below method:
+
+        public boolean isDaemon();
+
+How we can set the thread as Daemon?
+    
+        public void setDaemon(Boolean b);// But if you want to set thread as Daemon, it should be set before starting of the thread.
+
+        If we set the thread as Daemon after starting the thread, then immediately we will get IllegalThreadStateException
+
+What is the Default Nature of thread?
+
+    By Default Main thread is always non Daemon,
+    But for all Remaining threads, the default nature is by default inheriting from parent to child.
+    If parent thread is Daemon, then Automatically Child Thread is also Daemon.
+    If the parent thread is non Daemon, then Automatically Child thread is also non Daemon
+
+Is it possible to change the daemon nature of main thread?
+
+    Impossible. Because Main Thread is started by JVM and hence after starting you cannot change the Daemon nature of main thread
+
+========================================================================================================================================
+
+class Test{
+    public static void main(String ...args){
+        System.out.println(Thread.currentThread().isDaemon());// false
+        // Thread.currentThread().setDaemon(true);//RE: IllegalThreadStateException
+
+        MyThread t=new MyThread();
+        SOP(t.isDaemon());// false
+        t.setDaemon(true); // true
+        SOP(t.isDaemon());// true 
+    }
+}
+
+=======================================================================================================================================
+
+
+Whenever Last Non Daemon Thread Terminates, Automaitcally All Daemon Threads will be Terminated irrespective of their Postiton
+
+class MyThread extends Thread{
+    public void run(){
+        for(int i=0;i<10;i++){
+            SOP("Child Thread");
+            try{
+                Thread.sleep(1000);
+            }
+            catch(IE e){
+
+            }
+        }
+    }
+}
+
+
+class DaemonThreadDemo{
+    public static void main(String ...args){
+        MyThread t=new MyThread();
+        t.setDaemon(true);
+        t.start();
+        SOP("End Of Main Thread");
+    }
+}
+
+Now if we comment the line t.setDaemon(true);
+then main Thread is non-daemon and child thread is non-daemon.
+Hence both threads will be executed until their Completion.
+
+Now If  t.setDaemon(true); is there
+then main thread is non Daemon and Child Thread is Daemon. 
+Whenever main thread completes child thread won't continue execution and will be terminated

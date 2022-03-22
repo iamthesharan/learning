@@ -1,0 +1,48 @@
+Setting Up the HIbernate Config File
+
+    Config File basically tells Hibernate to how to Connect to DB. 
+    Note--> Hibernate Internally Uses JDBC API to interact with DB
+
+
+    Hibernate Config File will be inside the src Directory.
+
+
+    Hibernate Config File:
+
+        1.  <hibernate-configuration></hibernate-configuration>   --> This tag tells that it is the Hibernate Config File
+        
+        2.  session-factory  --> Session Factory allows us to get the Session Objects for connecting to the DB
+
+                <hibernate-configuration>
+                    <session-factory></session-factory> 
+                </hibernate-configuration>
+        
+        3.  Now We will write the JDBC Connection Settings inside the Session Factory.
+                <session-factory>
+                    <property name="connection.driver.class">oracle.jdbc.driver.OracleDriver</property>
+                    <property name="connection.url">jdbc:oracle:thin:@localhost:1521:xe</property>
+                    <property name="connection.username">Sharan</property>
+                    <property name="connection.password">system</property>
+                </session-factory>
+        4. Now We will Set the JDBC Connection Pool Settings
+
+                	<property name="connection.pool_size">1</property>
+
+        5. After that we will set up the dialect:
+
+                The dialect specifies the type of database used in hibernate so that hibernate generate appropriate type of SQL statements.
+
+                <property name="dialect">org.hibernate.dialect.Oracle10gDialect</property>
+
+        6. Now We Will Configure the Hbernate to Show The SQL:
+
+            	<property name="show_sql">true</property>
+        
+        7. Configure the Hibernate to use Threaded Mode.:
+
+            	<property name="current_session_context_class">thread</property>
+
+
+
+
+

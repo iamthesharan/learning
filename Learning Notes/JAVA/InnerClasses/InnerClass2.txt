@@ -1,0 +1,91 @@
+//Notes 2
+
+
+
+class Outer{
+	int x=10;
+	static int y=20;
+	
+	class Inner{
+		public void m1(){
+			System.out.println(x);
+			System.out.println(y);
+			
+			// Both The Code will run Properly as we can access static members in inner class 
+				but we cannot declare Static members in Inner class
+		}
+	}
+	public static void main(String ...args){
+		Outer O=new Outer();
+		Outer.Inner i=O.new Inner();
+		i.m1();
+	}
+}
+
+Therefore from Normal or Regular inner class we can access both static and non-static members of outer class Directly
+
+
+------------------------------------------------------------------------------------------------------
+
+
+class Outer{
+	int x=10;
+	
+	class Inner{
+		int x=100;
+		
+		void method(){
+			int x=1000;
+			System.out.println(x);  //output is 1000
+			System.out.println(this.x);  // output is 100
+			System.out.println(Inner.this.x); //Output is 100			
+			System.out.println(outer.this.x); //output is 10
+
+
+			// This type of Arrangement is required when there is a Naming Conflict.
+			//Within the inner class this always refers Current Inner Class Object
+			//If we want to refer Current Outer Class Object We have to use Outer class Name.this
+		}
+	}
+	public static void main(String ..args){
+		new Outer().new Inner().method();
+	}
+}
+
+
+---------------------------------------------------------------------------------------------
+
+Modifiers -- 
+
+
+
+The Only applicable modifiers for Outer Classes are:
+
+	Public, Default, Final, Abstract, Strictfp
+	
+But For Inner Classes applicable modifiers are 
+	
+	Public, Default, Final, Abstract, Strictfp   +  Private, Protected, Static
+	
+---------------------------------------------------------------------------------------------
+
+
+Nested Inner Classes
+
+class A{
+	class B{
+		class C{
+			public void m1(){
+				System.out.println("Innermost Class Method");
+			}
+		}
+	}
+}
+class test{
+	public static void main(String ...args){
+		A a=new A();
+		A.B b=a.new B();
+		A.B.C c=b.new C();
+		c.m1();
+	}
+}

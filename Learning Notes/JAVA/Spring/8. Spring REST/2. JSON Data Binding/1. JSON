@@ -1,0 +1,37 @@
+JSON is the JAVAScript Object Notation.
+JSON is Language independent and can be integrated with any Programming Language
+
+
+Example Of JSON:
+
+It is defined by the curly Braces. Inside the Curly Braces, there are an Name Value pair and these name value pairs are delimited by Colons.
+Note: Whenever you define name in JSON, it will always be in Double quotes.
+
+JSON Values:
+    JSON values are defined in the right hand side. 
+    
+    We can have:
+
+    Number: no Quotes
+    Strings: Always in Double Quotes.
+    boolean: true/false and will not be in double quotes.
+    Nested Objects
+    Array
+    null
+
+    Nested JSON Item as welle as Arrays:
+
+{
+    "id":14,
+    "Customer Name":"Shashank Sharan",
+    "Address":{
+        "City":"Dhanbad",
+        "State": "Jharkhand"
+    },
+    "Languages":["JAVA","Python"]
+}
+
+{
+    "id":14
+    "FirstName": "Shashank"
+}

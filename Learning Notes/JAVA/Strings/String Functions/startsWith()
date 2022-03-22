@@ -1,0 +1,25 @@
+boolean startsWith() ----------------->
+
+
+Signature:
+
+boolean startsWith(String prefix)
+boolean startsWith(String prefix, int offset)
+
+
+
+class Car{
+	public static void main(String ...args) {
+		String s="Shashank Sharan Sharan";
+		System.out.println(s.startsWith("Shashank"));
+		System.out.println(s.startsWith("Sharan"));
+		System.out.println(s.startsWith("ashank",2));
+	}
+}   
+
+Output:
+
+
+true
+false
+true

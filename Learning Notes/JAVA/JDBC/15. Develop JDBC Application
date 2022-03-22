@@ -1,0 +1,111 @@
+Steps:
+
+1. Load and Register driver class
+2. Establish connection b/w JAVA application and database
+3. Create Statement Object
+4. Send and Execute SQL Query
+5. Process result from result set.
+6. close connection
+
+
+Driver Softwares are present in the form of JAR files. So we need to Place this Jar File in Class Path.
+Every Driver Software is identified with some special class called Driver Class. We have to load and Register this class
+
+
+1. Load and Register driver class
+ 
+    You can load any class in java by using
+    Class.forName("sun.jdbc.odbc.JdbcOdbcDriver"); // for type1
+    
+    
+    Ex 
+            class student{
+                static{
+                    SOP("Sharan");
+                }
+            }
+            public class test{
+                public static void main(String ...args){
+                    Class.forName("student");
+                }
+            }
+            
+            O/P: Sharan
+            
+            
+    So in this case internally what is happening
+    
+    class JdbcOdbcDriver{
+        static{
+            JdbcOdbcDriver driver=new JdbcOdbcDriver();
+            DriverManager.registerDriver(driver);
+        }
+    } 
+    
+    So when we load this class, inside Static block will be responsible to load the driver calass and register the DriverManager.
+    
+    For type 1 Driver this Driver class  is present inside JDK --> JRE --> lib --> rt.jar
+    
+2.  Establishing a Connection:
+    
+    // DriverManager Class has get Connection Method 
+    DriverManager.getConnection();
+    
+    inside getConnection Method: JDBC URL is required to connect DB. means DB host name, Username and Password.
+    Then only DriverManager will provide Connection Object.
+    
+    Connection con=DriverManager.getConnection(JDBC_URL, Username, password);
+    
+    JDBC URL Syntax:
+    
+    
+    mainProtocol:   subProtocol:        subname
+         |              |                   |
+         |              |                   |
+        jdbc        Driver Protocol     Connection details
+    (it will        varry from driver
+    always be       to driver
+    JDBC)           and connection to 
+                    connection
+                    
+    Therefore for Type 1: jdbc:odbc:demodsn
+    
+    Connection con=DriverManager.getConnection("jdbc:odbc:demodsn", "scott", "tiger");
+    
+    
+    Hence for Type 1 driver DNS will provide Database info to ODBC Driver. Example DB Name
+    DSN is only Required for type1 driver.
+
+    DSN Types:
+    1. User DSN
+    2. System DSN
+    3. File DSN
+
+
+
+
+    Connection con=DriverManager.getConnection(JDBC_URL, Username, password);
+
+    **NOTE: Connection is an Interface. When the DriverManager returns Connection Object, the object is of type sun.jdbc.odbc.JdbcOdbcConnection.
+
+    you can check by. con.getClass().getName();
+
+3.  Creation of Statement object
+
+    Statement st=con.createStatement();
+    
+    
+    
+4.  Send and Execute SQL Query
+
+    There are two types of Query:
+    1. Select Query: return ResultSet Objects
+    2. Non Select Query: returns numeber. Number of rows inserted, deleted, updated etc.
+    
+    
+    For Executing the query in JDBC, three methods are there:
+    1.executeQuery();
+    2.executeUpdate();
+    3.execute();
+    
+    These methods are defined in Statement Interface

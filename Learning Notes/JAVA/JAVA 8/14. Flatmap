@@ -1,0 +1,51 @@
+List<String> s=ls.stream().filter // here we can apply Filter.
+--> When it comes to the Return type as array or list
+
+List<String[]> --> filter() is not gonna work
+List<List<String>>  --> filter() is not gonna Work
+
+
+    List<String[]>  ----> Flat Map  -----> Filter
+                         we can apply
+                         sum , distinct,
+                         filter
+
+
+    So here we need to apply these processing methods on flat map
+
+
+
+    String data[][]=new String[][]{
+        {'a','b'},
+        {'c','d'}
+    };
+
+    Stream<String[]> dataStream=Arrays.stream(data);
+    Stream<String> streamFlatMap=dataStream.flatMap(x -> Array.stream(x));
+    Stream<String> dataStreamFilter=streamFlatMap.filter(x->"a".equals(x.toString()));
+    dataStreamFilter.forEach(System.out::println);
+
+    Arrays.stream(data).flatMap(x -> Array.stream(x)).filter(x->"a".equals(x.toString()).forEach(System.out::println);
+
+
+==================================================================================================================
+
+Suppose You have an Eployee Class that can Store  multiple Devices with addDeviceMethod().
+
+List<Employee> empList=new ArrayList<Employee>();
+empList.add(emp1);
+empList.add(emp2);
+
+empList.stream().map(x->x.getDevices()).flatMap(x->x.stream())
+.distinct()  // Gives me Distinct
+.collect(Collectors.toList());
+
+
+
+==================================================================================================================
+
+
+int data[]={1,2,3,4,5,6};
+Stream <int[]> streamArray=Stream.of(data);
+IntStream intStream=streamArray.flatMapToInt(x->Arrays.stream(x));
+intStream.forEach(System.out::println);

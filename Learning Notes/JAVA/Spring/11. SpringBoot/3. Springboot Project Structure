@@ -1,0 +1,51 @@
+Springboot makes the use of Standard maven Directory Structure. Please check the Maven Notes.
+
+mvnw --> allows you to run the maven project. No need to install the maven at your path.
+If the Correct version of the maven is not found on your computer, It will automatically download the correct version and runs Maven.
+
+There are two Files Provided.
+mvnw.cmd --> for Windows
+mvnw.sh  --> for mac and linux
+
+
+I maven POM file:
+Inside the build Plugins Section, You will See the Springboot maven Plugin. 
+This plugin is used to package the executable jar file or to create a war archive file
+
+So you can easily run the app with the below Command:
+
+./mvnw package
+./mvnw spring-boot:run
+
+=====================================================================================
+
+@SpringBootApplication
+
+This annotation enables:
+1. Auto Configuration
+2. Component Scanning
+3. Additional Configuration
+
+Composed of the following annotation:
+@EnableAutoConfiguration
+@ComponentScan
+@Configuration
+
+======================================================================================
+
+application.properties
+
+By Default Springboot will load the properties from: application.properties
+
+    How will you access the property from the property file?
+
+    You can create a field and use @Value annotation
+
+    @Value("${coach.name}")
+    private String coachName
+
+======================================================================================
+
+Springboot Starter parent:
+
+If you define the Springboot Starter Parent, then no need to provide the versions in the child dependencies.

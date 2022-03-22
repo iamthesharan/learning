@@ -1,0 +1,8 @@
+There are two types of users:
+1. root user --> has # prompt
+2. normal user --> has $ prompt
+
+whoami --> this will give the username.
+
+sudo -i --> command is used to switch to the root user terminal.
+            here su means super user.

@@ -1,0 +1,37 @@
+all the jar files are kept in lib folder.
+Connection Pool Defination: present in context.xml
+
+
+<Context>
+    <Resource name="jdbc/web_student_tracker"    // basically its an alias for the pool
+        auth="Container"                        // auth will decide how we will authenticate, here tomcat container.
+        type="javax.sql.DataSource"             // DataSource is a java interface used for communicating with the pool.
+            maxActive="20"                     // Max connection is 20
+            maxIdle="5"                        // when there are no users in our system. we have at least 5 connection
+            maxWait="10000"
+            username="system" password="sharan"
+            driverClassName="oracle.jdbc.OracleDriver"
+            url="jdbc:oracle:thin:@localhost:1521:xe"
+    />
+</Context>
+
+
+
+Tomcat container automatically set connection pool to the servlet.
+To access that we just need to use the resource annotation
+
+
+===================================================================
+Database Utility Class
+
+Responsible for interfacing the database using JDBC code.
+The common design pattern is known as Data Accessor Object (DAO)
+
+
+So Steps used to perform in MVC:
+
+1. POJO Class
+2. Utility Class
+3. Controller
+4. view
+

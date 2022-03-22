@@ -1,0 +1,76 @@
+Servlets are Java classes that conform to the Java Servlet API, which allows a Java class to respond to requests. Although servlets can respond to any type of request, they are most commonly written to respond to web-based requests. A servlet must be deployed to a Java servlet container in order to become usable.Although many developers use servlet frameworks such as Java Server Pages (JSP) and Java Server Faces (JSF), both of those technologies compile pages into Java servlets behind the scenes via the servlet container. That said, a fundamental knowledge of Java servlet technology could be very useful for any Java web developer. 
+
+
+
+            Search Flights                  SQL
+web browser -----------------> Web Server ------------------->database
+            <-----------------            <-------------------
+            HTML Pages                      Results
+            
+            
+            
+What are JSPs and Servlets?
+1. JAVA Code that runs on Web Browser.
+2. Reads User action normally from user
+3. Performs works
+4. Returns the HTML Pages that is generated dynamically
+
+Servlets and JSPs are build in web Servers  
+
+
+
+Servlet Container:
+
+Servlets are like Server Side JAVA Classes --> these Classes are capable to read the data which is comming from Browser.
+
+Container: To execute this Server side java Classes you need a Servlet container
+                                   _______________________
+                                  |  HttpServletsRequest  |
+                                  |            |          |  
+                                  |        ________       |              
+                                  |       |        |      |
+ Browser---> Http  protocol ----->|       |Servlets|      |                       
+                                  |       |Class   |      |
+                                  |       |________|      |
+                                  |                       |
+                                  |                       |
+                                  |_______________________|
+                                        Servlet Container
+                                        
+
+Browser Send the data to Servlet Container in the form of Http request. 
+Servelet Container will first make this http data in the java bean objects.
+So the Server Basically converts the data into HttpServletsRequest object.
+And after that the container will forward this HttpServletsRequest object to Servlets Classes.
+The Response we get is stored in the form of HttpServletsResponse Object.
+and again this HttpServletResponse is converted back into http Response 
+
+
+
+Which servlet Class the request object should go?
+
+    Lets Say we have 4 Servlets Classes
+    
+    a.class, b.class, c.class, d.class --> binded in myapp application 
+
+    Well it Depends on the URL, which class the object should go.
+    
+    we need to hit the Server URL. ex localhost:8080/myapp
+    myapp --> its a servlet Application
+    
+    So if we need hello.html to load. This page must be saved in my application 
+    
+    So we need to hit localhost:8080/myapp/helo.html
+    
+    
+    Now for Response: we can use the page adrress of servlets as /a, /b, /c, /d
+    for the respective a,b,c,d servlet class.
+    
+    So put the response URL in form Action
+    
+    
+    So when you submit the form request the url will become
+    localhost:8080/myapp/a?name=Shashank
+    So once the request is send to the Servlet Container, it will Create a request object and send it to the Servlet Class   
+    
+We have open Source Container from apache: Tomcat

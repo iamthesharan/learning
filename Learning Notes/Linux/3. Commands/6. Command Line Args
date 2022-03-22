@@ -1,0 +1,19 @@
+$# --> gives you the no of command line arguments excluding Script Name
+$0 --> represent Script name.
+$1 --> first Cmd line args.
+$@ --> All arguments excluding Script name but the Each argument is a separate String. @ will always take Space in middle
+$* --> All arguments excluding Script name but each argument is not a separate String overall arguments are taken as single string. and the Separator is IFS.
+$? --> Return Value/exit code.
+
+
+
+By Default IFS value is blank space
+you can change the IFS first character.
+
+IFS="-"
+echo $@
+echo $*
+
+output:
+Hello World
+Hello-World.

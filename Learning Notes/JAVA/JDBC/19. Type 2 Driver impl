@@ -1,0 +1,14 @@
+Driver Class Name: oracle.jdbc.driver.OracleDriver --> in older Version
+                            or
+                    oracle.jdbc.OracleDriver   --> for newer version
+                    
+URL: jdbc.oracle.oci8:@xe  --> older Version
+      jdbc.oracle.oci:@xe  --> for newer Version
+                        |
+                        |
+                    System ID --> Every Database has Unique id as SID
+                    
+to identify SID:
+
+1. select * from global_name;
+2. tnsnames.ora

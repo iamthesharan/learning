@@ -1,0 +1,80 @@
+/
+|------ bin
+|------ dev (also called devices)
+|------ home (in this for every user a separate folder will be created. when you login, the directory you are in is /home/user-name)
+
+
+In Linux everthing is treated as a file whether it's directory, devices etc.
+
+All files in Linux OS is devided into 3 types:
+
+1. Normal Files/Ordinary Files  -> ex test.txt, test.java, binary files(images, audio etc) --> these files contains data.
+2. Directory Files              -> represents directories --> contains files/subdirectories
+3. Device Files                 -> here all device related files are there. 
+
+our terminal also treated as a file which is device file.
+
+
+
+In Linux, File Extension is not important. Linux is capable of recognizing the file.
+to check the Extension.
+file file1.jpg  -> gives you the Extension.
+
+
+tty --> Print the file name of the terminal connected to standard input.
+/dev/pts/0  --> here 0 represents the terminal number
+
+To send the Output to different terminal
+
+echo "Hello World" > /dev/pts/1
+
+
+--------------------------------------------------
+
+File System.
+/etc  --> contains sensitive Config files.
+/bin  --> constains System Utilities and binary executables like ls, cat and other commands
+          To identy the Command location, type  "which less"
+/sbin --> Commands that are intended to used by the super user like mount, mkfs
+/dev  --> contains device files
+/lib  --> shared libraries: its a symbolic link to /usr/lib like man pages, python, java
+/usr  --> Contains various programs and libraries.
+/var  --> Contains variable files, the file that can change a lot. like log files, mails
+/home --> location where user home directory are placed.
+
+
+whenever you want to create a hidden file in linux put a . in the first place of the name of the file.
+
+
+Device Files:
+
+Device files are used as a means  of communication between the system(the kernel) and the physical hardware device.
+Device files receives request from the kernel and redirects it to the device driver which inturn send it to the physical device or vice versa.
+
+
+
+-----------
+
+etc/passwd --> password info
+etc/groups --> group info
+etc/hosts  --> All Host info. (ip address indo)
+
+
+-------------
+
+
+Files:
+
+-rwxr-xr-x   1 root root    0 Jan 29 13:08 .dockerenv*
+
+first charachter "-" represents the type for file. if its directory , it will represent d.
+rwxr-xr-x  --> this is permissions.
+next "1" is the no of linked files
+first root is user the file belongs to
+2nd root is group the file belongs to
+0 is the size of the file.
+last modification of the file
+then file na
+
+
+

@@ -1,0 +1,3 @@
+When we initalize a git repo, that's in one directory. In our case its MyFirstNovel. But git is going to watch everything in this directory including nested directory. ****Warning**** So we don't have to initialize another repo inside of the existing repo.
+
+Its good to keep 1 repo per project.

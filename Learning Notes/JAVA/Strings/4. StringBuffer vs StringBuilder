@@ -1,0 +1,10 @@
+    StringBuffer                StringBuilder
+
+1.  Syncronized             1. Non-Synchronized
+
+2.  Thread-Safe             2. Not Thread Safe (At a time Multiple threads can access StringBuilder Object).
+
+3.  Relatively low          3. Relatively High performance
+    performance
+    
+4.  Introduced in 1.0v      4. Introduced in 1.5v

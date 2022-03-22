@@ -1,0 +1,57 @@
+REST over HTTP
+
+The Most Common use of Rest is over HTTP.
+We can Leverage HTTP methods for Crud Operations
+
+    POST    : Whenever you send a POST request, this will Translate to CRUD operation to create and Entity.
+    GET     : When you send a GET Request, this will translate the CRUD operation to read the Entity.
+    PUT     : When you send a PUT Request, this will translate the CRUD operation to Update the Existing Entity.
+    DELETE  : When you send a DELETE Request, this will translate the CRUD operation to Delete the Existing Entity.
+
+
+HTTP Message:
+                     
+                        HTTP Request Message
+                -----------------------------------------> 
+    CRM App                                                  CRM Rest Service 
+                <-----------------------------------------
+                        HTTP Response Message
+
+
+HTTP Request Message:
+
+    HTTP request Message Contains:
+        1. Request Line         --> has actual HTTP command(GET/POST/PUT/DELETE)
+        2. Header Variables     --> Metadata
+        3. Message Body         --> Content of the Message as JSON
+
+
+    HTTP Response Message Contains:
+        1. Response Line            --> Contains Server Protocol and Status Code
+        2. Header Variable          --> Response metadata
+        3. Message Body             --> contents of message
+
+
+    Status Code:
+
+        100 -199 : informational
+        200 -299 : Success
+        300 -399 : redirection
+        400 -499 : Client Side Error
+        500 -599 : Server Side Error
+
+
+    MIME Content Type:
+
+            It is the message format for actual Payload
+            MIME: Multipurpose Internet Mail-Extension
+
+            basic Syntax: type/subtype
+            Example: text/html, text/plain
+
+
+Here we use a Tool Called POSTMAN which will help us to send HTTP request to the Rest WebService.
+
+POSTMAN: Rest Client.
+
+

@@ -1,0 +1,35 @@
+Java String getChars()  --------->
+
+The java string getChars() method copies the content of this string into specified char array. There are 4 arguments passed in getChars() method.
+
+
+Signature  ------>
+The signature or syntax of string getChars() method is given below:
+
+public void getChars(int srcBeginIndex, int srcEndIndex, char[] destination, int dstBeginIndex)  
+
+
+Returns
+It doesn't return any value.
+
+
+Throws
+It throws StringIndexOutOfBoundsException if beginIndex is greater than endIndex.   
+
+Program:
+
+class Car{
+	public static void main(String ...args) {
+		String s1="Hi There! How R U?";
+		int len=s1.length();
+		char ch[]=new char[len-10];
+		s1.getChars(10, len, ch, 0);
+		String s2=new String(ch);
+		System.out.println(s2);
+	}
+}
+
+
+Output:
+
+How R U?

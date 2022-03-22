@@ -1,0 +1,45 @@
+Directive are used for specifying something for the whole page
+Types of Directive:
+@page --> for adding package
+@include --> used to include the existing JSP Page in Page
+@taglib --> for proviiding tags that are beyond the html
+
+
+1. @page:
+
+Syntax:
+<%@ page attribute="value" attribute="value" %>
+
+Attributes:
+
+language="scripting language"  --> by default: JAVA 
+extends="className"            
+import="importList"             --> for packages we can use
+session="true|false"
+autoFlush="true|false"
+contentType="ctiinfo"
+errorPage="errorUrl"
+isErrorPage="true|false"
+info="information"
+isELIgnored="true|false"
+isThreadSafe="true|False"
+
+
+Ex:
+
+<%@ page language="java" import="java.sql.Statement, java.util.Scanner"%>
+
+
+2. @include --> just like we use in php for header and footer
+
+    <%a include file="header.jsp" %>
+    
+    
+3. @taglib
+
+    to include the library
+    suppose we want to use our own library H1 Tag or modify h1 tag of html
+    <%@ taglib uri="uri" prefix="fx" %>
+    <fx:h1>
+    
+    

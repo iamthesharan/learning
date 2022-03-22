@@ -1,0 +1,14 @@
+Step 1: Install MiddleWare Server ie Application Server
+Step 2: Configure System DSN for Middleware Server
+
+Driver Class for Type3 Drivers: ids.sql.IDSDriver
+jdbc URL: jdbc:/ids://localhost:12/con?dsn=sysdsntype3 -->sysdsntyp3 need to configure in middleware Server in
+                         |       |                          For DB Connect
+                         |       |
+                         |    Default port for IDS
+                         |
+                    Server URL
+                    
+                    
+Driver Software is present in C:\IDSServer\clases\jdk13drv.jar
+    

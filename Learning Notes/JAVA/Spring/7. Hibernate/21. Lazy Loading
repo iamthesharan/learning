@@ -1,0 +1,48 @@
+Eager --> will retrive Everything
+Lazy  --> will retrive on request
+
+    tbap_item ---> has multiple price Plan.
+
+    so if the request is made to tbap_item and if it returns price plan as well then there will be the performance issue
+
+
+    Best PRactice:
+
+        Only load data when absolutely needed
+
+    Syntax:
+
+        @OneToMany(fetch=FetchType.LAZY)                                                          
+
+
+    Default Type:
+
+    @OneToOne and ManyToOne is Eager
+    @OneToMany and ManyToMany is Lazy
+
+
+    How to Resolve the Lazy Loading Problem when the Session is closed and the Entity is loaded after that?
+
+    1. Keep the Lazy Loaded Entity before the Session Close.
+    2. Using HQL Join.
+
+
+    2. Using HQL Join.
+        
+        int id=1;
+        Query<Instructor> query=session.createQuery(
+            "select i from Instructor i "
+            +"JOIN FETCH i.courses "
+            +"where i.id=:theInstructorId",
+            Instructor.class
+        );
+
+        query.setParameter("theInstructorId", theId);
+
+        Instructor tempInstructor=query.getSingleResult();
+
+        session.getTransaction().commit();
+
+        session.close();
+
+        System.out.println(tempInstructor.getCourses()); // This will Load because we have loaded the Joined Column table in the memory with HQL above

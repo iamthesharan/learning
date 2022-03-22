@@ -1,0 +1,43 @@
+Variable Substitution and Command Substitution.
+
+Variable Substitution:
+if x is the variable, the get the value of x by $x or ${x}
+
+
+Command Subtitution:
+
+`cmd`
+$(cmd)
+
+Write a Script to create log file with Time Stamp.
+
+myDate=$(date '+%d_%m_%Y %H_%M_%S')
+echo $myDate
+
+            OR
+
+myDate=`date '+%d_%m_%Y %H_%M_%S'`
+echo $myDate
+
+The above Code is partially Correct beacuse the below will then give an error.
+    myDate="date '+%d_%m_%Y %H_%M_%S'"
+    echo $($myDate)
+
+
+To overcome this, we use:
+    myDate="date '+%d_%m_%Y %H_%M_%S'"
+    echo $(eval $myDate)
+
+But this is also not a good Approach,
+better to use function
+function my_date {
+  date "+%y-%m-%d %H:%M:%S"
+}
+echo $my_date
+
+
+
+Or Else use \ 
+
+myDate=`date +%d_%m_%Y\ %H:%M:%S`
+echo $myDate

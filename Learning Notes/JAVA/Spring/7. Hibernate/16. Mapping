@@ -1,0 +1,16 @@
+Entities can contain refernces to other Entities either directly as an embedded property or field or directly via some collection of some sort of (array , sets , list)
+These associations are represented using foreign key relationship in the Underlying Tables
+
+When only one of the pair of entities contains a reference to the other, the association is unidirectional.
+If the association is mutual, then it is referred to as bidirectional.
+
+
+A common mistake by beginners, when designing entity models, is to try to make all associations bidirectional. Remember that associations that are not a natural part of the object model should not be forced into it. Hibernate Query Language (HQL) often proves a more natural way to access the required information when needed.
+
+Ideally, we would like to dictate that only changes to one end of the relationship will result in any updates to the foreign key; and indeed, Hibernate allows us to do this by marking one end of the association as being managed by the other.
+
+In hibernate mapping associations, one (and only one) of the participating classes is referred to as “managing the relationship” and other one is called “managed by” using ‘mappedBy’ property. We should not make both ends of association “managing the relationship”. Never do it.
+
+Note that “mappedBy” is purely about how the foreign key relationships between entities are saved. It has nothing to do with saving the entities themselves using cascade functionality.
+
+

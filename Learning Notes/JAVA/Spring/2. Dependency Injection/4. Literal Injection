@@ -1,0 +1,26 @@
+Step 1 : Create a Setter method in a class for injection
+Step 2 : Configure the injection in Spring config file
+
+
+
+Step 1:
+
+public class CricketCoach implements Coach{
+    private String emailAddress;
+    private String team;
+    public void setEmailAddress(String emailAddress){
+    
+    }
+    public void setTeam(String team){
+    
+    }
+}
+
+
+Step 2:
+    
+    <bean id="myFortuneService" class="com.spring.ioc.HappyDailyFortuneService">
+    <bean id="CricketCoach" class="com.spring.ioc.CricketCoach">
+        <property name="emailAddress" value="sharans@amdocs.com"></property>
+        <property name="team" value="FE"></property>
+    </bean>

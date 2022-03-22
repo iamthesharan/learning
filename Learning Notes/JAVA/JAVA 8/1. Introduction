@@ -1,0 +1,101 @@
+Why JAVA 8?
+
+Concise Code
+Enabling Functional Programming
+
+Features of JAVA 8:
+    1. Lamda Expressions -> to enable functional Programming in JAVA
+    2. Functional Interface
+    3. Default Methods and Static Interface
+    4. Predefine Functional Interface:
+        a. Predicate
+        b. Function
+        c. Consumer
+        d. Supplier
+        etc.
+    5. Double Colon Operator (::)
+        a. we can use for Method Reference Purpose
+        b. Constructor Reference
+    6. Streams
+    7. Date and Time API
+    8. Optional Class
+    9. NaShron JavaScript API 
+
+=============================================================================================================
+
+1. Lamda Expressions:
+    a.  The main objective of Lambda Expression:
+        To bring benefits of Functional Programming into java.
+
+    What is lambda Expression?
+
+        It is an Annonymous Function: Annonymous means nameless
+        Any Function without name, without return type and without modifiers, then it is called Annonymous Function
+        
+        
+        
+        Conversion into lambda Expression.
+
+        Example 1:
+            public void m1(){
+                System.our.println("Hi There");
+            }
+
+            
+            ()->{
+
+                // -> will tell that the expression is lambda
+                System.out.println("Hi There!");
+            }
+
+            Now If the body Contains only 1 line then we can remove the {}
+
+            ()->System.out.println("Hi There!");
+
+        Example 2:
+
+            public void m1(int a, int b){
+                System.out.println(a+b);
+            }
+
+            (int a, int b)-> System.out.println(a+b);
+
+            But there are times when compiler will guess the type of the argument automatically. IN that case we can write:
+
+            (a,b)->System.out.println(a+b);
+
+        Example 3:
+
+            public int squareIt(int n){
+                return n*n;
+            }
+
+
+            (int n)->{ return n*n;}
+
+            => (int n) -> return n*n;
+            => (int n) -> n*n; // Without curly braces if you're returning something then you can easily remove return Statement
+            => (n) -> n*n; // My compiler will automatically guess n*n is the return value
+            => n-> n*n;
+
+        Example 4:
+
+            public void m1(String s){
+                return s.length();
+            }
+
+            s->s.length();
+
+==============================================================================================================================================
+
+How to call Lambda Expression:
+
+    For that we should go for FI(Functional Interface)
+
+    Single Abstract methods interfaces are also known as FI.
+
+    Runnable ==> run()
+    Comparable ==> compareTo()
+    Comparator ==> compare()
+    ActionListener ==> actionPerformed()
+    Callable ==> call()

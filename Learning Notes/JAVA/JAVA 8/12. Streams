@@ -1,0 +1,75 @@
+1.8v Streams Concept:
+
+java.io.streams: 
+I want to write Some data to the file abc.txt,
+I want to read some data from the file.
+
+If you want to represent data wrt file operation, then we will go for java.io.streams.
+
+
+=====================================================================================================================
+1.8v Streams: This is no way realted to java.io.streams.
+1.8v Streams is present in util package.
+This Streams is applicable for Collection Objects
+
+If you want to perform certain operation on the collections, then we go for streams
+
+=====================================================================================================================
+What is the Difference between Collection and Streams.
+
+    If we want to represent a group of individual object as a single entity then we go for Collection.
+    If you want to process objects from the collection, then we will go for streams Concept
+
+    let us suppose we have Integer arraylist.
+
+    AL<Integer> l=new AL<Integer>();
+    l.add(0);
+    l.add(10);
+    l.add(20);
+    l.add(15);
+    l.add(5);
+    l.add(25);
+    SOP(l);
+    [0,10,20,15,5,25]
+
+    Now I want to extract only the Even no from the list and put it in new ArrayList.
+    without Streams in JAVA 1.7v
+
+        List<Integer> l1=new AL<Integer>();
+        for(Integer I1:l){
+            if(I1%2==0){
+                l1.add(I1);
+            }
+        }
+        SOP(l1);
+
+
+    Now for the Same Rquirement in 1.8v Streams:
+
+        List<Integer> l1=l.stream().filter(I->I%2==0).collect(Collectors.toList());
+        Now here we get the stream by using l.stream(); l.stream() will point to collection
+        after that we filter certain Set of values
+        and after that we will collect those values using collect method
+
+
+======================================================================================================================================
+
+Now I don't want to Filter, I want to perform some operation and create a mapped object as a new result.
+
+So I want the collection where each element is the double of the original Element and add it to the new List.
+
+Without Streams:
+        List<Integer> l1=new AL<Integer>();
+        for(Integer I1:l){
+            l1.add(I1*2);
+        }
+        SOP(l1);
+        O/P: [0,20,40,30,10,50]
+
+
+With Streams:
+
+    List<Integer> l1=l.stream().map(i->i*2).collect(Collectors.toList());
+    SOP(l1);
+
+    [0,20,40,30,10,50]

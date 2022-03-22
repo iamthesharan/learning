@@ -1,0 +1,51 @@
+Let us suppose MyThread class extends Thread Class. and This Thread Class implements Runnable Interface.
+
+
+By Extending Thread Class
+
+         Runnable
+            |
+         Thread
+            |
+         MyThread
+
+By Implementing Runnable Interface: 2nd Approach
+
+                Runnable
+                    |
+                MyRunnable
+
+Runnable Interface Present in java.lang package and it contains only 1 method:
+
+    public void run();
+
+
+How To define the Thread using Runnable Interface.
+
+Defining a Thread:
+
+class MyRunnable implements Runnable{
+
+    // This is the job of the Child Thread
+	public void run() {
+		for(int i=0;i<10;i++) {
+			System.out.println("Child Thread");
+		}
+	}
+}
+
+public class test{
+	public static void main(String ...args) {
+		MyRunnable r=new MyRunnable();
+		Thread t=new Thread(r); // This is main thread.
+		t.start();
+		for(int i=0;i<10;i++) {
+			System.out.println("Main Thread");
+		}
+	}
+}
+
+
+
+It is always recommended to use Implementing Runnable interface instead of Extending Thread Class. Because it will allow the 
+Flexibility to extend Some other class. But in case for Extending Thread Class you cannot extend some other class

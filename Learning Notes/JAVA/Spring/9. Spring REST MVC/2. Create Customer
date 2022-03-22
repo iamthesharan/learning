@@ -1,0 +1,26 @@
+We will use the POST method here to create a new customer and to add a new Customer.
+
+In the Application we will pass POST api/customers and in the body we will pass the firstName, lastName and Email as the Request.
+Since we are creating a new Customer here so for that we will not pass the ID.
+
+For Aceessing the Request we need Jackson, Jackson will convert Request body from JSON to POJO.
+
+@RequestBody will be used in the method parameter which will bind the POJO to a method body.
+
+@PostMapping("/customers")
+public Customer addCustomer(@RequestBody Customer customer){
+    return theCustomerService.createCustomer(customer);
+}
+
+When Sending the JSON data to Spring Rest Controllers
+
+For Controller to process the JSON Data, need to set a HTTP Request Header
+    * Content-type: application/json
+
+So we need to configure the Rest Client to send the correct HTTP request Header and process accordingly
+So here our Rest Client is Postman
+
+
+==============================================================================================================
+
+For Getting the parameter from url, use @PathVariable in method parameter

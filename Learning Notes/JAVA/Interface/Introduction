@@ -1,0 +1,59 @@
+Topic 1;
+
+Interface Introduction
+
+	## Any service requirement Specification is known as Interface.
+	/*
+		Example
+			
+			JDBC API---> As per JDBC Specification........
+			
+			This JDBC API Acts as Requirement Specification to develop database Driver.
+			
+			Example Oracle Driver---> Oracle People Implements JDBC API.
+			
+			
+			JDBC API
+				|________  Oracle Driver (Oracle People Implemented)
+				|________  MySqL driver
+				|________  DB2 Driver.
+				
+				
+			Q) Who is responsible to Define this API?
+			
+			Ans) Sun People Define API Implementation and Database Vendor Implements the API. 
+				
+	*/ 		
+	
+	/*
+		Servlet API
+			
+			
+			Apache Tomcat Server -> Servlet API is implemented by Apache People
+			WebLogic Server      -> Servlet API is implemented by Oracle People
+			WebSphere Server     -> Servlet API is implemented by IBM People
+			
+			
+			If I Make One Application Today and I have Deployed it on Tomcat. Now the 
+			next day I want to Deploy it on WebLogic Server, The I will get the Support for 
+			my application because WebLogic Server also Implements Servlet API 
+	*/
+	
+	
+	/*
+			client  ----->  Interface  <-------  Service Provider
+								|
+								|
+								|
+							getAttendance();
+							getTimeTable();
+							getFees();
+	*/
+	
+	
+	/*
+		Summary Defination:
+		
+			Any Service Requirement Specification or any Contract between Client and Service Provider
+			or 100% pure abstract class is nothing but Interface.
+	*/

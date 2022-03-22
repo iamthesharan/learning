@@ -1,0 +1,26 @@
+Type 2 Drivers are same as Type 1 Driver except here ODBC Driver is replaced with Database Vendor Native Libraries
+
+JAVA Application  <---->  Type 2 Driver  <----> Vendor Provided Database  <----> DB
+                                                    Specific Libraries
+                                                        (Native Driver)
+                                                        
+Type 2 Drivers: the Driver that converts JDBC Calls to Vaendor Specific native Driver are called Type 2 Driver.
+
+Native Libraries: The libraries that are developed in NON JAVA mostly C/C++
+
+Advantages
+
+Type 2 Driver is Faster than type 1 Since only JDBC calls are converted to DATABASE SPECIFIC Native library CAlls that can be understood by DB
+
+
+Disadvantage:
+1. Database Dependent
+2. Platform Dependent -->  Diffrent For diffrent OS
+
+
+Which Jar to use?
+
+Oracle 10g( internally Uses java 1.4)   --> ojdbc14.jar
+Oracle 11g ( internally uses java 6v)  --> ojdbc6.jar
+Oracle 12g ( internally uses java 7v)  --> ojdbc7.jar
+                                    

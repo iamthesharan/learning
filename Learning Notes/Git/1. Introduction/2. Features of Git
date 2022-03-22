@@ -1,0 +1,30 @@
+1. Tracks changes across multiple Files
+2. Compare Versions of Project
+3. Time Travel back to old version
+4. Revert to a previous version
+5. Collaborate and Share changes
+6. Combine Changes
+
+Think about a Game. You create a Save point in a game and if you die in game you can go back and continue from there. This is what the simplest explaination of GIT.
+
+let us say I'm working on some website Project.
+Note*** With Git I create Checkpoints. So Checkpoint are saved files.
+
+    chkp1 (Initialize Project)   <-------> chkp2 (Add Top Nav Bar)  <-----> chkp3 (Add First Row) <-----> chkp4 (Finish Bottom Row)
+
+    So here If my boss Rejects my Code, I can even go back too.
+
+    I can also Create a fork which tells you are not working on Modifying rows(In case of this example) but you're woking on another version.
+
+    chkp1 (Initialize Project)   <-------> chkp2 (Add Top Nav Bar)  <-----> chkp3 (Add First Row) <-----> chkp4 (Finish Bottom Row)
+                                              \
+                                               \
+                                                \<---> chkp5(Add Side Bar) <------> chkp6(Add Footer)
+
+
+    I can even combine the Checkpoints.
+
+    chkp1 (Initialize Project)   <-------> chkp2 (Add Top Nav Bar)  <-----> chkp3 (Add First Row) <-----> chkp4 (Finish Bottom Row)
+                                              \                                                             /
+                                               \                                                           /
+                                                \<---> chkp5(Add Side Bar) <------> chkp6(Add Footer)<--->/

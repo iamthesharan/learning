@@ -1,0 +1,6 @@
+git diff - Shows all the changes in our working directory which are not Staged to Commit. Shows all Unstaged Changes
+git diff HEAD - Shows all changes unstaged and Staged since head.
+git diff --staged - only shows the staged changes and not unstaged changes since head.
+
+git branch1 branch2  --> diffrence in all files in branch
+git diff commit1 commit2

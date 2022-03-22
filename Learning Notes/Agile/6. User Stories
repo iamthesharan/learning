@@ -1,0 +1,9 @@
+Product Owners Create a User Stories. --> This is not formal. It is for future Conversations
+Bussiness Analyst writes requirements --> This is Clear and formal so that its doen't create any mess further
+
+
+User Stories must be written from customer perspective
+Format,
+
+As a [user] I want [some feature]
+so that i can get [some Value].

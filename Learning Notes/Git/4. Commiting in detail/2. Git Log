@@ -1,0 +1,2 @@
+git log --abbrev-commit --> This shorten the hashcode.
+git log --oneline --> Displays the logs in single line

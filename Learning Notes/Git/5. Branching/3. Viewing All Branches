@@ -1,0 +1,30 @@
+Command:
+
+git branch --> This will show the existing branches
+git branch <branch-name>  --> This is used to create a branch
+git branch -v --> this views the last commit including the branch name.
+
+when you create a branch, it will point to the same master branch.
+to check this type git log. you will see two branches with head at the same commit location, master and the other branch.
+
+==============================================================
+
+Switching the branch.
+
+git switch <branch name to switch on> 
+git switch -c Sharan   --> this will Create the branch with name Sharan and then switch.
+
+
+now if you type git status, it will show you the branch on which you are.
+if you type git log, it will show you the branches
+
+Now in this branch you can perform new changes 
+
+Sometimes Switching branch will let the changes which are not stage to come with you. It is when there is no conflict in filename.
+Otherwise it will prompt for commiting the change before Switching
+
+=============================================================================
+
+Staging and commiting together.
+
+git commit -a -m "My Commit Message"; --> This will stage all the changes and commit also commit those changes

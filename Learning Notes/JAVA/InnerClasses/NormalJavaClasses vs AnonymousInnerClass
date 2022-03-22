@@ -1,0 +1,44 @@
+Notes 5
+
+
+		Normal Class					Anonymous Class
+
+1) Can Extends only one class		1) Can Extends only one class
+
+2) A Normal Java Class Can 
+	implements any Number of 		2) Can implements only one interfaces
+	Interfaces simultaneously.
+
+3) Can have a Constructor			3) Cannot have a Constructor as The class has no name
+										and the name of the constructor must be same as class name
+
+Q) Where Anonymous Inner Classes are Best Suitable?
+
+Ans) In Gui Event Handling
+
+example
+
+
+	class MyGuiFrame extends JFrame{
+		JButton J1, J2, J3, J4, J5;
+		// Let us suppose we want to add specific functionality to J1;
+		
+		J1.addActionListener(new ActionListener(){
+			public void actionPerformed(ActionEvent e){
+				//Here is the Specific Functionality
+			}
+		});
+		
+		J2.addActionListener(new ActionListener(){
+			public void actionPerformed(ActionEvent e){
+				//Here is the Specific Functionality
+			}
+		});
+	}
+	
+	
+	
+// We can use Anonymous Inner Classes frequently in GUI Based Applications to implement
+	event Handling
+	
+	

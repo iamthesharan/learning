@@ -1,0 +1,14 @@
+With The Primary Key Strategy, You Can specify the how the primary key will be generated in the database.
+
+Strategy                    Description
+
+GenerationType.AUTO         Pick the Particular Strategy for the Particular database.
+GenerationType.IDENTITY     Assign Primary key using Database Identity Column
+GenerationType.SEQUENCE     Assign Primary key using Database Sequence (Oracle)
+GenerationType.TABLE        Assign Primary Key using and Underlying database table to ensure uniqueness
+
+
+@generatedValue(strategy="GenerationType.SEQUENCE", generator = "STUDENT_SEQ")
+@SequenceGenerator(name="STUDENT_SEQ", sequenceName = "SYSTEM.STUDENT_SEQ", allocationSize =1)
+
+int id;

@@ -1,0 +1,33 @@
+When We are in Aspect (i.e logging), How can we access the method Parameters?
+Means I want to log the method Params when calling the Bussiness Logic
+
+
+Development Process:
+1. Access and Display the Method Signature
+2. Access and Display Method Arguments
+
+    1. Access and Display the Method Signature:
+        So in the Below Advice, we can add the method arguments as JoinPoint.
+        JoinPoint will give the information/metadata about the method that is getting executed
+
+
+        @Before("...")
+        public void beforeAddAccountAdvice(JoinPoint theJoinPoint){
+
+            // displays the Method Signature
+            MethodSignature methodSig=(MethodSignature) theJoinPoint.getSignature();
+            System.out.println("Method: "+ methodSig);
+        }
+
+    2. Accessing and Displaying the method Arguments:
+
+        @Before("...")
+        public void beforeAddAccountAdvice(JoinPoint theJoinPoint){
+
+            // displays the Method Arguments:
+
+            Object args[]=theJoinPoint.getArgs();
+            for(Object tempArg:args){
+                System.out.println(tempArg);
+            }
+        }

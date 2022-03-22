@@ -1,0 +1,16 @@
+			session=factory.getCurrentSession();
+			session.beginTransaction();
+			Student student =session.get(Student.class, 25);
+			session.delete(student);
+			session.getTransaction().commit();
+
+
+Using HQL:
+
+
+    		session=factory.getCurrentSession();
+			session.beginTransaction();
+			Query query=session.createQuery("delete from Student where id=:id");
+			query.setParameter("id", 24);
+			query.executeUpdate();
+			session.getTransaction().commit();

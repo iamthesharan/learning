@@ -1,0 +1,35 @@
+                HashMap                     |           LinkedHashMap
+                                            |
+1. Underlying datastructure is HashTable    |   1. Undelying Data Structure is Linked List + HashTable
+2. Insertion Order is not Preserved         |   2. Insertion order is preserved.
+    based on hashcode of keys
+    
+    
+    
+Linked HashSet and Linked HashMap are commonly used for developing Cache based Application.
+
+
+In case of HashMap, JVM will compare with .equals methods for searching duplicate keys.
+
+ex
+
+HashMap m=new HashMap();
+Integer I1=new Integer(1);
+Integer I2=new Integer(1);
+m.put(I1,"Shashank");
+m.put(I2,"Sharan"); // Here I1.equals(I2) will be performed
+sop(m);
+
+O/P
+[1=Sharan]
+
+
+In Case of IdentityHashMap, JVM will compare with == operator for searching duplicate keys.
+ex:
+
+IdentityHashMap m=new IdentityHashMap();
+Integer I1=new Integer(1);
+Integer I2=new Integer(1);
+m.put(I1,"Shashank");
+m.put(I2,"Sharan"); // Here I1.equals(I2) will be performed
+sop(m);

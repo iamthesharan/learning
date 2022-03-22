@@ -1,0 +1,18 @@
+If Sorted map is dependent on default sorting order, then keys should be homogeneous and Comparable
+If Sorted map is dependent on our own sorting order i.e Comparator, then keys need not be homogeneous and Comparable
+
+Null Acceptance: 
+
+1 . For non-empty Tree map if we are trying to insert null key, we will get NPE.
+    since Comparison with Null gives NPE
+ 
+2.  Till 1.6 version, for empty tree map inserting null element is possible but after inserting First element, you cannot         insert other element because comparison with null gives NPE. After 1.7  null is not accepted in TreeMap
+
+ Constructors:
+ 
+ ();
+ (Comparator C);
+ (Map m);
+ (SortedMap S);
+ 
+ 

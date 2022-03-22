@@ -1,0 +1,230 @@
+Collection--> it is an interface
+
+For any Collection Object (ArrayList, LinkedList) whatever Common Methods which are Required for any collection Object 
+like add(), remove(), replace().
+These Methods are Available in Collection Interface.
+ 
+Collection Iterface is Considered as Root Interface of CollectionFrameWork but it is not due to MAP Concept
+
+There is No Concrete Class which implements Collection interface Directly.
+
+Difference Between Collection and Collections
+
+Collection is an interface which can be used to represent a group of individual Object as a Single Entity
+Collections is a class.
+
+Collections is an uitility class provides various uitility methods for Collection Object (like Sorting, Searching etc.). It is present in java.util package
+1. ArrayList 
+   ArrayList is not Sorted. to Sort that we call Collections.sort(l)
+   
+=============================================================================================================================================================
+
+
+List:---> It's a child Interface of collection.
+
+In List Duplicates are allowed and insertion order must be preserved.
+
+
+                            
+                         Collection(I)
+                              |
+                              |
+                            List(I)
+                              |
+                              | Implements
+        ______________________|_____________
+        |         |           |            |
+    Arrayist(C) LinkedList(C) Vector(C)  Stack(C)
+      1.2v       1.2v       1.0v        1.0v
+      
+      
+      Vectors and Stacks are Legacy Classes
+      
+      
+      In 1.2v Vector and Stack classes are re-engineered to Implement List Interface
+      
+===========================================================================================
+
+Set Interface: It is the Child Interface of Collection. If we want to represent a group of individual Objects as a single entity where duplicates are not allowed
+                and insertion order not required then we should go for Set Interface.
+                
+                
+                
+                          Collection(I)
+                              |
+                        1.2v  |
+                             Set(I)
+                              |
+                        1.2v  | Implements
+                              |
+                              | 
+                           HashSet(C) 
+                             1.2v    
+                              |
+                              |
+                           Linked (C)
+                           HashSet
+                            1.4v
+                      
+                      
+==================================================================================================================                      
+                      
+SortedSet: It is the Child interface of Set. If we want to represent a group of individual Objects as a single entity where duplicates are not allowed
+            and all objects are inserted according to some sorting order then we should go for SortedSet Interface.
+            
+            
+            
+                         Collection(I)
+                              |
+                        1.2v  |
+                             Set(I)
+                              |
+                        1.2v  | Implements
+                              |
+                     1.2v SortedSet(I)
+
+                          
+    NavigableSet: It is the Child Interface of SortedSet. It Contains Serveral Methods for Navigation Purposes. ex: previous, next 
+    
+    
+    
+    
+                         Collection(I)
+                              |
+                        1.2v  |
+                             Set(I)
+                              |
+                        1.2v  | Implements
+                              |
+                     1.2v SortedSet(I)
+                              |
+                              |
+                   1.6v   NavigableSet(I)
+                              |
+                              |
+                           TreeSet (C)
+
+
+====================================================================================
+
+Queue:
+                
+                    1.2v  Collection(I) 1.2v
+                              |
+                              |
+                            Queue(I)1.5v
+                            
+Q When to use queue?
+Ans--> Before Processing or Before Offering a Service, If you want to represent a group of individual objects as a single Entity.
+        Prior to Processing.
+        
+        It is the Child interface of Collection. If we want to represent a group of Individual Objects Prior to Processing then we Should go for Queue.
+        Usually Queue Follows FIFO. But based on our Requirement we Can implement our own piority order also. 
+        For Example: Before Sending a mail all mail ID's we have to store in Data structure. In which order we added mail IDs' in the Same order Only the mail should be Delivered. For this requirement Queue is Best Choice.
+
+                                    
+                    1.2v  Collection(I)1.2v
+                              |
+                              |
+                            Queue(I) 1.5v
+                              |
+    __________________________|___________________________________
+    |           |       |        |
+    |           |       |        |
+Priority    Blocking ---------------
+Queue       Queue
+                |
+                |---Priority Blocking Queue
+                |
+                |---Synced Blocking Queue
+                
+                
+==========================================================================================
+
+Key Value Pair Concept :MAP
+
+If we want to represent a group of objects as Key Value Pairs then we Should go for Map
+Map Is not a child Interface of Collection Interface.
+Ex Roll-------> Name
+   14           Shashank
+   12           Kiran
+   
+Keys Must not have Duplicate Values.
+
+      (1.2)    Map(I)          Dictonary(Abstract Class) 1.0V  
+                 |                          |
+                 |Implements                |extends
+    _____________|__________________________|
+    |        |              |               |
+    |(1.2)   |              |               |
+HashMap(C)  Weak(C)       Identity(C)   Hashtable(C) 1.0v
+    |       HashMap       HashMap           |
+    |         (1.2)         (1.4V)          |     
+ Linked(C)                              Properties(C) 1.0v
+ HashMap(1.4V)
+ 
+ 
+ 
+ Dictionary, Hashtable, Properties are Considered as Lagecy Classes.
+ 
+
+ 
+ =========================================================================================
+ 
+ 
+ SortedMap: It is a child Interface of Map. If we Want to Represent a group of Key Value Pairs according to some Sorting order of keys then we must 
+            go for sorted map. In SortedMap, the Sorting Should be based on Key. But Not Based On value. 
+            
+NavigableMap: It is the Child Interface of SortedMap. It defines several Methods for Navigation Purposes.
+
+                        
+
+                             Map(I)
+                              |
+                        1.2v  | Implements
+                              |
+                     1.2v SortedMap(I)
+                              |
+                              |
+                   1.6v   NavigableMap(I)
+                              |
+                              |
+                           TreeMap (C)
+
+========================================================================
+
+Sorting:
+
+ If we Want default Natural sorting Order. --> Comparable Interface
+ and for Customized Sorting --> Comparator Interface
+ 
+ =======================================================================
+ Cusrsors:
+ 
+ If we want to get Objects One by One.------------> Use Cursor.
+ 
+ 1. Enumeration(I)
+ 2. Iterator(I)
+ 3. ListIterator(I)
+ 
+ ======================================================================
+ 
+ Utility Classes:
+ 1. Collections
+ 2. Arrays
+ 
+ 
+ ========================================================================
+ 
+ lagacy :
+ Enumeration(I)
+ Dictionary(C)
+ vector(C)
+ Stack(C)
+ Hashtable(c)
+ Properties(c)
+    
+    
+   
+    
+

@@ -1,0 +1,109 @@
+What if we request the URL like this: api/student/99999.
+
+If the arrayList donesnot has this much Element it will give IndexOutOfBound Exception.
+
+So we don't need Stack trace. Insted we need JSON which will provide the Error Details
+
+So here we will Request the REst Service for the Index which is not there in Array list and it will throw IndexOutOfBound Exception.
+After that  we will handle the Exception at the backend and Send the Response
+
+
+Development Process:
+    1. Create a custom error response class
+    2. Create Custom exception class
+    3. Update Rest Service to throw Exception if Student not found
+    4. Add Exception Handler Method using @ExceptionHandler
+
+
+
+    1. Create a custom error response class:
+
+        This class will be sent back to the Client as JSON and will be POJO.
+        Jackson will be responsible for converting it to JSON
+
+
+        public class StudentErrorResponse{
+            private int status;
+            private String message;
+            private long timeStamp;
+
+            // constructors and getters/setters
+        }
+
+    2. Create Custom exception class
+
+        The Custom student exception class will be used by our REST Service
+        In our Code if we can't find the Student, then we will throw the Exception
+
+        Need to define a custom Student Exception Class
+
+            StudentNotFoundException
+
+        public class StudentNotFoundException extends RuntimeException{
+            public StudentNotFoundException(String message){
+                super(message);
+            }
+        }
+    
+    3. Update REST Service to throw an Exception.
+
+        In StudentRestController.java, inside the getStudent method we will throw exception.
+
+        @GetMapping("/students/{studentId}")
+        public Student getStudents(@PathVariable int studentId){
+            if((studentId>=theStudents.size()) || (studentId<0)){
+                throw new StudentNotFoundException("Student Not found with id: "+studentId);
+            }
+            return theStudents.get(studentId); // if the Student id is within the range, then we will simply return
+        }
+
+    4. Adding the Exception Handler.
+
+        Now we have thrown the Exception, we have to Handle it and this Exception Handler will help us to handle that.
+
+        So we need to define an Exception Handler method using @ExceptionHandler annotation from Spring.
+        Exception handler will return a ResponseEntity
+        ResponseEntity is a wrapper for HTTP response Object.
+        ResponseEntity gives fine grain Control to Specify:
+            HTTP status code, HTTP headers and Response Body
+
+
+        Example:
+
+            @ExceptionHandler
+            public ResponseEntity<StudentErrorResponse> handleException(StudentNotFoundException exc){
+                // Note the Return type is of StudentErrorResponse HTTP wraper object.
+                // Parameter type is StudentNotFoundException. This says that if Any StudentNotFoundException is thrown, it is handled by this handler method.
+
+
+                // here we will Create an object for StudentErrorResponse, the custom POJO that we have Created Earlier.
+
+                StudentErrorResponse error=new StudentErrorResponse();
+                error.setStatus(HttpStatus.NOT_FOUND.value()); // retuns the Status
+                error.setMessage(exc.getMessage());
+                error.setTimeStamp(System.currentMillis());
+
+                return new ResponseEntity<>(error, HttpStatus.NOT_FOUND); // here error is the Body of the response and the 2nd parameter is 404 error
+
+                // When the object is return, Jackson will automatically Convert it to JSON.
+            }
+
+
+Now Suppose instead of Student ID we pass some String in URL and We get the below Error because we are passing Sting not Integer
+
+WARNING: Failed to bind request element: org.springframework.web.method.annotation.MethodArgumentTypeMismatchException: 
+Failed to convert value of type 'java.lang.String' to required type 'int'; nested exception is java.lang.NumberFormatException: For input string: "dasdasfasf"
+
+So Again here we create an ExceptionHandler for any type of exception that is thrown
+
+
+    @ExceptionHandler
+	public ResponseEntity<StudentErrorResponse> handleException(Exception exc){
+		
+		StudentErrorResponse error=new StudentErrorResponse();
+		error.setStatus(HttpStatus.BAD_REQUEST.value());   // This is for BAD_REQUEST
+		error.setMessage(exc.getMessage());
+		error.setTimeStamp(System.currentTimeMillis());
+		return new ResponseEntity<StudentErrorResponse>(error, HttpStatus.BAD_REQUEST);
+		
+	}

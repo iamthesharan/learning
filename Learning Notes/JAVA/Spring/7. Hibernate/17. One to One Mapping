@@ -1,0 +1,53 @@
+Lets say we have Account Entity and Employee Entity
+
+
+Scenario 1) Association managed by both entities
+
+        //Inside EmployeeEntity.java
+
+            @OneToOne
+            AccountEntity       account;
+        
+        //Inside AccountEntity.java
+
+            @OneToOne
+            EmployeeEntity      employee;
+
+        ** With above association, both ends are managing the association so both must be updated with information of each other using setter methods defined in entity java files. If you fail to do so, you will not be able to fetch the associated entity information and it will be returned as null.
+
+
+        Circular Dependency: If both the tables are made as Managing Entity and both the tables have references with the foreign key. Then there is a circular Dependency.
+
+
+        Note** You need to set @OneToOne annotation on both EmployeeEntity and AccountEntity otherwise it wont be manageable.
+
+Scenario 2) Association managed by single entity
+
+
+            Let’s say association is managed by EmployeeEntity then the annotations in both entity will look like below.
+
+            //Inside EmployeeEntity.java
+            @OneToOne
+            AccountEntity       account;
+            
+            //Inside AccountEntity.java
+            @OneToOne (mappedBy = "account")
+            EmployeeEntity      employee;
+
+
+
+            We have used mappedBy attribute in the AccountEntity to make it manageable. It will automatically detect the Foreign key column in the Employee Entity and map the Account Entity with the Employee Employee Entity Field --> account
+
+
+Hibernate – BLOB
+Hibernate – Cascade Types
+Hibernate – Lazy Loading
+Hibernate – Criteria Queries
+Hibernate – First Level Cache
+Hibernate – Second Level Cache
+Hibernate – EhCache Configuration
+Hibernate – OSCache Configuration
+Hibernate – C3P0 Connection Pool
+
+
+<Pr

@@ -1,0 +1,21 @@
+API Design Process:
+
+    1. Review API Requirements
+    2. Identify the main resources and Entites
+    3. Use HTTP Methods to Assign Action on Resource.
+
+
+    1. Review API Requirments:
+
+        A Requirements came to create a rest API for Customer Relationship Management System.
+
+        So here we will allow the Rest Clients to:
+        1. get the list of customers
+        2. Get Single Customer by ID.
+        3. Update the Customer
+        4. Delete the Customer
+
+    2. Identify the main Resources/ Entity
+
+    3. Use HTTP Methods on the entity to perform actions:
+        GET, POST, PUT, DELTE

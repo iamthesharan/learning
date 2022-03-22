@@ -1,0 +1,119 @@
+Suppose I wanna buy a car and I request Car Factory to give me a Car. 
+
+        |-----------giveMeACar()---------->| 
+    me  |                                  |    Car Factory
+        |<------------provides Car---------|        |
+                                                    |
+                                                    |
+                                               Assembles Car
+                                               
+
+So Consider the Car is not in a lot. So the Technician has to build a car and inject it to the External OutSource. In this Case its Car Factory.
+
+So Spring Container Provides the faciclity for Dependency Injection
+
+===================================================================================================
+
+Spring has an Object Factory. sowhen you retrive an Object like a coach object, this coach object may have some addition dependencies. So these dependencies are just helper objects, other objects that it needs to perform it's operation. 
+So instead of manually building the Coach object and all of it's dependencies, the Spring factory will do this for us.
+
+===================================================================================================
+
+Our Coach Already Provides daily Workout. Now will also provide daily fortunes.
+
+So here the Coach will now use the Helper called FortuneService. Now the Coach depends on FortuneService in order to serve up the daily fortune.
+
+This is dependency
+===================================================================================================
+
+Types of Injection.
+
+1. Constructor Injection.
+2. Setter Injection
+
+===================================================================================================
+
+
+1. Constructor Injection:
+
+    1. Define the Dependency interface in class
+    2. Create a constructor in your class for injection
+    3. Configure the Dependecy injection in Spring Config File
+    
+    
+    
+    1. Defining the dependency interface in class
+    
+        this interface will have a method called getFortune();
+        
+    2. Create a constructor in your class for injection
+         public BaseballCoach(FortuneService fortuneService){}
+         
+    3. Configuring the Dependency.
+    
+        first we have to create a bean with id and class for the fortune service. ->> this is called creating a dependency.
+        Now we have to inject the dependecy into our class. 
+        
+        so inside the BaseballCoach Dependency. put the contructor injection.
+        <constructor-arg ref="myFortuneService"/>
+                                    |
+                                    |---------------------> This will be the Same id name.
+                                    
+                                    
+===================================================================================================
+
+1. Defining Dependency Interface and Class
+
+    FortuneService.java:
+    
+        package com.spring.ioc;
+
+        public interface FortuneService {
+            public String getFortune();
+        }
+    
+    
+    HappyFortune.java:  Helper Class
+    
+        package com.spring.ioc;
+
+        public class HappyFortuneService implements FortuneService {
+            @Override
+            public String getFortune() {
+                return "Today is your lucky Day";
+            }
+        }
+
+                                    
+2. Creating Constructor in your class injection.
+
+    So in Baseball Class we need to create a FortuneService reference Variable and as a parameter in a contructor for dependency injection
+    
+    BaseballCoach.java:
+    
+        private FortuneService fortuneService;
+        public BaseballCoach(FortuneService fortuneService) {
+            this.fortuneService=fortuneService;
+        }
+
+        @Override 
+        public String getDailyFortune() {
+            return this.fortuneService.getFortune();
+        }
+        
+        
+3. Configure Dependencies:
+    
+        <bean id="myFortune" class="com.spring.ioc.HappyFortuneService"></bean>
+	
+	
+        <bean id="myCoach" class="com.spring.ioc.BaseballCoach">
+            <constructor-arg ref="myFortune"></constructor-arg>
+        </bean>
+        
+        BaseballCoach.java:
+        
+        @Override 
+        public String getDailyFortune() {
+            return this.fortuneService.getFortune();
+        }        

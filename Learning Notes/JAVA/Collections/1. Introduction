@@ -1,0 +1,58 @@
+If we represent large amount of data, we need Collection Classes.
+
+Suppose if we want to Represent 10000  variables.
+
+int a1, int a2, ......int a10000; //Bad Approach
+Student s[]=new Student[10000]; //Okay but not good
+
+Problems with Arrays:
+
+    1. Arrays are Fixed in Size --> Upto 10000 we can easily represent, but we Cannot increase the size. Its Fixed.
+    2. If only 2 inputs but the array created is on 10000 size. This is waste of memory.--> To use arrays we need to get the size in advance.
+    3. Arrays can hold only Homgeneous datatypes:
+        Person p[]=new Persons[10000];
+        p[1]=new Person();
+        p[2]=new Student(); // Incompatible Types 
+        
+        p can able to represent only Person datatype
+        
+        To Overcome point 3, use Object Array
+        
+        Object o[]=new Object[10000];
+        o[1]=new Person();
+        o[2]=new Student();
+    
+    4. Readymade method support is not abailable in arrays. For sorting, it's dependent on Programmers. In case of Collection Use treeset
+
+
+Array: An Array is an indexed Collection of Fixed no of Homogeneous data elements
+
+
+
+To Overcome Above Problems, we Must go for Collection Concepts.
+
+1. Collections are Dynamic in Size.
+2. Collections can hold both Homogeneous and Hetrogeneous Values.
+3. Every Collection class is implemented with some standard Data Structures. Hence Every Collection class has readymade method Support.
+
+
+
+
+
+                                            Arrays                  |               Collections
+                                                                    |
+    1. Performance wise Array is good.                              |    1. Performance wise Collection is Okay
+    2. Memory Wise array is bad.                                    |    2. Memory wise Collection is good.
+    3. Can hold Primitives and Objects                              |    3. Can only hold Objects.  
+    
+    
+    
+    
+    
+    
+Collections:
+If you want to represent a group of individual Objects as a single Entity. The We can go for Collection.
+
+
+Collection framework:
+Contains Several Class and interface which is used to represent the group of individual Object as a single Entity. 

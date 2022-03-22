@@ -1,0 +1,52 @@
+Tier means how many levels.:
+
+Type 1:
+
+ Client Machine +       DB
+        |               |               -----------> 2 tier
+        |               |
+Java Application    Databse Machine
+        +
+Type 1 Driver   
+    +
+ODBC Driver
+
+
+
+Type 2 Driver:
+
+ Client Machine     +       DB
+        |                   |                   --------> 2 tier
+        |                   |
+Java Application        Databse Machine
+        +
+Type 2 Driver   
+    +
+Vendor Provided lib
+
+
+Type 3 Driver:
+
+ Client Machine     +    Middleware             DB
+        |                 Server                |                   --------> 3 tier
+        |                                       |
+Java Application                        Databse Machine
+        +
+Type 3 Driver   
+
+
+
+
+
+Type 4 Driver:
+
+ Client Machine +       DB
+        |               |                   --------> 2 tier
+        |               |
+Java Application    Databse Machine
+        +
+Type 4 Driver   
+
+
+
+

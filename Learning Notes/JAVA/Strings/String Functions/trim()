@@ -1,0 +1,8 @@
+Signature
+The signature or syntax of string trim method is given below:
+
+public String trim() 
+
+
+Returns
+string with omitted leading and trailing spaces

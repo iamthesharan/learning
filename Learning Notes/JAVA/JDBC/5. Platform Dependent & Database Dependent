@@ -1,0 +1,15 @@
+                    JAVA Application
+                            |                
+    ________________________|_________________
+    |                       |                 |
+driver Oracle           driver MYSQL      DB2 Driver
+    |                       |                 |  
+Oracle DB               MySQL DB            DB2 DB
+
+
+
+
+
+
+
+JAVA is DATABASE independent due to driver software

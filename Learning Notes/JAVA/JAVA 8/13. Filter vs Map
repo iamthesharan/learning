@@ -1,0 +1,123 @@
+How we can create Streams?
+
+Stream s=c.stream();
+// here c is any collection.
+// This method present inside the collection interface as a default method
+// Stream is an interface present inside java.util package. 1.8v
+
+Getting the Stream: Stream s=c.stream();
+
+Now how you can process the Collection object by using this stream?
+Steps:
+
+1. Configuration  
+
+    Can be done by 2 Mechanism
+
+----> Filter Mechanism
+        I want to Filter the elements from Collection based on some boolean Expression
+
+        Filter():
+            If you want to filter the elements in a collection based on some boolean Condition, then we go for filtering.
+            We can configure filter by using filter method of Stream interface.
+                public Stream filter(Predicate<T> t); // It can be booleaned Value Function or expression.
+
+            List<String> l1=l.stream().filter(s->s.length()>=9).collect(Collectors.toList());// filter names with length greater than 9
+
+
+
+
+
+----> Map Mechanism
+        I want to create an mapped object for every object in the collection based on some function.
+
+        For every object present in  collection, can you please create a new object based on some function.
+        If we want to create a separate new object for every object present in collection based on some function then we should go for mapping mechanism.   
+
+        We can implement mapping by using map() method of stream interface.
+        public Stream map(Function<T,R> f)
+
+        eg:
+            Stream s1=c.stream().map(i->i*2);
+            List<String> l2=l.stream().map(s->s.toUpperCase()).collect(Collectors.toList());
+
+
+   
+
+
+2. Processing:
+
+    Processing by Count method:
+
+        This method return the number of elements present in the Stream
+        public long count()
+
+            long count=l.stream().filter(s->s.length()>=9).count();
+            SOP("The no of string whose count is greater than 9 "+count);
+
+    
+
+    Processing by Sort method:
+        We can use Sorted Method to Sort Elements inside Stream.
+        We can Sort Either Based on Default Sorting order or based on our Own Customized Sorting Order specified by Comparator Object.
+            1. sorted() => Default Sorting Order
+            2. Sorted(Comparator c) => Customized Sorting Order
+
+            List<Integer> l1=l.stream().sorted().collect(Collection.toList());// Default Sorting Order
+
+
+            Comparator <Integer> c=(i1, i2)->(i1<i2)?1:(i1>i2)?-1:0
+            List<Integer> l2=l.stream().sorted(c).collect(Collectors.toList());
+
+
+    Processing with Min and Max:
+        1. min(Comparator c)
+            - Returns minimum value according to Specified Comparator
+
+                
+                Integer min=l.stream().min((i1, i2)-> i1.compareTo(i2).get();
+                // So here Min method will take parameter of Comparator Object.
+                // After finding the min we are getting the object in min varaible.
+
+                SOP("Minimum Value: "+min);
+
+
+        2. max(Comparator c)
+            - Returns Maximum Value According to Specified Comparator
+
+
+
+                Integer max=l.stream().max((i1, i2)-> i1.compareTo(i2).get();
+                SOP("Maximum  Value is : "+max)
+
+
+
+
+    Processing with forEach():
+        forEach method don't return anything. What it does is take every elements present inside Stream and will apply any operation based on lambda Expression
+
+        l.stream().forEach(s->SOP(s));
+        l.stream().forEach(System.out::println); // Method Refrence used here
+
+    Processing with ToArray method:
+
+        ToArray method is used to copy elements present in stream into Specified Array
+
+
+        Integer[] array=l.stream().toArray(Integer[]::new);
+        for(Integer x: array)
+            SOP(x);
+
+
+    We can Apply Streams Concept not only in collections but any group of values like array
+
+
+    For Group of Values:
+
+        Stream <Integer> S=Stream.of(9,99,999,9999,99999);
+        S.forEach(System.out::println);
+
+
+        Doublt[] d={10.1,15.5,1.2,16.8}
+        Stream<Double> doub=Stream.of(d);
+        doub.forEach(System.out::println);

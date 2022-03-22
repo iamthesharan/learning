@@ -1,0 +1,14 @@
+You have one Branch Created from Master Branch.
+Now You wanna merge that branch and for that you have to go to master branch.
+
+git switch master
+git merge <branch1>
+
+
+basically here we are merging the commits in fast forward merge.
+
+=================
+
+merging Conflicts :
+It's good to create a new Branch and then merge on it rather than directly merging on master branch.
+

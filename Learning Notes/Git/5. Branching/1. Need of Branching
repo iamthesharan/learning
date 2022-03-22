@@ -1,0 +1,19 @@
+Suppose I've been assigned a task to resolve the bug and I need to delete some part of the code.
+Another teammate is working on functionality that needs to be added in the project and is dependent on the above piece of code on which I'm working.
+So If I made changes on the file, then that may impact the other developer.
+
+To overcome this, we need branching
+Branches are the alternate timeline of the project
+They Enable us to create separate context where we can try new things or even work on multiple ideas in parallel.
+If we make changes on 1 branch, then they will not impact the other branch(unless we merge the changes)
+
+How to know which brach you are?
+you can see the right side of the terminal, the branch is written over there.
+or else you can use command git status. that will show the branch you are in
+
+master branch is the default branch in git
+
+
+How to push newly Created branch to github.
+
+git push --set-upstream origin Fork1

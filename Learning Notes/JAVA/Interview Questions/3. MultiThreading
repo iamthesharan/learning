@@ -1,0 +1,46 @@
+1. What is MultiThreading?
+
+    MultiThreading is a type of Thread based multitasking where each indenpendent program unit is a thread.
+    Executing several task Simultaneously where each task is a separate independent part of the same program. 
+    and each independent part is called a thread.
+
+2. What is Thread?
+
+    A Thread is a light weight and Smallest Unit of processing that can be managed independently by the thread Scheduler.
+
+3. What are the two ways of Implementing a thread in JAVA?
+    1. By Implementing a Runnable Interface  -> Recommended becuase you will get the ability to extend any other class on child thread..
+    2. By Extending Thread Class.
+
+4. What is the difference between the class level Lock and Object Level Lock?
+
+    Class Level Lock:
+    In every Class There is a Unique lock called Class Level Lock. These lock are achied using the static synchronized keyword.
+    
+    Object Level Lock:
+    In every Object there is a Unique lock called Object level Lock. These lock can be achieved using synchronized keyword.
+
+5. What are Demon Threads?
+    Demon Threads are those threads which runs on background to support other threads.
+    Example GC, It is called when some thread is facing memory issues.
+    Demon Thread can increase or decrease its priority based on requirement. Usually They are of low Priority.
+    If Parent Thread is demon then Automatically child thread is demon.
+    Once the last non -demon thread executes completion , all demon thread will terminante automatically.
+    
+6. What are wait(), notify() method.
+
+    wait method is called by thread on the object if the thread need some updation on the object.
+    notify method is called by Thread on the object if the thread is going to update something to the object.
+    
+    When a Thread Calls wait() method on an object, it must be the owner of the object. 
+    i.e. it must have lock of the object before calling wait.
+    Once wait is called by the thread on the object, it automatically realeases the lock as the object will be used by the notifying thread.
+
+    So When Notify is called, The object must be the owner of the notifying thread.
+    Once notifying completes, the thread may or may not immediately release the lock on the notified object.
+
+7. What is join Method?
+
+    join() method is generally used to pause the execution of a current thread unless and until the specified thread on which join is called is dead or completed. 
+
+

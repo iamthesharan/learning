@@ -1,0 +1,78 @@
+Types of autowiring injection Types:
+1. Constructor Injection
+2. Setter Injection
+3. Field Injection
+
+==================================================================================================================
+Constructor Injection
+Steps:
+
+    1. Define a dependency interface and Class
+    2. Create a constructor in your class for injection
+    3. Configure the dependency injection with @Autowired Anotation
+
+When @Autowired anotation is used, Spring will say it need to satisfy the dependencies. Spring will Again Scan the the Components there and find the component that implements the interface provided as an argument in Contructor and it will take that bean and automaticall inject it on TennisCoach
+
+
+So Now we also want Coach to provide a daily Fortune
+
+Coach.java
+
+    package com.spring.anotations;
+
+    public interface Coach {
+        public String getDailyWorkout();
+        public String getFortune();
+    }
+
+
+TennisCoach.java
+
+    package com.spring.anotations;
+
+    import org.springframework.beans.factory.annotation.Autowired;
+    import org.springframework.stereotype.Component;
+
+    @Component
+    public class TennisCoach implements Coach {
+        private FortuneService fortuneService;
+        @Autowired
+        public TennisCoach(FortuneService fortuneService) {
+            this.fortuneService=fortuneService;
+        }
+        @Override
+        public String getDailyWorkout() {
+            return "Tennis Coach Class getDailyWorkout() method";
+        }
+
+        @Override
+        public String getDailyFortune() {
+            return this.fortuneService.getFortune();
+        }
+    }
+
+
+FortuneService.java
+
+    package com.spring.anotations;
+
+    public interface FortuneService {
+        public String getFortune();
+    }
+
+HappyFortuneService.java
+
+    package com.spring.anotations;
+
+import org.springframework.stereotype.Component;
+
+
+    public class HappyFortuneService implements FortuneService {
+
+        @Override
+        public String getFortune() {
+            return "This is Happy Fortune Service Method";
+        }
+    }
+
+==================================================================================================================

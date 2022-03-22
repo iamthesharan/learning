@@ -1,0 +1,192 @@
+Synchronized is a modifier.
+Synchronized is applicable for only methods and Blocks.
+Synchronized is not applicable for classes and Variables.
+
+Suppose there is a biryaani Plate and three dogs are fighting for that biriyaani. If all the 3 dogs comes together, 
+then pulls the biriyaani from each side of the plate, then there will be the biriyaani inconsistency problem. Nobody will get biriyaani.
+
+So lets assume that biryaani plate is a JAVA object. 
+Each dog is a thread.
+
+If multiple threads trying to operate simultaeously on the same java object then there will be data inconsistency problem.
+
+Suppose I'm having an account and both me and my Gf is operating it simultaneously Then also there is an inconsistency.
+
+If the same object is accessed by multiple threads simultaeously, then there will be a data inconsistency problem.
+
+So that's why we need Synchronized keyword
+
+so suppose we have a method m1() and is Synchronized, then only one thread can access this method at a time.
+Synchronized is a modifier applicable only for methods and blocks and not for classes and variables.
+If a multiple threads are trying to operate simultaneously on the same java object then there may be a chance of data inconsistency problem.
+To overcome this problem, we should go for Synchronized keyword.
+
+If a method or block declared as synchronized, then at a time only one thread is allowed to execute that method or blocked on a given object, so that data inconsistency problem will be resolved. 
+
+The main advantage of Synchronized keyword is we can resolve data inconsitency problems but the main disadvantage of Synchronized keyword is it increases waiting time of threads and creates performance problems. Hence of there is no specific requirement then it is not recommended to use Synchronized keyword.
+
+===========================================================================================================================
+
+Internally Synchronized keyword is implemented using lock concept.
+Every object in java has a unique lock.
+Whenever we are using synchronized keyword, then only lock concept will come to the picture.
+If a thread wants to execute synchronized method on the given object, first it has to get lock at that object. once thread got locked, then it is allowed to execute any synchronized method on that object. Once method execution completes, automatically thread releases a lock.
+
+Aquiring and releasing lock internally takes care by JVM and programmer not responisble for this activity.
+
+class x
+{
+    synchronized m1()
+    {
+
+    }
+    synchronized m2()
+    {
+
+    }
+    m3()
+}
+
+            
+            t3 m2() //then t3 came and get into wating stage because, x is already locked by t1
+            |
+            |
+            x m1()  <------- t1 l(x) // t1 locks x and start executing m1() 
+            |\
+            | \--------> t4 m3() // t4 will execute m3() like normal method because it is not synchronized
+            |
+            t2 m1() l(x) // waiting thread. when t2 came to execute m1()/
+
+
+While a thread execute Synchronized method on the given object then remaining threads are not allowed to execute any Synchronized method
+simultaneously. on the same object but remaining threads are allowed to execute non synchronized methods simultaneously.
+Class X sync m1, sync m2, m3
+
+Lock Concept is implemented based on object but not based on method. 
+
+now the question is threads other than t1 which are executing m1 and m2 are in waiting state because the object is locked.
+But t4 can exectue the m3() why?
+
+because Every Object has 2 areas:
+    1. Synchronized Area  --> Can be accessed by only 1 thread at a time 
+    2. Non Synchronized Area --> Can be accessed by any no of threads simultaneously
+
+
+    That's why if you are performing update operation in Synchronized area then its good but you sould not perform the update operation in non synchronized area.
+
+    Wherever we perform update operation/ delete operation, the state of the object is changing. This type of operation should be perfomed in sync area. Ex: reserveSeat();
+
+    non sync methods: Wherever object state is not changed. example: read operation , checkAvailablity().
+
+
+===================================================================================================================
+Main thread is responsible for creating Multiple Child threads. And those Child thread can access the other object by calling the class constructor of the object. In the below Scenario we have discussed this.
+
+
+public class Display {
+	public void wish(String name) {
+		for(int i=0;i<10;i++) {
+			System.out.print("Good Morning:");
+			try {
+				Thread.sleep(2000);
+			}
+			catch(InterruptedException exc) {
+				exc.printStackTrace();
+			}
+			System.out.println(name);
+		}
+	}
+}
+
+class MyThread extends Thread{
+	Display d;
+	String name;
+	MyThread(Display d, String name){
+		this.d=d;
+		this.name=name;
+	}
+	public void run() {
+		d.wish(name);
+	}
+}
+
+public class SynchronizedDemo {
+	public static void main(String ...args) {
+		Display d=new Display();
+		MyThread t1=new MyThread(d,"Sharan");
+		MyThread t2=new MyThread(d,"Kiran");
+		t1.start();
+		t2.start();
+	}
+}
+
+
+
+In the above Example, Display Object is not blocked and can be used by any no of threads at a time.
+So output can be random and any threadcan execute first.
+
+
+Now When we use Sunchronized with method wish(), then each thread will lock the Display object as all the threads are acting on the same object.
+
+
+public class Display {
+	public Synchronized void wish(String name) {
+		for(int i=0;i<10;i++) {
+			System.out.print("Good Morning:");
+			try {
+				Thread.sleep(2000);
+			}
+			catch(InterruptedException exc) {
+				exc.printStackTrace();
+			}
+			System.out.println(name);
+		}
+	}
+}
+
+
+class MyThread extends Thread{
+	Display d;
+	String name;
+	MyThread(Display d, String name){
+		this.d=d;
+		this.name=name;
+	}
+	public void run() {
+		d.wish(name);
+	}
+}
+
+
+public class SynchronizedDemo {
+	public static void main(String ...args) {
+		Display d=new Display();
+		MyThread t1=new MyThread(d,"Sharan");
+		MyThread t2=new MyThread(d,"Kiran");
+		t1.start();
+		t2.start();
+	}
+}
+
+O/P
+
+Good Morning:Sharan
+Good Morning:Sharan
+Good Morning:Sharan
+Good Morning:Sharan
+Good Morning:Sharan
+Good Morning:Sharan
+Good Morning:Sharan
+Good Morning:Sharan
+Good Morning:Sharan
+Good Morning:Sharan
+Good Morning:Kiran
+Good Morning:Kiran
+Good Morning:Kiran
+Good Morning:Kiran
+Good Morning:Kiran
+Good Morning:Kiran
+Good Morning:Kiran
+Good Morning:Kiran
+Good Morning:Kiran
+Good Morning:Kiran

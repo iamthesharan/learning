@@ -1,0 +1,35 @@
+With the help of Cookie, You can manage the sessions
+
+Cookie Works different than Session and it has Expiration time.
+
+Basically it sends the data back to the client and then sends the same data to the redirected page. Whereas in case of session, the data remains in the Server Side.
+
+The Data is sent to the client with some tokens.
+
+Cookie is present in class Cookie
+
+So to create a Cookie
+
+Constructors:
+
+Cookie()	                        constructs a cookie.
+Cookie(String name, String value)	constructs a cookie with a specified name and value.
+
+
+Cookie cookie = new Cookie("k"+k+""); Since the value must be a String
+
+//now to add the cookie to the response object
+
+    response.addCookie(cookie);
+    
+Now when the page is redirected by using sendRedirect, this Cookie will be sent as a part of request object on other page.                          
+
+		Cookie cookies[]=request.getCookies();
+		String k="d";
+		for(Cookie cookie:cookies) {
+			if(cookie.getName().contentEquals("k")) {
+				k=cookie.getValue();
+			}
+		}
+		System.out.println(k);
+		

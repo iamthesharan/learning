@@ -1,0 +1,12 @@
+When Possible, a commit should encopass a single feature, change or fix. In other words, try to keep each commit focused on a single thing. This makes easier to undo or rollback changes later on.
+
+Commit messages: Past or persent tense
+
+Note while Commiting if your message is a paragraph, then simple execute git commit. It will open an editor and there you can write the paragraph and save it
+
+For configuring the default editor
+
+https://git-scm.com/book/en/v2/Appendix-C:-Git-Commands-Setup-and-Config.
+
+For setting vs code in windows: 
+git config --global core.editor "code --wait"

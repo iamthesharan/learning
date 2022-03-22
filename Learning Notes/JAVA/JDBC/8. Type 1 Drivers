@@ -1,0 +1,14 @@
+OBDC Driver is used to Comunicate with DB. ODBC Calls are converted in DB Calls and DB Calls are converted into ODBC Calls.
+
+
+Type 1 Driver is used to communticate ODBC Driver. Means JDBC Calls are converted to ODBC Calls via tyoe 1 Driver.
+
+JAVA Application  ---->   Type 1 Driver  ----> ODBC Driver  ----> DB 
+      (JDBC)                    |
+                                |
+                    *    JDBC ODBC Bridge Driver
+                    *    SUN Microsystem provides this driver as a part of JDK
+                    *    It is an independent Driver because it will not communicate with DB directly
+                    *    Slowest Driver
+                    *    available 1.7v only
+                    *    Available only for Windows
