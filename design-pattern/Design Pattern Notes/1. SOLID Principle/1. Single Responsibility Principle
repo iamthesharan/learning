@@ -1,4 +1,0 @@
-There should never be more than one reason for a class to change
- - The Class provides a very specific concern of our desired functionality.
- - If we have multiple Responsibilities like Protocol Change, Message Format Change, Security Change, then we should have separate classed for those responsibilites.
- 

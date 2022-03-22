@@ -1,4 +1,0 @@
-You Can easily Create an immutable class if you implement your builder as an inner static class.
-Because that way you can have your setter methods as private and avoid writing a bad constructor where all the object states are present in constructor itself.
-It also provides a nice namespace as you don't have to go and search for your builder Class.
-
