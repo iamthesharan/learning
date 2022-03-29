@@ -1,0 +1,5 @@
+Whenever we have a complex object and creating that object is Costly.
+Cost can be a performance issue, Memmory Issue etc.
+So here we Create an object and Whenever we require the instance of the class, we create a prototype of that object.
+
+
