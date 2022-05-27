@@ -1,0 +1,31 @@
+It is Contract between the Webservice Provider and Consumer.
+it has extension .wsdl
+
+There are two things WSDL Provide:
+1. What this web Service Provide?
+2. How it Provides it and How can you consume it.
+
+Basedon the above two, the WSDL file is divided into 
+1. Abstract Portion
+2. Physical Portion
+
+
+Definitons  --> Root Element
+
+types           |          
+messages        |  ------>      Absract Portion/ What
+operation       |
+porttype        |
+
+
+Binding     |-------> Physical/How
+Service     |
+
+
+===========================================================================
+Soap Binding Styles:
+
+There are three important things that are impacted depending on the Soap Binding Style.
+1. How the SOAP Payload looks like
+2. Whether the entire soap body can be validated?
+3. Operation Name SOAP Message 

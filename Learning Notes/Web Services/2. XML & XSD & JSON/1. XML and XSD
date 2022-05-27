@@ -1,0 +1,17 @@
+XML:
+Extensible Markup Language 
+XML Carries both data and metadata.
+
+XML used in :
+1. Data Exchange (using SOAP or REST)
+2. Configuration file
+
+
+XSD: XML Schema Defination:
+XSD deines the grammer or a blue print for XML Document.
+
+XML Follows XSD  --> Then that's a Valid XML Document
+
+When to use XSD?
+XSD file is a contract between two applications for Exchanging messages.
+If no XSD provided then Application1 can send any data to Application2 or vise versa

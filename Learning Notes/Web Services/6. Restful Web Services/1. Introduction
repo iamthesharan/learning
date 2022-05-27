@@ -1,0 +1,35 @@
+REST - Representational State transfer
+
+URI Mapping:
+
+@Path("users/{username}") --> Mark our java classes and methods with relative uri
+
+
+
+HTTP Methods:
+
+@GET
+@POST
+@PUT
+@DELETE
+
+
+Data Format:
+
+@Consumes("text/plain") -> what kind of data this particular Rest Provider can accept
+@Produces({"application/json","application/xml"})
+
+
+
+Parameters Value:
+
+@PathParam -> used to map the values to java object.
+@QueryParam -> map the request parameter in get method to map with the java object
+@FormParam -> Map the parameters comming from form to java object
+
+
+Exception Mappers:
+
+@Provider -> to implement custom exception mappers. Map Java Exceptions to Http Error Codes.
+
+JAX-RS is a Standard which provides annotations to mark our java classes and methods to make then restful services

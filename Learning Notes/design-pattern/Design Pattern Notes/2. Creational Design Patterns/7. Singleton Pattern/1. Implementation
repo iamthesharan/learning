@@ -1,0 +1,26 @@
+Controlling the instance Creation:
+1. Class Constructor must not be accessible Globally
+2. Subclassing Inheritance must not be allowed.
+
+Keeping Track of Instance:
+1. Class Itself is a good place to track the instance.
+
+Give Access to Singleton Instance:
+1. A Public Static method is a good Choice.
+2. Can Expose instance as final public static field but it won't work for all Singleton implementations.
+
+
+There are two types of Singleton implementations:
+1. Early Initialization - Eager Singleton
+    - Creates Singleton as soon as the class is loaded.
+
+2. Lazy Initialization - Lazy Singleton
+    - We Don't create an instance unless and until somebody ask for it.
+
+
+Implementations Consideration:
+1. Always try to use Eager Singleton.
+2. If you See any issues in Startup time, then you can only go for Lazy Singleton.
+
+
+Best Example of Singleton is Runtime Class

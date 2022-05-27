@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schema xmlns="http://www.w3.org/2001/XMLSchema"
+	targetNamespace="http://www.matenick.com/Patient"
+	xmlns:tns="http://www.matenick.com/Patient"
+	elementFormDefault="qualified">
+	
+	<element name="patient" type="tns:Patient"/>
+	<complexType name="Patient">
+		<sequence>
+			<element name="id" type="int"/>
+			<element name="name" type="string"/>
+			<element name="age" type="int"/>
+			<element name="dob" type="date"/>
+			<element name="email" type="string"/>
+			<element name="gender" type="string"/>
+			<element name="phone" type="string"/>
+		</sequence>
+	</complexType>
+</schema>
+
+<!--              Another Example                -->
+
+<?xml version="1.0" encoding="UTF-8"?>
+<schema xmlns="http://www.w3.org/2001/XMLSchema"
+	targetNamespace="http://www.matenick.com/phone"
+	xmlns:tns="http://www.matenick.com/phone" elementFormDefault="qualified">
+	
+	<element name="phone" type="tns:Phone"/>
+	<complexType name="Phone">
+		<sequence>
+			<element name="id" type="int"/>
+			<element name="company" type="tns:companyName"/>
+			<element name="model" type="string"/>
+			<element name="payment" type="tns:PaymentType"/>
+		</sequence>
+	</complexType> 
+	<complexType name="PaymentType">
+		<choice>
+			<element name="cash" type="int"/>
+			<element name="emi" type="tns:emi"/>
+		</choice>
+	</complexType>
+	<complexType name="emi">
+		<all>
+			<element name="provider" type="string"/>
+			<element name="limit" type="int"/>
+		</all>
+	</complexType>
+
+	<simpleType name="companyName">
+		<restriction base="string">
+			<enumeration value="Apple"/>
+			<enumeration value="Samsung"/>
+		</restriction>
+	</simpleType>
+</schema>

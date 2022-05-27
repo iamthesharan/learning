@@ -1,0 +1,38 @@
+SOAP -> Simple Object Access Protocol
+Its a Specification defined by W3C.
+
+
+<soap:Envelope> --> This is the root Element
+    <soap:header/>  --> This stores the metadata
+    <soap:body>
+            --> here is the request payload if its a request or response payload if it's a response.
+        <creditcard></creditcard>
+    </soap:body>
+</soap:Envelope>
+
+If there is a Error in the request you can use soap fault element which is the child element of the body in response body:
+
+<soap:Body>
+    <soap:Fault>
+        <soap:code>soap:Server</soap:code>
+        <soap:Reason>
+            <soap:text>
+                Card Expired.
+            </soap:text>
+        </soap:Reason>
+    </soap:Fault>
+</soap:Body>
+
+Whenever we throw Exception using JAVA, it goes to <soap:fault>
+
+Soap Header:
+
+
+<soap:header>
+    <wsse:Security>
+        <wsse:UsernameToken>
+            <wsse:Username/>
+            <wsse:Password/>
+        </wsse:UsernameToken>
+    </wsse:Security>
+</soap:header>

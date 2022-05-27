@@ -1,0 +1,105 @@
+Namespaces Uniquely identify the XML Components
+Let's say we are creating a Schema file for Amazon.com.
+The First Step will be to assign a tragetNamespace for all the elements in the order:
+
+tragetNamespace:
+    - http://www.amazon.com/order
+prefix:  
+    xmlns:amz="http://www.amazon.com/order"
+
+Document also should use the same as XSD:
+
+<order xmlns:amz="http://www.amazon.com/order">
+    <amz:lineitem/>
+    <amz:shippingaddress/>
+
+Lets say we are having 2 application Patient Billing App and Patient Clinical App and they both exchang the patient data with XML.
+Our Goal is to create a Schema File which can be used as a Contract between these two application.
+
+Patient Data Name, Age, DOB, Email, Gender, Phone
+
+XSD file:
+
+<?xml version="1.0" encoding="UTF-8"?>
+<schema 
+    xmlns="http://www.w3.org/2001/XMLSchema"     --> xmlns stands for xml namespace and has w3c namespace. W3C defines all the elements used in Schema file.
+
+	targetNamespace="http://www.example.org/Patient" --> targetNamespace tells any xml that complies with this schema should have this particular namespace.
+
+	xmlns:tns="http://www.example.org/Patient" --> defines the prefix for our namespace, tns stands for target namespace.
+
+	elementFormDefault="qualified">  --> This says that when you use the element in you actual xml you should provide the target namespace explicitly like <tns:name>.
+                                
+
+    If the value of elementFormDefault is unqualified then you have to use element like <name> and not <tns:name>
+
+
+
+    <element  name="Patient", type="tns:Patient"/> --> this is the root element and every xml has only 1 root element.
+                        --> Here type is a complex type that we need to create.
+
+    <complexType name="Patient">
+        <sequence>
+            --> here in sequence, all the elements we define should appear in the same order in xml.
+        </sequence>
+    </complexType>
+
+</schema>
+
+
+
+====================================================================================
+Simple Types: Used for Restrictions:
+
+<simpleType name="Gender">
+    <restriction base="string">
+        <enumeration value="M"/>  --> You can use various restrictions like this.
+        <enumeration value="F"/>
+    </restriction>
+</simpleType>
+
+and then on the sequence in complex type:
+
+<sequence>
+    <element value="gender" type="tns:Gender"/>
+</sequence>
+
+
+
+==========================================
+
+Usually id is taken as an attributes instead of element.
+
+<schema xmlns="http://www.w3.org/2001/XMLSchema"
+	targetNamespace="http://www.matenick.com/Patient"
+	xmlns:tns="http://www.matenick.com/Patient"
+	elementFormDefault="qualified">
+	
+	<element name="patient" type="tns:Patient"/>
+	<complexType name="Patient">
+		<sequence>
+			<element name="name" type="string"/>
+			<element name="age" type="int"/>
+			<element name="dob" type="date"/>
+			<element name="email" type="string"/>
+			<element name="gender" type="string"/>
+			<element name="phone" type="string"/>
+		</sequence>
+        <attribute name="id" type="tns:ID"/>
+	</complexType>
+</schema>
+
+Now Go to XML:
+
+<tns:patient xmlns:tns="http://www.matenick.com/Patient"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.matenick.com/Patient Patient.xsd " 
+    id="123">
+	<tns:id>1</tns:id>
+	<tns:name>Shashank Sharan</tns:name>
+	<tns:age>24</tns:age>
+	<tns:dob>2001-01-01</tns:dob>
+	<tns:email>iamthesharan@outlook.com</tns:email>
+	<tns:gender>M</tns:gender>
+	<tns:phone>1234567890</tns:phone>
+</tns:patient>

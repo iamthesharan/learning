@@ -1,0 +1,32 @@
+Annotation:
+@Test (timeout = 1000)   --> The value for timeout will be in milliseconds.
+
+
+
+Parameterized Test:
+
+1.  Add the annotaion over the class ->  @RunWith(Parameterized.class)
+
+
+
+Resume Headline: 
+
+    NEED BANKING DOMAIN SOFTWARE DEVELOPMENT JOB | Backend Developer with 2.5+ Years of Experience in Backend Product Development having good knowledge of JAVA Programming and various development tools, seeking for Software Specialist or Similar role.
+
+
+Role - Software Developer
+Project - Amdocs Order Management System
+
+Client - US Cellular
+
+Technologies Used - JAVA, Spring Boot, REST, Oracle, Unix
+
+Tools Familiar with - Eclipse IDE, Adobe AEM, Perforce, SQL Developer, HP Quality Center, Dynatrace, JIRA, Maven, Putty, Web-logic Servers and other AMDOCS Internal tools.
+
+Having a Good Business and Architectural Knowledge of OMS Application and its various Modules
+
+Worked on Defect Analysis and Fixes as well as implementation and change requests of different modules of OMS.
+
+Automated Various BAU tasks for Ordering Applications in JAVA.
+
+Worked on findings for RCA for various product related issues.

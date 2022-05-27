@@ -1,0 +1,14 @@
+<element name="email" type="string" maxOccur="2"/>  --> This will allow 2 Email Fields
+So in xml you can provide:
+
+<tns:email>abc@gmail.com</tns:email>
+<tns:email>xyz@gmail.com</tns:email>
+
+
+For Unlimited:
+maxOccur="unbounded"
+
+To make element optional or limit the no of elements:
+
+minOccur="0" --> this will make it optional
+minOccur="2" --> min 2 elements is needed.

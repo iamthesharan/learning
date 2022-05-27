@@ -1,0 +1,12 @@
+Top Down Or WSDL First. It is known as Contract First Design.
+
+Try to use Top Down Approach as much as Possible.
+
+Steps:
+1. Generate WSDL file
+2. Generate the JAVA Stubs using tools like wsdl2java
+3. Implement the webservice endpoint
+
+
+Bottom Up Approach  --> Write the JAVA Code first and Expose the webservices via WSDL.
+Use this approach when you wnat to expose the Webservice from Legacy Application.

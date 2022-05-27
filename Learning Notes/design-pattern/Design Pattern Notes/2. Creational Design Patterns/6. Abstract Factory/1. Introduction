@@ -1,4 +1,10 @@
 Whenever two or more classes are designed to work together, and they form a kit of some sort.
 Whenever we have multiple sets or kit of objects that client needed, then we can use the abstract factory.
 
-The 
+Factory vs Abstract Factory:
+
+
+With the Factory pattern, you produce instances of implementations (Apple, Banana, Cherry, etc.) of a particular interface -- say, IFruit.
+
+With the Abstract Factory pattern, you provide a way for anyone to provide their own factory. 
+This allows your warehouse to be either an IFruitFactory or an IJuiceFactory, without requiring your warehouse to know anything about fruits or juices.

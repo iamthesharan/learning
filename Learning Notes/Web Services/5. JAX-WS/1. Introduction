@@ -1,0 +1,70 @@
+JAX-WS is JAVA Api for XML Based Services
+Like Every other JAVA EE Standard Comprises of Specification and API
+
+Specification: Rules and Guidelines.
+These Guidelines help webservices engine to implement the JAX-WS Standard.
+
+API- has Annotaions
+
+Core Important Annotations:
+In Package javax.jws:
+
+@WebService
+public class OrderService{
+    // TO make this as webservice Class we use @WebService Annotaion.
+}
+
+@WebMethod
+@WebResult(name="order") Order getOrder(@WebParam(name="orderId") Long orderId){
+
+}
+
+@WebFault
+MyException extends Exception{
+
+}
+
+SOAP Binding - Binding Controls how the SOAP message gets Generated when it goes on Apache CXF etc.
+
+@SOAPBinding -> By Default it document/literal
+
+
+@RequestWrapper  --> Allows us to Wrap the Request. It is very Rarely Used. 
+@ResponseWrapper --> Allows us to Wrap the Response. It is very rarely Used.
+
+
+
+===========================================================================================
+JAXB - JAVA Architecture for XML Binding.
+It provides an easy way to MAP java Classes and XML Schema hinding the complexity of XML
+
+
+XML Schema <---------------> JAVA Object 
+
+Like :
+JAVA <-----------> Hibernate <------------> SQL
+
+JAVA <-----------> JAXB <------------> XML
+
+the JAXB api provide 3 tools:
+
+1. XJC --> XML Schema Compiler tools. this is used in top down approach
+
+    XML Schema ------> JAVA Classes
+
+2. SCHEMAGEN tool. this is used in bottom up API
+
+    JAVA Classes -------> XML Schema
+
+XJC and SCHEMAGEN are used in Compile time
+
+3. RUNTIME API:  Does Marshalling and Unmarshalling etc.
+
+    JAVA Object <--------------> XML
+
+
+
+Runtime API:
+1. Marshall
+2. UNMarshall
+3. Annotation
