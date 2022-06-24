@@ -1,0 +1,9 @@
+function fun(){
+    console.log("Hello");
+}
+
+console.log(typeof fun);  // this will give the type as function
+console.dir(fun); // this will give the Insights and metadata of the function.
+
+
+Hence Function is also a special Type of Object and is particularly stored in heaps.

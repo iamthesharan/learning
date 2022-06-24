@@ -1,0 +1,24 @@
+JS Code   ----> JS Engine  -----> Effect on WebPage
+Every Browser has a Built in JS Engine.
+
+
+JS Engine Steps:
+1. Parse Code
+2. Compile Machine Code
+3. Executes the Machine Code.
+4. Effect on WebPage
+
+This all happens in the Browser
+
+===========================================================================
+Dynamic, Interpreted and Weakly Typed Language.
+1. Code Evaluated and Executed at runtime
+2. Code can change at runtime.
+
+
+===========================================================================
+
+JS Engine Can be run in different Environments.
+1. Browser
+2. Server Side like Node JS
+

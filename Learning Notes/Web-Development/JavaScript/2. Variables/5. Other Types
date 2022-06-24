@@ -1,0 +1,5 @@
+Undefined --> The variable which is never Defined.
+null --> The null is used to reset or clear a variable. --> its type is Object
+NaN -> Not a number  ex 3 * 'hi' gives NaN. Its Type is number
+
+typeof [1,2,3]   --> 'object'

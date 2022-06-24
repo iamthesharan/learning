@@ -1,0 +1,7 @@
+You can use the Variable in a string by using ${} in backticks.
+
+let myVar = 10;
+console.log(`My Variable Vaule is ${myVar}`);
+
+With Backticks you can write multiline String.
+

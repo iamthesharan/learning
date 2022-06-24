@@ -1,0 +1,10 @@
+console.log(parseInt('10'));
+console.log(parseInt('10.0'));
+
+
+3 + '3' = '33'
+3 - '3' = 0
+3 * '3' = 9
+3 / '3' = 1
+
+String Concatination Only Works with + operator.

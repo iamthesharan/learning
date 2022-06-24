@@ -1,0 +1,7 @@
+While Using let you can change the Value whereas with const you can't change the value.
+
+let name = "Shashank Sharan";
+name = "Hello There";
+
+const age = 25;
+age = 26; --------> (X) NOT ALLOWED 
