@@ -1,0 +1,48 @@
+Intersection types allow us to  Combine othere types.
+
+type Admin={
+    name:string;
+    privilages:string[];
+}
+
+type Employee={
+    name:string;
+    startDate:Date; // Date is a type in TS which give Date Object.
+}
+
+type ElevatedEmployee=Admin &Employee; // So here We are combining both the types
+
+so any Object that has type ElevatedEmployee must be of type Admin as well as Employee.
+
+const e1:ElevatedEmployee={
+    name:'Sharan',
+    privilages:[create-server],
+    startDate:new Date()
+};
+
+type Conbinable=string | number;
+type Numeric=number | boolean;
+
+type Universal = Combinable & Numeric;
+
+---------------------------------------------------------------------
+
+You Can also use Iterface for Intersection Types
+
+interface Admin{
+    name:string;
+    privilages:string[];
+};
+
+interface Employee{
+    name:string;
+    startDate:Date; // Date is a type in TS which give Date Object.
+};
+
+interface ElevatedEmployee extends Admin , Employee{
+
+}
+
+So here also we can use the below Lines:
+
+type ElevatedEmployee=Admin & Employee;

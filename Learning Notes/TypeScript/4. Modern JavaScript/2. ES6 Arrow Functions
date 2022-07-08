@@ -1,0 +1,87 @@
+Normal Function:
+
+const add=function(){
+
+}
+
+const add = (n1:number, n2:number) =>{
+    return n1+n2;
+}
+console.log(add(20,30));
+
+
+
+==================================================================
+
+In Short arrow function can also be written as 
+
+const add = (n1:number, n2:number) => n1+n2;
+
+here you can also omit the return statement if you have only 1 expression
+
+
+==================================================================
+
+If you have a function that only takes 1 parameter
+
+    1. We can write the Below Arrow function that will print the output result.
+        const printOutput=(output:string | number) =>{
+            console.log(output);
+        }
+        printOutput(add(2,3));
+
+    2. Now we can also Shorten like this since it has only 1 expression.
+
+        const printOutput=(output:string | number) => console.log(output);
+        printOutput(add(2,3));
+
+    3. Now if we have only 1 Argument as a parameter, then we can even ommit the paranthesis around the argument. However the Type assignment of the output variable will then not work.
+
+            const printOutput=output:string | number => console.log(output); // this will throw an error.
+
+            instead write this.
+
+            const printOutput=output => console.log(output);
+            printOutput(add(2,3));
+
+    4. But You can have type assignment in different ways.:
+
+        const printOutput:(a:number | string) => void=output => console.log(output);
+        printOutput(add(2,3));
+
+        Unfortunately here we don't save a lot in writing as any how we are providing the Type assignment in different way.
+
+    5. Case where we can save a lot:
+
+        Suppose we have a button in DOM.
+
+        const button=document.querySelector("button");
+
+        if(button){
+            button.addEventListener('click',()=>{});// this is how arrow function works, the addEventListener method will return the listener Object to this arrow function.
+        }
+
+        This can also be written as
+
+        if(button){
+            button.addEventListener('click',(event:MouseEvent)=>{});
+        }
+
+        Now the TypeScript is so smart that if you don't provide the type of the event variable i.e MouseEvent in this Case
+        it will automatically assign the type as it is present in the addEventListener method.
+
+        if(button){
+            button.addEventListener('click',event=>{});
+        }
+
+        This can further be written as below since it has only 1 expression:
+
+        if(button){
+            button.addEventListener('click',event=>console.log(event));
+        }
+
+
+
+
+
+

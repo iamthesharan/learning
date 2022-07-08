@@ -1,0 +1,84 @@
+function WithTemplate(template:string, hookId:string){
+    return function(constructor:any){ // Changed it to any because the TS will not assume that its a normal function. 
+        const hookEl=document.getElementBuId(hookId);
+        const person=new constructor(); // this line will give error if the constructor type is a function. you cannot use new keyword with function.
+        if(hookEl){
+            hookEl.innerHTML=template;
+            hookEl.querySelector('h1')!.textContent=person.name; // added new line here
+        }
+    }
+}
+
+
+@WithTemplate('<h1></h1>','app')
+class Person{
+    name="Shashank Sharan";
+    constructor(){
+        console.log(this.name + "will be printed on the Screen");
+    }
+}
+
+
+In the WithTemplate Decorator Function we Can Return the Value.
+So what we can return here?
+So here we are working with Class Decorator. So here we can return a new Contructor Function which will replace the old one.
+This means it will replace the Class on which we have added the Decorator
+
+
+function WithTemplate(template:string, hookId:string){
+    return function(originalConstructor:any){ // Changed it to any because the TS will not assume that its a normal function. 
+        const hookEl=document.getElementBuId(hookId);
+        const person=new originalConstructor(); // this line will give error if the constructor type is a function. you cannot use new keyword with function.
+        if(hookEl){
+            hookEl.innerHTML=template;
+            hookEl.querySelector('h1')!.textContent=person.name; // added new line here
+        }
+        return class extends constructor{
+            constructor(){
+                super();
+            }
+        }
+    }
+}
+
+Now we can move our template logic to a new constructor function.
+
+
+function WithTemplate(template:string, hookId:string){
+    return function(originalConstructor:any){ // Changed it to any because the TS will not assume that its a normal function. 
+        return class extends originalConstructor{
+            constructor(){
+                super();
+                const hookEl=document.getElementBuId(hookId);
+                if(hookEl){
+                    hookEl.innerHTML=template;
+                    hookEl.querySelector('h1')!.textContent=this.name; // added new line here
+                }
+            }
+        }
+    }
+}
+
+
+Now we can also allow the Generic returning class.
+
+
+function WithTemplate(template:string, hookId:string){
+    return function<T extends {new(...args[]:any):{name:string}}>(originalConstructor:T){ // Changed it to any because the TS will not assume that its a normal function. 
+        //Returning Decorator only accespts the Class which has a name property
+        return class extends originalConstructor{
+            constructor(..._[]:any){ // _ parameter is TS will get it, it needs to accept but will never use it
+                super();
+                const hookEl=document.getElementBuId(hookId);
+                if(hookEl){
+                    hookEl.innerHTML=template;
+                    hookEl.querySelector('h1')!.textContent=this.name; // added new line here
+                }
+            }
+        }
+    }
+}
+
+
+
+Now we need to instantiate the person object

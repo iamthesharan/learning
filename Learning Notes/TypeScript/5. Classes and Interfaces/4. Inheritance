@@ -1,0 +1,58 @@
+class Department{
+    names:string;
+    constructor(names:string,private dept:string){
+        this.names=names;
+        this.dept=dept;
+    }
+    describe(this:Department){
+        console.log(this.names);
+    }
+}
+
+
+class ItDepartment extends Department{
+    constructor(name:string,  private admin:string[]){
+        super(name,'IT'); // you need to provide the super keyword just like java when you inherit 
+        this.admin=admin;
+    }
+}
+
+==========================================================================================
+
+If we mark the field as protected, then it can be used directly with the child class
+
+==========================================================================================
+
+Getter and Setter:
+
+get getterMethod(){ // you need to provide the get keyword
+    return this.name;
+}
+
+So when you provide the get for getter method. you can access the method as property.
+
+console.log(myDepartment.getterMethod);
+
+
+Similar with Setters:
+
+set setterMethod(name:string){
+    this.name=name;
+}
+
+myDepartment.setterMethod='Sharan';
+
+===================================================================================
+Static is also used in the same way as in JAVA. Same Concept.
+
+if static someMethod(name:string){} is declare as static then:
+
+Department.someMethod='Shashank';
+
+===================================================================================
+
+abstract Class and method same as in JAVA.
+
+for abstract method you need to provide Defination with return type.
+
+abstract someMethod():void;

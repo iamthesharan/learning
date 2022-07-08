@@ -1,0 +1,29 @@
+Here are we are printing our own logs with decorator factory by customizing iteself in annotation
+
+Syntax:
+
+    function outerFunction(myString:string){
+        return function(classConstructor:Function){
+            /*This is anonymous Function*/
+            console.log(myString);
+            console.log(classConstructor);
+        }
+    }
+
+    /* You can also write like below*/
+
+    function outerFunction(myString:string){
+        return function innerFunction(classConstructor:Function){
+            /*This is anonymous Function*/
+            console.log(myString);
+            console.log(classConstructor);
+        }
+    }
+
+@outerFunction("Hi There")
+class Person{
+    name="Shasank";
+    constructor(){
+        console.log("creating Person Object");
+    }
+}

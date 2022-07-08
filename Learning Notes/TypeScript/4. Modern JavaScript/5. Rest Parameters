@@ -1,0 +1,25 @@
+Suppose You want to add the Variable Arguments in the Parameters list in function
+
+
+So Basically whatever arguments is passed in the Parameters, TS will merge those no and put it in array.
+    const add=(...numbers:number[])=>{
+        //here you can use logic to add the numbers using for Loop.
+    }
+
+    You can also use Reduce method:
+    reduce method will accept 2 parameter, 
+
+    1. callback function: A function that accepts up to four arguments. The reduce method calls the callbackfn function one time for each element in the array.
+    
+        Callback function accepts 4 argumnents:
+        (previousValue: number, currentValue: number, currentIndex: number, array: number[])
+
+    2.  Initial Value: If initialValue is specified, it is used as the initial value to start the accumulation. The first call to the callbackfn function provides this value as an argument instead of an array value.
+
+
+
+    const add = (...numbers:number[])=>{
+        return numbers.reduce((currentResult, currentValue)=>{
+            return currentResult+currentValue;
+        }, 0);
+    }

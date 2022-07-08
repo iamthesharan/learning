@@ -1,0 +1,16 @@
+Option Parameter is defined By ?. 
+
+It Can be used in instance variable or can be used in Contructor or function parameter.
+
+class Person{
+    name?:string;
+    age=30;
+    constructor(name?:string){ // if Name not Provided then Save only if name is present.
+        if(name){
+            this.name=name;
+        }
+    }
+} 
+
+
+So we can call the Constructor of the Class without parameters here.

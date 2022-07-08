@@ -1,0 +1,100 @@
+Lets us assume we have intersection Type:
+
+type combinable= string | number
+
+So Type Guard Help Us with Union Types
+
+function(a:combinable, b:combinable){
+    return a+b; // now this will not work because a can be string and b can be number or vice versa. 
+}
+
+Instead We need to check
+function(a:combinable, b:combinable){
+    if(typeof a==='string' || typeof b==='string'){  // This is a type guards using typeof
+        return a.toString() + b.toString();
+    }
+    return a+b;
+}
+
+================================================
+
+Other Kind of Type Guards
+
+
+interface Admin{
+    name:string;
+    privilages:string[];
+};
+
+interface Employee{
+    name:string;
+    startDate:Date; // Date is a type in TS which give Date Object.
+};
+
+typeof unknownEmployee= Employee | Admin;
+
+function printEmployeeInfo(emp:unknownEmployee){
+    console.log(emp.name);
+    console.log(emp.privilages); // TS can't confirm privilages filed is there in both Employee as well as Admin
+}
+
+So here we use typeguard for privilages.
+
+if we check the typeof employee, then that will just an object at runtime
+
+
+function printEmployeeInfo(emp:unknownEmployee){
+    console.log(emp.name);
+    if(typeof emp==='object')
+        console.log(emp.privilages);
+}
+
+If we check the type of emp as Employee, the note JS doen't know about the employee type.
+So the below code will also not work.
+
+function printEmployeeInfo(emp:unknownEmployee){
+    console.log(emp.name);
+    if(typeof emp==='Employee') // Will not work
+        console.log(emp.privilages);
+}
+
+
+So for that we use in keyword.
+
+function printEmployeeInfo(emp:unknownEmployee){
+    console.log(emp.name);
+    if('privilages' in emp) // TS will check if privilages is present in emp.
+        console.log(emp.privilages);
+}
+
+
+If the above is the case with function, we can also use function name  in if condition
+
+
+===========================================================================
+
+Third type guard is instanceof keyword.
+
+class car{
+    driveCar(){
+        console.log("Driving Car");
+    }
+}
+
+class Truck{
+    driveTruck(){
+        console.log("Driving Truck")
+    }
+}
+
+typeof Vehicle= car | truck;
+
+funtion drivingVehicle(vehicle:Vehicle){
+    if(vehicle instanceof Car){
+        vehicle.driveCar();
+    }
+    vehicle.driveTruck();
+}
+
+
+Note instanceof can only be used with Classes and not interface types

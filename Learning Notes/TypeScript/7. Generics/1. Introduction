@@ -1,0 +1,51 @@
+Lets Stay we have an array
+
+const names=['Shashank','Sharan']; // This is the String Array
+
+If we remove the data from names from the array the type of the array will be any.
+
+A Generic Type is a Type which is kind of Connected with some other Types and is really Flexible regarding which exact type that our type is.
+
+const names:Array=[]; // here the Array is a type on its own.
+but Array type needs some more information
+
+
+const names:Array<string>=[]; // this is similar as string[]
+and now we can call
+
+names[0].split(' ');
+=================================================================
+
+Promise in JAVAScript:
+A Promise in JAVA Script in just like a Promise in real Life. 
+So a Promise can have two results, either it is completed/resolved or else NotCompleted/Rejected
+
+let p=new Promise((resolve,reject)=>{
+    let a = 1+1; // this is what the promise does.
+    if(a==2){
+        resolve('Success')
+    }
+    else{
+        reject('Failed');
+    }
+
+});
+
+//When the Promises Executed, then perform the below funtion using then method
+p.then((method)=>{
+    console.log("This is in the then " + message)
+}).catch((message)={
+    console.log("This is in catch Method"); // If the Promise is rejected with Some Exception then this block of code executes
+});
+==========================================================================================
+We get Better Type Safety with Generic Types
+
+const promise:Promise<string>=new Promise((resolve, reject)=>{
+    serTimeout(()={
+        resolve('10 10');
+    },2000);
+});
+
+promise.then(data=>{
+    // data.split(' '); //This will throw an error if the Promise is not of type String. but in this case it is string.
+})

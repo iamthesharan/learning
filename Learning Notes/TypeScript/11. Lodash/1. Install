@@ -1,0 +1,10 @@
+npm -i --save lodash
+Lodash is a JS library--> so it will show error in TS while Importing.
+to overcome this.
+we need to install types library for lodash
+npm install --save @types/lodash
+
+and then import :
+import _ from 'lodash';
+
+console.log(_.shuffle([1,2,3]));

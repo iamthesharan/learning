@@ -1,0 +1,76 @@
+class DataStorage{
+    private data=[]; // Now we are not saying anything about the data that we are storing. Error!
+    addItem(item){ // Here we are not specifying which type the item is. Error!
+        this.data.push(item);
+    }
+    removeItem(item){
+        this.data.splice(this.data.indexOf(item),1);
+    }
+    getData(){
+        return [...this.data];
+    }
+}
+
+So in the above class we are not caring which type of data we are allowing in our class. So we need to make it for specefic type of data.
+We can do this by creating generic class.
+
+class DataStorage<T>{
+    private data:T[]=[];
+    addItem(item:T){
+        this.data.push(item);
+    }
+    removeItem(item:T){
+        this.data.splice(this.data.indexOf(item),1);
+    }
+    getData(){
+        return [...this.data];
+    }
+}
+
+let textStorage=new DataStorage<string>();
+textStorage.addItem('Shashank');
+textStorage.addItem('Sharan');
+textStorage.addItem('Prasad');
+textStorage.removeItem('Sharan'); 
+textStorage.removeItem('Chopra'); // note if the element is not found while removing, It will remove the last element
+This is because splice will return -1 and removes the -1 element which is the last element. To avoid this we need to modify our removeItem method.
+
+    removeItem(item:T){
+        if(this.data.indexOf(item)===-1)
+            return;
+        this.data.splice(this.data.indexOf(item),1);
+    }
+
+======================================================================================================================
+
+We can also Store objects.
+
+const objStorage=new DataStorage<object>();
+objStorage.addItem({name:"Shashank"});
+objStorage.addItem({name:"Sharan"});
+objStorage.addItem({name:"Prasad"});
+objStorage.removeItem({name:"Prasad"});// This line will also remove the last element but not because Prasad is a last element
+objStorage.removeItem({name:"Shashank"}); // This line will remove the last element because the object in the argument is the new object
+and indexOf doesn't know about its location in the data array.
+
+So to avoid this behaviour with objects, we need to create an object and assign it to the variable and then add the object to data array by calling addItem method.
+And when we want to remove that object, we just simply pass the created object into the removeItem.
+
+======================================================================================================================
+
+
+What if we don't want to allow the object type.
+To do this we can assign the types that will be accepted during the class creation by extending the required type.
+
+class DataStorage<T extends string | number | boolean>{
+    private data:T[]=[];
+    addItem(item:T){
+        this.data.push(item);
+    }
+    removeItem(item:T){
+        this.data.splice(this.data.indexOf(item),1);
+    }
+    getData(){
+        return [...this.data];
+    }
+}

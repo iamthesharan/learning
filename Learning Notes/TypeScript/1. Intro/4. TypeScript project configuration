@@ -1,0 +1,15 @@
+TypeScript uses a configuration file, named tsconfig.json, that holds a number of compilation options. 
+So basically you can configure the TS compilation on this file.
+
+To generate tsconfig.json
+tsc --init
+
+tsconfig.json:
+
+target: --> Tells JavaScript version that we would like to generate for.
+
+
+In order to compile a TypeScript project that may contain many files in many sub-directories, we just need to type tsc in the root directory of the project.
+
+
+watching the files for change: tsc -w

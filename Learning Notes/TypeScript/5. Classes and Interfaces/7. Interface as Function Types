@@ -1,0 +1,22 @@
+We Can also Add a type of a function like this:
+
+type AddFn = (a:number,b:number) => number;
+
+let add:AddFn;
+add =(n1:number, n2:number)=>{
+    return n1+n2;
+}
+
+===================================================================================================
+
+You can also create function type with Interface
+
+interface AddFn{
+    (a:number, b:number):number;
+}
+
+The Above code will behave as function type:
+let add:AddFn
+add=(a:number, b:number) =>{
+    return a+b;
+}

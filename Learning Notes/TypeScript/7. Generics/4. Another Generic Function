@@ -1,0 +1,27 @@
+Let us say we have a function which have 1 generic Type and the paramter of that generic typs
+
+function countAndDescribe<T>(element:T){
+    let descriptionString="Got no value";
+    if(element.length>0)
+        descriptionString="Got Count of "+element.length + "elements"; 
+    return [element,descriptionString];// here we are returning a tuple
+}
+
+Now in the above code TS will throw an error as element that is passed may not have a length property.
+So we can make it clear to TS that it does have length property. So in order to do that we need to create an interface called Lengthy.
+
+interface Lengthy{
+    length:number
+}
+
+and now we extend the generic type T with Lengthy to ensure TS that element will have length property.
+
+function countAndDescribe<T extends Lengthy>(element:T):[T, string]{
+    let descriptionString="Got no value";
+    if(element.length>0)
+        descriptionString="Got Count of "+element.length + "elements"; 
+    return [element,descriptionString];// here we are returning a tuple
+}
+
+console.log(countAndDescribe("Hi There!")); // this works because string has a length property
+console.log(countAndDescribe(["Hi","There"]])); // this works because array has a length property

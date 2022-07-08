@@ -1,0 +1,23 @@
+Sometimes you need Some variable that should not only Private or public but should never change once initialized.
+You can use read only in this case.
+
+
+readonly will only valid in TS and Not JS
+
+class Department{
+    private readonly names:string;
+    age:number;
+    constructor(names:string,age:number){
+        this.names=names;
+        this.age=age;
+    }
+    describe(this:Department){
+        console.log(names);
+    }
+}
+
+or:
+
+    constructor(private readonly id:number, public age:number){
+        
+    }
