@@ -1,0 +1,17 @@
+$ man man pages  --> This will show what number represents what manual pages
+$ man ps  --> Shows the manual pages for ps
+$ man -f crontab  --> This will show how many manual Pages crontab has
+$ man 5 crontab --> Shows the manual for File format of Crontab
+$ man -k crontab  --> Shows number of manual Page with keyword crontab
+
+===========
+
+info pages:
+
+info grep
+
+===========
+
+manual Pages to display in browser
+
+yelp man:crontab

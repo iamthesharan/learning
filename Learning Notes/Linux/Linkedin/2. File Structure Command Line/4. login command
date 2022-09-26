@@ -1,0 +1,8 @@
+$ whoami --> Shows who I'm logged in currently
+$ logname --> Show the Starting user I've logged in
+
+$ who -H
+$ w  -> shows who logged on and what they are doing
+$ who --> show who is currently logged on
+$ lastlog  --> Show which users has logged in
+$ last | tac  --> last command will show who only logged in user in past or present and tac will show from ascending order.
