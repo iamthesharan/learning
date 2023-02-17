@@ -1,0 +1,16 @@
+COMMENTS ON TABLE <TABLE_NAME> IS <TEXT>;
+COMMENTS ON COLUMN <TABLE_NAME.COLUMN_NAME> IS <TEXT>;
+
+
+MAX-LENGTH: 4000
+
+
+
+When the comment is already present on the object and we try to add, it will be overwritten.
+
+Comments are stored in data dictionary.
+to view them.
+
+
+SELECT * FROM USER_TAB_COMMENTS;
+SELECT * FROM USER_COL_COMMENTS;

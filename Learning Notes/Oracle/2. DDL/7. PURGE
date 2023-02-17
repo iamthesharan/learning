@@ -1,0 +1,7 @@
+Removing the object permanently from recyclebin
+
+PURGE TABLE <TABLE_NAME>
+
+
+For Shift +delete
+DROP TABLE <TABLE_NAME> PURGE;

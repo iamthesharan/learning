@@ -1,0 +1,27 @@
+1. Droping the table
+
+    DROP TBAP_ITEM;
+
+2. Dropping Column
+    
+    1. Dropping Single Column: 
+        
+            ALTER TABLE <TABLE NAME>
+            DROP COLUMN <COLUMN NAME>;
+            
+                    OR
+                    
+            ALTER TABLE <TABLE NAME>
+            DROP ();
+    
+    2. Dropping multiple columns
+            
+            ALTER TABLE <TABLE NAME>
+            DROP (COL1, COL2);
+            
+            
+    
+            ALTER TABLE TBAP_ITEM
+            DROP (AP_ID, MAIN_ITEM_ID);
+    
+    

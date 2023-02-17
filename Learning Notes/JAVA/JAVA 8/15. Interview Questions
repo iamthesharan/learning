@@ -45,8 +45,8 @@ Q5 Given a list of integers, find the total number of elements present in the li
 
 Q6 Given a list of integers, find the maximum value element present in it using Stream functions? 
 
-        int count=Stream.of(20,10,20,20,4).max(Integer::compare).get();
-        System.out.println(count);
+        int max=Stream.of(20,10,20,20,4).max(Integer::compare).get();
+        System.out.println(max);
 
 
 Q7 Given a list of integers, sort all the values present in it using Stream functions?

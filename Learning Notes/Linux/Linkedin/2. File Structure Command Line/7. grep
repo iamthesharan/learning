@@ -1,0 +1,8 @@
+grep kernel test --> Shows all the words with kernal in a file
+
+grep ^Oct test --> ^ shows all lines that starts with the word Oct
+grep service$ --> $ shows all lines that ends with name service
+
+
+grep -c ^Oct test --> Shows the number of lines that start with Oct
+this is similar to --> grep ^Oct test | wc -l

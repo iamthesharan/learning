@@ -1,0 +1,25 @@
+Terminal <====> Shell <====> kernel
+
+Shell Command Execution Order:
+1. checks if the command is built in command
+2. checks if it's an alias of command
+3. checks if the command is in disk
+4. If above 3 not found it will show command not found
+
+
+Types of Shell:
+1. Bourne Shell -> sh
+2. C Shell -> csh
+3. Kourn Shell -> ksh
+4. Bourn Again Shell --> bash
+5. Zsh
+
+To Change the Shell use change shell command:
+
+chsh and hit enter
+
+give the path /bin/zsh  --> Note this will work only when zsh shell is installed.
+To install zsh Shell. Use:
+1. sudo dnf install -y zsh
+
+Note after you change the shell you have to restart the shell.

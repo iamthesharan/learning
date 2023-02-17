@@ -1,0 +1,26 @@
+DDL --> Data Defination Language  --> DEALS WITH THE STRUCTURE OF THE DATABASE
+
+DDL always interact with the database directly. hence there is an implicit commit
+
+There will be two commit for the DDL command
+
+commt; //madatory before any ddl
+DDL COMMAND;
+commit; // based on the success of the previous command
+
+Every DDl command is a three Step Process
+
+DDL commands are faster.
+Ex truncate is faster than delete
+
+
+DDL Commands:
+
+CREATE
+ALTER
+TRUNCATE  --> After Truncating, the Structure of the table will remained and the entire data will be removed
+RENAME    --> to change the name of the object
+DROP      --> remove the structure and data
+FLASHBACK --> When object is droped, it is removed and goes to the recycle bin. butwith FLASHBACK, it can be bought back if it is in the recycle bin
+PURGE     --> Object will be removed from the recycle bin
+COMMENT

@@ -1,0 +1,14 @@
+TCL -> Transaction Control Language
+
+DML write to Commit  --> Transaction 1
+DML write to Rollback --> Transacton 2
+
+
+Commands:
+
+COMMIT
+ROLLBACK
+SAVEPOINT
+SET TRANSACTION
+
+

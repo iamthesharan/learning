@@ -1,0 +1,49 @@
+Merge command in 9i was introduced to support INSERT AND UPDATE TOGETHER THROUGH A SINGLE STATEMENT
+
+In 10g Orcale has introduced delete command also.
+
+
+oracle 9i: insert+update together works with merge
+Oracle 10g: INSERT+UPDATE+DELETE
+
+POSSIBILITIES:
+
+INSERT+UPDATE+DELETE    -->P
+INSERT+UPDATE           -->P
+UPDATE+DELETE           -->P
+INSERT                  -->P
+UPDATE                  -->P
+---------------------------------
+DELETE                  -->NP   |
+INSERT+DELETE           -->NP   |
+---------------------------------
+
+
+SYNTAX:
+
+    MERGE INTO <TARGET TABLE> A
+    USING <SOURCE TABLE> B
+    ON (A.COL1=B.COL1)
+    WHEN MATCHED THEN
+        UPDATE SET A.COL2=B.COL2 , A.COL3=B.COL3
+    WHEN NOT MATCHED THEN
+        INSERT (A.COL2, A.COL3) VALUES (B.COL2, B.COL3)
+        
+    
+    
+TARGET TABLE WILL ALWAYS BE 1.
+SOURCE TABLE CAN BE MULTIPLE ie. we can either provide table or can also use SELECT Statement.
+ON clause will have Condition  --> But these conditional columns cannot be in the UPDATE Statement.
+
+
+
+
+    MERGE INTO <TARGET TABLE> A
+    USING (SELECT * FROM <SOURCE TABLE>) B  --INLINE VIEW
+    ON (A.COL1=B.COL1)
+    WHEN MATCHED THEN
+        UPDATE SET A.COL2=B.COL2 , A.COL3=B.COL3  
+        DELETE WHERE A.COL2=B.COL2
+        /* THESE TYPES OF UPDATE + DELETE IS WRITTEN WHEN YOU WANT TO UPDATE THE TRIGGER TABLE OR SOME LOG TABLE AND THE DELETING THE RECORD*/
+    WHEN NOT MATCHED THEN
+        INSERT (A.COL2, A.COL3) VALUES (B.COL2, B.COL3)

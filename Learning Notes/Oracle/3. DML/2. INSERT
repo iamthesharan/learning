@@ -1,0 +1,12 @@
+For taking input from user:
+
+INSERT INTO <TABLE NAME>(COL1, COL2, COL3) VALUES('&COL1','&COL2','&COL3');
+
+
+
+Inserting the values from other table.
+
+INSERT INTO <TABLE 1>
+SELECT * FROM <TABLE 2>;
+
+

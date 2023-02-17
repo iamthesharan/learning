@@ -1,0 +1,8 @@
+U1> GRANT SELECT ON EMP TO U2 WITH GRANT OPTION; 
+U2> GRANT SELECT ON EMP TO U3 ;
+
+
+U1> REVOKE SELECT ON EMP FROM U3; U1 Directly cant revoke the access.
+
+    solution:   1. either revoke Access from U2;
+                2. Ask U2 to revoke Access from U3.

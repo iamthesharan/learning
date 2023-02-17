@@ -1,0 +1,23 @@
+DML Commands always interact with buffer
+Hence it is slower
+
+
+DML -->  Buffer --> DATABASE (on COMMIT)
+            |
+            |
+        Removed from Buffer (on ROLLBACK)
+        
+        
+        
+DML -----> READ
+    ------> WRITE  --> Row level Locked is made while performing DML.
+    
+
+If 10 rows are updated then 10 rows are locked by the user automatically.
+
+
+Read --> SELECT
+Write:  ----> INSERT
+              UPDATE
+              DELETE
+              MERGE

@@ -1,0 +1,21 @@
+SHOW USER; --> Shows the User with which we are connected.
+
+NOW 
+
+GRANT SELECT ON EMP TO "USER2"; --> This means USER2 can select data from EMP table of USER1 Schema. but USER2 has to provide Schema name
+
+SELECT * FROM USER1.EMP;
+
+
+
+GRANT ALL ON EMP TO U2;  --> Granting all the privilages on EMP object of U1 to U2
+
+GRANT SELECT, INSERT ON EMP TO U1, U2;  --WE CAN grant MULTIPLE PRIVILAGES on object TO ONE Schema
+                                        --We can grant PRIVILAGES ON OBJECT TO MULTIPLE Schema
+                                        --We can grant privilages to Schemas for only one object in a single statement
+                                        
+U1> GRANT SELECT ON EMP TO U2 WITH GRANT OPTION; -->If U1 has give U2 the privilage to Grant privilage, then only U2 can grant privilage to other users
+U2> GRANT SELECT ON EMP TO U3 ;
+
+now  select * from U2.emp; --> invalid. the attached Schema must be of the owner.
+     select * from U1.emp; --> valid

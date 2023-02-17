@@ -1,0 +1,27 @@
+1. Creating a fresh table:
+
+        CREATE TABLE STUDENT( 
+                ROLL_NO NUMBER(3), 
+                'NAME' VARCHAR(20), 
+                DOB  DATE 
+        );
+
+
+2. Creating a new table with existing table with all data
+
+        CREATE TABLE TBAP_ITEM_TEMP AS
+        SELECT * FROM TBAP_ITEM;
+        
+3. Creating a new table with existing data and a selected columns
+        
+        CREATE TABLE TBAP_ITEM_TEMP AS
+        SELECT CUSTOMER_ID, SUBSCRIBER_ID FROM TBAP_ITEM;
+        
+        
+4. Creating a new Table without data but with same structure:
+    
+    For this we need to provide any false condition
+         
+        CREATE TABLE TBAP_ITEM_TEMP AS
+        SELECT CUSTOMER_ID, SUBSCRIBER_ID FROM TBAP_ITEM 
+        WHERE 1=2;

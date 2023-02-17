@@ -1,0 +1,23 @@
+DCL --> Data Control Language
+
+DCL --> deals with the permission
+
+like DDL, DCL will also have two implicit commit and will be executed in same manner as in case of DDL
+
+
+Commands:
+
+GRANT
+REVOKE
+SET ROLE
+
+
+For Every operation in SQL we require permissions from DBA. This is done by DCL commands.
+Every DCL commands have inplicit commit like DDL commands.
+
+
+Privilages:
+
+
+    1. System Privilages --> applicable only for application developers and Adminstrators.
+    2. Object Privilages --> object privilages are granted by Schema Owner.

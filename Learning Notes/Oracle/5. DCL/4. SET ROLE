@@ -1,0 +1,41 @@
+Role is created to avoid granting privilages manually one by one on Every object to every User.
+
+basically it is a set of privilages Designed to grant to the users of the same type. 
+
+1. CREATING ROLE
+
+    CREATE ROLE R1; OR CREATE ROLE R1 NOT IDENTIFIED
+    
+    CREATE ROLE R1 IDENTIFIED BY PASSWORD; // WHENEVER WE ACCESS ROLE WE NEED TO PROVIDE PASSWORD.
+    
+    
+2. GRANTING PRIVILAGES TO ROLES.
+
+    GRANT P1[P1,P2,P3...Pn] to R1;   P IS PRIVILAGE AND R IS ROLE
+    GRANT R1 ON <TABLE> TO  U1[U1, U2, U3... Un]; // U IS USER
+    
+    
+3. ALTERING THE ROLE
+
+    ALTER ROLE <ROLE NAME>
+    IDENTIFIED BY <PASSWORD>;
+    
+            OR
+    ALTER ROLE <ROLE NAME>
+    NOT IDENTIFIED;
+    
+    ALTER USER <USERNMANE>
+    DEFAULT ROLE R1;
+    
+    
+4. SET ROLE:
+
+alter session set "_ORACLE_SCRIPT"=true;  
+
+
+
+    SET ROLE R1;  // ASSIGNING THE ROLE R1 TO THE CURRENT USER
+    SET ROLE ALL; //ASSIGNING ALL THE ROLES TO THE CURRENT USER
+    SET ROLE ALL EXCEPT R1;
+    SET ROLE NONE;
+    SET ROLE R1 IDENTIFIED BY <PASSWORD>

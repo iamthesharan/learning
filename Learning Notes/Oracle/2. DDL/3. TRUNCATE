@@ -1,0 +1,6 @@
+Deleting all the Data from the table we use truncate.
+
+TRUNCATE TABLE <TABLE_NAME>
+
+
+TRUNCATE TABLE TBAP_ITEM_TMP;

@@ -1,0 +1,27 @@
+
+
+We can rename table, column, contraints.
+
+
+1. Changing the name of the table:
+
+        RENAME <OLD> TO <NEW>;
+        
+        RENAME EMP TO EMPLOYEE;
+
+2. Changing the name of the column:
+        
+        ALTER TABLE <TABLE_NAME>
+        RENAME COLUMN <OLD> TO <NEW>;
+        
+        ALTER TABLE TBAP_ITEM_TMP
+        RENAME COLUMN MAIN_IND TO MAIN_INDICATOR;
+        
+        
+2. Changing the name of the Constraint:
+        
+        ALTER TABLE <TABLE_NAME>
+        RENAME CONSTRAINT <OLD> TO <NEW>;
+        
+        ALTER TABLE TBAP_ITEM_TMP
+        RENAME CONSTRAINT TBAP_ITEM_PK TO TBAP_ITEM_CONSTRAINT_PK;

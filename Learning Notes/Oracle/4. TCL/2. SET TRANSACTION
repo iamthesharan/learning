@@ -1,0 +1,20 @@
+Defaut ---> SET TRANSACTION TO READ WRITE;
+
+SET TRANSACTION TO READ ONLY; --> ONLY SELECT WILL WORK TILL THE TRANSACTION GETS COMPLETE.
+
+Transaction gets complete only when there is a commit statement or rollback statement.
+
+
+SET TRANSACTION MUST BE EXECUTED AT THE STARTING OF THE TRANSACTION OTHERWISE IT WILL THROW ERROR.
+
+
+
+
+Isolation Level:
+Isolation level decides what type of data should be visible to us.
+
+SET TRANSACTION ISOLATION LEVEL READ COMMITED; --default
+-->if we commit then those changes will be visible to other users or same session
+
+SET TRANSACTION ISOLATION LEVEL SERIALIZABLE;
+--> If we dont want to show the commited data  of the program then we can change the ISOLATION LEVEL

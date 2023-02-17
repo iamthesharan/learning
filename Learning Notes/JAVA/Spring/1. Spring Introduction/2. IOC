@@ -29,7 +29,7 @@ What is Container?
         (Conf file)    Reads From Configuration <======> Object Factory  -----> Main Object
 
         So Here the Object Factory will hand over the Objects to the Main Object
-        SO basically Object Factory Creates an Object Based on the Config file or blue print for all the Objects
+        So basically Object Factory Creates an Object Based on the Config file or blue print for all the Objects
         So Object Factory will tell the Configuration that it needs, the object of particular type with the following Specification.
 
 
