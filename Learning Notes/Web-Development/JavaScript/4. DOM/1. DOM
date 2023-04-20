@@ -1,7 +1,0 @@
-Global Object is the window Object and Document is the property of the window object.
-
-Document  --> It is the root DOM node that browsers Provide.
-Window is the Real Top most object which represents Tab of the browser.
-console.dir(document);  --> give the Document Propery overall hierarchy.
-alert()  --> this is same as window.alert();
-document  --> this is same as window.document;

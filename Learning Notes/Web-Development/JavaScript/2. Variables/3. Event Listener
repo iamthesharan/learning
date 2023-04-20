@@ -1,5 +1,0 @@
-function add(){
-    currentResult += 12;
-    return currentResult;
-}
-element.addEventListener('click',add);

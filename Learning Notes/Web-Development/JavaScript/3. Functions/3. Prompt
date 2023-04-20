@@ -1,7 +1,0 @@
-const ROCK = 'ROCK';
-const PAPER = 'PAPER';
-const SCISSOR = 'SCISSOR';
-
-const selection =  prompt(`${ROCK}, ${PAPER} or ${SCISSOR}?`,'').toUpperCase();
-
-you can use this selection variable now.

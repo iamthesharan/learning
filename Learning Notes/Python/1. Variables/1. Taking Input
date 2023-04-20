@@ -1,7 +1,0 @@
-
-input("What is your age?")
-
-print("Hello "+input("What is your age?")) --> This will first Prompt for input and then Print Hello and then input value
-
-Suppose input is Shashank
-Output will be Hello Shashank
