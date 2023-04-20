@@ -1,0 +1,27 @@
+@Mock - Automatically creates mock but for this you need @RunWith(MockitoJUnitRunner.class)
+@RunWith(MockitoJUnitRunner.class) -  Adding it over the class will run all the class with Mockito JUnit Runner.
+                                    Mockito JUnit Runner makes sure that all the mocks are created and dependeny mocks are injected.
+
+@InjectMocks -  This Annotaion is used to inject mocks on the mentioned class.
+
+    Ex:
+
+        TodoServiceImpl todoServiceImpl = new TodoServiceImpl(todoServiceMock); // here todoServiceMock is a mock object.
+        So to shorten this line we can use.
+
+        @InjectMocks
+        TodoServiceImpl todoServiceImpl; // This will check whatever is the injecting parameter in the constuctor of TodoServiceImpl, if the Mock object is available for that, Mockito will inject it.
+
+@Captor - Will create Captor for the mentioned line.
+
+    Ex:
+        @Captor
+        ArgumentCaptor<String> stringArgumentCaptor;
+
+
+If we want to use 2 Junit Runner like Spring JUnit Runner as well as Mockito JUnit Runner,
+Then we cannot use it together on @RunWith annotation. 
+Instead we have to use @Rule annotation
+
+@Rule
+public MockitoRule mockitoRule = MockitoJUnit.rule();

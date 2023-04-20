@@ -1,0 +1,31 @@
+PowerMock is used to mock the static class, private class and Final Class methods.
+generally if you use
+    when(SomeStaticClass.method()).thenReturn(someValue); // This won't work with Mockito
+
+
+1. Specify the runner.
+
+    @RunWith(PowerMockRunner.class)
+
+
+2. Initialize the Static class inside test method or you can do it in Setup method too.
+
+    PowerMockito.mockStatic(SomeStaticClass.class);
+
+3. Use @PrepareForTest annotation above test class for that static class.
+
+    @PrepareForTest(SomeStaticClass.class)
+
+
+4. Now Mock the static method:
+
+    when(SomeStaticClass.method()).thenReturn(someValue); 
+
+5. Assert that the Static method is called or not.
+
+    PowerMockito.verifyStatic();
+    SomeStaticClass.method(); // Power mockito will verify this method is called or not.
+
+    
+====================================================================================================
+

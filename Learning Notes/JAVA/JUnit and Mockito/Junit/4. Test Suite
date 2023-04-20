@@ -1,0 +1,12 @@
+Test suites are used to group the test cases.
+Suppose you have a class with lots of test cases which takes a lots of time to execute. and your requirement is to execute only some of the test cases from that class.
+In that case you can use test suite.
+
+@RunWith(Suite.class)
+@SuiteClasses({
+    QuickBeforeAfterTest.class,
+    StringHelperTest.class
+})
+public class AllTest{
+
+}

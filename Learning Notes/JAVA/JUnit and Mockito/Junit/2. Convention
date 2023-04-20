@@ -1,0 +1,12 @@
+Whenever you write a Test, you should use the name of the test method like:
+
+public void myMethodTest_Condition(){
+
+}
+
+here the condition is the scenario. A Scenario can be a happy path scenario or sad path scenario
+
+
+You should not test 2 Conditions in the same test.
+You cannot have the return type for test method
+You should only have public method for test.

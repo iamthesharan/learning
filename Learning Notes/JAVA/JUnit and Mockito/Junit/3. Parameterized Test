@@ -1,0 +1,28 @@
+Steps:
+1. Use @RunWith(Parameterized.class) above the class name
+2. Define the Parameter method which will return collection that will be passed to the test method as a Parameter
+
+    @Parameter
+    public Collection<String[]> testCollection(){
+        String test = {
+            {"Acutal 1","Expected 1"}, // These Expected and Actual Values are passed in Constructor of the test class
+            {"Actual 2","Expected 2"}
+        };
+        return Arrays.asList(test);
+    }
+3. Create a member variable and initialized it in constructor.
+    private String input;
+    private String expectedOutput;
+    
+    public TestClass(String input, String expectedOutput){
+        this.input = input;
+        this.expectedOutput = expectedOutput;
+    } 
+
+4. Now inside the Test class use these initialized value.
+
+    @Test
+    public void testMethod(){
+        assertEquals(expectedOutput,input);
+    }
+

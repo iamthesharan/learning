@@ -1,0 +1,38 @@
+TodoService todoServiceMock = Mockito.mock(TodoService.class)
+
+In case of stubbing, if you want to return multiple values on mutiple calls:
+then use:
+
+    List list = Mockito.mock(List.class);
+    when(list.size()).thenReturn(1).thenReturn(2);
+
+    assertEquals(1,list.size());
+    assertEquals(2,list.size());
+
+
+Argument Matcher:
+1. anyInt(), anyByte()
+
+ThrowingException:
+
+    when(list.get(anyInt())).thenThrow(new RuntimeException());
+
+
+
+TO Verify Specific method is called.
+
+Mockito.verify(mockobject).method()
+Mockito.verify(mockobject,times()).method()
+Mockito.verify(mockobject,never).method()
+Mockito.verify(mockobject,atleastOnce()).method()
+
+
+Argument Captor: used to Captor the argument passed in the inside code.
+
+ArgumentCaptor<String> argumentCaptor = ArgumentCaptor.foClass(String.class);
+
+todoServiceImpl.deleteNotRelatedToSpring("Spring");
+Verify(todoServiceMock).deleteTodo("Learn to Dance");// TO BE REPLACED WITH BELOW LINE
+Verify(todoServiceMock).deleteTodo(argumentCaptor.capture());
+assertThat(argumentCaptor.getValue(),is("Learn To Dance")); // This case will get success since it doesnot contains spring.
+

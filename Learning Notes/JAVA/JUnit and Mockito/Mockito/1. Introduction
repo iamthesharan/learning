@@ -1,0 +1,40 @@
+SUT - System under Test:
+
+public interface TodoService {
+    public List<String> retrieveTodos(String users);
+}
+
+
+
+
+
+
+
+public class TodoServiceImpl {
+    private TodoService todoService;
+
+    public TodoServiceImpl(TodoService todoService) {
+        this.todoService = todoService;
+    }
+
+    public List<String> retrieveTodoRelatedToSpring(String users){
+        List<String> filterTodos = new ArrayList<>();
+        List<String> todos = todoService.retrieveTodos(users);
+        for(String todo :  todos){
+            if(todo.contains("Spring")){
+                filterTodos.add(todo);
+            }
+        }
+        return filterTodos;
+    }
+}
+
+1. Here TodoServiceImpl is System Under Test (SUT)
+2. todoService - > Dependency. So here todoService is implementation is given by someother team and we want to use it in our test case. so here we will use the concept of stubbing.
+3. retrieveTodoRelatedToSpring method
+
+
+So in order to test retrieveTodoRelatedToSpring, we need a stub for TodoService, We can manually create this but what if a new method is added to interface, then we have to maintain the stub with the changes done wrt interface.
+to overcome this problem, there is a need of Mock
+
+

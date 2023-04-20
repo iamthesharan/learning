@@ -1,0 +1,27 @@
+Annotation:
+
+1. @Test -  Used to define method as test method
+2. @Before -  If we have some setup to do before a test. 
+        @Before
+        public void setup(){
+            // This method will run before every test in the test class.
+            System.out.println("Before Test");
+        }
+3. @After - Similary this will be invoked after every Test
+4. @BeforeClass - Method Executed Before test class is initialized. Note the method must be static
+    @BeforeClass
+    public void beforeClassMethod(){
+        System.out.println("Executed before the class is initialized");
+    }
+5. @AfterClass
+6. @Test(expected = SomeException.class) - For testing exception method.
+7. @Test(timeout = 1000) - where timeout is in ms. If the method executed within this timeout range, the test case will succeed otherwise it gets failed.
+
+
+Method:
+
+1. Assert.fail(String str) - Used to Fail the Test
+2. assertEquals(expected,actual) - Used to assert whether two objects are equal or not. Assert method calls equals method of on object from Object class
+3. assertFalse(boolean condition) - whatever is return from the boolean method, this method will check if it is false or not. Note the message will only be printed when the test case fails
+4. assertFalse(String failureMessage, boolean condition)
+5. assertArrayEquals(arr1[], arr2[]) - Checks the arrays are equal or not. Both arrays should should have same elements irrespective of positions in order to pass the testcase.

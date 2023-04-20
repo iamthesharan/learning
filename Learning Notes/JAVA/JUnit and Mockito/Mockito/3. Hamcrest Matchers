@@ -1,0 +1,9 @@
+Hamcrest matchers allows us to write test cases in human friendly way.
+
+
+MatcherAssert.assertThat(list,Matchers.hasSize(2));
+MatcherAssert.assertThat(list, Matchers.hasItems(100,10));
+MatcherAssert.assertThat(list, Matchers.everyItem(Matchers.greaterThan(90)));
+MatcherAssert.assertThat("Some String", Matchers.isEmptyOrNullString());
+MatcherAssert.assertThat(list, Matchers.arrayContaining(100,10));
+MatcherAssert.assertThat(list, Matchers.arrayContainingInAnyOrder(10,100));
