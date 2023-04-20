@@ -1,0 +1,11 @@
+Maven Wagon is Unified Maven API
+Communication inside and outside of the maven repo.
+Majority of time HTTP/HTTPS is used.
+In Some Corporate environments you may need to configure Wagon for Proxy Settings.
+
+
+Other Maven wagon Providers:
+1. File
+2. FTP
+3. SSH
+4. SCM

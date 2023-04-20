@@ -1,0 +1,9 @@
+.Java Files --> Zip Compression --> *.jar/*.war/*.ear ---> Unzip (Runtime) --> JVM 
+
+JAVA Packaging:
+
+JAR - JAVA Archive File -- Contains more than one Class file.
+WAR - Web Application Archive. Can include more than one JAR File, Web Application Resource Files, JAVA Class files etc.
+EAR - Contains one or more JAR file. Deployed on Application Servers
+FAT Jar - Executable JAR that springboot use. Can be deployed Standalone
+Docker Containers - Docker Image Containing runtime Env, JVM and JAVA Package(FAT JAR). Complete application that can be deployed Standalone.

@@ -1,0 +1,92 @@
+A lifecycle is a predefined group of build steps called phases.
+Each phase can be bound to one or more plugin group
+All the work done in maven is done by plugin
+Lifecycle and Phases provide the framework to call plugin goals in sequence
+
+Maven has three predefined lifecycles:
+1. clean - cleans the project, removes all build artifacts from working directory.
+         - Define with plugin bindings
+        
+2. default -  Does the build(Compilation) and deployment of the project.
+           -  Defined without plugin binding, bindings are defined for each packaging
+3. site -  Creates a website for the project
+        -  Defined with plugin bindings
+        -  Least used in enterprise
+
+
+1. Clean Lifecycle: 
+    \
+     Phases Involved:   1. Pre - Clean  => No Plungin Bound
+                        2. clean        => Maven Clean plugin Bound, Goal: Clean
+                        3. Post - Clean => No Plungin Bound
+
+        These phases will be invoked in sequence
+
+2. Default Lifecycle:
+    \
+     Phases Involved:
+     1. Validate - Verify the project. Makes sure we have project. Pom can be parsed with proper XML and Matched with XSD
+     2. Compile - Compile with JAVA Compiler
+     3. Test - Test Compiled Source
+     4. Package - Package Compiled files to packaging types
+     5. Verify - Run Integration Test
+     6. Install - Install to local maven repo
+     7. Deploy - deploy to shared maven repository
+
+
+     All Default Lifecycles:
+        1. Validate
+        2. Initialize
+        3. Generate Sources
+        4. Process Sources
+        5. Generate Resources
+        6. Process Resources
+        7. Compile
+        8. Process Classes
+        9. Generate Test Sources
+        10. Process Test Sources
+        11. Generate Test Resources
+        12. Process test Resources
+        13. Test Compile
+        14. Process Test Classes
+        15. Test
+        16. Prepare Packages
+        17. Package
+        18. Pre-Integration Test
+        19. Integration Test
+        20. Post Integration Test
+        21. Verify
+        22. Install
+        23. Deploy
+
+
+        Default Life Cycle for JAR Packaging:
+        1. Phase: Process Resources
+           Plugin: maven-resource-plugin:resources
+        
+        2. Phase: compile
+           Plugin: maven-compiler-plugin:compile
+        
+        3. Phase: process-test-resources
+           Plugin: maven-resources-plugin:testResources
+
+        4. Phase: test-compile
+           Plugin: maven-compiler-plugin:testCompile
+
+        5. Phase: test
+           Plugin: maven-surefire-plugin:test
+
+        6. Phase: package
+           Plugin: maven-jar-plugin:jar
+        
+        7. Phase: install
+           Plugin: maven-install-plugin:install
+        
+        8. Phase: deploy
+           Plugin: maven-deploy-plugin:deploy
+
+3. Site Build Lifecycle
+   Phase: Pre-Site      Plugin: none
+   Phase: site          Plugin: maven-site-plugin
+   Phase: Post-site     Plugin: none
+   Phase: Site-Deploy   Plugin: maven-site-plugin:deploy

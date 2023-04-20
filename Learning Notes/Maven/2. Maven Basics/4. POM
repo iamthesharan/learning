@@ -1,0 +1,11 @@
+POM - Project Object Model
+
+Its an XML Document and my comply with schema maven-4.0.0-xsd
+
+POM Inherits properties from Parent POM.
+
+Effective POM -  is the POM complete with inherited Properties.
+to generate effective pom - 
+
+    mvn help:effective-pom
+

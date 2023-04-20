@@ -1,0 +1,27 @@
+Maven Co-ordinates are used to Identify Maven Artifacts
+Together they Identify location in maven repo.
+
+groupId: Typically unique to organization
+artifactId: Typically project name
+version: Specific version of the project
+
+Note: GroupId and version can be inherited from parent POM
+
+Versions:
+
+    Example : 2.1.1-987-beta
+    1. Major Version - First Numner
+    2. Minor Version - Second No.
+    3. Incremental Version (Patch) - 3rd Number
+    4. Build Number (CI Build) - Fourth Number
+    5. Qualifier - 5th String
+
+    Snapshot Versions:
+    -SNAPSHOT Version - This tells maven that it's not a stable release. The project is still under development
+
+    For Non Snapshot Version, Maven once download the dependency from Remote Repo to Local Repo
+    it will never fetch again that dependency until and unless it is deleted from local repo.
+
+    For Snapshot version - By Default maven will check remote repo once per day.
+                           And this option is configurable.
+                           

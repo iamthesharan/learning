@@ -1,0 +1,16 @@
+Maven Wrapper Allows you to run maven without having specific version of maven installed on specific machine
+
+Command to install maven wrapper:
+
+    mvn -N io.takari:maven:wrapper
+
+To install the Specific Version of Maven Wrapper:
+
+    mvn -N io.takari:maven:wrapper -Dmaven=3.6.0
+
+now if you do ./mvnw --version   ---> this will give you maven wrapper version
+
+
+Its a good practice to use Maven Wrapper as it makes your project portable
+
+

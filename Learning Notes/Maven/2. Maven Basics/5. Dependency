@@ -1,0 +1,39 @@
+A dependency is an artifact which your maven projects depend upon. Typically a jar or a pom
+
+Transative Dependency -  A Dependency of an artifact which your project depends upon
+                        Can go many Layers deep
+
+
+Dependency Mediation - Determines what version to use in case of multiple versions of the same dependency are encountered.
+'Nearest dependency' in the dependency tree is used.
+
+Dependency A  --> Dependency B
+Dependency A --> Dependency D 2.0
+Dependency B --> Dependency D 1.5
+
+So in this case Dependency D 2.0 will be provided.
+
+
+Excluded Dependency - Ability to exclude Specific Dependency
+Optional Dependency - Ability to make dependency Optional. If you make it optional, Anybody DownStream doesnot have to include that.
+
+
+DEPENDENCY SCOPE:
+1. COMPILE - Default Scope for all class path Project. Also Propagated to Downstream
+2. PROVIDED -  Like Compile but expected to be provided by JDK or container at runtime
+3. RUNTIME - not required to compile but needed on runtime
+4. TEST - Only Available on test class path.
+5. SYSTEM - You need to reference file path and JAR will be downloaded from that path.
+6. IMPORT - Import Dependency Of POM. 
+
+Dependencies are managed by maven dependency Plugn.
+Important Goals:
+1. dependency:tree - shows the dependency tree. Useful for resolving conflicts
+2. dependency:go-offline -  Resolves all dependency, prepare to go offline.
+3. dependency:purge-local-repository - clears local repo.
+4. dependency:sources -  get sources for all Dependencies
+
+to run these dependency goals:
+
+mvn dependency:tree  - gives you the dependency tree
+

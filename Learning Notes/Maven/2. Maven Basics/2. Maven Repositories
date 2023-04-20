@@ -1,0 +1,7 @@
+It is the location where projects are stored.
+Types of Maven Repositories:
+    1. Local: <userhome>/.m2/
+    2. Central Repository: Public Repo hosted by maven community
+    3. Remote: Other Locations which can be public or private.
+                Example: JBOSS, Oracle, Atlassian,
+                Private: Hosted by companies for internal artifacts.
