@@ -1,0 +1,27 @@
+Resource Plugin copies the resources to the class directory.
+
+you can override the resources directory by:
+
+
+<build>
+        ...
+
+        <resources>
+            <resource>
+                <directory>src/resource1</directory>  // Here you can change the path of resource folder
+            </resource>
+            <resource>
+                <directory>src/resource2</directory>  // Here you can change the path of resource folder
+                <includes>
+                    <include>**/*.properties</include> // You can include only that specific file.
+                </includes>
+                <excludes>
+                    <exclude>**/*.txt</exclude>  // You can exclude the file
+                </excludes>
+            </resource>
+        </resources>
+
+        ...
+</build>
+
+Once you run the resources:resources plugin, you will see the resouces in target/classes folder

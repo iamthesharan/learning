@@ -1,0 +1,48 @@
+1. Build Lifecycle: CLEAN
+    Maven Clean Plugin:
+        Has only one goal -  clean
+        Purpose is to remove file generated during the build process
+
+
+
+2. Build Lifecycle: DEFAULT (for JAR)
+
+    1. Maven Compiler Plugin
+        Has two Goals: compiler:compile, compiler:testCompile
+        By default uses the compiler 'javax.tools.JavaCompiler'
+        can be confifured to use javac if needed
+
+        Default Sources Target language level are JAVA 1.6
+        Apache team encourages these values to be set
+
+    2. Maven Resource Plugin:
+
+        Has 3 Goals: resources:resources, resources:testResources, resources:copy-resources
+        Copy-resources : purpose is to copy resources to Target Directory
+
+    3. Maven Surefire Plugin:
+        Has 1 Goal: surefire:test
+        Used to execute unit test of project
+        By default Support JUnit3, Junit4, JUnit5, and TestNG
+
+    4. Maven Jar Plugin:
+        has 2 goals: jar:jar , jar:test-jar
+
+    5. Maven Deploy Plugin
+        has 2 Goals: deploy:deploy, deploy:deploy-file
+        Purpose is to deploy project artifacts to remote maven repository
+        Often done in CI.
+        Not from Developer end, instead CI Servers that run jenkins job
+
+
+3. Build Lifcycle: SITE
+    1. Maven site Plugin:
+        has 7 goals:
+        a. site:site - Generate Site for Project
+        b. site:deploy - deploy site via Wagon
+        c. site:run - run site locally using jetty as web Servers
+        d. site:stage - generate site to local staging directory
+        e. site:site-deploy - Deploy site to remote staging location
+        f. site:attach-descriptor.xml adds site.xml(site map file used by search engines) to file for deployment.
+        g. site:jar - bundles site into a jar for deployment to a repository
+        h. site:effective-site - generates site.xml file

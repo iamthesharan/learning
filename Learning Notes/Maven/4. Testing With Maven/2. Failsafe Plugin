@@ -1,0 +1,26 @@
+Failsafe plugin is used to do integration Testing.
+By Default Failsafe is not included in lifecycle
+
+The Name of the Testclass should end with IT as per convention.
+
+The Failsafe plugin executes in Verify Stage.
+
+Dependency:
+
+<build>
+    <plugins>
+        <plugin>
+            <groupId>org.codehaus.mojo</groupId>
+            <artifactId>failsafe-maven-plugin</artifactId>
+            <version>2.4.3-alpha-1</version>
+            <executions>
+                <execution>
+                    <goals>
+                        <goal>integration-test</goal>
+                        <goal>verify</goal>
+                    </goals>
+                </execution>
+            </executions>
+        </plugin>
+    </plugins>
+</build>

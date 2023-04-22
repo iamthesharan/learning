@@ -1,0 +1,7 @@
+you can change the Source and Target compiler version in pom.xml 
+and compiler plugin will compile accourdingly
+
+
+In IntelliJ if you run compile from Lifecycle, it will run overall build with overriden Build parametes till that life cycle.
+
+But if you run from complier plugin, it will only compile

@@ -1,0 +1,93 @@
+1. Master Pom.xml - All the modules inhreit from this Parent POM.
+2. All the modules will pick up properties from parent pom
+
+
+Project
+    |------ Module 1
+    |           |------- SubModule 1
+    |           |------- pom.xml
+    |
+    |------ Module 2
+    |           |------- pom.xml
+    |
+    |------ Module 3
+    |           |------- SubModule 1
+    |           |------- pom.xml
+    |
+    |------ pom.xml
+
+
+
+Now Building these modules, we have maven reactor. This reactor will go through each modules and build these modules.
+Here reactor will determine the build order of the modules
+By Default Reactor will build modules sequentially
+    Optionally can use threads to build modules in parallel.
+
+
+Build order by Reactor:
+Project Dependencies - modules used by other modules in the project will build first.
+Plugin Declaration
+You can delclare order in pom.xml
+
+
+Parent Pom:
+
+    <?xml version="1.0" encoding="UTF-8"?>
+    <project xmlns="http://maven.apache.org/POM/4.0.0"
+            xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+            xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+        <modelVersion>4.0.0</modelVersion>
+
+        <groupId>org.example</groupId>
+        <artifactId>GithubPractice</artifactId>
+        <version>1.0-SNAPSHOT</version>
+        <packaging>pom</packaging>
+
+        <!--  Modules that needs to be build.  -->
+        <modules>
+            <module>jpa-entities</module>
+        </modules>
+
+        <properties>
+            <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+            <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+            <java.version>11</java.version>
+            <maven.compiler.source>${java.version}</maven.compiler.source>
+            <maven.compiler.target>${java.version}</maven.compiler.target>
+        </properties>
+    </project>
+
+
+
+
+
+Module Pom:
+
+    <?xml version="1.0" encoding="UTF-8"?>
+    <project xmlns="http://maven.apache.org/POM/4.0.0"
+            xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+            xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+        <modelVersion>4.0.0</modelVersion>
+
+        <!-- here You need to provide the parent module   -->
+        <parent>
+            <groupId>org.example</groupId>
+            <artifactId>GithubPractice</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </parent>
+
+        <!--  Artifact ID of this module   -->
+        <artifactId>jpa-entities</artifactId>
+
+        <!--   For Child Module You can specify the packaging. By default it's jar -->
+        <packaging>jar</packaging>
+
+        <dependencies>
+            <dependency>
+                <groupId>org.hibernate</groupId>
+                <artifactId>hibernate-core</artifactId>
+                <version>5.6.3.Final</version>
+            </dependency>
+        </dependencies>
+
+    </project>

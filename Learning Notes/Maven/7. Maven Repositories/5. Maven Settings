@@ -1,0 +1,20 @@
+User Settings: in ./m2/settings.xml
+    can be overridden with command line parameter -s <path/filename>
+    comon to override in CI builds
+
+Global Settings: conf/settings.xml
+    Apply to all users using maven from that directory
+    can be overridden wih command line parameter -gs <path/filename>
+    Rarely used.
+
+
+Settings Elements:
+1. localRepository -  Allows you to override the location of the maven repository
+2. interactiveMode - Allows you to set interactive mode or batch mode. Default is interactive
+3. offline - default is false, if true, maven will not try to connect to remote repository
+4. pluginGroups - List Plugin Groups ids, to allow abbereviative plugin goals
+5. servers - elements allows you to set the user credentials for the server which maven connects to
+6. mirrors - Allows you to configure mirrors for repository
+7. proxies - defines network proxy network
+8. profiles 
+9. activeProfiles

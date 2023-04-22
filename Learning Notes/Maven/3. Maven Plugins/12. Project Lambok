@@ -1,0 +1,21 @@
+Lombok is used to create getters and setters in compiletime.
+
+dependency:
+
+    <dependency>
+        <groupId>org.projectlombok</groupId>
+        <artifactId>lombok</artifactId>
+        <version>1.18.26</version>
+    </dependency>
+
+
+Annotation to use in class:
+
+@Data
+@NoArgsConstructor
+@allArgsConstructor
+@Builder
+
+
+// Avoid Using Lombok for generating getters and setters
+

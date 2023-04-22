@@ -1,0 +1,8 @@
+Unit Testing - completed by surefire plugin
+Integration testing is completed by maven failsafe plugin
+
+Surefire/Failsafe Support:
+1. POJO Tests
+2. JUnit Versions 3-5
+3. TestNG
+

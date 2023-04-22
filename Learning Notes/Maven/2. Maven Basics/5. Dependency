@@ -32,6 +32,7 @@ Important Goals:
 2. dependency:go-offline -  Resolves all dependency, prepare to go offline.
 3. dependency:purge-local-repository - clears local repo.
 4. dependency:sources -  get sources for all Dependencies
+5. dependency:analyze -  Analyze the dependency
 
 to run these dependency goals:
 

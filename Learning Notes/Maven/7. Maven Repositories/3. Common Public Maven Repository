@@ -1,0 +1,9 @@
+Some Public Repo:
+
+1. Maven central
+2. Sonatype -  These Repo is a staging repo. You need to push your artifact to sonatype if you wanna push it to maven central
+3. JCenter
+4. JBoss
+5. Atlassian
+6. Oracle
+7. Spring

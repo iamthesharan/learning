@@ -1,0 +1,2 @@
+spring-boot:start - will start the project and suddenly stops it. Note the project must be packaged in target folder before running this plugin. It doesn't run the build life cycle.
+spring-boot:run - run the application,it also runs the default/build lifecycle as well

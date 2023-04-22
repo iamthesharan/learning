@@ -87,6 +87,6 @@ Maven has three predefined lifecycles:
 
 3. Site Build Lifecycle
    Phase: Pre-Site      Plugin: none
-   Phase: site          Plugin: maven-site-plugin
+   Phase: site          Plugin: maven-site-plugin:site
    Phase: Post-site     Plugin: none
    Phase: Site-Deploy   Plugin: maven-site-plugin:deploy

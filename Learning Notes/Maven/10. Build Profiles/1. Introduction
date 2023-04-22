@@ -1,0 +1,14 @@
+Allows you to specify a set of build configuration values.
+values set in build profile:
+    1. can be in addition to what is in POM.xml
+    2. or used to override existing pom values.
+More than one profile can be set to active at a time
+
+Build Profile allows you to change the behaviour of the build.
+Build behaviour can be changed based on:
+    1. the outcome of the build.
+    2. Automatically based on the runtime enviornment
+    3. Automatically to adapt the different OS
+    4. To optionally Activate Specific Plugin
+    5. To provide alternative build time configuration values.
+

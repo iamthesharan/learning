@@ -1,0 +1,25 @@
+In parent POM:
+
+<groupId>org.version.demo</groupId>
+<artifactId>demo-core</artifactId>
+<version>${revision}</version>
+
+<properties>
+    <revision>2.1.1-SNAPSHOT</revision>
+</properties>
+
+In modules Poms:
+
+<parent>
+    <groupId>org.version.demo</groupId>
+    <artifactId>demo-core</artifactId>
+    <version>${revision}</version>
+</parent>
+
+Now if you want any other module dependency into this POM:
+
+you can simply use ${project.version} which will reference to ${revision}
+
+
+But here in .m2 folder this ${project.version} will not be replaced by the value.
+To overcome this use flatten plugin

@@ -1,0 +1,46 @@
+Adding New Repository to maven project
+    Add this dependency - Maven will not fetch it from the central repo:
+
+        <dependency>
+            <groupId>org.jboss.ejb3</groupId>
+            <artifactId>jboss-ejb-api</artifactId>
+            <version>3.1.0</version>
+        </dependency>
+
+
+
+Inside POM add :
+
+    <repositories>
+        <repository>
+            <id>redhat-ga</id>
+            <url>https://maven.repository.redhat.com/ga/</url>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
+        </repository>
+    </repositories>
+
+
+Inside Settings.xml
+
+   <profiles>
+        <profile>
+            <id>jboss</id>
+            <repositories>
+                <repository>
+                    <id>redhat-ga</id>
+                    <url>https://maven.repository.redhat.com/ga/</url>
+                    <snapshots>
+                        <enabled>false</enabled>
+                    </snapshots>
+                </repository>
+            </repositories>
+        </profile>
+    </profiles>
+
+
+    <!-- This is for activating build profile  -->
+    <activeProfiles>
+        <activeProfile>jboss</activeProfile>
+    </activeProfiles>

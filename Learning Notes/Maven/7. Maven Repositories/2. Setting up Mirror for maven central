@@ -1,0 +1,13 @@
+in .m2/setting.xml
+    or right click on pom.xml and create setting.xml
+
+inside:
+
+<mirrors>
+    <mirror>
+        <id>Demo</id>
+        <name>demo</name>
+        <url>http://org.somthing.maven/maven2</url>
+        <mirrorOf>central</mirrorOf>
+    </mirror>
+</mirrors>

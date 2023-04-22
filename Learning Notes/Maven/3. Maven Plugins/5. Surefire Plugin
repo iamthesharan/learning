@@ -1,0 +1,4 @@
+Used for Unit test
+
+In surefire report folder, you will see TEST-Testclass.xml which consist of recording of the test.
+and one TXT file which gives the testcase result.

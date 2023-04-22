@@ -1,0 +1,28 @@
+With Jar Plugin you can change the manifes by overriding the plugin.
+
+<build>
+    <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-jar-plugin</artifactId>
+        <configuration>
+            <archive>
+                <manifest>
+                    <addClasspath>true</addClasspath> // this means any dependency you have added must be present in target folder/classpath
+                    <mainClass>TEST</mainClass>
+                </manifest>
+            </archive>
+        </configuration>
+    </plugin>
+</build>
+
+
+MANIFEST.MF:
+
+Manifest-Version: 1.0
+Archiver-Version: Plexus Archiver
+Created-By: Apache Maven 3.8.1
+Built-By: sharan
+Build-Jdk: 11.0.13
+Class-Path: mockito-core-5.2.0.jar byte-buddy-1.14.1.jar byte-buddy-agen
+ t-1.14.1.jar objenesis-3.3.jar
+Main-Class: TEST

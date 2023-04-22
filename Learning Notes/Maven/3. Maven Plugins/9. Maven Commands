@@ -1,0 +1,9 @@
+-T 4 ---> 4 threads per CPU (default)
+-T 2C --> 2 threads per CPU
+
+-DskipTests=true - compiles the test and skip running them
+-Dmaven.test.skip - skip compile and skip run tests
+
+-pl - makes maven build only specified module and not the whole project
+-rf - resume build from the specified project
+-U - forces a check for updated dependency on remote repository

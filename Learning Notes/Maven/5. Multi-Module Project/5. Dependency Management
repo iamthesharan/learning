@@ -1,0 +1,1 @@
+If you add the dependencies in Dependency Management Section of the parent POM, you don't need to specify the version of that depdendency in modules which inherit that pom.

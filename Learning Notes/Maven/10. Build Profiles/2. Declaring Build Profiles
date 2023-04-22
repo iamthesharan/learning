@@ -1,0 +1,23 @@
+Per Project:
+
+Defined in pom.xml
+    Command Line -mvn package -S <path to setting file>
+
+Per User:
+
+    Defined in <user.home>/.m2/settings.xml
+
+Global:
+
+    Defined in <Maven Home>/conf/settings.xml
+
+Use Project POM:
+
+    when your build needs to be portable to other computers.
+    When other may or may not need build features.
+
+Use Setting.xml when:
+    You want the profile available to many Projects
+    Frequently used for configuration of repository manager.
+    Protection of secrets
+    enviornment configuration values

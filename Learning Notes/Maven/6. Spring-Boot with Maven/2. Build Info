@@ -1,0 +1,25 @@
+Build info is present in build-info.properties file in META-INF folder.
+When you hit the actuator api, these info get printed only when this file is in the target folder.
+
+when you run spring-boot:build-info goal, this file will getenrated.
+
+You can also hook this execution section of spring-boot maven plugin
+
+<executions>
+    <execution>
+        <id>build-info-goal</id>
+        <goals>
+            <goal>goal-info</goal>
+        </goals>
+        <configuration>
+            <additionalProperties>
+                <java.version>${java.version}</java.version>
+                <some.common.prop>${some.common.prop}</some.common.prop>
+            </additionalProperties>
+        </configuration>
+    </execution>
+</executions>
+
+
+Note If you move your spring-boot maven plugin to parent pom, then you need to add below lines in modules pom which are not spring boot project to avoid repackaging.
+<spring-boot.repackaging.skip>true</spring-boot.repackaging.skip>

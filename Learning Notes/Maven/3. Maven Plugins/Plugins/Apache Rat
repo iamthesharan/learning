@@ -1,0 +1,71 @@
+ussage: 
+
+mvn apache-rat:check  -- Runs Rat and creates a report, which is written to a plain text file.
+mvn apache-rat:rat  -- Runs Rat and creates a report, which will be added to the generated site.
+
+plugin:
+
+<build>
+    <plugins>
+      ...
+      <plugin>
+        <groupId>org.apache.rat</groupId>
+        <artifactId>apache-rat-plugin</artifactId>
+        <version>0.15</version>
+      </plugin>
+      ...
+    </plugins>
+</build>
+
+To Auto Trigger:
+
+This example demonstrates how to configure the plugin to run automatically as part of the "verify" phase:
+
+  <build>
+    <plugins>
+      ...
+      <plugin>
+        <groupId>org.apache.rat</groupId>
+        <artifactId>apache-rat-plugin</artifactId>
+        <version>0.15</version>
+        <executions>
+          <execution>
+            <phase>verify</phase>
+            <goals>
+              <goal>check</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
+      ...
+    </plugins>
+  </build>
+In larger projects, the plugin may take some time to run. In such cases, it may be desirable not to run the plugin with every build, but only in important cases like a release build:
+
+  <profiles>
+    <profile>
+      <id>release</id>
+      <build>
+        <plugins>
+          ...
+          <plugin>
+            <groupId>org.apache.rat</groupId>
+            <artifactId>apache-rat-plugin</artifactId>
+            <version>0.15</version>
+            <executions>
+              <execution>
+                <phase>verify</phase>
+                <goals>
+                  <goal>check</goal>
+                </goals>
+              </execution>
+            </executions>
+          </plugin>
+          ...
+        </plugins>
+      </build>
+    </profile>
+  </profiles>
+Note, that this is almost the same example as before, except that the plugin configuration has been embedded into a profile. In this case, the plugin is only executed, when the "release" profile is activated by adding -Prelease to the command line, for example like this:
+
+  mvn -Prelease install

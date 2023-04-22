@@ -1,0 +1,79 @@
+Overview:
+1. Get access to oracle repo - https://www.oracle.com/webapps/maven/register/license.html
+2. Set Maven master password
+    a. run command mvn --encrypt-master-password <password>
+    b. copy the encrypted password generated
+    c. create a file settings-security.xml
+        <settingsSecurity>
+            <master>@$%#Mmh^$!</master>
+        </settingsSecurity>
+    d. you can also use this instead of step c. This path can be on external storage:
+        <settingsSecurity>
+            <relocation>path/settings-security.xml</relocation>
+        </settingsSecurity>
+    d. mvn --encrypt-password    --> this is done to create a hash for your password.
+    e. In settings.xml add a new profile which holds the oracle repo.:
+
+
+Now Add these in settings.xml:
+
+
+
+        <profile>
+            <id>Oracle</id>
+            <repositories>
+                <repository>
+                    <id>maven.oracle.com</id>
+                    <name>oracle-maven-repo</name>
+                    <url>https://maven.oracle.com</url>
+                    <releases>
+                        <enabled>true</enabled>
+                        <updatePolicy>always</updatePolicy>
+                    </releases>
+                </repository>
+            </repositories>
+            <pluginRepositories>
+                <pluginRepository>
+                    <id>maven.oracle.com</id>
+                    <url>https://maven.oracle.com</url>
+                </pluginRepository>
+            </pluginRepositories>
+        </profile>
+
+    f.  Now add this profile to active profile in settings.xml
+    
+        <activeProfiles>
+            <activeProfile>Oracle</activeProfile>
+        </activeProfiles>
+    
+    g. Now Add the oracle Servers:
+
+        <servers>
+            <server>
+                <id>maven.oracle.com</id>
+                <username>shashank.sharan01@gmail.com</username>
+                <password>{Qsbk0NyShMcHi6LyL6QiQbjTra/kaEGnqxVDLt9r7Bo=}</password>
+                <configuration>
+                    <basicAuthScope>
+                        <host>ANY</host>
+                        <port>ANY</port>
+                        <realm>OAM 11g</realm>
+                    </basicAuthScope>
+                    <httpConfiguration>
+                        <all>
+                            <params>
+                                <property>
+                                    <name>http.protocol.allow-circular-redirects</name>
+                                    <value>%b,true</value>
+                                </property>
+                            </params>
+                        </all>
+                    </httpConfiguration>
+                </configuration>
+            </server>
+        </servers>
+
+    h. You can do this in pom.xml if you want it for specific project.
+    i. Now Add ojdbc8 dependency to test whether mvn is fetching dependency from oracle repo.
+
+

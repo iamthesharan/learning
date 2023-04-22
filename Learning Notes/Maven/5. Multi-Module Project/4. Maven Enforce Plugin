@@ -1,0 +1,2 @@
+Enforce Plugin - If the enforce rules added gets fails, the build will fails:
+https://maven.apache.org/enforcer/enforcer-rules/index.html

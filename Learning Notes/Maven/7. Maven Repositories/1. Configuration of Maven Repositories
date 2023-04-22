@@ -1,0 +1,31 @@
+When Resolving the artifact maven will:
+1. First check the local repo ie. .m2 folder
+2. Next - Maven Central
+3. Next - Additional Repo Configured
+
+Repository Mirrors:
+    Mirrors are used to override project defined repository values.
+    Mirrors are configured in /.m2/settings.xml
+    A Mirror will override the URL of the Repository
+    Can be used to improve performance by directing to regional Servers
+    Or to Direct the internal Repository manager
+
+
+Repositories can be defined in :
+1. POM
+2. settings.xml
+
+
+Repository Element:
+1. id
+2. name
+3. url
+4. layout
+5. releases - takes repository policy
+6. snapshots -  takes repository policy
+
+    Repository Policy: 
+        1. enabled - true/false
+        2. updatePolicy - always, daily(default), interval:xxx (xxx in minutes), never
+        3. checksumPolicy - what to do if the verification of the artifacts fails.
+             value: ignore, fail, warn
