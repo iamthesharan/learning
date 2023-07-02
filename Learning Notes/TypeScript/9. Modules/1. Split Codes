@@ -1,8 +1,0 @@
-Splitting Code in multiple Files
-1. Writing a TS file and Compile it and manuall import the JS file in HTML --> not a good approch for Big Project
-2. For bigger Project:
-    a. NameSpace & File Bundling
-        NameSpace is a TS feature which is a Special Syntax Feature which allows group the code into it and then import nameSpaces into other files
-    
-    b. ES6 Imports and Exports:
-        TS supports ES6 Imports and Exports --> mordern Approach
