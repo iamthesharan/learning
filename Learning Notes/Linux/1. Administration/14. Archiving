@@ -1,0 +1,37 @@
+In Linux we use Archiver to preserve meta data such as ownership, permissions, access control, list
+
+The Tool we use to do this archive is Archiver.
+in linux it is tar --> Tape Archiver.
+It doesn't compresses the file but leaves the file to be compressed by other 
+
+.tar file is also known as tarball which consist of all the files and folder togther as 1 file.
+
+
+tar
+--xattrs        ==>     Enable extended attributes support
+-c              ==>     To Create an Archive
+-v              ==>     verbose
+-p              ==>     Save ownership and permissions
+-f              ==>     Final name of the archive
+
+
+tar --xattrs -cvpf demo.tar ./demo  --> to create a tarball
+tar --gzip --xattrs -cpvf demo.tar.gz ./demo --> To create a zip file
+
+tar:
+-t : list the content of the file
+-f : file name
+-x : to extract
+
+tar -tf demo.tar  --> Shows the files inside the tar
+tar --gzip -tf demo.tar --> Shows the file inside the compressed archive
+
+
+tar -xvpf demo.tar --> To Extract. Not keep f at the last.
+To Extract Somewhere else:
+
+tar -xvpf demo.tar -C /home/grant/downloads
+
+zip demo.zip demo  --> This will let the file as it is and create a new zipfile.
+But same is not the case with gzip or bzip2
+

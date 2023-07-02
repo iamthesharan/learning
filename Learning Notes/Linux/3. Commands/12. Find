@@ -1,0 +1,43 @@
+find / -name bizip2  --> Searches bzip2 from absolute path
+find . -name bzip2   --> Searches bzip2 in the current directory recursively
+
+find / -name *demo* | sort  -> this will find demo from topmost directory and sort the result
+
+find / -user grant  --> Shows all files that belongs to grant user
+find / -group grant  --> Shows files belongs to grant group
+
+sudo find / -size +50k  --> find size of the file >50k in system
+
+stat  --> Stat is used for showing the statistic of the file.
+stat test --> shows the stat of the file
+stat -c "%s %n"  test  --> -c will format the output based on wildcards. %s for size and %n for name.
+
+
+So with find you can use -exec to execute additional commands
+
+find . -size +1M -exec stat -c "%s %n" {} \; --> {} this is the placeholder for exec
+
+Sorting files based on smallest to largest
+find . -size +1M -exec stat -c "%s %n" {} \; | sort -n  --> this will sort the output numerically
+
+
+Find Files modified in last 1 day:
+
+find . -mtime -1
+
+Find files not modified in last 1 day 
+
+find . -mtime +1
+
+
+To find all files of type files.
+find /home -type f
+
+Similarly for all Directories in home folder
+
+find /home -type d
+
+To search a specific Directory in sepcific folder
+
+find . -name demo -type d
+

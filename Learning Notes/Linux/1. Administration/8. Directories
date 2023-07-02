@@ -78,3 +78,32 @@ then file na
 
 
 
+
+
+Top Level Directory: /
+home directory: ~
+
+
+Absolute Path: Always start with /
+relative path: doesn't start with /
+
+
+Directories:
+
+/ --> Top Level Directory
+/bin --> Has simple commands such as ls, cat tac.
+/boot --> Boot Loader files including kernels
+/dev  --> Device Files are stored here. Device files are interface to the system hardware through a device driver.
+/etc  --> System Configuration Files
+/home --> Users Home Directory
+/lib --> System Libraries
+/media --> Mount Points for removal media
+/mnt   --> Temporarily Mounted filesystem
+/opt   --> Optional packages
+/proc  --> Virtual Filesystem providing process and kernel info as files
+/root  --> Home directory for root user
+/run   --> Runtime Configuration files
+/sbin   --> Essential System binary. Larger system administrator tool
+/sys   --> Contains information about the devices connected to the system.
+/tmp --> Global Temporary files are stored
+/var  --> Contaisn Variable Links file. Ex log files that grows bigger
