@@ -1,0 +1,24 @@
+View Child is used to select the element in the template directly through Component Class
+
+TEmplate:
+<input type="text" #serverContentInput>
+
+
+Component Class:
+
+@ViewChild('serverContentInput') serverContentInput:ElementRef;
+
+    OR
+@ViewChild(MyComponent) serverContentInput:ElementRef; // We can also put Component Name
+
+addServer(){
+    this.serverElement.push({
+        name:this.serverContentInput.nativeElement.value; // nativeElement will give the referenced element.
+    });
+    this.serverContentInput.nativeElement.value="Test"; // Dont do this, insted of this use interpolation or property binding.
+}
+
+
+Note @ViewChild will work only ngAfterViewInit();
+
+Once the view/template is Initialized, then you can use @ViewChild

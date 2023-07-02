@@ -1,0 +1,108 @@
+======================================= Watch Mode ======================================
+
+In bigger Projects you nedd to change many files and need to compile it again. You cannot do this manually to every File.
+Watch mode allows to watch any changes in the file and then compiles it again automatically.
+
+to use the watch mode for a single file, use this command:
+tsc filename.tsc -w
+
+to use the watch mode for the entire Project, use this command:
+tsc --init   --> this command will initialize the project by creating tsconfig.json file. This file will tell TypeScript to compile the ts files if tsconfig.json present in it by just using tsc command.
+tsc          --> This will compile all the files that you've made changes.
+tsc --watch  --> this will start the watch mode for all the ts files in the project
+
+
+============================================ Excluding the file from compilation. ====================================================
+
+Go to tsconfig.json
+
+insert the below lines.
+
+"exclude":[
+    "app.ts", // this will exclude app.ts in the current directory
+    "*.dev.ts", // this will exclude all the .dev.ts file in the directory
+    "**/*.dev.ts" //this will exclude all the .dev.ts file in the entire project
+]
+
+=========================================== Node Modules ============================================================================
+node_modules is a folder that contains all the dependencies and the dependencies of the dependencies that are there in package.json
+and therefore these are 3-rd party libraries that we are importing and we dont wann touch or compile.
+so its the good practice to exclude the node_modules.
+
+"exclude":[
+    "node_modules"
+]
+
+=========================================== Including in compilation ============================================================================
+
+"include":[
+    "app.ts" // if we are using include then we need to compile all the files
+]
+
+=========================================== Ccompilation Target ============================================================================
+
+"CompilerOptions":{
+    "target":"es6", // you can specify any compiler target based on how you want to compile the code in js file. ES6 is the mordern version supports let and const
+}
+
+=========================================== core libraries ============================================================================
+in tsconfig.json, Inside Compiler options there will be lib array. By default it is not unlocked. 
+Basically when you provide the target as es6, the TS will automatically includes all the core libs available in ES6.
+so in Libs array, you can explicitly porvide the libraries like "dom", "es6".
+But not all the by defualt libraries will be disabled if you unlock the lib arrays
+
+=========================================== allow and check js in tsconfig.json ============================================================================
+
+allowJs  --> it will also compile the js files
+checkJS  --> this will check for syntactical errors
+
+=========================================== Source Map ============================================================================
+If you set the Source map to true, then you will be able to see .ts file in the source tab in browser. This will help in debuggig process.
+
+=========================================== Out dir  ============================================================================
+outDir:    "./dist"  -> Compiles the JS file in dist folder
+
+=========================================== noEmit ============================================================================
+"noEmitOnError": false
+
+When its set to face, it will make problem when we introduce an error.
+The Js file gets created while compiling the TS file even in case of error
+
+=============================================== Strict =========================================================================
+
+
+    "strict": true,                                 /* Enable all strict type-checking options. */
+    // "noImplicitAny": true,                       /* Raise error on expressions and declarations with an implied 'any' type. */
+    // "strictNullChecks": true,                    /* Enable strict null checks. */
+    // "strictFunctionTypes": true,                 /* Enable strict checking of function types. */
+    // "strictBindCallApply": true,                 /* Enable strict 'bind', 'call', and 'apply' methods on functions. */
+    // "strictPropertyInitialization": true,        /* Enable strict checking of property initialization in classes. */
+    // "noImplicitThis": true,                      /* Raise error on 'this' expressions with an implied 'any' type. */
+    // "alwaysStrict": true, 
+
+
+    If you Set Strict as true then it is similar to setting all the Below options as true
+
+
+    a. "noImplicitAny": true
+
+        Take an example of this code.:
+
+            function manageTuples(data){
+                console.log(data);
+            } 
+
+        Here we haven't sprcify the type of data here. So by default the type of data will be any implicitly.
+
+        When you mark the above option as true. The Comiler will throw an error and ask to provide the type of the data.
+        But if you mark it as false. The compiler will succefully compile the TS code
+
+        So Basically it insures, we should be clear about the values which we will be working in our code 
+
+
+    b. "strictNullChecks": true
+
+        cont button=document.querySelector('button')!;
+        if Strict Null Check is true then if you don't give the last !, the compiler will throw an error as compiler thinks that button variable can be null.
+        But if you make Strict Null Check as false, then compiler will no throw an error even if you not provide the !.
+        

@@ -1,0 +1,25 @@
+Interpolation refers to embedding expressions into marked up text. By default, interpolation uses the double curly braces {{ and }} as delimiters.
+
+You can write multiline Expression in curly braces
+
+Example:
+
+
+    Template:
+        <p>{{'Server'}} with Id: {{serverId}} is {{getServerStatus()==='offline'}} </p>
+
+    Component:
+
+        import { Component } from "@angular/core";
+        @Component({
+            selector:'app-server',
+            templateUrl:'./server.component.html'
+        })
+        export class ServerComponent{
+            serverId=10;
+            serverStatus='offline';
+            
+            getServerStatus(){
+                return this.serverStatus;
+            }
+        }   

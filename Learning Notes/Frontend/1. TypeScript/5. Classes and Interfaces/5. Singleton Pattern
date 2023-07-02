@@ -1,0 +1,37 @@
+Singletom Pattern Return only 1 instance of the class.
+Suppose we have a super class as Department and then we have the Subclasses AccountingDepartment and ItDepartment.
+
+But we need only 1 instance of Accounting Department as there is only 1 Accounting Department.
+So for that we COnstruct a Singleton Pattern.
+
+Step1: Make the Constructor as Private of the AccountingDepartment
+Step2: Create a static Variable of type AccountingDepartment in AccountingDepartment class as a class Variable.
+Step3: create a Static method that will retun the Instance of the Object.
+
+Step 1:
+
+ private constructor(private id:number, private name:string){
+     this.id=id;
+     this.name=name;
+ }
+
+Step 2:
+
+    private static instance:AccountingDepartment;
+
+Step 3:
+
+    static getInstance(){
+        if(AccountingDepartment.instance){// we can also use this instead of AccountingDepartment
+            return this.instance;
+        }
+        this.instance=new AccountingDepartment(1,'USCC');
+        return this.instance;
+    }
+
+
+
+Step 4: 
+
+    const account1=AccountingDepartment.getInstance(); // hashcode: abc
+    const account2=AccountingDepartment.getInstance(); // Same Hashcode abc

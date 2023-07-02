@@ -1,0 +1,28 @@
+import 'dart:html';  // For dart libraries,
+import 'package:test/test.dart'; //The package: scheme specifies libraries provided by a package manager such as the pub tool.
+
+Sprcifying Library Prefix:
+
+import 'package:test/test.dart'
+import 'package:test/test1.dart' as test;
+
+Element element1 = Element(); // Use the Element from test.dart;
+test1.Element element2 = test1.Element();
+
+
+Lazy Loading of Library:
+
+To reduce a web app’s initial startup time.
+To perform A/B testing—trying out alternative implementations of an algorithm, for example.
+To load rarely used functionality, such as optional screens and dialogs.
+
+import 'package:greetings/hello.dart' deferred as hello;
+
+Future<void> greet() async {
+  await hello.loadLibrary();
+  hello.printGreeting();
+}
+
+
+In the preceding code, the await keyword pauses execution until the library is loaded
+You can invoke loadLibrary() multiple times on a library without problem

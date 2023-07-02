@@ -1,0 +1,14 @@
+Webpack is a bundling tool and reduces the amount of http request.
+
+as a normal ts setup, we get multiple HTTP request.
+Installing Webpack:
+npm install --save-dev webpack webpack-cli webpack-dev-server typescript ts-loader
+
+  "devDependencies": {
+    "lite-server": "^2.6.1",
+    "ts-loader": "^9.2.6",
+    "typescript": "^4.4.3",
+    "webpack": "^5.57.1", // for bundling
+    "webpack-cli": "^4.9.0",
+    "webpack-dev-server": "^4.3.1"
+  }

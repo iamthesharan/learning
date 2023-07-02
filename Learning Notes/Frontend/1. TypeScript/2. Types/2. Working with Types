@@ -1,0 +1,398 @@
+Core types:
+1. Number type: In Type Scrpit we only have number type, no decimal, just like in javascript
+2. String type: 'Hi', "Hi" , `hi`. String are written with Double quotes, Single Quotes and ``.
+                `` this is a special quote which is used to inject the data in the Template.
+3. boolean type: This is true and false
+4. object Type
+5. arrays type
+6. Tuples : Tuples are   length and Fixed Type Array
+7. enum --> only Exist in TypeScript world
+
+=============================================================================================================
+Inferred typing:
+This means that even if we do not explicitly specify the type of a variable, the compiler will determine its type based on when it was first assigned.
+
+Later on when we assign that variable to diffrent Variable of different type, TS will throw an error.
+
+=============================================================================================================
+
+Duck typing:
+Two variables are considered to have the same type if they have the same properties and methods. 
+
+var nameIdObject = { name: "myName", id: 1, print() { } };
+nameIdObject = { id: 2, name: "anotherName", print() { } };
+
+Note below is valid: Duck Typing Basically Checks, whether the type of obj2 has all of the properties of the type of obj1
+
+var obj1 = { id: 1, print() { } };
+var obj2 = { id: 2, print() { }, select() { } }
+obj1 = obj2; // Valid
+obj2 = obj1; // Invalid --> Type of obj1 must have at least value of obj2
+
+=============================================================================================================
+Let us assume a method calculate()
+
+function calculate(a:number, b:number, c:number) {
+    return (a * b) + c;
+}
+console.log(`calculate() = ${calculate(2, 3, 1)}`);
+
+
+OP: calculate() = 7
+
+=============================================================================================================
+
+The Below Code will give the output 7.8. In this case our code is working fine.
+
+function add(n1, n2){
+    return n1+n2;
+}
+
+const number1 =5;
+const number2= 2.8;
+const result=add(number1,number2);
+console.log(result);
+
+=============================================================================================================
+If we make number1 as String, then our code will not give correct result although it will compile. This code will give the Result as 52.8 because the first number is String
+
+
+function add(n1, n2){
+    return n1+n2;
+}
+const number1 ='5';
+const number2= 2.8;
+const result=add(number1,number2);
+console.log(result);
+
+=============================================================================================================
+To Overcome this Failure we can use type Safety by adding :number in the parameters. So if you make number 1 as string now, then the Code will not compile. If you make both the numbers as number, then only Conde will Compile
+
+function add(n1:number, n2:number){
+    return n1+n2;
+}
+const number1 =5; //5.0
+const number2= 2.8;
+const result=add(number1,number2);
+console.log(result);
+
+=============================================================================================================
+
+typeof Operator is used to know the correct type of the operator
+In javascript and type Script all numbers are float by default
+
+
+function calculate(a:number, b:number, c:number) {
+    return (a * b) + c;
+}
+console.log(`calculate() = ${typeof calculate(2, 3, 1)}`);
+
+O/P:
+
+$ node app.js
+calculate() = number
+
+
+=============================================================================================================
+passing a boolean Value
+
+function add(n1:number, n2:number, showResult: boolean){
+    if(showResult){
+        console.log(n1+n2)
+    }
+    else{
+        return n1+n2;
+    }
+}
+const number1 =5;
+const number2= 2.8;
+const printResult=true;
+add(number1,number2,true);
+
+=============================================================================================================
+Using Assignment Types:
+
+let x:number = 5; // Using this not a good idea. TypeScript is Very Smart, it can detect the variable assigned in own way.
+
+instead when we use unassigned Variable, we should specify the type of the variable.
+ex: 
+
+    let x:number; this is a good Practice
+
+=============================================================================================================
+=============================================================================================================
+Object Type
+{age:30}
+
+const person:object ={
+    name:"Shashank",
+    age:20
+}
+
+Note If you dont specify the Object type as object, the compiler will use the object type of the created object. It has Semicolons
+i.e:
+
+const person{
+    name:string;
+    age:number;
+}
+
+But if you Specify the object , then its type will be object.
+
+Now if you want to Explicitly define the object type and assign the object to it then you have to write the code like below but this is not a good Practice.
+const person:{
+    name:string;
+    age:number;
+} = {
+    name:"Shashank",
+    age: 30
+}
+
+=============================================================================================================
+=============================================================================================================
+
+Arrays Type
+
+const person={
+    name='Shashank',
+    age:30,
+    hobbies:['Sports', 'Cooking'] // type Script will automatically detect this as a String array
+};
+
+let favouriteActivities: string[];
+favouriteActivities=['Sports', 'Cooking'];
+
+But what if we use the number as well as String in array like Below: Then we use any
+
+let favouriteActivities: any[];
+favouriteActivities=['Sports', 1];
+
+=============================================================================================================
+=============================================================================================================
+
+for(const hobby of person.hobbies){  // here hobby must be a String which is.
+    console.log(hobby.toUpperCase());
+}
+
+=============================================================================================================
+=============================================================================================================
+
+Tuples: Tuples are fixed length and Fixed Type Array
+
+example:
+
+const person:{
+    role:[number, string];       // This will Exactly take 2 elements and first element must be number and second number must be string.
+} = {
+    role:[1,'Shashank']
+}
+
+person.role.push('admin');      // this will work. push is exception
+person.role[1]=10;              /// This will also not work
+
+=============================================================================================================
+=============================================================================================================
+
+Enum: identifiers or global Contants which you will be using in your app and want to assign a numbers up to which you want to assign a human readable numbers . Enum Datatype assings lables to the Value
+enum {new, old}
+
+Now Assume we have persons with role admin, author and read only user. We want to assign admin as 1, author as 2 and user as 3.
+
+enum Role {ADMIN,READ_ONLY,AUTHOR}; // Role must starts with Upper case
+const person={
+    name:"Shashank",
+    age:20,
+    role: Role.ADMIN
+};
+
+if(person.role === Role.ADMIN){
+    console.log("I am Admin");    // This will print I am admin in console log.
+}
+
+
+You can also assign the Values
+
+enum Role {ADMIN = 5 ,READ_ONLY,AUTHOR}; // Then READ_ONLY will be 6 and the AUTHOR will be 7.
+enum Role {ADMIN=5,READ_ONLY=7,AUTHOR=9};
+
+=============================================================================================================
+=============================================================================================================
+
+Any :
+
+Avoid any always. Only use if you don't know the type of object and make sure to have a special check
+
+=============================================================================================================
+=============================================================================================================
+
+Union Types:
+
+If you want to allow the Specific types in a program, then you use union types. Union types are used with the help of | operator.
+
+function combine(input1:number | string | boolean, input2:string | number){
+    // So this function will only accept string and number
+    // here we can you typeof with if to perform specific function
+}
+
+=============================================================================================================
+=============================================================================================================
+
+Literal Type:
+
+function combine(input1:number | string, input2: number | string, resultConversion: 'as-number' | 'as-string'){
+    // this funtion will accept only 2 literals --> 'as-number' or 'as-string'
+}
+
+=============================================================================================================
+=============================================================================================================
+
+Creating a custom type:
+
+
+type Combinable= number | string; // we can use this type anywhere in the ts file.
+type ConversionDescriptor= 'as-number' | 'as-text'
+
+type User={
+    name:string;
+    age:number;
+}
+
+So in Function you can use like this:
+
+function getInfo(user:User){
+    // Here We've used the User as alias
+}
+
+=============================================================================================================
+=============================================================================================================
+Function Return Type
+
+function add(num1:number, num2:number):number{ // Here you have provided the return type as number. Its good that we allow TypeScript to assign a return type of its own and not expliitly assigning it.
+    return n1+n2;
+}
+
+If you don't specify the return statement, then the return type is void by default
+
+function add(num1:number, num2:number):void{
+    console.log(num1,num2);
+}
+
+Now if we use this funtion to return a value in console, it will return undefined.
+
+console.log(add(4,5)); // this will return undefined.
+
+undefined is a type in javascript as well as TypeScript. This is used when user doesn't have a value in the variable.
+var x:undefined;  // this is valid
+
+
+But if you use this undefined in funtion, then we hae to give the return statement with no value. but this is not the case with void in function.
+
+function add(num1:number, num2:number):undefined{
+    console.log(num1,num2);
+    return;
+}
+
+=============================================================================================================
+=============================================================================================================
+
+Function Types:
+
+Scenario: 1
+
+    Suppose we have a below Function:
+
+    function add(num1:number, num2:number){
+        return num1+num2;
+    }
+
+    Now we store this function to some other variable.
+
+    let conbineValues = add; // here the combineValues will have a return type as number
+
+    Now if I print it in the console, it will give the result.
+
+    console.log(conbineValues(1,2));
+
+Scenario 2:
+
+    Suppose we have a below Function:
+
+    function add(num1:number, num2:number){
+        return num1+num2;
+    }
+
+    Now we store this function to some other variable.
+
+    let conbineValues;
+    conbineValues=add; // here the combineValues will have a return type as any
+    combineValues=5; // 
+
+    let combineValues:Function; // this is good but not perfect because suppose if there is another function with only 1 input parameters and later on we assign that to conbineValues, it will again give me the value as undefined.
+
+    So it will be good if we presise with the parameters and return type.
+    Syntax:
+
+        let conbineValues: (a:type, b:type) => returnType;
+        
+        therfore for example:
+
+        let conbineValues: (a:number, b.number) => number; 
+
+
+=============================================================================================================
+=============================================================================================================
+
+Call Back Function:
+
+A function which is passed as an argument in another function. 
+Ex:
+ 
+  function addAndHandle(n1:number, n2:number, cb:(num:number)=>void){ // here we have passed cb function as argument with parameter type as 
+                                                                        number and return type as void
+      
+      const result=n1+n2;
+      cb(result); 
+  }
+
+  So now if we call this function and pass the anonymous function as argument then,
+
+    addAndHandle(10,20, (result) =>{
+          console.log(result);
+    });
+
+    addAndHandle(10,20, (result) =>{
+      console.log(result);
+      return result;   // if we write this statement even though the return type is void, the TypeScript will not see this as an error.
+    });
+
+=============================================================================================================
+=============================================================================================================
+
+Unknown Type:
+
+let userInput:unknown;
+let username:string;
+userInput=5;
+userInput='Hello';
+username=userInput; // this line will give an error. unknown type cannot be assign to string.
+
+But here the Scenario changes when you make userInput to any type. The above code will work.
+
+Its better to use unknown compared to any because there is some kind of type Checking. so in order to Run the above code with unknown, the 
+write the following code.
+
+let userInput:unknown;
+let username:string;
+userInput=5;
+userInput='Hello';
+if(typeof userInput=== 'string')
+    username=userInput;  // this will work as there is some type checking.
+
+    
+=============================================================================================================
+=============================================================================================================
+
+Never Type.
+
+Whenever the exception is thrown from a function, it doesn't return anything. but its type is not void. its never.
+The script crashes whenver the exception is thrown. Its a good Practice to Explicitly define the never type.

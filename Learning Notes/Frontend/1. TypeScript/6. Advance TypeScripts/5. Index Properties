@@ -1,0 +1,33 @@
+Suppose we are creating a type for Error using an interface.
+interface ErrorContainer{
+    email:string;
+    username:string;
+}
+
+so here we can provide an object to the interface type by:
+
+const errorBag:ErrorContainer{
+    email:"Not a valid Email",
+    username:"Must Start with a Capital Character"
+};
+
+So here we can only use two fields. We cannot customize ErrorContainer.
+To Do so we will be using Indexed types.
+
+interface ErrorContainer{
+    [prop:string]:string; // inside Square Brackets its the type of the property. and outsite its the type of value.
+}
+
+const errorBag:ErrorContainer={
+    //this is valid object. we can add the property and is optional.
+};
+
+
+
+Also to be note along with index property you can also define diffrent properties but it must be of Same Type.
+
+interface ErrorContainer{
+    id:number; Invalid
+    name:string; // Valid
+    [prop:string]:string; 
+}

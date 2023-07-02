@@ -1,0 +1,12 @@
+While Injecting the Service into Some Service, we use Injectable() on the Service on which we are injecting another Service.
+
+
+Instead of providing the Service in appModule,
+You can do like this.
+
+@Injectable({
+    providedIn:"root"
+})
+export class MyService{
+
+}

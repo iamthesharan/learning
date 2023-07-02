@@ -1,0 +1,104 @@
+var name = 'Sharan' // Creating and Initializing the Variable
+String name = 'Sharan' // Explicit Type Declaration
+
+
+
+1. NULL Safety:
+
+    String str; // Non Nullable type
+    print(str.toString()); // This Evaluates to Null and Compiler will give Error
+
+    To Allow null Values then Declare like this:
+    String? str;  // Nullable Type
+    print(str.toString());
+
+
+
+
+2. Default value
+    Uninitialized variables that have a nullable type have an initial value of null. 
+    Even variables with numeric types are initially null, because numbers—like everything else in Dart—are objects.
+
+        int? lineCount;
+        assert(lineCount == null);  // True
+
+    Note: Production code ignores the assert() call. During development, on the other hand, 
+    assert(condition) throws an exception if condition is false
+
+
+3. LATE VARIABLES:
+
+    The Late Modifier has two usecases:
+    1. Declaring Non null variable that is initialized after it's Declaration
+
+        If you’re sure that a variable is set before it’s used, but Dart disagrees, 
+        you can fix the error by marking the variable as late:
+
+            late String description;
+
+            void main() {
+                description = 'Feijoada!';
+                print(description);
+            }
+
+
+    2. Lazy initializing a variable:
+
+        When you mark a variable as late but initialize it at its declaration, then the initializer runs the first time the variable is used. This lazy initialization is handy in a couple of cases:
+
+        The variable might not be needed, and initializing it is costly.
+        You’re initializing an instance variable, and its initializer needs access to this.
+        In the following example, if the temperature variable is never used, then the expensive readThermometer() function is never called:
+
+            // This is the program's only call to readThermometer().
+            late String temperature = readThermometer(); // Lazily initialized.
+
+
+
+4. FINAL and CONST:
+
+    If you never intend to change a variable, use final or const, 
+    either instead of var or in addition to a type. 
+    A final variable can be set only once; 
+    A const variable is a compile-time constant. (Const variables are implicitly final.)
+
+    Note** Instance Variables can be final but not Const.
+
+    Ussage of Final:
+        final name = 'Bob'; // Without Type Annotaion
+        final String nickname = 'Bobby';
+
+        name = 'Sharan'; // Error. Final Variable can be set only once.
+
+
+    Ussage of Const:
+    Use const variable that you want to be compile time constant.
+    If the Constant variable is at class level, mark it as static const
+        const acclerationDueToGravity = 9.8;
+        const double escapeVelocity = 11.2;
+
+
+    var foo = const [];
+    final bar = const [];
+    const baz = []; // Equivalent to `const []`
+
+    You can change the value of a non-final, non-const variable, even if it used to have a const value:
+        foo = [1, 2, 3]; // Was const []
+
+    You can’t change the value of a const variable:
+        baz = [42]; // Error: Constant variables can't be assigned a value.
+
+
+    Note: Although a final object cannot be modified, its fields can be changed. In comparison, a const object and its fields cannot be changed: they’re immutable.
+
+5. TYPECAST:
+
+    const Object i = 3; // Where i is a const Object with an int value...
+    const list = [i as int]; // Use a typecast.
+
+6. TYPECHECK:
+
+    const Object i = 3; // Where i is a const Object with an int value...
+    const map = {if (i is int) i: 'int'}; // Use is and collection if.
+    const set = {if (list is List<int>) ...list}; // ...and a spread.
+

@@ -1,0 +1,62 @@
+Utility types are only in TypeScript.
+
+Suppose we have an interface CourseGoal
+
+interface CourseGoal{
+    title:string;
+    description:string;
+    completeUntil:Date;
+}
+
+
+So calling this would be the correct Setup.
+
+function createCourseGoal(title:string, description:string. completeUntil:Date):CourseGoal{
+    return {title:title, description:description,completeUntil:completeUntil}
+}
+
+===================================================================================
+But We don't wanna call the code like above. Instead we wanna do like this
+
+function createCourseGoal(title:string, description:string. completeUntil:Date):CourseGoal{
+    
+    // Here the TypeScript will complain about the empty array of type CourseGoal as no attribute specified here.
+    let courseGoal:CourseGoal={}; 
+    courseGoal.title=title;
+    courseGoal.description=discription;
+    courseGoal.completeUntil=date;
+    return courseGoal;
+}
+
+To overcome this we need to provide the type as partial.
+function createCourseGoal(title:string, description:string. completeUntil:Date):CourseGoal{
+
+    // Here the partial keyword will tell no need to worry, the final type will be of CourseGoal.
+    let courseGoal:Partial<CourseGoal>={}; 
+    //So it basically changes all the properties as optional.
+    
+    courseGoal.title=title;
+    courseGoal.description=discription;
+    courseGoal.completeUntil=date;
+
+    // But no here we will get an error because courseGoal type is Partial<CourseGoal> 
+    //and the Funtion is returning CourseGoal.
+    return courseGoal; 
+}
+
+So here we need to Typecast courseGoal.
+function createCourseGoal(title:string, description:string. completeUntil:Date):CourseGoal{
+    let courseGoal:Partial<CourseGoal>={};   
+    courseGoal.title=title;
+    courseGoal.description=discription;
+    courseGoal.completeUntil=date;
+    return courseGoal as CourseGoal; 
+}
+=====================================================================================================================
+
+Readonly type.
+
+Suppose we have an array but we don't want to push or pop the array. Basically we don't want to change the array.
+In that case we use Readonly Type.
+const myArray:Readonly<string[]>=['Shashank','Sharan'];
+myArray.push('Prasad');//Invalid. myArray is Readonly

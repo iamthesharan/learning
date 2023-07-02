@@ -1,0 +1,63 @@
+Decorators where you can return Something are the Decorators that you add to method, and the Decorators that you add to Accessors.
+Decorators at Properties and method Arguments can also return Something but TS will ignore it 
+So on Methods and Accessors, we can return only on propertyDescriptor so that we can change the configuration of the methods
+
+
+You can also change the Descriptor value with the Help of decorator by returning the object of PropertyDescriptor:
+
+
+
+Creating an Autobind Decorator:
+
+1. Create a button in index.html
+2. Create a printer class with Method showMessage
+    class Printer{
+        message="This Works!";
+        showMessage(){
+            console.log(this.message);
+        }
+    }
+
+3.  Add the Event Listner
+    const p=new Printer();
+    const button=document.querySelector("button")!;
+    // here 'this' keyword in showMessage will refer to addEventListener target object which is button
+    button.addEventListener('mouseover', p.showMessage); // in order to avoid this we need to bind the Person object
+    button.addEventListener('mouseover', p.showMessage.bind(p));
+
+
+Now we will build a Decorator which will automatically Bind the method with the sourrounding class
+
+
+            const Autobind=(_:any, _1:string|symbol, descriptor:PropertyDescriptor)=>{
+                const originalMethod=descriptor.value;
+                const adjDescriptor:PropertyDescriptor={
+                    // This adjDescriptor is the new Descriptor which we return later
+                    configurable:true,
+                    get(){
+                        // So here we do the Extra work before we execute the function
+                        const boundFn=originalMethod.bind(this);
+                        //Here this refers to whatever is responsible for Triggering this getter method
+                        // The trick here is the getter method will be triggered by the concrete object to which it belongs
+                        // Getter is the extra layer between the function which is being executed and the Concrete object which it belongs.
+                        // SO here this will refer to the Printer object p
+                        return boundFn;
+                    }
+                };
+                return adjDescriptor;
+            }
+
+
+
+            class Printer{
+                message="This Works!";
+                @Autobind
+                showMessage(){
+                    console.log("This Works!");
+                }
+            }
+
+
+            const p=new Printer();
+            const button=document.querySelector("button")!;
+            button.addEventListener('mouseover', p.showMessage);

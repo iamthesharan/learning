@@ -1,0 +1,54 @@
+Un-Structural Directive don't add or remove elements instead they only change the element they were placed on
+
+1. ngStyle
+
+<p [ngStyle]>Hi There</p>
+
+here the square brackets is not the part of the directive name, the directive name is ngStyle
+the Square bracket indicates that we want to bind to some property on this directive
+
+The ng Style Directive experct to get the JS object
+<p [ngStyle]="{'background-color':'red'}">Hi There</p>
+
+    or
+
+
+<p [ngStyle]="{backgroundColor:getColor()}">Hi There</p>
+
+=====================================================================================================
+
+ngClass --> it is used to change the class of the element.
+
+<p [ngClass]="{online:serverStatus==='online'}"></p>
+
+in style property in @Component Decorator:
+
+style:[`
+    .online{
+        color:white;
+    }
+`];
+
+
+
+so ngClass directive takes the object wigth key values pair.
+key is the CSS Class name
+Value will be the Condition for true or false and accordingly the class will be added
+
+
+Example: 
+
+<p [ngStyle]="{backgroundColor:getColor()}"  [ngClass]="{online:getServerStatus()==='Online'}">{{'Server'}} with Id: {{serverId}} is {{getServerStatus()}} </p>
+
+
+===================================================================
+
+ngFor --> this is a built in Directive so we will use * in front of it.
+
+<server-name *ngFor="let server of servers"></app-server>
+
+    Also to get the index:
+
+    <server-name *ngFor="let server of servers; let i=index"></app-server>
+    here index is the reserved keyword
+

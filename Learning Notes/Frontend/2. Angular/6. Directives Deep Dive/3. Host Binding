@@ -1,0 +1,55 @@
+@HostBinding('style.backgroundColor') backgroundColor:string; // HostBinding will take the argument as DOM property.
+Now for Mouse enter and Mouse Leave HostListener, we can change the backgroundColor variable.
+
+@Directive({
+  selector: '[appBetterHighlight]'
+})
+export class BetterHighlightDirective implements OnInit{
+  @HostBinding('style.backgroundColor') backgroundColor : string='transparent';
+
+  constructor(private elementRef:ElementRef, private renderer:Renderer2) { }
+  ngOnInit(){
+  }
+  @HostListener('mouseenter') mouseOver(event:Event){
+    this.backgroundColor='lightBlue';
+  }
+  @HostListener('mouseleave') mouseLeave(event:Event){
+    this.backgroundColor='transparent';
+  }
+}
+
+=================================================================================
+
+To add any Class or remove.
+In the below Example we've added open class in the btn-group so that the dropdown toggle works properly.
+
+export class DropdownDirective{
+
+    @HostBinding('class.open') isOpen=false;
+    @HostListener('click')
+    onToggleOpen(){
+        this.isOpen=!this.isOpen;
+    }
+}
+
+=================================================================================
+
+If you click Somewhere Else then the Above example will not work properly because the Dropdown will not get closed.
+to solve this, you can attach the below lines in the class:
+
+  @HostListener('document:click', ['$event']) toggleOpen(event: Event) {
+    this.isOpen = this.elRef.nativeElement.contains(event.target) ? !this.isOpen : false;
+  }
+
+
+So Final:
+
+export class DropdownDirective{
+
+    @HostBinding('class.open') isOpen=false;
+    @HostListener('document:click',['$event'])
+    onToggleOpen(event:Event){
+        this.isOpen=this.elRef.nativeElement.contains(event.target)?!this.isOpen:false;
+    }
+    constructor(private elRef:ElementRef){}
+}

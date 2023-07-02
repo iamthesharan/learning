@@ -1,0 +1,49 @@
+Cascade notation
+
+    var paint = Paint()
+    ..color = Colors.black
+    ..strokeCap = StrokeCap.round
+    ..strokeWidth = 5.0;
+
+    This is Similar to :
+
+    var paint = Paint();
+    paint.color = Colors.black;
+    paint.strokeCap = StrokeCap.round;
+    paint.strokeWidth = 5.0;
+
+
+    If the object that the cascade operates on can be null, then use a null-shorting cascade (?..) for the first operation
+
+        querySelector('#confirm') // Get an object.
+        ?..text = 'Confirm' // Use its members.
+        ..classes.add('important')
+        ..onClick.listen((e) => window.alert('Confirmed!'))
+        ..scrollIntoView();
+
+
+        var button = querySelector('#confirm');
+        button?.text = 'Confirm';
+        button?.classes.add('important');
+        button?.onClick.listen((e) => window.alert('Confirmed!'));
+        button?.scrollIntoView();
+
+
+    You can also nest cascades. For example:
+
+        final addressBook = (AddressBookBuilder()
+                                ..name = 'jenny'
+                                ..email = 'jenny@example.com'
+                                ..phone = (
+                                    PhoneNumberBuilder()
+                                        ..number = '415-555-0100'
+                                        ..label = 'home'
+                                    )
+                                .build()
+                            )
+                            .build();
+
+
+
+?.	Conditional member access	Like ., but the leftmost operand can be null; example: foo?.bar selects property bar from expression foo unless foo is null (in which case the value of foo?.bar is null)
+!	Null assertion operator	Casts an expression to its underlying non-nullable type, throwing a runtime exception if the cast fails; example: foo!.bar asserts foo is non-null and selects the property bar, unless foo is null in which case a runtime exception is thrown

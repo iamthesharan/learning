@@ -1,0 +1,19 @@
+When it comes to services, Do not instantiate on your own.
+Angular Dependency Injector help us with that.
+
+Dependncy Injector will inject the instnace to our Component class automatically.
+We just need to inform angular that require Some instance.
+How to do that?
+
+1. constructor(private loggingService:LoggingService){
+        // This will informs angular that we will need the instance of the logging services.
+        //Think about the Components that we create, who is responsible for creating the instance of the class? -->
+        // Answer is Angular.
+}
+
+Now from the above angular knows what we want. But it doesn't know how we want.
+
+2. To let angular know how to give the instance, for that we need to provide the Service.
+    fot that we will add one extra property in the @Component Decorator.
+
+    providers:[LoggingService]    

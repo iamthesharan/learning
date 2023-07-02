@@ -1,0 +1,21 @@
+suppose you receive the object from backend in Json Format for the Person Object.
+
+const personList=[{
+    name:"Shashank",
+    age:25
+},
+{
+    name:"Khushboo",
+    age:30
+}];
+
+const loadPerson=personList.map(person=>{
+    return new Person(personList.name, personList.age);
+});
+
+// Load person will have list of person Objects
+
+now here you can use the class transformer Library
+class transformer:
+npm install --save-dev class-transformer
+npm install --save-dev reflect-metadata

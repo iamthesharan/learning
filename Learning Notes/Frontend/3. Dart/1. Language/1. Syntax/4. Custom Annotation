@@ -1,0 +1,17 @@
+You can define your own metadata annotations. Here’s an example of defining a @Todo annotation that takes two arguments:
+
+    class Todo {
+        final String who;
+        final String what;
+
+        const Todo(this.who, this.what);
+    }
+
+
+
+And here’s an example of using that @Todo annotation:
+
+    @Todo('Dash', 'Implement this function')
+    void doSomething() {
+        print('Do something');
+    }

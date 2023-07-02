@@ -1,0 +1,45 @@
+Every App requires top level main function where execution Starts
+
+    Hello World :
+
+    void main(){
+        print("Hello");
+    }
+
+
+VARIABLES:
+
+Variable Types are defined by initial Values.
+But you can declare type Explicitly:
+
+Type Safe Code:
+
+    void main() {
+        var firstName = 'Shashank';
+        var lastName = 'Sharan';
+        var age = 25;
+        var heightInFeet = 5.7;
+        var projects = [
+            'Amdocs OMS',
+            'BMC Helix Digital Workplace',
+            'Citi Bank Online IIT'
+        ];
+        var vehicle = {'name': 'Honda Amaze', 'model': 'VX'};
+
+        print('name' + firstName + ' ' + lastName);
+        print('Age : ' + age.toString());
+        print('Height : ' + heightInFeet.toString() + ' Feet');
+        print("Projects : " + projects.toString());
+        print("Vehicle : " + vehicle.toString());
+    }
+
+IMPORTS:
+
+    // Importing core libraries
+    import 'dart:math';
+
+    // Importing libraries from external packages
+    import 'package:test/test.dart';
+
+    // Importing files
+    import 'path/to/my_other_file.dart';

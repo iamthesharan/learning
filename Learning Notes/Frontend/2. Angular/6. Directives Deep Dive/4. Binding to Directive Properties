@@ -1,0 +1,36 @@
+Suppose we want to add our own color in the Directive as in the Previous notes its hard coded in the Directive.
+So for that we will use custom Property Binding.
+
+@Input() defaultColor:string='transparent';
+@Input() highlightColor:string='blue';
+
+@HostBinding('style.backgroundColor') backgroundColor:string=this.defaultColor;
+
+@HostListener('mouseenter') mouseOver(event:Event){
+    this.backgroundColor=this.highlightColor;
+}
+@HostListener('mouseleave') mouseLeave(event:Event){
+    this.backgroundColor=this.defaultColor;
+}
+ngOnInit(){
+    this.backgroundColor=this.defaultColor; // This will be assigned once we get all the values
+}
+
+<p appBetterHighlight [defaultColor]="'yellow'" [highlightColor]="'red'">Hello</p>
+===============================================================================================
+
+Now for ngClass you see that the directive itself enclosed in the Squuare Brackets like [ngClass]
+That is useful when you have 1 main property to bind.
+For that we need to provide the alias in @Input
+
+Change the line in directive.ts
+@Input('appBetterHighlight') highlightColor:string='blue';
+
+Then in template
+<p [appBetterHighlight]="'red'" [defaultColor]="'yellow'" >Hello</p>
+
+===============================================================================================
+You can also use the property binding without square brackets and for that you have to remove the '' from yellow.
+<p appBetterHighlight="red" defaultColor="yellow" >Hello</p>
+
+
