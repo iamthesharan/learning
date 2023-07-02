@@ -1,6 +1,0 @@
-Services are like Central Repository where we can store something to avoid duplication  
-Ex. If we have 2 components where Log are getting printed same.
-
-    So we can have LogService which can act as a centralized.
-
-===============================================================================

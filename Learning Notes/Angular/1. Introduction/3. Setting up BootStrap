@@ -1,8 +1,0 @@
-npm install --save bootstrap
-
-In angular.json: add the bootstrap style location
-
-            "styles": [
-              "src/styles.css",
-              "node_modules/bootstrap/dist/css/bootstrap.min.css"
-            ]

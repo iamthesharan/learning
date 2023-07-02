@@ -1,5 +1,0 @@
-Template:
-<input type="text" [(ngModel)]="serverName">
-
-Component:
-serverName="Test Server";
