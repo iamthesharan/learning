@@ -1,0 +1,13 @@
+@Bean - 
+    1. One or more instance of the class can be added to the Spring Context.
+    2. You can create bean for any class. Ex - Spring, Any class 
+    3. Need to write more code.
+    4. Developer have full control on creating and configuring bean.
+    5. Creates bean based on instruction and values provided by developer
+
+@Component -
+    1. Only One instance of the class can be added to the Spring Context.
+    2. You can only create a bean for the classes that you've build on your own. You cannot mention any Stereotype annotation on the source code of any other classes.
+    3. Need to write very Less Code.
+    4. Developer will not have any control on creating and configuring the bean.
+    5. Framework Will Create a Bean for Developer.

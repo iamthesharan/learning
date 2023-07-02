@@ -1,0 +1,10 @@
+When we implement AOP on Specific Point cut or JAVA Method, my Spring Framework will intercept each and every call that is comming to that specific java method.
+
+This is achieved by Proxy Object inside AOP Concept. 
+Like if you don't implement AOP for a method present inside particular bean then definitely there is no interception needed so in those scenarios, if you try to execute the method, the it will be pretty much normal method execution.
+
+Now If we Put Some AOP logic for a mehtod inside a bean, in this scenario whenever we try to get the bean from Spring Context, the Spring Context will never give me the bean directly instead it will provide the refrence of proxy object that belongs to that bean.
+
+and the same proxy object bean will be injected as a part of dependency injection, autowire etc
+
+Hence Weaving is a concept inside AOP where Spring framework controls all the interceptions of the java methods and apply aspect logic with the help of proxy object.

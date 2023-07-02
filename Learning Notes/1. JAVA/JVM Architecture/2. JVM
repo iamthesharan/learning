@@ -1,0 +1,75 @@
+JDK ---> JRE ----> JVM
+
+JVM is a part of JRE
+JRE is a part of JDK
+
+JVM is Responsible for 2 activities:
+1. Load JAVA Class Files
+2. Run JAVA Class Files
+
+
+Architecture Diagram:
+
+
+                     ______________________                              
+                    |                      |
+                    |     CLASS LOADER     |
+                    |______________________|
+
+Memory Areas:
+ _______________________________________________________________________________________
+|                 |             |             |              |                          |
+|   Method Area   |   Heap Area |  Stack Area | PC Registers |   Native Method Stacks   |
+|_________________|_____________|_____________|______________|__________________________|
+
+
+             ____________________________
+            |                           |
+            |      Execution Engine     |  <--> Java Native Interface <---- Native Method Library
+            | __________________________|
+
+
+Class Loader -  To Read and Loads Class into memory Areas.
+Class Loader Activities:
+    1. Loading
+    2. Linking
+    3. Initialization
+
+1. Loading:
+    - Read Class file from disk and Store it in Method Area by Default
+    - Store below in method area:
+        - Fully Qualified name of Class
+        - Fully Qualified name of Parent i.e. Object Class
+        - Method Information
+        - Variable Information
+        - Constructor Information
+        - Modifiers Information
+        - Constant Pool Information
+
+    hence Method Area Stores the Loaded class file info.
+
+    Heap Area:
+
+        Once the Loading is Finished. JVM will create Class class object to Store the Loaded class information in class form.
+        This is Class class object is Stored in Heap Area
+
+        The Class class object can be used by Programmer to get class level information like method information or variable information or constructor infromation etc.
+
+    
+
+How to load Class in JAVA programatically:
+
+Class c = Class.forName("Student");
+
+To get methods:
+Method[] m = c.getDeclaredMethod();
+for(Method method : m){
+    System.out.println(method.getName());
+}
+
+Class Loading is done only Once:
+public static void main(String ...args){
+    Student s1 = new Student();
+    Student s2 = new Student();
+    System.out.println(s1.getClass() == s2.getClass()); // returns true. Same Class object is returned whenever you call the getClass method on any class as class loading is done only once.
+}

@@ -1,0 +1,22 @@
+Virtual Machine - A Software Program which can simulate behviour of Physical Machine or can perform Operation like a Physica Machine.
+Example - A Windows Calulator can work same as physical Calculator.
+
+Categories:
+1. Hardware Based/System Based VMs
+2. Application Based/Process Based VMs
+
+1. Hardware Based/System Based VMs:
+
+    It provides several logical systems on the same computer with the Strong Isolation from Each Other. i.e on one Physical machines multiple Logical Machines.
+    The Main Advantage of hardware based VMs is Hardware Resources Sharing and Improves Utilization of hardware Resources.
+    Ex - Cloud VMs
+
+
+2. Application Based/Process Based VMs:
+
+    These VMs acts as Runtime Engines to Run a particular programing Language Applications.
+    Ex -    JVM(Runtime Engine for JAVA Based Applications)
+            CLR(Runtime Engine for .Net Based Applications)
+
+
+

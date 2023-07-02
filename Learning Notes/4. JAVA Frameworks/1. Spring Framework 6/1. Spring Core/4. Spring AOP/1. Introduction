@@ -1,0 +1,10 @@
+Aspect Oriented Programming:
+1. AOP module is present in Spring core Framework
+2. With the help of AOP and Aspects, we can build applications by separating the cross cutting concerns like transaction management, logging, security, auditing into a separate place to build a better maintainibility inside our application
+
+AOP dynamically injects the logic inside aspect whenever a particular method is executed inside application. It is like a pluggable code.
+
+
+
+With AOP, All the Non Business logic will be moved into different Location which will make your application clear, clean and maintainable
+

@@ -1,0 +1,18 @@
+@Primary - When there is not Unique bean in Context for the Given Class and we want default bean to be return when we try to fetch bean from context without bean name, then we make the use of @Primary Annotation to return the default bean.
+
+
+@Primary
+@Bean
+Vehicle vehicle(){
+    return new Vehicle().setName("Honda City");
+}
+
+@Bean
+Vehicle vehicle(){
+    return new Vehicle().setName("Honda Amaze");
+}
+
+ApplicationContext context = new AnnotationConfigApplicationContext(ProjectConfig.class);
+context.getBean(Vehicle.class); // This will return Honda Ciy Bean.
+
+

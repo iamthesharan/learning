@@ -1,0 +1,18 @@
+You need a Config class where you can define the bean Configuration
+
+@Configuration -  Annotation that defines Configuration
+@Bean -  Used to Create beans
+
+
+
+@Bean
+Vehicle vehicle() { // Spring Container will register the bean with name vehicle
+
+    return new Vehicle();
+
+}
+
+In Main App:
+
+        ApplicationContext context = new AnnotationConfigApplicationContext(ProjectConfig.class);
+        System.out.println(context.getBean(Vehicle.class).getName());
