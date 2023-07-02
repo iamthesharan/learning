@@ -72,7 +72,7 @@ Class Level Modifiers:
 			a.m1();
 		}
 	}
-	For Compiling A----> javac -d . B.java
+	For Compiling B----> javac -d . B.java
 	
 	CE -- > Class A not found.	
 */

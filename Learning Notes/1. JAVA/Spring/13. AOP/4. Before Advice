@@ -1,4 +1,4 @@
-                                        Logging, Security
+                                                 Logging, Security
     Main App  <------  AOP Proxy <--------------------------------------------> Target Object
 targetObjcct.doSomeStuff()                                                      doSomeStuff()
 
@@ -8,7 +8,7 @@ So Here the Plan is to Run the Custom code before calling the Target Object meth
 
 So over the Target Object Method we will use @Before Annotation
 
-Example @Transaction --> Spring uses AOP behind the Scene to Start the Transaction and Commit the Transaction
+Example @Transaction ---> Spring uses AOP behind the Scene to Start the Transaction and Commit the Transaction
 
 Usecases of @BeforeAdvice:
 

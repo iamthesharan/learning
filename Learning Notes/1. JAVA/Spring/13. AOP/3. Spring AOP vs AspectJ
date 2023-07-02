@@ -1,6 +1,6 @@
 AOP Terminology:
 Aspect: Module of code for Cross cutting Concern
-Advice: What action taken and when it should be applied
+Advice: When the Spring needs to execute the Given Aspect.
 Joint Point: when to apply code during program execution
 Pointcut: A Predicate expression for where the advice should be applied
 
