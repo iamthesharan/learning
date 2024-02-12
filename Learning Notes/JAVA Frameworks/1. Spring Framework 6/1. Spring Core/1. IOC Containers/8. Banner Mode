@@ -1,0 +1,10 @@
+@SpringBootApplication
+public class MyApplication {
+
+    public static void main(String[] args) {
+        SpringApplication application = new SpringApplication(MyApplication.class);
+        application.setBannerMode(Banner.Mode.OFF);  // Turning off the Banner Mode
+        application.run(args);
+    }
+
+}

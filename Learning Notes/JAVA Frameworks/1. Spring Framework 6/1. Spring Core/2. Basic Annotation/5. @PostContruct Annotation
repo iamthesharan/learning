@@ -1,0 +1,24 @@
+We've seen that with Stereotype Annotations, we dont have control while creating a bean. But what if we want to execute some instructions post spring creates the bean.
+
+For this we can use @PostConstruct.
+This means once the constuction of the bean is done, it can execute the method which is anotated with @PostContruct
+
+
+@Component
+public class Vehicle {
+
+    private String name;
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    @PostConstruct
+    public void postConstructMethod() {
+        this.name = "Honda City";
+    }
+}

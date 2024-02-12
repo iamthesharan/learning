@@ -1,0 +1,25 @@
+
+ 
+
+                                       /-----> ITEM READER
+                                      /
+                                     /
+    JOB LAUNCHER  ----> JOB ----> STEP -----> ITEM PROCESSOR
+        |                |         | \
+        |                |         |  \
+        |                |         |   \-----> ITEM WRITER
+        |                |         | 
+ --------------------------------------------------
+ |                                                |
+ |                  JOB REPO                      |
+ |                                                |
+ --------------------------------------------------
+                        |
+                        |
+                        |
+                     DATABASE                 
+
+Job Launcher - Its Responsibilty is to start the Job
+Job Repo   - Stores metadata of the Job (Time Logs etc. JOB Status)
+Database -> Job related Metadata/Status will be stored in DB
+

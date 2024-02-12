@@ -1,0 +1,21 @@
+Here You can have Multiple Services having their Own Servers or Containers
+Each Service communicates with Other Services via network
+Each Service will typically have their own DB.
+
+
+Pros:
+1. Easy to Develop, Test and Deploy.
+2. Easily Adapt Changes
+3. No Need to deploy Dependent Service or whole Application
+4. Parallel Development
+5. Services Can choose their Own Database
+6. Services can be built with the Help of Other Programming languages even
+
+
+Cons:
+1. Complexity
+2. Infrastructure Overhead
+
+
+
+

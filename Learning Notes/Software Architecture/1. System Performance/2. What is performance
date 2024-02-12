@@ -1,0 +1,23 @@
+It is the measure of how fast or responsive a system under:
+1. A Given Workload
+    -> Backend Data
+    -> Request Volume
+
+2. A Given Hardware
+    -> Kind
+    -> Capacity
+
+Now We have to keep these 2 parameters fixed becase if they vary, The performance of the System may vary.
+So while Measuring performance, we need to take these 2 parameters fixed.
+
+
+System which has Huge amount of data will slightly to face more performance problem than the system with reduced amount of data.
+
+If the Request Volume is high, the System will face more performance problem
+
+
+If we increase the capacity of the hardware, performance problem generally go away
+Now If we increase the Workload, the performance should degrade little instead of huge degradation
+
+So the Overall Goal is that the System performance remains Stable as workload increases.
+The System Performance should Resolve as we upgrade the hardwares.

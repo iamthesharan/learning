@@ -1,0 +1,22 @@
+In the Main Class, you need to put annotation:
+1. @EnableBatchProcessing - To Enable Batch Processing
+2. @ComponentScan("//Packege for which the beans needs to be created") - Basically Here the Job Configuration Beans will be created
+
+
+So Create a package called Config:
+Inside this package Put the Job Configs and add the Annotaion @Configuration over the Class
+
+@Configuration
+class SampleJob{
+
+}
+
+To have the Job , Spring batch provides interface that is Job.
+To Create a job you need to inject JobBuilderFactory Class into Configuration
+
+To Start job:
+
+      jobBuilderFactory.get("First Job").start()
+
+To Have Step:
+    To Create Step Spring Batch Provides StepBuilderFactory that we need to Inject in Config Class

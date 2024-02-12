@@ -1,0 +1,6 @@
+Sample System:
+
+              SSL/TSL
+Web Browser ----------> Web Application ---> Business Application  ----> Database <-- Batch Processing
+            Pages/JSON/                         (N Services)             (RDBMS)
+            XML/Images

@@ -1,0 +1,17 @@
+DTO vs Model:
+
+
+DTO (Data Transfer Object):
+- DTOs are typically used to transfer data between software application subsystems or layers.
+- They are often used in situations where you need to transfer data between different parts of your application or between your application and external systems (e.g., when making API calls).
+- DTOs are designed to carry data and are usually simple POJOs (Plain Old Java Objects) that contain fields and getters/setters.
+- DTOs may contain only the necessary fields required for data transfer, and they may not have any business logic or behavior associated with them.
+- DTOs are often used to encapsulate the data exchanged between the client and the server in a web application.
+
+
+Model Class:
+- Model classes, on the other hand, are typically part of the MVC (Model-View-Controller) architecture and represent the data in your application's domain model.
+- They are often used to represent the structure and behavior of the data within your application.
+- Model classes may contain business logic, validation rules, and behavior related to the data they represent.
+- In web applications, model classes are often used to represent entities from the database or objects that are manipulated within the application's business logic.
+- Model classes may also contain annotations or configurations specific to the persistence layer (e.g., JPA annotations for database mapping in Java).

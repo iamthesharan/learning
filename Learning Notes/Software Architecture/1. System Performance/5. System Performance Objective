@@ -1,0 +1,10 @@
+1. Minimize Request Response Latency
+    Latency is measured in time units
+    Depends on  Wait/Idel time
+                Processing time
+
+2. Maximize Throughput
+    Throughput is measured as Rate of Request processing
+    Depends on:
+    1. Latency - Inversely Proportional
+    2. Capacity -  Directly Proportional

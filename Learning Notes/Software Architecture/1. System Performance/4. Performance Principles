@@ -1,0 +1,40 @@
+For High Performance:
+1. High Degree of Efficiency
+2. High Degree of Concurrency
+3. High Degree of Capacity
+
+
+Single Request Processing: Single Thread
+Concurrent Request Processing: Multiple Thread.
+
+Here We will discuss about Single Request Processing:
+1. High Degree of Efficiency:
+    Efficient Resource Utilization
+        - IO - Memory/Network/Disk
+        - CPU
+
+        These Resources must be utilized Efficiently
+    
+    Efficient Logic:
+        - Algorithms
+        - DB Queries
+    
+    Efficient Data Storages:
+        - Data Structures (Decide where to use MAP instead of list)
+        - DB Schema (Indexing in DB)
+
+    Caching :
+        Caching Requires minimum code changes.
+
+If we do this the the Response time will come down drastically for Single Request
+
+
+For Multiple Request Simultaneously within a system.
+2. High Degree of Concurrency:
+    Hardware - Hardware should allow the request to deprocess simultaneously
+    Software
+        - Queueing
+        - Coherence
+
+        
+        

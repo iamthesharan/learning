@@ -1,0 +1,14 @@
+It is also known as Bulk Processing
+When you have a large amount of data and you want to process at one time, that is Called Batch Processing/Bulk Processing
+
+Spring Batch:
+1. It is Light weight batch framework based on Spring
+2. It is used for High Volume Batch Processing(Means Millions of Records)
+3. Various I/O Options - JSON, XML, SQL databases etc
+
+    Source -----> Spring Batch  ---> Target
+
+    Source/target can be any thing (CSV, Database, JSON)
+
+4. Easy to manage, Start/Stop/Restart
+5. Retry or Skip Mechanism

@@ -1,0 +1,19 @@
+By Default Spring will Create all the Singleton Beans eagerly during the Startup of the application itself. This is called Eager initialization
+
+We can change the Default Behaviour to initialize the Singleton beans lazily only when the application is trying to refer the bean. This approach is called Lazy Initialization.
+
+
+Example:
+
+@Component
+@Lazy
+class Person {
+
+}
+
+Espcially when there remote scenario for which the bean is used rarely. Like Deleting an account, the we can go for lazy initialization as there is no need to create a bean by Spring IOC Container during the initialization of the application.
+
+Note in case of Lazy initialization, If the Exception happens while the Bean creation, it will throw runtime Exception
+
+
+Eager Instantiaion -  Recommended.

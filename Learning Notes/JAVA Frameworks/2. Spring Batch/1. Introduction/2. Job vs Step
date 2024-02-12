@@ -1,0 +1,44 @@
+Job - :
+
+Transcation -> Here we are doing batch processing of Transactions. It can be 1000s of Transaction, It won't matter
+So here Transaction is one Job
+
+
+So here Transaction Involves 3 Steps:
+1. Communicate with Bank
+2. Debit Money
+3. Send SMS/Email
+
+
+So These are steps and it will be executed in Sequence
+
+
+Step Types Provided By Spring Batch:
+1. Tasklet Step
+2. Chunk-Oriented Step
+
+1. Tasklet Step: These are Simple Task and not a Complex Processing
+    Transaction - Communicate with Bank
+                - Debit Money
+                - Send SMS/Email
+
+2. Chunk Oriented Step : Dividing the Steps into chunks
+    Example Reading huge Records from CSV and Processing it and Storing it to DB
+
+        CSV -----> Spring Batch ------> DB
+
+    So if you process this huge data in one Shot, it will give out of memory Exception
+    So in Chunk oriented Steps you need to define Chunk Size i.e how many records at a time you want to process
+    Suppose your chunk size is 3, and your CSV file records are 10000
+    So once 3 Records are written in DB then next 3 Records will be written and this will continue till all the records are processed and written:
+
+
+    So for Reading the Data from source Spring batch needs: Item Reader
+    For Writing the Data in Target Spring Batch Needs: Item Writer
+    To Process the Data Spring batch needs:  Item Processor.
+
+
+    So Chunk Oriented Steps :   - Item Reader
+                                - Item Processor
+                                - Item Writer
+                                

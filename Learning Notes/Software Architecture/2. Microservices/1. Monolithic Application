@@ -1,0 +1,46 @@
+All Applications are deployed in Single Uint and has a Single DB:
+
+        ------------------------------
+        |                            |
+        |    Presentation Layre(UI)  |
+        |                            |
+        |----------------------------|
+        |                            |
+        |      Business Logic        |
+        |                            |
+        |----------------------------|
+        |                            |
+        |      Data Access Layer     |
+        |                            |
+        |----------------------------|
+                      |
+                      |
+                   Database
+
+Pros:
+1. Good For Development of Smaller Applications
+2. Fewer Cross Cutting Concerns - Logging, Security Code will be lesser
+3. Better performance due to low network Latency
+
+Cons:
+1. Difficult to Adapt new Technologies.
+2. Code base difficult to maintain
+3. Limited Agility due to Compact Code.
+4. Tiny Update and Feature always need a Full Deployment
+
+
+SOA Architecture (Service Oriented Architecture):
+Here we have a middleware that Allows UI to communicates with Different Backend Services.
+
+UI   ---> Middleware Server ----> Application Server
+
+Pros:
+1. Reusibilty of Services
+2. Parallel Development - Developers can Work on Any Service and if there is any Change, then Full Application deployment is not required.
+
+Cons:
+1. Complex Management due to Communication Protocol (SOAP) which is Heavy Weight
+2. Heavy Investment Code due to vendor in middleware (Like Oracle)
+3. No Multople Database, No Multiple Codebase. Hence We cannot separate our Services within the business domain.
+
+

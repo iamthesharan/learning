@@ -1,0 +1,49 @@
+DI is a pattern through which IOC is achieved.
+
+Hence Spring core is build upon IOC and DI
+
+======================================================================
+
+
+public class Vehicle {
+    
+    public void makeVehicle1(){
+        new SonySpeaker();
+        new AppoloTyres();
+    }
+
+    public void makeVehicle2(){
+        new SpeakerFactory().getSpeaker("Sony");
+        new TyreFactory().getTyre("Appolo")
+    }
+}
+
+Suppose you want to manufacture a vehicle, and Vehicle will have many Components like Tyre, Speaker, Engine, Seats etc.
+
+So as a vehicle manufacturer, you don't want to manufacture everything from scratch instaead you outsource few things to the external vendors.
+
+
+So in makeVehicle1(), I'm creating my own dependencies instead of outsourcing the dependencies. But what in case if I want to outsource speaker to Bose Company instead of Sony, then as a developer I need to change my application code or source code.
+
+But in the second Approach makeVehicle2() I'm outsourcing the object by creating a Factory pattern. Creating Factory for Speaker and Tyre. These Factory will have logic with if else for which object to select
+
+
+
+But here also we need to write some code if we need changes.
+
+
+So here comes the Spring Framework:
+
+@Data
+class SpringVehicle {
+
+    @Autowire
+    private Speaker speakers;
+
+    @Autowire
+    private Tyre tyre;
+}
+
+So here you see we are letting the Spring container to decide which object to create rather than creating in SpringVehicle.
+
+Also there is loose coupling. SpringVehicle is not aware of any outside code

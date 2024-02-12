@@ -1,0 +1,11 @@
+Spring Rest:
+
+@RestController - Applied over the Rest Controller Class to Create a Bean during the Startup
+@RequestMapping - Handle Any HTTP Request (GET, POST, PUT, DELETE, etc)
+                - attributes - path -> endpoint of the RestController
+                             - produces -> Specifies the Media Type of Handler method produces.
+                             - consumes
+                             - method
+                             - headers  - The handler method will be invoked only if the header of specific type is pased in the request.
+                                        - headers = "content-type=application/json"
+                                            

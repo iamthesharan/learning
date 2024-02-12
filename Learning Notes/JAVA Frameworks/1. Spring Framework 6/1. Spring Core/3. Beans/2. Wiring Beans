@@ -1,0 +1,81 @@
+Wiring Beans using Method Calls
+
+@Configuration
+public class ProjectConfig {
+
+    @Bean
+    Vehicle vehicle() {
+        Vehicle vehicle = new Vehicle();
+        vehicle.setName("Honda City");
+        vehicle.setPerson(person());
+        return vehicle;
+    }
+
+    @Bean
+    Person person() {
+        Person person = new Person();
+        person.setName("Shashank Sharan");
+        return person;
+    }
+}
+
+
+Wiring Beans using Method Parameters
+
+@Configuration
+public class ProjectConfig {
+
+    @Bean
+    Vehicle vehicle(@Qualifier("person") Person person) { // Here in case of only one person bean in the config, You don't need to provide Qualifier annoataion
+        Vehicle vehicle = new Vehicle();
+        vehicle.setName("Honda City");
+        vehicle.setPerson(person);
+        return vehicle;
+    }
+
+    @Bean
+    Person person() {
+        Person person = new Person();
+        person.setName("Shashank Sharan");
+        return person;
+    }
+
+    @Bean
+    Person person1() {
+        Person person = new Person();
+        person.setName("Khushi");
+        return person;
+    }
+}
+
+
+Autowire Annotation ---->
+
+Note if you don't want to do autowiring mandatory:
+
+you need to put @Autowire(required = false)
+
+@Autowire(required = false)
+private Vehicle vehicle;   // This will don't throw exception if vehicle bean is not present in context.
+
+
+
+
+Autowire on Setter Methods:
+
+
+
+CONSTRUCTOR INJECTION:
+
+If you are more concern about the security of the bean. ie If you want your bean to not to change once it is inject, then you can go for Contructor injection,
+As in other Approaches like Setter Injection or literal Injection, you can change the injected bean later.
+
+So this mean basically you can use final variable in Constructor Injection.
+
+
+private final Vehicle vehicle;
+
+@Autowire
+public Person (Vehicle vehicle) {
+    this.vehicle = vehicle;
+}

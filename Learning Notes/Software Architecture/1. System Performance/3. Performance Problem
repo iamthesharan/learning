@@ -1,0 +1,11 @@
+Every Performance Problem is the result of some queue building up somewhere.
+Ex: Network Socket Queue - So many Request conjestion
+    DB IO queue - Lot of DB Request
+    OS run Queue - How Much CPU is available, How much theads can be used.
+
+Reasons for queue build-up:
+1. Inefficient Slow Processing - If we have an Algorithm which is running Slow. Inefficient Code
+2. Serial Resource Access - A particular code to be executed with only one thread serially.
+3. Limited Resources Capacity - Let's say we've limited no of CPUs. Lots of vehicles to cross the roads and the road has only 1 lane
+
+So the Role is to identify the queue buildup instead of upgrading the System.

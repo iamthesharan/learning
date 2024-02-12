@@ -1,0 +1,33 @@
+When we create multiple objects of same type and try to fetch the bean from context type, the Spring cannot guess which instance you've declared you refer to. This will lead to NonUniqueBeanDefinitionException.
+
+    @Bean
+    Vehicle vehicle(){
+        return new Vehicle().setName("Honda City");
+    }
+
+    @Bean
+    Vehicle vehicle1(){
+        return new Vehicle().setName("Honda Amaze");
+    }
+
+        ApplicationContext context = new AnnotationConfigApplicationContext(ProjectConfig.class);
+        System.out.println(context.getBean(Vehicle.class).getName());
+
+Exception While Running Application: 
+
+Exception in thread "main" org.springframework.beans.factory.NoUniqueBeanDefinitionException: No qualifying bean of type 'com.iamthesharan.springproject.beans.Vehicle' available: expected single matching bean but found 2: getVehicleBean,getVehicle1
+
+
+To Avoid this :
+
+Get the bean with name:
+
+context.getBean("vehicle1",Vehicle.class); // Here vehicle1 is the bean name.
+=============================================================================
+Custom Bean Name: I don't want to use 
+
+@Bean(name = "autoVehicle")
+        OR
+@Bean(value = "hondaVehicle")
+        OR
+@Bean("ferrariVehicle")

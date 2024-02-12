@@ -1,0 +1,12 @@
+Spring Core is at the heart of the Entire Spring Ecosystem.
+
+
+Inversion of Control:
+Any Application you will build on Spring framework, that will follow IOC priciple.
+It is a Software Design Principle
+It Says never ever create an object in your program directly, instead describe the ways objects has to be created to an external Entity (like configs).
+
+Means as a developer I should never take the responsibility of creating my own Dependency or the object that my program needed instead I should rely on framework or an external entity for the configration and the objects that our program needed.
+
+This is called Outsourcing the creation of objects.
+  
