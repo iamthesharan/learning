@@ -1,6 +1,0 @@
-1. Loose Coupling between the Components.
-2. Minimizes the Amount of code in your application.
-3. Makes Unit Testing Easier with Different Mocks.
-4. Increased System Maintainability & Module Reusability.
-5. Allows Concurrent or Independent Development.
-6. Replacing the Module has no side effects on other modules.

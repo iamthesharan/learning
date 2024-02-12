@@ -1,5 +1,0 @@
-Although Spring Framework handles the Distruction of the resouces, but in rare scenario if you want to destroy something Explicitly, then you can go for @PreDestroy
-
-But for this in Main Method you need to call:
-
-context.close();

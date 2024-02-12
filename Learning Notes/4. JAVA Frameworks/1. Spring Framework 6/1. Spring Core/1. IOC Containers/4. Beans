@@ -1,7 +1,0 @@
-Any normal POJO JAVA Class that is instantiated, assembled and otherwise managed by a Spring Container is called Spring Bean
-
-These beans are created with the configuration metadata that you provide. 
-Spring IOC Container Manages the lifecycle of bean and injecting any required dependency in bean.
-
-Context like memory location of your app in which we add all the object instances that we want the framework to manage. By Default Spring doesn't know any of the objects you define in your application. To enable Spring to see your, Object you need to add them to the context.
-
