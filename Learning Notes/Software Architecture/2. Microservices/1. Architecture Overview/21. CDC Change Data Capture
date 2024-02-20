@@ -1,0 +1,9 @@
+The Concept is Same by Creating Outbox Table. 
+But here CDC Can be used to monitor the outbox table for new Records, Extracts the Data Changes that propergated to the Target Microservices.
+Using CDC, with outbox pattern allows microservices to decouple their data updates from process of propergating those updates to microservices.
+
+
+Database Used for CDC:
+
+1. Cockroach DB
+2. Dynamo DB

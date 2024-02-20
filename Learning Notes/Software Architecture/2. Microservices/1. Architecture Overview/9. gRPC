@@ -1,0 +1,12 @@
+RPC is a form of Client Server Communication that uses function call rather than usual HTTP Call
+
+Client Application Directly calls method on Server Application on a different machine like Local Object
+
+gRPC is based on Idea of defining a service and methods and these can be called remotely with their parameters and return type.
+On Server Side the server implements these interface and runs a gRPC server to handle Client Calls
+On client Side , the client has a stub that provides the same methods as Servers
+
+Using HTTP/2 gRPC provide 30-40% more performance 
+gRPC uses binary serialization, provides higher performance and less bandwidth ussage than json with binary serialization.
+
+

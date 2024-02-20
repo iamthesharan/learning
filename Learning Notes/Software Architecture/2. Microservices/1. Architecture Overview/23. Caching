@@ -1,0 +1,18 @@
+Types:
+1. In-Memory Cache - Stores mainly in main memory of the System. Data is Lost when System is Restarted.
+2. Disk Cache - Stores data in SSD or HDD
+3. Distributed Cache - Cache Distributed Across multiple Machines and typically used in distributed systems such as microservice Architecture.
+                     -  This is done by Separating the Cache Service from other microservices.
+
+
+
+Cache Hit - When the Requested DAta is Found in Cache
+Cache Miss - When Requested Data is not found in cache, and must be retrived from Secondry Storage
+
+Cache Hit Rate - measure of how often the cache is able to fullfill the request.
+               - High Value of Cache Hit Rate indicates cache is effective at Storing frequently accessed Data.
+
+
+
+
+

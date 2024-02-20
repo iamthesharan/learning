@@ -1,0 +1,3 @@
+How Service Discovery Works:
+There are 3 Participants: Service Registry, Cient, Microservices
+Clients finds the Location of the other Service instance by quering a Service Registry

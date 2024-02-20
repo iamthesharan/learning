@@ -1,0 +1,44 @@
+Why do we need API Gateways:
+1. Client Can't manage Communications:
+    The Client Application can try to handle multiple calls to microservice endpoints, Not managable when it comes to different Protocols like HTTP, GraphQL, gRPC and WebSocket
+
+2. Complex Client Code: Lots of request Codes to Bakend. may create significant Latency to our application.
+3. Strong Coupling:
+    Creates Coupling between the client and the backend. The Client needs to know how the specific microservice are decomposed. Increase the coupling between client and service and also make it harder to maintain the client.
+
+4. Cross Cutting Concerns:
+    There are very important Cross cutting concerns in Microservices like Authentication, Authorization, Rate Limiting, Load Balancing and Circuit Breaker.
+    Its better to keep all these cross cutting tasks in centralized spaces.
+
+5. Protocol Exchanges: From One protocol to Other. Request from Client needs to transform to other protocols
+
+
+
+API Gateways:
+
+1. Single point of entry to the Client Application.
+2. Sits between Client  and Multiple backend Services
+3. Manage Routing to internal Microservices
+
+
+API Gateway Pattern:
+1. Gateway Routing Pattern
+    - Route Request to multiple microservices with exposing a Single End point
+    - Useful to expose multiple services on a Single End point and route them to internal Backend microservices based on request.
+    - Client requires to consume Several Microservices, gateway routing pattern offers to create new end point that handles the request and route this request for each service.
+
+2. Gateway Aggregation Pattern
+    - Dispatches request to several Microservices and then Aggerates the result and send them back to the client
+
+3. Gateway Offloading Pattern.
+    - Offers to Combine Commonly used Shared Functionalities into a gateway proxy Service.
+    - Authentication, Authorization, SSL, Load Balancing
+
+
+API Gateway Flow:
+1. Request Validation
+2. IP Allowlisting
+3. Authentication/Authorization
+4. RateLimiting
+5. Service Discovery - Routing to other service, Circuit Breaker Pattern, Retry Pattern
+6. Protocol Conversion

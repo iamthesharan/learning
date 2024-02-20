@@ -1,0 +1,16 @@
+Rollbacks the Overall Series of Transaction exectuted to the Initial States if any microservice fails the transaction
+
+Choregraphy Based SAGA Pattern:
+Publish Events of the Actions perform by Microservice to the Message Broker. Based on the Events, Other Services takes actions.
+
+
+ORchestraction Based Saga Pattern:
+There is a Centralized Orchestration Service, that is responsible for initiating the transaction and ensuring that each Service performs its Step in the correct order.
+If any Saga fails to complete the Step, The Orchestraction can use the Compensating Transaction to rollback the changes and restores the system to the original State.
+
+
+Drawbacks:
+1. If Orchestraction Service Goes Down, then the Entire system may be unable to complete the transaction
+
+Compensating Transaction Pattern:
+Has the Steps for the Rollback. It the the Rollback of the Saga Pattern

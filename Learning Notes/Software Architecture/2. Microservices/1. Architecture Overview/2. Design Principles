@@ -1,0 +1,38 @@
+DRY - Don't repeat Yourself
+    - Try to maintain the behaviour of a functionality of a System in one place. It should not have duplicated code or design Investment
+    - If you have Same code at 2 Place, you need to change 2 places whenever the change is required for that. This might be difficult to adapt changes and there are chances that it might get missed and Create issue in your system later.
+
+KISS - Keep it Simple Stupid
+     - Make your code Simple
+     - Avoid Unecessary Complexity
+     - Easier to maintain and easier to understand
+    
+YAGNI - You Ain't Gonna Need It
+      - Do the Simplest thing that could possibly Work.
+      - You should not create Features that is not really necessary
+
+
+SOLID:
+
+S - Single Responsibility Principle
+The Single Responsibility Principle states that a class should have only one reason to change, 
+meaning that it should have only one responsibility. 
+In other words, a class should encapsulate one and only one aspect of functionality or behavior. 
+If a class is responsible for multiple unrelated tasks, changes to one of those tasks may 
+necessitate changes to the entire class, which violates the principle of cohesion and 
+can lead to code that is difficult to understand, maintain, and extend.
+
+O - Open Close Princliple
+Software Entities(class, modules, function) should be open for extension but closed for modification.
+
+L - Liskov Principle:
+The Liskov Substitution Principle states that objects of a superclass should be replaceable with objects of its subclasses without affecting the correctness of the program
+
+I - Interface Segregation Principle
+In simpler terms, the Interface Segregation Principle suggests that you should design interfaces that are specific to the needs of the clients that use them. In other words, instead of having a large, monolithic interface that covers all possible methods, it's better to have smaller, more focused interfaces.
+
+D - Dependency Inversion Principle:
+Classes should depended on Abstraction, rather than concrete implementation
+
+
+

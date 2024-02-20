@@ -1,0 +1,1 @@
+Backward compatibility: As microservices evolve over time, it's essential to ensure that changes made to the API do not break existing clients. By versioning the API, clients can continue using the older version if needed, while new clients can take advantage of the latest version.

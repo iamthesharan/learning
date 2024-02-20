@@ -1,0 +1,17 @@
+Lets Say there are 4 Layers from inwords to Outwards.
+
+1st Layer - Entities
+2nd Layer - UseCases
+3rd Layer - Controllers, Presenters, Gateways
+4th Layer - Web, UI, External Interfaces, DB, Devices
+
+Separates the elements of the Design into Circle Levels
+
+
+Purpose:
+1. To Organise Codes with encapsulated Business Logic.
+2. Keep the Core business Logic and the application domain at the center of the solution structure that is independent with presentation and data access layer.
+3. Clean Architecture is divided into two main Elements:
+    a. Policies: are business rules and procedures
+    b. Details: are the Implementation Codes to carry out the Policies
+4. Internal Layers should not have any dependencies of any third party libraries which allows to use different frameworks and tools and not to lock libraries if the technology is changed.

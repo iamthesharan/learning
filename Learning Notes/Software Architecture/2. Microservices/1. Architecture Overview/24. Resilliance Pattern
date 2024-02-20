@@ -1,0 +1,7 @@
+1. Retry Pattern: Retrying the requests if it fails or time out. Retries can be implemented at the client or Service Level
+2. CircuitBreaker Pattern : If the Service is not Responding, it will break the Circuit and calls for the Failure Transaction.
+3. Bulkhead Pattern : Patitioning the System into isolated components  to prevent failure of one component from affecting others.
+4. TimeoutPattern :  Should not wait for Service Response for indefinite amount of time, throw an exception instead waiting too long.
+5. Fallback Pattern: Providing Alternative behaviour in case of Failure or timeout
+
+

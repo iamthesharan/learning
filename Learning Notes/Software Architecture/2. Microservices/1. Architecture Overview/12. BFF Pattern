@@ -1,0 +1,6 @@
+Backend For Frontend Pattern.
+
+Backend to Frontend Pattern Separates API Gateways as per the specific frontend Application.
+The Main Ussage for BFF is :
+The Data for Ussage for Mobile Application may be different from Desktop Application.
+Hence we have to design Separate Gateway for Each Client.

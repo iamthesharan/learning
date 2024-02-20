@@ -1,0 +1,7 @@
+There are 2 Types of Sync Communication.
+    1. Public API: API Calls from Client apps.
+    2. Backend API: The Intercommunication between Backend Service.
+
+    Public APIs: Restful
+    Backend API: User gRPC
+    Intercommunication between Service require lots of Bandwidth where gRPC is used.

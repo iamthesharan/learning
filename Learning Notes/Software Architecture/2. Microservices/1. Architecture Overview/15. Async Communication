@@ -1,0 +1,10 @@
+It Allows Decoupling of Services
+Message Broker has Retry Mechanism
+We can Provide Event Driven Architecture.
+
+Disadvantage:
+1. In Multiple Queues, There Can be an issue related to Sequence order of the message.
+
+
+Fan-Out Publish Subscribe Pattern:
+Here Publishers sends Message to The Topic. and message is immediately fanned out to all the subscribers of the topic.

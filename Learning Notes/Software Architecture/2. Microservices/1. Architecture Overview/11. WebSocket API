@@ -1,0 +1,12 @@
+Websocket API is used for interactive 2 way communication session between browser and server.
+Sends message to  the server and receive event based responses without having to poll the server for a response.
+
+WebSockets are good way to handle high-scale data transfer between server-client.
+
+Websockets are bidirectional
+
+Websockets are statefull protocols, connection between client and server stays alive until terminated by one of the parties.
+
+Real Life Example:  Stock Trading Application
+Game Application requiring changes in UI
+Chatting Application

@@ -1,0 +1,37 @@
+Use Ansyc Communication between internal Microservices as much as possible
+
+Microservice Communication Types:
+1. Synchronous - HTTP/gRPC Request/Response
+2. Asynchronous - Message Broker using queues
+
+Async Communication Features:
+1. Client don't have to block the thread and wait for the Response
+2. Protocol - AMQP. Using this protocol Client Sends the message to the Message Broker System like Kalfka or RabbitMQ
+3. Async Communications can be implement in different way:
+    a. one-to-one (queue model)
+    b. one to many (topic model)
+
+
+Communications Styles:
+1. Request/Respose Communications with HTTP and REST Protocols(extends gRPC and GraphQL)
+    - Used for Synchronous Communication
+    - If the Communication happens between internal Microservices use gRPC protocol communication mechanism to provide low latency and High Performance.
+    - Use graphQL instead of REST API when performing request/Response Communication
+
+
+2. Push and Real Time Communication based on HTTP, WebSocket Protocols
+    - Use Case like real time One to many Communication like Chat Application use Push Model with HTTP and WebSocket Protocols
+    - Ex - Streaming Dashboards like score of the sport game with websocket API
+    - The Client and the Server can both send messages to each other anytime. Backend Servers can easily push data to connected users and Devices
+
+
+3. Pull Communication based on HTTP and AMPQ(short polling - long Polling)
+    - Also Called Polling and it is same as refresing your mailbox every 5 min to check new Mail
+    - This model becomes waste of bandwidth if there is no message or response comes from Server.
+
+4. Event Driven Communication with publish Subscribe Model
+    - Here microservice don't call each other instead they create events and consume events from message broker systems in an Async Way.
+    - Using AMPQ Protocol Client sends events using message broker system like Kalfka and RabbitMQ.
+    - Also Called Publish Subscribe pattern with Events
+    - Producer Service Doesn't know about the Consumer Service and the Consumner service also don't know about Producer's service
+    

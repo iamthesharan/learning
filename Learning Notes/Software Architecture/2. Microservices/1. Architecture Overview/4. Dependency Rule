@@ -1,0 +1,4 @@
+1. Code dependency should only point inwards. That means code dependency should only move from outer layer to inwards
+2. Code on the inner layers can have no knowledge of functions of the outer layers
+3. Inner Layer Cannot have any information of the elements of the outer layer
+4. Classes, Functions, variables or any entity declared in the ourter layer must not be mentioned by the code of the inner layer.

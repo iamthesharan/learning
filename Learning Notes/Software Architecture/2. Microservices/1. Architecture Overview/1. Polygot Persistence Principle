@@ -1,0 +1,10 @@
+Each microserice must have its own database
+Welcome Duplication of Data.
+We cannot provide ACID Princples to distributed Systems microservices.
+
+1. Database per service Pattern
+2. API Composition Pattern:
+   When Invoking the Query by invoking serveral Microservices, we will follow API Composition, Gateway Aggreation patterns for combinig the result.
+3. CQRS Pattern
+4. Event Sourcing Pattern
+5. SAGA Pattern

@@ -1,0 +1,32 @@
+Let's say if the Client Request are required to visit more than one internal microservices.
+If the Request is Synchronous, and there are Intercommunication between microservices and one of the microserice is down
+then it can't return data to the client. Hence we should Avoid too much tight coupling.
+
+Solution: Change communication way to Async or use Service Aggerator pattern
+
+Service Aggerator Pattern:
+
+Functionality: In the Service Aggregator Pattern, the aggregation logic is implemented within a dedicated microservice. This microservice orchestrates requests to multiple backend microservices, aggregates their responses, and then returns the aggregated data to the client.
+Granularity: It operates at the microservice level, where a specific microservice is responsible for aggregating data from other microservices.
+Benefits: This pattern promotes separation of concerns by centralizing aggregation logic into a single service. It also allows for reusability of the aggregation logic across multiple clients.
+
+Note it is different from Gateway Aggerator pattern
+
+
+
+
+Service Discovery Pattern:
+Due to Autoscaling the IP and the Location of the microservices dynamically changes.
+and hence there intercommunication will fail if the microservice unable to send the request to other microservice because of unrecognized microservice.
+
+
+To overcome this we use Service Discovery pattern:
+Service Discovery Pattern uses Centralized Server for Service Registry to maintain a central view of microservices network Location.
+Sevices update their location in the Service Registry at fixed Intervals. Clients can connect to the Service registry and fetch the location of the microservices.
+
+
+
+2 main Service Discovery Pattern:
+ - client-side service Discovery
+ - server-side service discovery
+

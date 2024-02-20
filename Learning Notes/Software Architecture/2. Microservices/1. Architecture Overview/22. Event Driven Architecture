@@ -1,0 +1,1 @@
+Here we have Event Hub and all the Microservice Interacts with this Event hub. Infact Other Applications like IOT, Big Data also Interact with the Event hub for messages.

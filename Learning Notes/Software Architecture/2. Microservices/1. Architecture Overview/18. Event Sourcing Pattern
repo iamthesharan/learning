@@ -1,0 +1,8 @@
+Events Created by the Services are stored in Event Store Database in the Form of Event List.
+This event list is used to Store the Final State of Data into a Materialized View which is used for Reading.
+Event List Can help to Replay the Event at that timestamp
+
+
+With CQRS event Sourcing Pattern,
+The Writing Database don't need to Store the Final State of data, insted it just stores the Sequences of the Events into the Write database.
+The Data from the write Database Converted into Single Final State and Updated on the Read Database through events.

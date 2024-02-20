@@ -1,0 +1,11 @@
+Horizontal Scaling - Scaling more Instances
+                   - Need Infrastructure Configuration
+                   - Best for Handle Huge Request
+                   - We need to take care of the State. 
+
+
+Verticle Scaling - Increase Size of instance(RAM, CPU)
+                 - No Existing Code Change is Required.
+                 - No Extra Configuration
+
+

@@ -1,0 +1,15 @@
+Used when 2 Way Commits are problem.
+
+Let's say we want to Save the Order related data and Publish the Events to other microservice from order micorservce.
+If the Publishing Ques Crased and Order got persisted in Order Microservice DB.
+Then There will be data InConsistency.
+
+To Avoid this, Transaction Outbox Pattern is used.
+Here we have Outbox table which stores the Events Once the Events is successfully Published by the Queue, it marks the Transaciton in Otubox table as published.
+There will be another mircorservice which will check for the Events by polling onto the Outbox table and then publish the events.
+
+If Not Published, Then Rollback Scenario will happen.
+
+
+
+But Polling Can also Create Dual Write Problem, where Polling Micorservice Reads data from Outbox table and then while publishing events there is a failure in between.

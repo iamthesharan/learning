@@ -1,0 +1,4 @@
+1. Cache Aside - Checks Cache First to determine Whether data is available or not. If Not then the client will retrieve the data from backend Service and store it in cache for future requests.
+2. Read - through - When the Client didn't find data in cache, the Cache Retrive data from DB and not Client unlike Cache Aside Strategy
+3. Write - through - the data written in cache is synchronously written in database
+4. Write Back, Write Behind - the data written in cache is Asynchronously written in DB
